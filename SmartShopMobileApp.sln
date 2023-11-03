@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31611.283
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartShopMobileApp", "SmartShopMobileApp\SmartShopMobileApp.csproj", "{BEB48907-BEDD-40FC-811A-9CFBD403BA6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{70EA862A-BB07-4949-A33E-47E2DB85AEF8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTO", "DTO\DTO.csproj", "{263D5D07-03ED-4C36-973F-DBB168DFC6B1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BEB48907-BEDD-40FC-811A-9CFBD403BA6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEB48907-BEDD-40FC-811A-9CFBD403BA6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEB48907-BEDD-40FC-811A-9CFBD403BA6D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{BEB48907-BEDD-40FC-811A-9CFBD403BA6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEB48907-BEDD-40FC-811A-9CFBD403BA6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEB48907-BEDD-40FC-811A-9CFBD403BA6D}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{70EA862A-BB07-4949-A33E-47E2DB85AEF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70EA862A-BB07-4949-A33E-47E2DB85AEF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70EA862A-BB07-4949-A33E-47E2DB85AEF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70EA862A-BB07-4949-A33E-47E2DB85AEF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{263D5D07-03ED-4C36-973F-DBB168DFC6B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{263D5D07-03ED-4C36-973F-DBB168DFC6B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{263D5D07-03ED-4C36-973F-DBB168DFC6B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{263D5D07-03ED-4C36-973F-DBB168DFC6B1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {61F7FB11-1E47-470C-91E2-47F8143E1572}
+	EndGlobalSection
+EndGlobal
