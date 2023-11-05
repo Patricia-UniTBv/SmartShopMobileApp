@@ -1,4 +1,4 @@
-﻿//using Camera.MAUI;
+﻿using Camera.MAUI;
 namespace SmartShopMobileApp;
 
 public static class MauiProgram
@@ -8,7 +8,7 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
-			//.UseMauiCameraView()
+			.UseMauiCameraView()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

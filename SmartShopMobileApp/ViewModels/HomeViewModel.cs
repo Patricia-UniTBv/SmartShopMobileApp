@@ -1,6 +1,7 @@
 ﻿//using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using SmartShopMobileApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace SmartShopMobileApp.ViewModels
         {
             try
             {
-                //await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new HomepageView()));
+                await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new BarcodeScanner()));
                 //await App.Current.MainPage.Navigation.PopToRootAsync();
 
             }

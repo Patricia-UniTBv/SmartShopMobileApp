@@ -1,4 +1,3 @@
-using Android.Service.Autofill;
 using SmartShopMobileApp.ViewModels;
 
 namespace SmartShopMobileApp.Views;
