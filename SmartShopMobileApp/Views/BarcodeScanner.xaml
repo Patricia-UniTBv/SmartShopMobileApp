@@ -10,7 +10,7 @@
             Padding="30,0"
             VerticalOptions="Center">
 
-           <!-- <Label x:Name="barcodeResult" FontSize="20"/>-->
+            <Label x:Name="barcodeResult" FontSize="20"/>
             <cv:CameraView x:Name="cameraView" 
                            WidthRequest="500"
                            HeightRequest="500"
