@@ -16,10 +16,7 @@
                            HeightRequest="500"
                            CamerasLoaded="cameraView_CamerasLoaded"
                            BarCodeDetectionEnabled="True"
-                           BarcodeDetected="cameraView_BarcodeDetected"
-                           
-                           
-                          />
+                           BarcodeDetected="cameraView_BarcodeDetected"/>
 
         </VerticalStackLayout>
     </ScrollView>
