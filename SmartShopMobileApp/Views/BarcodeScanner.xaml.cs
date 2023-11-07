@@ -1,4 +1,3 @@
-using static Microsoft.Maui.ApplicationModel.Permissions;
 using Camera.MAUI;
 
 namespace SmartShopMobileApp.Views;
