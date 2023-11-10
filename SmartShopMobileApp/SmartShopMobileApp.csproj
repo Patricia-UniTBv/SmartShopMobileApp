@@ -50,6 +50,11 @@
 
 	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\DTO\DTO.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -81,5 +86,7 @@
 	    <Version>1.4.4</Version>
 	  </PackageReference>
 	</ItemGroup>
+	
+    <ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionSmartShopMobileAppHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 
 </Project>

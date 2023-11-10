@@ -1,19 +1,39 @@
-﻿//using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DTO;
+using SmartShopMobileApp.Helpers;
 using SmartShopMobileApp.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SmartShopMobileApp.ViewModels
 {
     public partial class HomeViewModel: ObservableObject
     {
-        public HomeViewModel() { }
+        public HomeViewModel() 
+        {
+            _manageData = new ManageData();
+            Products = new List<ProductDTO>();
+            GetProducts();
+        }
 
+        private IManageData _manageData;
+        public IManageData ManageData
+        {
+            get { return _manageData; }
+            set { _manageData = value; }
+        }
+
+        #region ObservableProperties
+        [ObservableProperty]
+        private List<ProductDTO> _products;
+
+        private async Task GetProducts()
+        {
+            _manageData.SetStrategy(new GetData());
+            Products = await _manageData.GetDataAndDeserializeIt<List<ProductDTO>>("Product/GetAllProducts", "");      
+        }
+        #endregion
+
+        #region RelayCommands
         [RelayCommand]
         private async Task OpenScanner()
         {
@@ -29,5 +49,6 @@ namespace SmartShopMobileApp.ViewModels
             }
 
         }
+        #endregion
     }
 }

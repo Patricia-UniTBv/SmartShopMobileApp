@@ -1,4 +1,6 @@
 ﻿using Camera.MAUI;
+using SmartShopMobileApp.Helpers;
+
 namespace SmartShopMobileApp;
 
 public static class MauiProgram
@@ -14,7 +16,7 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
-
-		return builder.Build();
+        builder.Services.AddSingleton<IHttpClientHandlerService, HttpClientHandlerService>();
+        return builder.Build();
 	}
 }

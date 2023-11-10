@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartShopMobileApp.Views.HomeView"
              xmlns:viewModels="clr-namespace:SmartShopMobileApp.ViewModels" 
+             xmlns:model="clr-namespace:DTO;assembly=DTO"
              x:DataType="viewModels:HomeViewModel"
              Title="Home">
     <VerticalStackLayout>
@@ -16,7 +17,21 @@
                 WidthRequest="104"
                 HeightRequest="40"
                 HorizontalOptions="FillAndExpand"
-                Command="{Binding OpenScannerCommand}"/>             
-                       
+                Command="{Binding OpenScannerCommand}"/>
+        <Label Text="The products are:"/>
+        <ListView x:Name="ProductListView" ItemsSource="{Binding Products}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="model:ProductDTO">
+                    <ViewCell>
+                        <StackLayout>
+                            <Label Text="{Binding Name}" FontAttributes="Bold" />
+                            <Label Text="{Binding Price, StringFormat='Price: {0:C}'}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
     </VerticalStackLayout>
 </ContentPage>
