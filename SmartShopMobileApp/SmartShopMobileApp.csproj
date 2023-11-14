@@ -49,8 +49,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="CommunityToolkit.Maui" Version="6.1.0" />
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	  <PackageReference Include="Syncfusion.Maui.Popup" Version="23.1.44" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -58,7 +60,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\ScannedProductPopupView.xaml.cs">
+	    <DependentUpon>ScannedProductPopupView.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="Views\HomeView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ScannedProductPopupView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

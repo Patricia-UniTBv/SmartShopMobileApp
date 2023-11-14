@@ -27,5 +27,19 @@ namespace API.Controllers
                 return BadRequest(e.Message);
             }
         }
+        [HttpGet("GetProductByBarcode/{barcode}")]
+        public async Task<IActionResult> GetProductByBarcode(string barcode)
+        {
+            try
+            {
+                var product = await _unitOfWork.ProductRepository.GetProductByBarcode(barcode);
+
+                return Ok(product);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

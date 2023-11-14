@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Maui.Views;
 using DTO;
 using SmartShopMobileApp.Helpers;
 using SmartShopMobileApp.Views;
@@ -39,9 +40,9 @@ namespace SmartShopMobileApp.ViewModels
         {
             try
             {
+                //var popup = new ScannedProductPopupView();
                 await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new BarcodeScanner()));
-                //await App.Current.MainPage.Navigation.PopToRootAsync();
-
+               
             }
             catch (Exception e)
             {

@@ -1,17 +1,33 @@
 using Camera.MAUI;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui.Views;
+using DTO;
+using SmartShopMobileApp.Helpers;
+using SmartShopMobileApp.ViewModels;
+using SmartShopMobileApp.Views;
+using ZXing.QrCode.Internal;
 
 namespace SmartShopMobileApp.Views;
 
 public partial class BarcodeScanner : ContentPage
 {
-	public BarcodeScanner()
+    public BarcodeScanner()
 	{
 		InitializeComponent();
+        _manageData = new ManageData();
         cameraView.BarCodeOptions = new Camera.MAUI.ZXingHelper.BarcodeDecodeOptions
         {
             PossibleFormats = { ZXing.BarcodeFormat.All_1D }
         };
 	}
+    private IManageData _manageData;
+    public IManageData ManageData
+    {
+        get { return _manageData; }
+        set { _manageData = value; }
+    }
+
+
     private void cameraView_CamerasLoaded(object sender, EventArgs e)
     {
         if (cameraView.Cameras.Count > 0)
@@ -25,15 +41,17 @@ public partial class BarcodeScanner : ContentPage
         }
     }
 
-    private void cameraView_BarcodeDetected(object sender, Camera.MAUI.ZXingHelper.BarcodeEventArgs args)
+    private async void cameraView_BarcodeDetected(object sender, Camera.MAUI.ZXingHelper.BarcodeEventArgs args)
     {
         MainThread.BeginInvokeOnMainThread(() =>
         {
-            barcodeResult.Text = $"{args.Result[0].BarcodeFormat}: {args.Result[0].Text}";
+            barcodeResult.Text = $"Barcode: {args.Result[0].Text}";
+            var popup = new ScannedProductPopupView(args.Result[0].Text);
+            this.ShowPopupAsync(popup);
         });
-        Dispatcher.Dispatch(async () =>
-        {
-            await DisplayAlert("Result", args.Result[0].Text, "OK");
-        });
+
+       
+       
+
     }
 }
