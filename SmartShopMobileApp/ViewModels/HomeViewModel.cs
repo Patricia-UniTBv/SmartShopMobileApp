@@ -40,9 +40,8 @@ namespace SmartShopMobileApp.ViewModels
         {
             try
             {
-                //var popup = new ScannedProductPopupView();
                 await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new BarcodeScanner()));
-               
+
             }
             catch (Exception e)
             {

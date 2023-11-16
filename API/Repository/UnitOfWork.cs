@@ -8,7 +8,13 @@ namespace API.Repository
     {
         private IProductRepository? _productRepository;
         public IProductRepository ProductRepository => _productRepository ??= new ProductRepository(_context, _mapper);
-      
+        private IShoppingCartRepository? _shoppingCartRepository;
+        public IShoppingCartRepository ShoppingCartRepository => _shoppingCartRepository ??= new ShoppingCartRepository(_context, _mapper);
+        private IUserRepository? _userRepository;
+        public IUserRepository UserRepository => _userRepository ??= new UserRepository(_context, _mapper);
+        private ICartItemRepository? _cartItemRepository;
+        public ICartItemRepository CartItemRepository => _cartItemRepository ??= new CartItemRepository(_context, _mapper);
+
         private readonly SmartShopDBContext _context;
 
         private readonly IMapper _mapper;

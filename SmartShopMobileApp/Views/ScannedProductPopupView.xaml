@@ -6,12 +6,7 @@
                xmlns:model="clr-namespace:DTO;assembly=DTO"
                xmlns:compatibility="clr-namespace:Microsoft.Maui.Controls.Compatibility;assembly=Microsoft.Maui.Controls"
                x:Class="SmartShopMobileApp.Views.ScannedProductPopupView">
-    <!--<Frame>
-        <VerticalStackLayout>
-            <Label Text="MERGI!!!"/>
-        </VerticalStackLayout>
-    </Frame>-->
-    
+
     <VerticalStackLayout>
         <Frame CornerRadius="10"
            HasShadow="False"
@@ -30,8 +25,8 @@
                            HeightRequest="38"
                            WidthRequest="85"
                            Margin="0,0,16,0">
-                            <Button Text="Discard"
-                                TextColor="#0C5071" 
+                            <Button Text="Cancel"
+                                TextColor="#8A1C23" 
                                 FontSize="15"
                                 BackgroundColor="Transparent"
                                 TextTransform="None"
@@ -52,7 +47,9 @@
                         BackgroundColor="#1C698A"
                         WidthRequest="129"
                         HeightRequest="40"
-                        HorizontalOptions="EndAndExpand"/>
+                        HorizontalOptions="EndAndExpand"
+                        Command="{Binding AddProductToCartCommand}"
+                        CommandParameter="{Binding ProductName}"/>
                     </StackLayout>
                 </StackLayout>
             </Grid>

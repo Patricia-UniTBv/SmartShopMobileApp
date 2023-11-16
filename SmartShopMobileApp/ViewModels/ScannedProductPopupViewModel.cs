@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DTO;
+using Newtonsoft.Json;
 using SmartShopMobileApp.Helpers;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,11 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using ZXing.QrCode.Internal;
 
 namespace SmartShopMobileApp.ViewModels
 {
-    public class ScannedProductPopupViewModel: Popup, INotifyPropertyChanged
+    public partial class ScannedProductPopupViewModel: Popup, INotifyPropertyChanged
     {
         public ScannedProductPopupViewModel(string barcode)
         {
@@ -42,18 +44,32 @@ namespace SmartShopMobileApp.ViewModels
             }
         }
 
+        public ProductDTO Product { get; set; }
+
         public async Task IdentifyProductByBarcode(string barcode)
         {
             try
             {
                 _manageData.SetStrategy(new GetData());
-                var product = await _manageData.GetDataAndDeserializeIt<ProductDTO>($"Product/GetProductByBarcode/{barcode}", "");
-                ProductName = product.Name;
+                Product = await _manageData.GetDataAndDeserializeIt<ProductDTO>($"Product/GetProductByBarcode/{barcode}", "");
+                ProductName = Product.Name;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
+        }
+
+        [RelayCommand]
+        public async Task AddProductToCart(object obj)
+        {
+            HttpClient client = new HttpClient(DependencyService.Get<IHttpClientHandlerService>().GetInsecureHandler());
+
+            var json = JsonConvert.SerializeObject(Product);
+
+            _manageData.SetStrategy(new CreateData());
+            await _manageData.GetDataAndDeserializeIt<object>("Product/AddProductToShoppingCart", json);
+
         }
 
     }
