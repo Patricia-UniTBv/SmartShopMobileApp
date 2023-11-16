@@ -6,6 +6,5 @@ namespace API.Repository.Interfaces
     {
         Task<ICollection<ProductDTO>> GetAllProducts();
         Task<ProductDTO> GetProductByBarcode(string barcode);
-        Task<ProductDTO> AddProductToShoppingCart(ProductDTO product);
     }
 }
