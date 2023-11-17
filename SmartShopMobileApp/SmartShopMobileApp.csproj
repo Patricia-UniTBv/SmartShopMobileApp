@@ -60,6 +60,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\BarcodeScannerView.xaml.cs">
+	    <DependentUpon>BarcodeScannerView.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\ScannedProductPopupView.xaml.cs">
 	    <DependentUpon>ScannedProductPopupView.xaml</DependentUpon>
 	  </Compile>

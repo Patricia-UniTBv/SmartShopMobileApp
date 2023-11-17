@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Maui.Views;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DTO;
 using Newtonsoft.Json;
@@ -8,16 +7,15 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using ZXing.QrCode.Internal;
 
 namespace SmartShopMobileApp.ViewModels
 {
-    public partial class ScannedProductPopupViewModel: Popup, INotifyPropertyChanged
+    public partial class BarcodeScannerViewModel: ObservableObject, INotifyPropertyChanged
     {
-        public ScannedProductPopupViewModel(string barcode)
+        public BarcodeScannerViewModel(string barcode) 
         {
             _manageData = new ManageData();
             IdentifyProductByBarcode(barcode);
@@ -44,8 +42,26 @@ namespace SmartShopMobileApp.ViewModels
             }
         }
 
+        private string _barcodeResult;
+
+        public string BarcodeResult
+        {
+            get { return _barcodeResult; }
+            set
+            {
+                if (_barcodeResult != value)
+                {
+                    _barcodeResult = value;
+                    OnPropertyChanged(nameof(BarcodeResult));
+                }
+            }
+        }
+        //[ObservableProperty]
+        //public string BarcodeResult;
+
         public ProductDTO Product { get; set; }
 
+        [RelayCommand]
         public async Task IdentifyProductByBarcode(string barcode)
         {
             try
@@ -60,17 +76,27 @@ namespace SmartShopMobileApp.ViewModels
             }
         }
 
+        //public async void BarcodeDetected(object sender, Camera.MAUI.ZXingHelper.BarcodeEventArgs args)
+        //{
+        //    MainThread.BeginInvokeOnMainThread(() =>
+        //    {
+        //        BarcodeResult = $"Barcode: {args.Result[0].Text}";
+        //        //var popup = new ScannedProductPopupView(args.Result[0].Text);
+        //        //this.ShowPopupAsync(popup);
+        //    });
+
+        //}
+
         [RelayCommand]
         public async Task AddProductToCart(object obj)
         {
-            HttpClient client = new HttpClient(DependencyService.Get<IHttpClientHandlerService>().GetInsecureHandler());
+            var _httpClient = new HttpClient(App.Current.MainPage.Handler.MauiContext.Services.GetService<IHttpClientHandlerService>().GetInsecureHandler());
 
             var json = JsonConvert.SerializeObject(Product);
 
             _manageData.SetStrategy(new CreateData());
-            var result = await _manageData.GetDataAndDeserializeIt<object>("Product/AddProductToShoppingCart", json);
+            var result = await _manageData.GetDataAndDeserializeIt<ProductDTO>("Product/AddProductToShoppingCart", json);
 
         }
-
     }
 }

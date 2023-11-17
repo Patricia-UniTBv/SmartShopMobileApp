@@ -40,7 +40,7 @@ namespace SmartShopMobileApp.ViewModels
         {
             try
             {
-                await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new BarcodeScanner()));
+                await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new BarcodeScannerView()));
 
             }
             catch (Exception e)
