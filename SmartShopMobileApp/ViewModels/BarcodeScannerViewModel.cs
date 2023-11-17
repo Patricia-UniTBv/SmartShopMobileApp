@@ -76,17 +76,6 @@ namespace SmartShopMobileApp.ViewModels
             }
         }
 
-        //public async void BarcodeDetected(object sender, Camera.MAUI.ZXingHelper.BarcodeEventArgs args)
-        //{
-        //    MainThread.BeginInvokeOnMainThread(() =>
-        //    {
-        //        BarcodeResult = $"Barcode: {args.Result[0].Text}";
-        //        //var popup = new ScannedProductPopupView(args.Result[0].Text);
-        //        //this.ShowPopupAsync(popup);
-        //    });
-
-        //}
-
         [RelayCommand]
         public async Task AddProductToCart(object obj)
         {

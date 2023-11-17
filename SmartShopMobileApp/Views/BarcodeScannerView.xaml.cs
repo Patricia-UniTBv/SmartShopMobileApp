@@ -14,20 +14,12 @@ public partial class BarcodeScannerView : ContentPage
     public BarcodeScannerView()
     {
         InitializeComponent();
-       // BindingContext = new BarcodeScannerViewModel();
-       
 
         cameraView.BarCodeOptions = new Camera.MAUI.ZXingHelper.BarcodeDecodeOptions
         {
             PossibleFormats = { ZXing.BarcodeFormat.All_1D },
-            //ReadMultipleCodes = true,
             TryHarder = true,
-            //TryInverted = true
         };
-        //cameraView.BarCodeDetectionFrameRate = 10;
-        //cameraView.BarCodeDetectionMaxThreads = 5;
-        //cameraView.ControlBarcodeResultDuplicate = true;
-        //cameraView.BarCodeDetectionEnabled = true;
     }
     public BarcodeScannerViewModel viewModel { get; set; }
     private void cameraView_CamerasLoaded(object sender, EventArgs e)
@@ -50,11 +42,6 @@ public partial class BarcodeScannerView : ContentPage
         {
             barcodeResult.Text = $"Barcode: {args.Result[0].Text}";
             BindingContext = new BarcodeScannerViewModel(args.Result[0].Text);
-            //viewModel = (BarcodeScannerViewModel)BindingContext;
-            //viewModel.BarcodeResult = args.Result[0].Text;
-
-            //var popup = new ScannedProductPopupView(args.Result[0].Text);
-            //this.ShowPopupAsync(popup);
         });
 
 
