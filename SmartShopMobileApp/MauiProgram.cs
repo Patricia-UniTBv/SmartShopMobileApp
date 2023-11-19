@@ -19,7 +19,7 @@ public static class MauiProgram
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-				fonts.AddFont("MaterialIcons-Regular.ttf", "GoogleFont");
+				fonts.AddFont("MaterialIcons-Regular.ttf", "GoogleMaterialFont");
 			});
         builder.Services.AddSingleton<IHttpClientHandlerService, HttpClientHandlerService>();
         return builder.Build();

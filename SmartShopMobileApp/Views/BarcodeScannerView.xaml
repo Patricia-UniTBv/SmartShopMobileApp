@@ -6,6 +6,7 @@
              xmlns:model="clr-namespace:DTO;assembly=DTO"
              x:DataType="viewModels:BarcodeScannerViewModel"
              x:Class="SmartShopMobileApp.Views.BarcodeScannerView"
+             xmlns:icon="clr-namespace:SmartShopMobileApp"
              Title="BarcodeScanner">
     <ScrollView>
         <VerticalStackLayout
@@ -25,21 +26,32 @@
                    Margin="10,10"
                    FontSize="16"/>
                 
-                <StackLayout  Orientation="Horizontal"  HorizontalOptions="Center" VerticalOptions="EndAndExpand">
-                    <Button Text="Add to cart"
+                <StackLayout Orientation="Vertical"  HorizontalOptions="Center" VerticalOptions="EndAndExpand">
+                <StackLayout Orientation="Horizontal" WidthRequest="130" Margin="0,0,0,10">
+                    <Entry Placeholder="1" Text="{Binding NumberOfProducts, Mode=TwoWay}" WidthRequest="90" />
+                    <Button Text="{x:Static icon:IconFont.Add}"
+                            TextColor="#8C1A6D"
+                            Style="{x:StaticResource GoogleFont}"
+                            BackgroundColor="Transparent"
+                            HeightRequest="50"
+                            WidthRequest="50"
+                            Command="{Binding AddNumberOfProductsCommand}"/>
+                </StackLayout>
+                
+                <Button Text="Add to cart"
                         TextTransform="None"
                         CornerRadius="5"
                         FontSize="15"
                         TextColor="#FFFFFF"
                         Padding="2,0,2,0"
                         BackgroundColor="#8C1A6D"
-                        WidthRequest="129"
+                        WidthRequest="130"
                         HeightRequest="40"
                         HorizontalOptions="EndAndExpand"
                         Command="{Binding AddProductToCartCommand}"
                         CommandParameter="{Binding ProductName}"/>
                 </StackLayout>
-
+            
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

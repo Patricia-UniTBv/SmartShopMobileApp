@@ -37,14 +37,11 @@ public partial class BarcodeScannerView : ContentPage
 
     private async void cameraView_BarcodeDetected(object sender, Camera.MAUI.ZXingHelper.BarcodeEventArgs args)
     {
-
         MainThread.BeginInvokeOnMainThread(async () =>
         {
             barcodeResult.Text = $"Barcode: {args.Result[0].Text}";
             BindingContext = new BarcodeScannerViewModel(args.Result[0].Text);
         });
-
-
-
     }
+
 }

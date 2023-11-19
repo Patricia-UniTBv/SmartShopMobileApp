@@ -6,6 +6,7 @@ using SmartShopMobileApp.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,37 +28,43 @@ namespace SmartShopMobileApp.ViewModels
             set { _manageData = value; }
         }
 
-        private string _productName;
+        //private string _productName;
 
-        public string ProductName
-        {
-            get { return _productName; }
-            set
-            {
-                if (_productName != value)
-                {
-                    _productName = value;
-                    OnPropertyChanged(nameof(ProductName));
-                }
-            }
-        }
+        //public string ProductName
+        //{
+        //    get { return _productName; }
+        //    set
+        //    {
+        //        if (_productName != value)
+        //        {
+        //            _productName = value;
+        //            OnPropertyChanged(nameof(ProductName));
+        //        }
+        //    }
+        //}
 
-        private string _barcodeResult;
+        //private string _barcodeResult;
 
-        public string BarcodeResult
-        {
-            get { return _barcodeResult; }
-            set
-            {
-                if (_barcodeResult != value)
-                {
-                    _barcodeResult = value;
-                    OnPropertyChanged(nameof(BarcodeResult));
-                }
-            }
-        }
-        //[ObservableProperty]
-        //public string BarcodeResult;
+        //public string BarcodeResult
+        //{
+        //    get { return _barcodeResult; }
+        //    set
+        //    {
+        //        if (_barcodeResult != value)
+        //        {
+        //            _barcodeResult = value;
+        //            OnPropertyChanged(nameof(BarcodeResult));
+        //        }
+        //    }
+        //}
+        [ObservableProperty]
+        public string _productName;
+
+        [ObservableProperty]
+        public string _barcodeResult;
+
+        [ObservableProperty]
+        public int _numberOfProducts;
 
         public ProductDTO Product { get; set; }
 
@@ -84,8 +91,17 @@ namespace SmartShopMobileApp.ViewModels
             var json = JsonConvert.SerializeObject(Product);
 
             _manageData.SetStrategy(new CreateData());
-            var result = await _manageData.GetDataAndDeserializeIt<ProductDTO>("Product/AddProductToShoppingCart", json);
+            var result = await _manageData.GetDataAndDeserializeIt<ProductDTO>($"Product/AddProductToShoppingCart/{NumberOfProducts}", json);
+            
+            if(result != null)
+                await Application.Current.MainPage.DisplayAlert("Yey", "Your product has been successfully added to the shopping cart!", "OK");
 
+        }
+
+        [RelayCommand]
+        public async Task AddNumberOfProducts(object obj)
+        {
+            NumberOfProducts++;
         }
     }
 }

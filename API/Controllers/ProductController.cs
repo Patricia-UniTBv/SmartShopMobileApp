@@ -46,8 +46,8 @@ namespace API.Controllers
             }
         }
 
-        [HttpPost("AddProductToShoppingCart")]
-        public async Task<IActionResult> AddProductToShoppingCart([FromBody] ProductDTO product)
+        [HttpPost("AddProductToShoppingCart/{numberOfProducts}")]
+        public async Task<IActionResult> AddProductToShoppingCart([FromBody] ProductDTO product, int numberOfProducts)
         {
             try
             {
@@ -70,7 +70,7 @@ namespace API.Controllers
                 {
                     ProductID = product.ProductId,
                     ShoppingCartID = shoppingCart.ShoppingCartID,
-                    Quantity = 1, // va fi modificat in functie de numarul de produse cumparate
+                    Quantity = numberOfProducts, 
                 };
 
                 await _unitOfWork.CartItemRepository.AddCartItem(cartItem);
