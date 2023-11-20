@@ -50,11 +50,13 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\AppIcon\Home.png" />
+	  <None Remove="Resources\AppIcon\scanner.png" />
 	  <None Remove="Resources\Fonts\MaterialIcons-Regular.ttf" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiImage Include="Resources\AppIcon\home.png" />
+	  <MauiImage Include="Resources\AppIcon\scanner.png" />
 	</ItemGroup>
 
 	<ItemGroup>

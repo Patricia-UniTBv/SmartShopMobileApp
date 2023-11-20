@@ -11,10 +11,10 @@
             NavigationPage.HasNavigationBar="False">
     <views:HomeView
         Title="Home"
-        IconImageSource="Home.png"/>
+        IconImageSource="home.png"/>
 
     <views:BarcodeScannerView
         Title="Scan product"
-        IconImageSource="{x:Static icon:IconFont.Scanner}"/>
+        IconImageSource="scanner.png"/>
     
 </TabbedPage>
