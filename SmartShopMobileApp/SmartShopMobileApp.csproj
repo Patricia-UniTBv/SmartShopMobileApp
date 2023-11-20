@@ -49,13 +49,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\AppIcon\cart.png" />
 	  <None Remove="Resources\AppIcon\Home.png" />
+	  <None Remove="Resources\AppIcon\profile.png" />
 	  <None Remove="Resources\AppIcon\scanner.png" />
 	  <None Remove="Resources\Fonts\MaterialIcons-Regular.ttf" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiImage Include="Resources\AppIcon\cart.png" />
 	  <MauiImage Include="Resources\AppIcon\home.png" />
+	  <MauiImage Include="Resources\AppIcon\profile.png" />
 	  <MauiImage Include="Resources\AppIcon\scanner.png" />
 	</ItemGroup>
 
@@ -74,9 +78,6 @@
 	  <Compile Update="Views\BarcodeScannerView.xaml.cs">
 	    <DependentUpon>BarcodeScannerView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\ScannedProductPopupView.xaml.cs">
-	    <DependentUpon>ScannedProductPopupView.xaml</DependentUpon>
-	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -86,7 +87,10 @@
 	  <MauiXaml Update="Views\Navigation.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\ScannedProductPopupView.xaml">
+	  <MauiXaml Update="Views\ProfileView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ShoppingCartView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

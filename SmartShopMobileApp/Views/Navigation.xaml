@@ -16,5 +16,13 @@
     <views:BarcodeScannerView
         Title="Scan product"
         IconImageSource="scanner.png"/>
-    
+
+    <views:ShoppingCartView
+        Title="My cart"
+        IconImageSource="cart.png"/>
+
+    <views:ProfileView
+        Title="Profile"
+        IconImageSource="profile.png"/>
+
 </TabbedPage>

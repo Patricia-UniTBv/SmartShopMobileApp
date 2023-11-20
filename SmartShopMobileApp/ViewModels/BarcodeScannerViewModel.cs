@@ -94,7 +94,7 @@ namespace SmartShopMobileApp.ViewModels
             var result = await _manageData.GetDataAndDeserializeIt<ProductDTO>($"Product/AddProductToShoppingCart/{NumberOfProducts}", json);
             
             if(result != null)
-                await Application.Current.MainPage.DisplayAlert("Yey", "Your product has been successfully added to the shopping cart!", "OK");
+                await Application.Current.MainPage.DisplayAlert("Successfully added", "Your product has been successfully added to the shopping cart!", "OK");
 
         }
 
