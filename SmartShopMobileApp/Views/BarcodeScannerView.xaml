@@ -7,7 +7,7 @@
              x:DataType="viewModels:BarcodeScannerViewModel"
              x:Class="SmartShopMobileApp.Views.BarcodeScannerView"
              xmlns:icon="clr-namespace:SmartShopMobileApp"
-             Title="BarcodeScanner">
+             Title="Scan product">
     <ScrollView>
         <VerticalStackLayout
             Spacing="25"
@@ -17,7 +17,7 @@
             <Label x:Name="barcodeResult" Text="{Binding BarcodeResult}" FontSize="20"/>
             <cv:CameraView x:Name="cameraView" 
                            WidthRequest="500"
-                           HeightRequest="500"
+                           HeightRequest="450"
                            CamerasLoaded="cameraView_CamerasLoaded"
                            BarCodeDetectionEnabled="True"
                            BarcodeDetected="cameraView_BarcodeDetected"/>
@@ -25,9 +25,9 @@
             <Label Text="{Binding ProductName, StringFormat='Do you want to add {0} to your cart?'}"
                    Margin="10,10"
                    FontSize="16"/>
-                
-                <StackLayout Orientation="Vertical"  HorizontalOptions="Center" VerticalOptions="EndAndExpand">
-                <StackLayout Orientation="Horizontal" WidthRequest="130" Margin="0,0,0,10">
+
+            <StackLayout Orientation="Vertical"  HorizontalOptions="Center" VerticalOptions="EndAndExpand" Margin="0,0,0,10">
+                <StackLayout Orientation="Horizontal" WidthRequest="130" >
                     <Entry Placeholder="1" Text="{Binding NumberOfProducts, Mode=TwoWay}" WidthRequest="90" />
                     <Button Text="{x:Static icon:IconFont.Add}"
                             TextColor="#8C1A6D"
