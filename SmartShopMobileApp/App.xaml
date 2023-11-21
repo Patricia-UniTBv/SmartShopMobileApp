@@ -8,6 +8,14 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+                <ResourceDictionary>
+                    <Style x:Key="LeaveCard" TargetType="Frame">
+                        <Setter Property="HasShadow" Value="True" />
+                        <Setter Property="CornerRadius" Value="5" />
+                        <Setter Property="BackgroundColor" Value="#FFFFFF" />
+                        <Setter Property="HeightRequest" Value="90" />
+                    </Style>
+                </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

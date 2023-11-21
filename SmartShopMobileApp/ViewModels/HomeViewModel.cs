@@ -12,8 +12,8 @@ namespace SmartShopMobileApp.ViewModels
         public HomeViewModel() 
         {
             _manageData = new ManageData();
-            Products = new List<ProductDTO>();
-            GetProducts();
+            Supermarkets = new List<SupermarketDTO>();
+            GetSupermarkets();
         }
 
         private IManageData _manageData;
@@ -24,14 +24,16 @@ namespace SmartShopMobileApp.ViewModels
         }
 
         #region ObservableProperties
+       
         [ObservableProperty]
-        private List<ProductDTO> _products;
+        private List<SupermarketDTO> _supermarkets;
 
-        private async Task GetProducts()
+        private async Task GetSupermarkets()
         {
             _manageData.SetStrategy(new GetData());
-            Products = await _manageData.GetDataAndDeserializeIt<List<ProductDTO>>($"Product/GetAllProducts", ""); // sa se modifice in functie de ID-ul supermarket-ului ales!!     
+            Supermarkets = await _manageData.GetDataAndDeserializeIt<List<SupermarketDTO>>($"Supermarket/GetAllSupermarkets", "");
         }
+
         #endregion
 
         #region RelayCommands

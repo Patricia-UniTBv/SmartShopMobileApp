@@ -6,6 +6,7 @@
         IShoppingCartRepository ShoppingCartRepository { get; }
         IUserRepository UserRepository { get; }
         ICartItemRepository CartItemRepository { get; }
+        ISupermarketRepository SupermarketRepository { get; }
 
         Task CompleteAsync();
     }

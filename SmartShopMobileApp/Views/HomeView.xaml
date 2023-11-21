@@ -7,8 +7,37 @@
              x:DataType="viewModels:HomeViewModel"
              Title="Home">
     <VerticalStackLayout>
-        
-        <Button Text="Open scanner"
+        <Label Text="Choose your supermarket:"
+               FontFamily="Poppins-Regular"
+               FontSize="20"
+               TextColor="#2B0B98"
+               Margin="10,0,0,0"/>
+        <CollectionView x:Name="SupermarketsList" ItemsSource="{Binding Supermarkets}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:SupermarketDTO">
+                    <Grid Padding="10,5,10,5">
+                        <Frame Padding="12" Style="{StaticResource LeaveCard}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image Source="{Binding ImageUrl}" HeightRequest="50" WidthRequest="50" />
+
+                                <StackLayout Grid.Column="1" VerticalOptions="Center">
+                                    <Label Text="{Binding Name}" Margin="15,0,0,0" FontFamily="Poppins-Bold" TextColor="#2B0B98" FontSize="16" />
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+
+
+        <!--<Button Text="Open scanner"
                 TextTransform="None"
                 CornerRadius="5"
                 TextColor="#FFFFFF"
@@ -17,8 +46,8 @@
                 WidthRequest="104"
                 HeightRequest="40"
                 HorizontalOptions="FillAndExpand"
-                Command="{Binding OpenScannerCommand}"/>
-        <Label Text="The products are:"/>
+                Command="{Binding OpenScannerCommand}"/>-->
+        <!--<Label Text="The products are:"/>
         <ListView x:Name="ProductListView" ItemsSource="{Binding Products}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="model:ProductDTO">
@@ -30,7 +59,7 @@
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
+        </ListView>-->
 
 
     </VerticalStackLayout>

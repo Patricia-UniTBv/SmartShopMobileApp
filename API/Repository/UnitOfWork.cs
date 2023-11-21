@@ -14,6 +14,8 @@ namespace API.Repository
         public IUserRepository UserRepository => _userRepository ??= new UserRepository(_context, _mapper);
         private ICartItemRepository? _cartItemRepository;
         public ICartItemRepository CartItemRepository => _cartItemRepository ??= new CartItemRepository(_context, _mapper);
+        private ISupermarketRepository? _supermarketRepository;
+        public ISupermarketRepository SupermarketRepository => _supermarketRepository ??= new SupermarketRepository(_context, _mapper);
 
         private readonly SmartShopDBContext _context;
 
