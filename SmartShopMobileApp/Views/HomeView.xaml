@@ -16,17 +16,17 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:SupermarketDTO">
                     <Grid Padding="10,5,10,5">
-                        <Frame Padding="12" Style="{StaticResource LeaveCard}">
+                        <Frame Padding="8" Style="{StaticResource LeaveCard}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <Image Source="{Binding ImageUrl}" HeightRequest="50" WidthRequest="50" />
+                                <Image Source="{Binding ImageUrl}" HeightRequest="90" WidthRequest="90" />
 
                                 <StackLayout Grid.Column="1" VerticalOptions="Center">
-                                    <Label Text="{Binding Name}" Margin="15,0,0,0" FontFamily="Poppins-Bold" TextColor="#2B0B98" FontSize="16" />
+                                    <Label Text="{Binding Name}" Margin="10,0,0,0" FontFamily="Poppins-Bold" TextColor="#2B0B98" FontSize="16" />
                                 </StackLayout>
                             </Grid>
                         </Frame>

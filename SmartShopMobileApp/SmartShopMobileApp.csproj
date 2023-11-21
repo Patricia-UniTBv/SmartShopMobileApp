@@ -60,6 +60,9 @@
 	  <None Remove="Resources\Fonts\Poppins-BoldItalic.ttf" />
 	  <None Remove="Resources\Fonts\Poppins-Light.ttf" />
 	  <None Remove="Resources\Fonts\Poppins-Regular.ttf" />
+	  <None Remove="Resources\Images\carrefour.png" />
+	  <None Remove="Resources\Images\kaufland.png" />
+	  <None Remove="Resources\Images\lidl.png" />
 	</ItemGroup>
 
 	<ItemGroup>
