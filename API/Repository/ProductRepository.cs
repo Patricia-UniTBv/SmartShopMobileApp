@@ -14,8 +14,13 @@ namespace API.Repository
         }
         public async Task<ICollection<ProductDTO>> GetAllProducts()
         {
-            var product = await _dbSet.ToListAsync();
-            return _mapper.Map<ICollection<Product>, ICollection<ProductDTO>>(product);
+            var result = await _dbSet.ToListAsync();
+            return _mapper.Map<ICollection<Product>, ICollection<ProductDTO>>(result);
+        }
+        public async Task<ICollection<ProductDTO>> GetAllProductsForSupermarket(int supermarketID)
+        {
+            var result = await _dbSet.Where(p => p.SupermarketID == supermarketID).ToListAsync();
+            return _mapper.Map<ICollection<Product>, ICollection<ProductDTO>>(result);
         }
 
         public async Task<ProductDTO> GetProductByBarcode(string barcode)

@@ -10,12 +10,20 @@ namespace DTO
     {
         public int ProductId { get; set; }
 
+        public int CategoryID { get; set; }
+
         public string Name { get; set; } = null!;
 
         public double Price { get; set; }
 
-        public string? Category { get; set; }
+        public string Barcode { get; set; } = null!;
 
-        public string? Barcode { get; set; }
+        public string? Unit { get; set; }
+
+        public double? Stock { get; set; }
+
+        public int SupermarketID { get; set; }
+
+        public byte[]? Image { get; set; }
     }
 }

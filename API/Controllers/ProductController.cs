@@ -31,6 +31,21 @@ namespace API.Controllers
             }
         }
 
+        [HttpGet("GetAllProductsForSupermarket/{supermarketID}")]
+        public async Task<IActionResult> GetAllProductsForSupermarket(int supermarketID)
+        {
+            try
+            {
+                var products = await _unitOfWork.ProductRepository.GetAllProductsForSupermarket(supermarketID);
+
+                return Ok(products);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpGet("GetProductByBarcode/{barcode}")]
         public async Task<IActionResult> GetProductByBarcode(string barcode)
         {

@@ -30,7 +30,7 @@ namespace SmartShopMobileApp.ViewModels
         private async Task GetProducts()
         {
             _manageData.SetStrategy(new GetData());
-            Products = await _manageData.GetDataAndDeserializeIt<List<ProductDTO>>("Product/GetAllProducts", "");      
+            Products = await _manageData.GetDataAndDeserializeIt<List<ProductDTO>>($"Product/GetAllProducts", ""); // sa se modifice in functie de ID-ul supermarket-ului ales!!     
         }
         #endregion
 
