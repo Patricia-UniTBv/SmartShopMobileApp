@@ -6,9 +6,12 @@
     xmlns:local="clr-namespace:SmartShopMobileApp.Views"
     Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:HomeView}"
-        Route="MainPage" />
-
+    <TabBar>
+        <ShellContent Title="Home"  
+                      Icon="home.png"
+                      ContentTemplate="{DataTemplate local:HomeView}" />
+        <ShellContent Title="Scan product"  
+                      Icon="scanner.png"
+                      ContentTemplate="{DataTemplate local:BarcodeScannerView}" />
+    </TabBar>
 </Shell>
