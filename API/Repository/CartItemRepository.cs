@@ -38,5 +38,27 @@ namespace API.Repository
             await _dbSet.AddAsync(result);
             _context.SaveChanges();
         }
+
+        public void DeleteCartItem(CartItemDTO item)
+        {
+            var cartItem = _mapper.Map<CartItemDTO, CartItem>(item);
+            _context.ChangeTracker.Clear();
+            _context.Remove(cartItem);
+            _context.SaveChanges();
+        }
+
+        public async Task<CartItemDTO> GetCartItemById(int id)
+        {
+            var cart = await _dbSet.SingleAsync(c => c.CartItemID == id);
+            return _mapper.Map<CartItem, CartItemDTO>(cart);
+        }
+
+        public async Task<CartItemDTO> GetCartItemByProductIdAndShoppingCartId(int productId, int shoppingCartId)
+        {
+            var carts = await _dbSet.Where(item => item.ProductID == productId && item.ShoppingCartID == shoppingCartId).ToListAsync();
+            var cart = carts.FirstOrDefault();
+            return _mapper.Map<CartItem, CartItemDTO>(cart!);
+        }
+
     }
 }

@@ -12,9 +12,22 @@ namespace API.Controllers
         {
             _unitOfWork = unitOfWork; 
         }
+        [HttpGet("GetLatestShoppingCartByUserId")]
+        public async Task<IActionResult> GetLatestShoppingCartByUserId(int id)
+        {
+            try
+            {
+                var latestShoppingCart = await _unitOfWork.ShoppingCartRepository.GetLatestShoppingCartForCurrentUser(id);
+                return Ok(latestShoppingCart);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
 
         [HttpGet("GetLatestShoppingCartForCurrentUser")]
-        public async Task<IActionResult> GetLatestShoppingCartForCurrentUser(int id)
+        public async Task<IActionResult> GetLatestShoppingCartItemsForCurrentUser(int id)
         {
             try
             {
@@ -28,19 +41,5 @@ namespace API.Controllers
             }
         }
 
-        //[HttpGet("GetLatestShoppingCartForCurrentUser")] //PROVIZORIU
-        //public async Task<IActionResult> GetLatestShoppingCartForCurrentUser()
-        //{
-        //    try
-        //    {
-        //        var latestShoppingCart = await _unitOfWork.ShoppingCartRepository.GetLatestShoppingCartForCurrentUser(1);
-        //        var cartItems = await _unitOfWork.CartItemRepository.GetProductsByShoppingCart(latestShoppingCart.ShoppingCartID);
-        //        return Ok(cartItems);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return BadRequest(e.Message);
-        //    }
-        //}
     }
 }

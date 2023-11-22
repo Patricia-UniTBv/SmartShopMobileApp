@@ -53,6 +53,7 @@
 	  <None Remove="Resources\AppIcon\Home.png" />
 	  <None Remove="Resources\AppIcon\profile.png" />
 	  <None Remove="Resources\AppIcon\scanner.png" />
+	  <None Remove="Resources\AppIcon\trash.png" />
 	  <None Remove="Resources\Fonts\MaterialIcons-Regular.ttf" />
 	  <None Remove="Resources\Fonts\Poppins-Black.ttf" />
 	  <None Remove="Resources\Fonts\Poppins-BlackItalic.ttf" />
@@ -70,6 +71,7 @@
 	  <MauiImage Include="Resources\AppIcon\home.png" />
 	  <MauiImage Include="Resources\AppIcon\profile.png" />
 	  <MauiImage Include="Resources\AppIcon\scanner.png" />
+	  <MauiImage Include="Resources\AppIcon\trash.png" />
 	</ItemGroup>
 
 	<ItemGroup>
