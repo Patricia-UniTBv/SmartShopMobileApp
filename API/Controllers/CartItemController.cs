@@ -15,11 +15,11 @@ namespace API.Controllers
         }
 
         [HttpDelete("DeleteCartItemFromShoppingCart")]
-        public async Task<IActionResult> DeleteLeaveRequestById(int productId, int shoppingCartId)
+        public async Task<IActionResult> DeleteLeaveRequestById(int productId, int shoppingCartId, double quantity)
         {
             try
             {
-                var cartItem = await _unitOfWork.CartItemRepository.GetCartItemByProductIdAndShoppingCartId(productId, shoppingCartId);
+                var cartItem = await _unitOfWork.CartItemRepository.GetCartItemByProductIdAndShoppingCartId(productId, shoppingCartId, quantity);
                 _unitOfWork.CartItemRepository.DeleteCartItem(cartItem);
 
                 await _unitOfWork.CompleteAsync();

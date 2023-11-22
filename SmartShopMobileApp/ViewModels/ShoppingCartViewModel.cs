@@ -35,43 +35,25 @@ namespace SmartShopMobileApp.ViewModels
         [ObservableProperty]
         private List<ProductDTO> _products;
 
-       // [ObservableProperty]
-        private ProductDTO _selectedProduct;
-        public ProductDTO SelectedProduct
-        {
-            get { return _selectedProduct; }
-            set
-            {
-                if (_selectedProduct != value)
-                {
-                    _selectedProduct = value;
-                    OnPropertyChanged(nameof(SelectedProduct));
-                }
-            }
-        }
-
         [RelayCommand]
         private async Task DeleteCartItem(object obj)
         {
             try
             {
-                // var x = SelectedProduct.ProductId;
-                int id = (int)obj;
+                ProductDTO product = (ProductDTO)obj;
 
                 _manageData.SetStrategy(new GetData());
                 var latestShoppingCart = await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"ShoppingCart/GetLatestShoppingCartByUserId?id={_userId}", "");
                 
                 _manageData.SetStrategy(new DeleteData());
-                await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"CartItem/DeleteCartItemFromShoppingCart?productId={id}&shoppingCartId={latestShoppingCart.ShoppingCartID}", "");
+                await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"CartItem/DeleteCartItemFromShoppingCart?productId={product.ProductId}&shoppingCartId={latestShoppingCart.ShoppingCartID}&quantity={product.Quantity}", "");
                 await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new ShoppingCartView()));
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
-
         }
-
 
         private async Task GetLatestShoppingCartForCurrentUser()
         {

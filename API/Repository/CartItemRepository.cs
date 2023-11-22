@@ -53,9 +53,9 @@ namespace API.Repository
             return _mapper.Map<CartItem, CartItemDTO>(cart);
         }
 
-        public async Task<CartItemDTO> GetCartItemByProductIdAndShoppingCartId(int productId, int shoppingCartId)
+        public async Task<CartItemDTO> GetCartItemByProductIdAndShoppingCartId(int productId, int shoppingCartId, double quantity)
         {
-            var carts = await _dbSet.Where(item => item.ProductID == productId && item.ShoppingCartID == shoppingCartId).ToListAsync();
+            var carts = await _dbSet.Where(item => item.ProductID == productId && item.ShoppingCartID == shoppingCartId && item.Quantity == quantity).ToListAsync();
             var cart = carts.FirstOrDefault();
             return _mapper.Map<CartItem, CartItemDTO>(cart!);
         }
