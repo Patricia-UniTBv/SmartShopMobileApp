@@ -30,8 +30,15 @@ namespace SmartShopMobileApp.ViewModels
 
         private async Task GetSupermarkets()
         {
-            _manageData.SetStrategy(new GetData());
-            Supermarkets = await _manageData.GetDataAndDeserializeIt<List<SupermarketDTO>>($"Supermarket/GetAllSupermarkets", "");
+            try
+            {
+                _manageData.SetStrategy(new GetData());
+                Supermarkets = await _manageData.GetDataAndDeserializeIt<List<SupermarketDTO>>($"Supermarket/GetAllSupermarkets", "");
+            }
+            catch(Exception ex) 
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         #endregion

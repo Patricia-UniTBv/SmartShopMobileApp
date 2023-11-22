@@ -25,5 +25,14 @@ namespace DTO
         public int SupermarketID { get; set; }
 
         public byte[]? Image { get; set; }
+        public string ImageUrl //PROVIZORIU
+        {
+            get
+            {
+               return "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png";
+            }
+        }
+        public double? Quantity { get; set; }
+
     }
 }

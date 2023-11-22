@@ -28,35 +28,7 @@ namespace SmartShopMobileApp.ViewModels
             set { _manageData = value; }
         }
 
-        //private string _productName;
-
-        //public string ProductName
-        //{
-        //    get { return _productName; }
-        //    set
-        //    {
-        //        if (_productName != value)
-        //        {
-        //            _productName = value;
-        //            OnPropertyChanged(nameof(ProductName));
-        //        }
-        //    }
-        //}
-
-        //private string _barcodeResult;
-
-        //public string BarcodeResult
-        //{
-        //    get { return _barcodeResult; }
-        //    set
-        //    {
-        //        if (_barcodeResult != value)
-        //        {
-        //            _barcodeResult = value;
-        //            OnPropertyChanged(nameof(BarcodeResult));
-        //        }
-        //    }
-        //}
+        
         [ObservableProperty]
         public string _productName;
 

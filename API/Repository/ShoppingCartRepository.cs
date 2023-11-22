@@ -11,7 +11,7 @@ namespace API.Repository
         public ShoppingCartRepository(SmartShopDBContext context, IMapper _mapper) : base(context, _mapper)
         {
         }
-        public async Task<ShoppingCartDTO> GetShoppingCartForSpecificUser(int userID)
+        public async Task<ShoppingCartDTO?> GetShoppingCartForSpecificUser(int userID)
         {
             var result = await _dbSet.FirstOrDefaultAsync(cart => cart.UserID == userID);
             if (result == null)
@@ -20,6 +20,11 @@ namespace API.Repository
             }
             return _mapper.Map<ShoppingCart, ShoppingCartDTO>(result);
         }
+        public async Task<ShoppingCartDTO> GetLatestShoppingCartForCurrentUser(int userID)
+        {
+            var result = await _dbSet.Where(cart=> cart.UserID == userID && cart.IsTransacted == false).OrderByDescending(cart => cart.CreationDate).FirstOrDefaultAsync();
+            return _mapper.Map<ShoppingCart, ShoppingCartDTO>(result!);
+        }
 
         public async Task AddShoppingCart(ShoppingCartDTO shoppingCart)
         {
@@ -27,5 +32,7 @@ namespace API.Repository
             await _dbSet.AddAsync(result);
             _context.SaveChanges();
         }
+
+      
     }
 }

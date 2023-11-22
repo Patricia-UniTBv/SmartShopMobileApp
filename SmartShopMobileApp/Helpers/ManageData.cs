@@ -24,7 +24,6 @@ namespace SmartShopMobileApp.Helpers
         {
             try
             { 
-
                 var _httpClient = new HttpClient(App.Current.MainPage.Handler.MauiContext.Services.GetService<IHttpClientHandlerService>().GetInsecureHandler());
 
                 var data = await _manageDataStrategy.ManageData(_httpClient, url, json);
