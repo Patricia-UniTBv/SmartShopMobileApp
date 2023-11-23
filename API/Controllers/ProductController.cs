@@ -81,7 +81,7 @@ namespace API.Controllers
         {
             try
             {
-                var shoppingCart = await _unitOfWork.ShoppingCartRepository.GetShoppingCartForSpecificUser(1); //provizoriu, UserID trebuie modificat dupa autentificare!
+                var shoppingCart = await _unitOfWork.ShoppingCartRepository.GetLatestShoppingCartForCurrentUser(1); //provizoriu, UserID trebuie modificat dupa autentificare!
                 var currentUser = await _unitOfWork.UserRepository.GetUserByID(1); //provizoriu
 
                 if (shoppingCart == null)
