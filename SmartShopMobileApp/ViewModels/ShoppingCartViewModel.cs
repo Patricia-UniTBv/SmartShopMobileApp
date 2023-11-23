@@ -35,6 +35,9 @@ namespace SmartShopMobileApp.ViewModels
         [ObservableProperty]
         private List<ProductDTO> _products;
 
+        [ObservableProperty]
+        private double _totalAmount;
+
         [RelayCommand]
         private async Task DeleteCartItem(object obj)
         {
@@ -61,7 +64,9 @@ namespace SmartShopMobileApp.ViewModels
             {
                 _manageData.SetStrategy(new GetData());
                 Products = await _manageData.GetDataAndDeserializeIt<List<ProductDTO>>($"ShoppingCart/GetLatestShoppingCartForCurrentUser?id={_userId}", "");
-               
+
+                var latestShoppingCart = await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"ShoppingCart/GetLatestShoppingCartByUserId?id={_userId}", "");
+                TotalAmount = latestShoppingCart.TotalAmount;
             }
             catch (Exception ex)
             {

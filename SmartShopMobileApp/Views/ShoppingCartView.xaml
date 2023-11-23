@@ -7,6 +7,11 @@
              xmlns:model="clr-namespace:DTO;assembly=DTO"
              Title="My shopping cart">
     <VerticalStackLayout>
+            <Label Text="Your current shopping cart:"
+               FontFamily="Poppins-Regular"
+               FontSize="20"
+               TextColor="#2B0B98"
+               Margin="10,0,0,0"/>
         <CollectionView x:Name="SupermarketsList" ItemsSource="{Binding Products}" HeightRequest="300">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:ProductDTO">
@@ -53,6 +58,29 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
+        <StackLayout Margin="0,250,10,0"
+                     Orientation="Horizontal" 
+                     VerticalOptions="CenterAndExpand" 
+                     HorizontalOptions="CenterAndExpand">
+            <Label Text="Total:"
+                   FontFamily="Poppins-Regular"
+                   FontSize="20"
+                   TextColor="Gray"
+                   Margin="10,0,0,0"/>
+            <Label Text="{Binding TotalAmount}"
+                   FontFamily="Poppins-Semibold"
+                   FontSize="20"
+                   TextColor="#2B0B98"
+                   Margin="10,0,0,0"/>
+            <Label Text="$"
+                   FontFamily="Poppins-Semibold"
+                   FontSize="20"
+                   TextColor="#2B0B98"
+                   Margin="5,0,0,0"/>  
+        </StackLayout>
+
+        <Button Text="Pay" FontSize="20" Margin="60,10,60,10" CornerRadius="20" BackgroundColor="Green"/>
 
     </VerticalStackLayout>
 </ContentPage>
