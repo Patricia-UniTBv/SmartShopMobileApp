@@ -26,6 +26,7 @@ namespace API.Repository
             {
                 ProductId = item.Product.ProductID,
                 Quantity = item.Quantity,
+                Price = item.Product.Price * (double)item.Quantity!,
                 Name = item.Product.Name,
 
             }).ToList();

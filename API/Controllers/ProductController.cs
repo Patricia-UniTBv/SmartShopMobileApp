@@ -46,6 +46,21 @@ namespace API.Controllers
             }
         }
 
+        [HttpGet("GetProductById")]
+        public async Task<IActionResult> GetProductById(int id)
+        {
+            try
+            {
+                var result = await _unitOfWork.ProductRepository.GetProductById(id);
+
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpGet("GetProductByBarcode/{barcode}")]
         public async Task<IActionResult> GetProductByBarcode(string barcode)
         {
@@ -62,12 +77,12 @@ namespace API.Controllers
         }
 
         [HttpPost("AddProductToShoppingCart/{numberOfProducts}")]
-        public async Task<IActionResult> AddProductToShoppingCart([FromBody] ProductDTO product, int numberOfProducts)
+        public async Task<IActionResult> AddProductToShoppingCart( ProductDTO product, int numberOfProducts)// SA PUN FROMBODY!
         {
             try
             {
                 var shoppingCart = await _unitOfWork.ShoppingCartRepository.GetShoppingCartForSpecificUser(1); //provizoriu, UserID trebuie modificat dupa autentificare!
-                var currentUser = await _unitOfWork.UserRepository.GetUserByID(1);
+                var currentUser = await _unitOfWork.UserRepository.GetUserByID(1); //provizoriu
 
                 if (shoppingCart == null)
                 {
@@ -75,7 +90,7 @@ namespace API.Controllers
                     {
                         UserID = currentUser.UserID,
                         CreationDate = DateTime.Now,
-                        TotalAmount = 1, // va fi modificat in functie de numarul de produse cumparate
+                        TotalAmount = 0,
                         IsTransacted = false,
                     };
 
@@ -87,6 +102,10 @@ namespace API.Controllers
                     ShoppingCartID = shoppingCart.ShoppingCartID,
                     Quantity = numberOfProducts, 
                 };
+
+                var productToAdd = await _unitOfWork.ProductRepository.GetProductById(product.ProductId);
+                shoppingCart.TotalAmount += productToAdd.Price * numberOfProducts;
+                await _unitOfWork.ShoppingCartRepository.UpdateShoppingCart(shoppingCart);
 
                 await _unitOfWork.CartItemRepository.AddCartItem(cartItem);
 

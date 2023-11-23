@@ -33,6 +33,12 @@ namespace API.Repository
             _context.SaveChanges();
         }
 
-      
+        public async Task UpdateShoppingCart(ShoppingCartDTO shoppingCart)
+        {
+            var cart = _mapper.Map<ShoppingCartDTO, ShoppingCart>(shoppingCart);
+            _context.ChangeTracker.Clear();
+            _context.Update(cart);
+            _context.SaveChanges();
+        }
     }
 }

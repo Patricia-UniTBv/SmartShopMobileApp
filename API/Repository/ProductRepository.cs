@@ -29,5 +29,10 @@ namespace API.Repository
             return _mapper.Map<Product, ProductDTO>(product);
         }
 
+        public async Task<ProductDTO> GetProductById(int id)
+        {
+            var product = await _dbSet.Where(p => p.ProductID == id).FirstAsync();
+            return _mapper.Map<Product, ProductDTO>(product);
+        }
     }
 }

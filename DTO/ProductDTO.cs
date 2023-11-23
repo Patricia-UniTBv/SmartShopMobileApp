@@ -14,7 +14,14 @@ namespace DTO
 
         public string Name { get; set; } = null!;
 
-        public double Price { get; set; }
+        public double Price
+        {
+            get;
+            //{
+            // return Price * (double)Quantity!;
+            //}
+            set;
+        }
 
         public string Barcode { get; set; } = null!;
 
