@@ -3,6 +3,7 @@ using SmartShopMobileApp.Helpers;
 using CommunityToolkit.Maui;
 using Syncfusion.Maui.Core.Hosting;
 
+
 namespace SmartShopMobileApp;
 
 public static class MauiProgram

@@ -58,6 +58,21 @@ namespace SmartShopMobileApp.ViewModels
             }
         }
 
+        [RelayCommand]
+        private async Task Pay(object obj)
+        {
+            try
+            {
+                await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new PaymentView()));
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+        }
+
         private async Task GetLatestShoppingCartForCurrentUser()
         {
             try

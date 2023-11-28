@@ -13,6 +13,9 @@
         <ShellContent Title="Scan product"  
                       Icon="scanner.png"
                       ContentTemplate="{DataTemplate local:BarcodeScannerView}" />
+        <ShellContent Title="History"  
+                      Icon="transaction.png"
+                      ContentTemplate="{DataTemplate local:BarcodeScannerView}" />
         <ShellContent Title="My cart"  
                       Icon="cart.png"
                       ContentTemplate="{DataTemplate local:ShoppingCartView}" />

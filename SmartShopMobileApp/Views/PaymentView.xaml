@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartShopMobileApp.Views.PaymentView"
+             xmlns:calendar="clr-namespace:Syncfusion.Maui.Calendar;assembly=Syncfusion.Maui.Calendar"
+             Title="Payment">
+
+    <VerticalStackLayout>
+        <Label Text="Process payment" Margin="18,15" FontFamily="Poppins-Bold" FontSize="20" TextColor="#2B0B98"/>
+        <StackLayout Padding="20">
+            <Label Text="Card Number"/>
+            <Entry Placeholder="Card Number" Keyboard="Numeric" MaxLength="16" x:Name="cardNo" Margin="0,15"/>
+            <!--<Grid RowDefinitions="0.1*, 0.9*">
+                <StackLayout>
+                    <Label x:Name="monthLabel"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   FontSize="20" />
+                    <Label x:Name="yearLabel"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   FontSize="20" />
+                </StackLayout>
+                <calendar:SfCalendar Grid.Row="1"
+                             x:Name="calendar" HeightRequest="260" />
+            </Grid>-->
+            <Label Text="Expire Year"/>
+            <Entry Placeholder="Expire Year" Keyboard="Numeric" MaxLength="2" x:Name="expireYear" Margin="0,15"/>
+            <Label Text="Expire Month"/>
+            <Entry Placeholder="Expire Month" Keyboard="Numeric" MaxLength="2" x:Name="expireMonth" Margin="0,15"/>
+            <Label Text="Security number"/>
+            <Entry Placeholder="CVV" Keyboard="Numeric" MaxLength="3" x:Name="cvv" Margin="0,15"/>
+            <Image Source="payment.png" HeightRequest="100" WidthRequest="300" />
+            <Button Clicked="Button_Clicked" Text="Pay" FontSize="18" Margin="30,20" BackgroundColor="Green"/>
+        </StackLayout>
+    </VerticalStackLayout>
+</ContentPage>

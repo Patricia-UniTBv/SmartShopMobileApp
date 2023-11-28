@@ -53,6 +53,7 @@
 	  <None Remove="Resources\AppIcon\Home.png" />
 	  <None Remove="Resources\AppIcon\profile.png" />
 	  <None Remove="Resources\AppIcon\scanner.png" />
+	  <None Remove="Resources\AppIcon\transaction.png" />
 	  <None Remove="Resources\AppIcon\trash.png" />
 	  <None Remove="Resources\Fonts\MaterialIcons-Regular.ttf" />
 	  <None Remove="Resources\Fonts\Poppins-Black.ttf" />
@@ -64,6 +65,7 @@
 	  <None Remove="Resources\Images\carrefour.png" />
 	  <None Remove="Resources\Images\kaufland.png" />
 	  <None Remove="Resources\Images\lidl.png" />
+	  <None Remove="Resources\Images\payment.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -71,6 +73,7 @@
 	  <MauiImage Include="Resources\AppIcon\home.png" />
 	  <MauiImage Include="Resources\AppIcon\profile.png" />
 	  <MauiImage Include="Resources\AppIcon\scanner.png" />
+	  <MauiImage Include="Resources\AppIcon\transaction.png" />
 	  <MauiImage Include="Resources\AppIcon\trash.png" />
 	</ItemGroup>
 
@@ -78,6 +81,8 @@
 	  <PackageReference Include="CommunityToolkit.Maui" Version="6.1.0" />
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	  <PackageReference Include="Stripe.net" Version="43.4.0" />
+	  <PackageReference Include="Syncfusion.Maui.Calendar" Version="23.2.6" />
 	  <PackageReference Include="Syncfusion.Maui.Popup" Version="23.1.44" />
 	</ItemGroup>
 
@@ -93,6 +98,9 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Views\HomeView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\PaymentView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ProfileView.xaml">

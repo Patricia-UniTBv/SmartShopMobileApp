@@ -6,4 +6,9 @@ public partial class AppShell : Shell
 	{
 		InitializeComponent();
 	}
+    protected override bool OnBackButtonPressed()
+    {
+        // true or false to disable or enable the action
+        return base.OnBackButtonPressed();
+    }
 }
