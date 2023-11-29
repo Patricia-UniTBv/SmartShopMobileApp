@@ -1,3 +1,4 @@
+using SmartShopMobileApp.ViewModels;
 using Stripe;
 using Stripe.Infrastructure;
 using System.ComponentModel;
@@ -10,23 +11,24 @@ public partial class PaymentView : ContentPage
 	public PaymentView()
 	{
 		InitializeComponent();
+        BindingContext = new PaymentViewModel(); 
     }
 
     public void PayViaStripe()
 	{
 		StripeConfiguration.ApiKey = "sk_test_51OHNMNDQz7fQ3QseH9lroYrCZXFfNVJAqJeHgWgeOYjczfYfH2M7lCJiTsnjb5gSysFLcdVT5wdVYjYt3gD2SVCs00acLz6SUz";
 
-        string cardno = cardNo.Text;
-		string expMonth = expireMonth.Text;
-		string expYear = expireYear.Text;
-		string cardCvv = cvv.Text;
+  //      string cardno = cardNo.Text;
+		//string expMonth = expireMonth.Text;
+		//string expYear = expireYear.Text;
+		//string cardCvv = cvv.Text;
 
 		
 		Stripe.TokenCardOptions stripeOption = new Stripe.TokenCardOptions();
-		stripeOption.Number = cardno;
-        stripeOption.ExpYear = expYear;
-        stripeOption.ExpMonth = expMonth;
-        stripeOption.Cvc = cardCvv;
+		//stripeOption.Number = cardno;
+  //      stripeOption.ExpYear = expYear;
+  //      stripeOption.ExpMonth = expMonth;
+  //      stripeOption.Cvc = cardCvv;
 
         TokenCreateOptions stripeCard = new TokenCreateOptions();
         stripeCard.Card = stripeOption;
