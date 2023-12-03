@@ -63,7 +63,7 @@ namespace SmartShopMobileApp.ViewModels
         {
             try
             {
-                await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new PaymentView()));
+                await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new PaymentView(TotalAmount)));
 
             }
             catch (Exception e)
