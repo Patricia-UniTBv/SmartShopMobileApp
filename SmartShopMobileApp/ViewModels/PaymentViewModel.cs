@@ -19,11 +19,22 @@ namespace SmartShopMobileApp.ViewModels
     {
         public PaymentViewModel() 
         {
-            //IsPayButtonEnabled = false;
-            //PayButtonColor = "#C2D2CE";
-           // UpdatePayButtonState();
+           
         }
-        public double TotalAmount { get; set; }
+
+        private double totalAmount;
+        public double TotalAmount {
+            get { return totalAmount; }
+            set
+            {
+                if (totalAmount != value)
+                {
+                    totalAmount = value;
+                    OnPropertyChanged(nameof(TotalAmount));
+                    UpdatePayButtonText();
+                }
+            }
+        }
         [ObservableProperty]
         public string _cardNo;
         [ObservableProperty]
@@ -32,10 +43,10 @@ namespace SmartShopMobileApp.ViewModels
         public string _expirationMonth;
         [ObservableProperty]
         public string _cvv;
-        //[ObservableProperty]
-        //public bool _isPayButtonEnabled = false;
-        //[ObservableProperty]
-        //public string _payButtonColor = "#C2D2CE";
+
+        [ObservableProperty]
+        public string _payButtonText;
+
         public void PayViaStripe()
         {
             StripeConfiguration.ApiKey = "sk_test_51OHNMNDQz7fQ3QseH9lroYrCZXFfNVJAqJeHgWgeOYjczfYfH2M7lCJiTsnjb5gSysFLcdVT5wdVYjYt3gD2SVCs00acLz6SUz";
@@ -95,19 +106,20 @@ namespace SmartShopMobileApp.ViewModels
             if (charge.Status == "succeeded")
             {
                 Microsoft.Maui.Controls.Application.Current.MainPage.DisplayAlert("Payment Confirmation", "The transaction was successful! You have recieved an email to confirm your payment.", "OK");
-                SendPaymentConfirmationEmail("patyanelis@yahoo.com", TotalAmount);
+                SendPaymentConfirmationEmail("patyanelis@yahoo.com", TotalAmount); // sa modific cu adresa userului conectat dupa autentificare!!
                 App.Current.MainPage.Navigation.PopAsync();
             }
             else
             {
-                // failed
+                Microsoft.Maui.Controls.Application.Current.MainPage.DisplayAlert("Oops!", "Something went wrong!", "OK");
+                return;
             }
         }
         public async void SendPaymentConfirmationEmail(string recipientEmail, double totalAmount)
         {
             var email = new MimeMessage();
             email.From.Add(MailboxAddress.Parse("smartshopapp.testing@gmail.com"));
-            email.To.Add(MailboxAddress.Parse("patyanelis@yahoo.com"));
+            email.To.Add(MailboxAddress.Parse("patyanelis@yahoo.com"));  // sa modific cu adresa userului conectat dupa autentificare!!
             email.Subject = $"Payment Confirmation";
             email.Body = new TextPart(TextFormat.Html)
             {
@@ -123,16 +135,11 @@ namespace SmartShopMobileApp.ViewModels
             await smtp.SendAsync(email);
             await smtp.DisconnectAsync(true);
         }
-        //private void UpdatePayButtonState()
-        //{
-        //    bool allEntriesCompleted = !string.IsNullOrEmpty(CardNo)
-        //        && !string.IsNullOrEmpty(ExpirationYear)
-        //        && !string.IsNullOrEmpty(ExpirationMonth)
-        //        && !string.IsNullOrEmpty(Cvv);
 
-        //    payButton.IsEnabled = allEntriesCompleted;
-        //    payButton.BackgroundColor = allEntriesCompleted ? "#1DB839" : "#C2D2CE";
-        //}
+        private void UpdatePayButtonText()
+        {
+            PayButtonText = $"Pay {TotalAmount} lei";
+        }
 
         [RelayCommand]
         private void Pay()

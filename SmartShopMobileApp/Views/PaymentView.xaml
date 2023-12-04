@@ -20,7 +20,7 @@
             <Label Text="Security number"/>
             <Entry Placeholder="CVV" Keyboard="Numeric" MaxLength="3" x:Name="cvv" Text="{Binding Cvv}" Margin="0,15"/>
             <Image Source="payment.png" HeightRequest="100" WidthRequest="300" />
-            <Button x:Name="payButton" IsEnabled="{Binding IsPayButtonEnabled}" BackgroundColor="{Binding PayButtonColor}" Command="{Binding PayCommand}" Text="Pay" FontSize="18" Margin="30,10" />
+            <Button x:Name="payButton" Command="{Binding PayCommand}" Text="{Binding PayButtonText}" FontSize="18" Margin="30,10" />
         </StackLayout>
     </VerticalStackLayout>
 </ContentPage>

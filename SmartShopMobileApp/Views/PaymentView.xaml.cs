@@ -33,13 +33,11 @@ public partial class PaymentView : ContentPage
     }
     private void EntryTextChanged(object sender, TextChangedEventArgs e)
     {
-        // Aici se face actualizarea stării butonului în funcție de conținutul Entry-urilor
         UpdatePayButtonState();
     }
 
     private void UpdatePayButtonState()
     {
-        // Verificați aici dacă toate entry-urile sunt completate
         bool allEntriesCompleted = !string.IsNullOrEmpty(cardNo.Text)
             && !string.IsNullOrEmpty(expireYear.Text)
             && !string.IsNullOrEmpty(expireMonth.Text)
