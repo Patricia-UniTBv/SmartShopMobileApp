@@ -9,6 +9,8 @@
     <VerticalStackLayout>
         <Label Text="Process payment" Margin="18,15" FontFamily="Poppins-Bold" FontSize="20" TextColor="#2B0B98"/>
         <StackLayout Padding="20">
+            <Label Text="Card Name"/>
+            <Entry Placeholder="Card Name" Keyboard="Default" MaxLength="16" x:Name="cardName" Margin="0,0,0,15"/>
             <Label Text="Card Number"/>
             <Entry Placeholder="Card Number" Keyboard="Numeric" MaxLength="16" x:Name="cardNo" Text="{Binding CardNo}" Margin="0,15"/>
             <Label Text="Expire Year"/>
@@ -16,9 +18,9 @@
             <Label Text="Expire Month"/>
             <Entry Placeholder="Expire Month" Keyboard="Numeric" MaxLength="2" x:Name="expireMonth" Text="{Binding ExpirationMonth}" Margin="0,15"/>
             <Label Text="Security number"/>
-            <Entry Placeholder="CVV" Keyboard="Numeric" MaxLength="3" x:Name="cvv" Text="{Binding CVV}" Margin="0,15"/>
+            <Entry Placeholder="CVV" Keyboard="Numeric" MaxLength="3" x:Name="cvv" Text="{Binding Cvv}" Margin="0,15"/>
             <Image Source="payment.png" HeightRequest="100" WidthRequest="300" />
-            <Button IsEnabled="true" Command="{Binding PayCommand}" Text="Pay" FontSize="18" Margin="30,20" BackgroundColor="Green"/>
+            <Button x:Name="payButton" IsEnabled="{Binding IsPayButtonEnabled}" BackgroundColor="{Binding PayButtonColor}" Command="{Binding PayCommand}" Text="Pay" FontSize="18" Margin="30,10" />
         </StackLayout>
     </VerticalStackLayout>
 </ContentPage>

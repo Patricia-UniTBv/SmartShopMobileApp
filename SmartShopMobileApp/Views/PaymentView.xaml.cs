@@ -9,6 +9,7 @@ using MailKit.Security;
 using MimeKit;
 using MimeKit.Text;
 using SmartShopMobileApp.ViewModels;
+using Microsoft.Maui.Graphics; 
 
 namespace SmartShopMobileApp.Views;
 
@@ -21,5 +22,30 @@ public partial class PaymentView : ContentPage
         PaymentViewModel viewModel = new PaymentViewModel();
         viewModel.TotalAmount = amount;
         BindingContext = viewModel;
+
+        payButton.BackgroundColor = Color.FromArgb("BFC6BF");
+        payButton.IsEnabled = false;
+
+        cardNo.TextChanged += EntryTextChanged;
+        expireYear.TextChanged += EntryTextChanged;
+        expireMonth.TextChanged += EntryTextChanged;
+        cvv.TextChanged += EntryTextChanged;
+    }
+    private void EntryTextChanged(object sender, TextChangedEventArgs e)
+    {
+        // Aici se face actualizarea stării butonului în funcție de conținutul Entry-urilor
+        UpdatePayButtonState();
+    }
+
+    private void UpdatePayButtonState()
+    {
+        // Verificați aici dacă toate entry-urile sunt completate
+        bool allEntriesCompleted = !string.IsNullOrEmpty(cardNo.Text)
+            && !string.IsNullOrEmpty(expireYear.Text)
+            && !string.IsNullOrEmpty(expireMonth.Text)
+            && !string.IsNullOrEmpty(cvv.Text);
+
+        payButton.IsEnabled = allEntriesCompleted;
+        payButton.BackgroundColor = allEntriesCompleted ? Color.FromArgb("24B024") : Color.FromArgb("BFC6BF");
     }
 }

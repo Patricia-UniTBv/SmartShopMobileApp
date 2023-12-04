@@ -11,16 +11,31 @@ using MimeKit.Text;
 using Stripe;
 using Stripe.Checkout;
 using Stripe.Infrastructure;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace SmartShopMobileApp.ViewModels
 {
-    public partial class PaymentViewModel
+    public partial class PaymentViewModel:ObservableObject
     {
+        public PaymentViewModel() 
+        {
+            //IsPayButtonEnabled = false;
+            //PayButtonColor = "#C2D2CE";
+           // UpdatePayButtonState();
+        }
         public double TotalAmount { get; set; }
-        public string CardNo { get; set; }
-        public string ExpirationYear { get; set; }
-        public string ExpirationMonth { get; set; }
-        public string CVV { get; set; }
+        [ObservableProperty]
+        public string _cardNo;
+        [ObservableProperty]
+        public string _expirationYear;
+        [ObservableProperty]
+        public string _expirationMonth;
+        [ObservableProperty]
+        public string _cvv;
+        //[ObservableProperty]
+        //public bool _isPayButtonEnabled = false;
+        //[ObservableProperty]
+        //public string _payButtonColor = "#C2D2CE";
         public void PayViaStripe()
         {
             StripeConfiguration.ApiKey = "sk_test_51OHNMNDQz7fQ3QseH9lroYrCZXFfNVJAqJeHgWgeOYjczfYfH2M7lCJiTsnjb5gSysFLcdVT5wdVYjYt3gD2SVCs00acLz6SUz";
@@ -28,11 +43,11 @@ namespace SmartShopMobileApp.ViewModels
             string cardno = CardNo;
             string expMonth = ExpirationMonth;
             string expYear = ExpirationYear;
-            string cardCvv = CVV;
+            string cardCvv = Cvv;
 
-            Stripe.TokenCreateOptions tokenOptions = new Stripe.TokenCreateOptions
+            TokenCreateOptions tokenOptions = new TokenCreateOptions
             {
-                Card = new Stripe.TokenCardOptions
+                Card = new TokenCardOptions
                 {
                     Number = cardno,
                     ExpMonth = expMonth,
@@ -41,7 +56,7 @@ namespace SmartShopMobileApp.ViewModels
                 }
             };
 
-            Stripe.TokenService tokenService = new Stripe.TokenService();
+            TokenService tokenService = new TokenService();
             Token stripeToken = tokenService.Create(tokenOptions);
 
             var option = new SourceCreateOptions
@@ -108,6 +123,16 @@ namespace SmartShopMobileApp.ViewModels
             await smtp.SendAsync(email);
             await smtp.DisconnectAsync(true);
         }
+        //private void UpdatePayButtonState()
+        //{
+        //    bool allEntriesCompleted = !string.IsNullOrEmpty(CardNo)
+        //        && !string.IsNullOrEmpty(ExpirationYear)
+        //        && !string.IsNullOrEmpty(ExpirationMonth)
+        //        && !string.IsNullOrEmpty(Cvv);
+
+        //    payButton.IsEnabled = allEntriesCompleted;
+        //    payButton.BackgroundColor = allEntriesCompleted ? "#1DB839" : "#C2D2CE";
+        //}
 
         [RelayCommand]
         private void Pay()
