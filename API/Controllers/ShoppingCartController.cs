@@ -1,4 +1,5 @@
 ﻿using API.Repository.Interfaces;
+using DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -34,6 +35,22 @@ namespace API.Controllers
                 var latestShoppingCart = await _unitOfWork.ShoppingCartRepository.GetLatestShoppingCartForCurrentUser(id);
                 var cartItems = await _unitOfWork.CartItemRepository.GetProductsByShoppingCart(latestShoppingCart.ShoppingCartID);
                 return Ok(cartItems);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPut("UpdateShoppingCartWhenTransacted")]
+        public async Task<IActionResult> UpdateShoppingCartWhenTransacted(int id)
+        {
+            try
+            {
+                var shoppingCart = await _unitOfWork.ShoppingCartRepository.GetShoppingCartById(id);
+                shoppingCart.IsTransacted = true;
+                await _unitOfWork.ShoppingCartRepository.UpdateShoppingCart(shoppingCart);
+                return Ok(shoppingCart);
             }
             catch (Exception e)
             {

@@ -31,7 +31,10 @@ namespace API.Repository
 
             }).ToList();
 
-            return productDTOs;
+            if (productDTOs != null)
+                return productDTOs;
+            return new List<ProductDTO>();
+
         }
         public async Task AddCartItem(CartItemDTO item)
         {

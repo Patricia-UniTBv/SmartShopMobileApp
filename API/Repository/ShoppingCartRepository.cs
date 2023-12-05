@@ -23,7 +23,17 @@ namespace API.Repository
         public async Task<ShoppingCartDTO> GetLatestShoppingCartForCurrentUser(int userID)
         {
             var result = await _dbSet.Where(cart=> cart.UserID == userID && cart.IsTransacted == false).OrderByDescending(cart => cart.CreationDate).FirstOrDefaultAsync();
-            return _mapper.Map<ShoppingCart, ShoppingCartDTO>(result!);
+            if (result != null)
+                return _mapper.Map<ShoppingCart, ShoppingCartDTO>(result!);
+            else return new ShoppingCartDTO();
+        }
+
+        public async Task<ShoppingCartDTO> GetShoppingCartById(int id)
+        {
+            var result = await _dbSet.Where(cart => cart.ShoppingCartID == id).FirstOrDefaultAsync();
+            if (result != null)
+                return _mapper.Map<ShoppingCart, ShoppingCartDTO>(result!);
+            else return new ShoppingCartDTO();
         }
 
         public async Task AddShoppingCart(ShoppingCartDTO shoppingCart)

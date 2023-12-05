@@ -12,6 +12,9 @@ using Stripe;
 using Stripe.Checkout;
 using Stripe.Infrastructure;
 using CommunityToolkit.Mvvm.ComponentModel;
+using DTO;
+using SmartShopMobileApp.Helpers;
+using Newtonsoft.Json;
 
 namespace SmartShopMobileApp.ViewModels
 {
@@ -19,9 +22,16 @@ namespace SmartShopMobileApp.ViewModels
     {
         public PaymentViewModel() 
         {
-           
+            _manageData = new ManageData();
         }
 
+        private IManageData _manageData;
+
+        public IManageData ManageData
+        {
+            get { return _manageData; }
+            set { _manageData = value; }
+        }
         private double totalAmount;
         public double TotalAmount {
             get { return totalAmount; }
@@ -35,6 +45,7 @@ namespace SmartShopMobileApp.ViewModels
                 }
             }
         }
+        public int ShoppingCartId { get; set; }
         [ObservableProperty]
         public string _cardNo;
         [ObservableProperty]
@@ -105,6 +116,9 @@ namespace SmartShopMobileApp.ViewModels
             Charge charge = chargeService.Create(chargeoption);
             if (charge.Status == "succeeded")
             {
+                //var json = JsonConvert.SerializeObject(leaveRequest);
+                _manageData.SetStrategy(new UpdateData());
+                _manageData.GetDataAndDeserializeIt<object>($"ShoppingCart/UpdateShoppingCartWhenTransacted?id={ShoppingCartId}", "");
                 Microsoft.Maui.Controls.Application.Current.MainPage.DisplayAlert("Payment Confirmation", "The transaction was successful! You have recieved an email to confirm your payment.", "OK");
                 SendPaymentConfirmationEmail("patyanelis@yahoo.com", TotalAmount); // sa modific cu adresa userului conectat dupa autentificare!!
                 App.Current.MainPage.Navigation.PopAsync();

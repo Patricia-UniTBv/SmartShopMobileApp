@@ -20,7 +20,6 @@ namespace SmartShopMobileApp.ViewModels
             _manageData = new ManageData();
             Products = new List<ProductDTO>();
             _userId = 1; //provizoriu
-            GetLatestShoppingCartForCurrentUser();
         }
 
         private IManageData _manageData;
@@ -30,6 +29,7 @@ namespace SmartShopMobileApp.ViewModels
             set { _manageData = value; }
         }
        
+        public int ShoppingCartId { get; set; }
         private int _userId { get; set; }//provizoriu
 
         [ObservableProperty]
@@ -63,7 +63,7 @@ namespace SmartShopMobileApp.ViewModels
         {
             try
             {
-                await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new PaymentView(TotalAmount)));
+                await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new PaymentView(TotalAmount, ShoppingCartId)));
 
             }
             catch (Exception e)
@@ -81,12 +81,18 @@ namespace SmartShopMobileApp.ViewModels
                 Products = await _manageData.GetDataAndDeserializeIt<List<ProductDTO>>($"ShoppingCart/GetLatestShoppingCartForCurrentUser?id={_userId}", "");
 
                 var latestShoppingCart = await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"ShoppingCart/GetLatestShoppingCartByUserId?id={_userId}", "");
+                ShoppingCartId = latestShoppingCart.ShoppingCartID;
                 TotalAmount = latestShoppingCart.TotalAmount;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+        [RelayCommand]
+        private async void PageAppearing(object obj)
+        {
+            GetLatestShoppingCartForCurrentUser();
         }
 
     }

@@ -6,6 +6,7 @@ namespace API.Repository.Interfaces
     {
         Task<ShoppingCartDTO?> GetShoppingCartForSpecificUser(int userID);
         Task<ShoppingCartDTO> GetLatestShoppingCartForCurrentUser(int userID);
+        Task<ShoppingCartDTO> GetShoppingCartById(int id);
         Task AddShoppingCart(ShoppingCartDTO shoppingCart);
         Task UpdateShoppingCart(ShoppingCartDTO shoppingCart);
     }

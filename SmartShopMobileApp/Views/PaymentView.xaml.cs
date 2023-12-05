@@ -16,11 +16,12 @@ namespace SmartShopMobileApp.Views;
 [DesignTimeVisible(false)]
 public partial class PaymentView : ContentPage
 {
-	public PaymentView(double amount)
+	public PaymentView(double amount, int shoppingCartId)
 	{
 		InitializeComponent();
         PaymentViewModel viewModel = new PaymentViewModel();
         viewModel.TotalAmount = amount;
+        viewModel.ShoppingCartId = shoppingCartId;
         BindingContext = viewModel;
 
         payButton.BackgroundColor = Color.FromArgb("BFC6BF");
