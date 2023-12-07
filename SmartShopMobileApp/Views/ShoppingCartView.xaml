@@ -16,6 +16,12 @@
                FontSize="20"
                TextColor="#2B0B98"
                Margin="10,0,0,0"/>
+        <Image Source="{Binding ImageSource}" HeightRequest="120" WidthRequest="120" />
+        <Label Text="Your shopping cart is empty!" IsVisible="{Binding IsEmptyShoppingCartTextVisible}" 
+               FontFamily="Poppins-Regular"
+               FontSize="20"
+               TextColor="#2B0B98"
+               Margin="45,50,0,0"/>
         <CollectionView x:Name="SupermarketsList" ItemsSource="{Binding Products}" HeightRequest="300">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:ProductDTO">
@@ -27,7 +33,7 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <Image Source="{Binding ImageUrl}" HeightRequest="90" WidthRequest="90" />
+                                <Image Source="{Binding ImageUrl}" HeightRequest="100" WidthRequest="100" />
 
                                 <StackLayout Grid.Column="1" VerticalOptions="Center">
                                     <Label Text="{Binding Name}" Margin="10,0,0,0" FontFamily="Poppins-Bold" TextColor="#2B0B98" FontSize="16" />

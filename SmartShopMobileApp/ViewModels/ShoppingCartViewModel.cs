@@ -33,6 +33,12 @@ namespace SmartShopMobileApp.ViewModels
         private int _userId { get; set; }//provizoriu
 
         [ObservableProperty]
+        public bool _isEmptyShoppingCartTextVisible;
+
+        [ObservableProperty]
+        public string _imageSource;
+
+        [ObservableProperty]
         private List<ProductDTO> _products;
 
         [ObservableProperty]
@@ -83,6 +89,16 @@ namespace SmartShopMobileApp.ViewModels
                 var latestShoppingCart = await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"ShoppingCart/GetLatestShoppingCartByUserId?id={_userId}", "");
                 ShoppingCartId = latestShoppingCart.ShoppingCartID;
                 TotalAmount = latestShoppingCart.TotalAmount;
+
+                if (ShoppingCartId != 0)
+                {
+                    ImageSource = "shopping_cart.png";
+                }
+                else { 
+                    ImageSource = "cartempty.png";
+                    IsEmptyShoppingCartTextVisible = true;
+                }
+
             }
             catch (Exception ex)
             {
@@ -92,6 +108,7 @@ namespace SmartShopMobileApp.ViewModels
         [RelayCommand]
         private async void PageAppearing(object obj)
         {
+            IsEmptyShoppingCartTextVisible = false;
             GetLatestShoppingCartForCurrentUser();
         }
 
