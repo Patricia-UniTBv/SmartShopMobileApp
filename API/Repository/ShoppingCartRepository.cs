@@ -25,7 +25,7 @@ namespace API.Repository
             var result = await _dbSet.Where(cart=> cart.UserID == userID && cart.IsTransacted == false).OrderByDescending(cart => cart.CreationDate).FirstOrDefaultAsync();
             if (result != null)
                 return _mapper.Map<ShoppingCart, ShoppingCartDTO>(result!);
-            else return new ShoppingCartDTO();
+            else return null;
         }
 
         public async Task<ShoppingCartDTO> GetShoppingCartById(int id)

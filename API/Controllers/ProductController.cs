@@ -95,6 +95,7 @@ namespace API.Controllers
                     };
 
                     await _unitOfWork.ShoppingCartRepository.AddShoppingCart(shoppingCart);
+                    shoppingCart = await _unitOfWork.ShoppingCartRepository.GetLatestShoppingCartForCurrentUser(currentUser.UserID);
                 }
                 var cartItem = new CartItemDTO
                 {
