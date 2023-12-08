@@ -91,6 +91,7 @@
         </StackLayout>
 
         <Button Text="Pay" Command="{Binding PayCommand}" FontSize="20" Margin="60,10,60,10" CornerRadius="20" BackgroundColor="Green"/>
+        <Button Text="Apply voucher" Command="{Binding ApplyVoucherCommand}" FontSize="20" Margin="60,10,60,10" CornerRadius="20" BackgroundColor="Pink"/>
 
     </VerticalStackLayout>
 </ContentPage>

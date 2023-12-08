@@ -64,21 +64,6 @@ namespace SmartShopMobileApp.ViewModels
             }
         }
 
-        [RelayCommand]
-        private async Task Pay(object obj)
-        {
-            try
-            {
-                await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new PaymentView(TotalAmount, ShoppingCartId)));
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-        }
-
         private async Task GetLatestShoppingCartForCurrentUser()
         {
             try
@@ -105,6 +90,36 @@ namespace SmartShopMobileApp.ViewModels
                 Console.WriteLine(ex.Message);
             }
         }
+
+        [RelayCommand]
+        private async Task Pay(object obj)
+        {
+            try
+            {
+                await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new PaymentView(TotalAmount, ShoppingCartId)));
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+        }
+
+        [RelayCommand]
+        private async Task ApplyVoucher(object obj)
+        {
+            try
+            {
+                await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new VoucherView()));
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
         [RelayCommand]
         private async void PageAppearing(object obj)
         {
