@@ -2,6 +2,7 @@
 using API.Repository.Interfaces;
 using AutoMapper;
 using DTO;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Repository
 {
@@ -11,12 +12,20 @@ namespace API.Repository
         {
         }
 
-        public async Task AddVoucherForSpecificUser(double earnedMoney)
+        public async Task<VoucherDTO> GetVoucherForUserAndSupermarket(int userId, int supermarketId)
         {
-
-            //var result = _mapper.Map <, ShoppingCart> (shoppingCart);
-            //await _dbSet.AddAsync(result);
-            //_context.SaveChanges();
+            var result = await _dbSet.Where(v =>v.UserID == userId && v.SupermarketID == supermarketId).FirstOrDefaultAsync();
+            return _mapper.Map<Voucher, VoucherDTO>(result!);
         }
+
+        public void UpdateVoucherForSpecificUser(VoucherDTO voucher)
+        {
+            var updatedVoucher = _mapper.Map<VoucherDTO, Voucher>(voucher);
+            _context.ChangeTracker.Clear();
+            _context.Update(updatedVoucher);
+            _context.SaveChanges();
+        }
+
+     
     }
 }

@@ -4,6 +4,7 @@ namespace API.Repository.Interfaces
 {
     public interface IVoucherRepository
     {
-        Task AddVoucherForSpecificUser(double earnedMoney);
+        void UpdateVoucherForSpecificUser(VoucherDTO voucher);
+        Task<VoucherDTO> GetVoucherForUserAndSupermarket(int UserId, int SupermarketId);  
     }
 }

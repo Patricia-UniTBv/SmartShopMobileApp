@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
+    [Route("api/[controller]")]
     public class VoucherController: ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -16,26 +17,35 @@ namespace API.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        //[HttpPost("AddVoucherForSpecificUser")]
-        //public async Task<IActionResult> AddVoucher(double earnedMoney)
-        //{
-        //    try
-        //    {
-        //        var newVoucher = new VoucherDTO
-        //        {
-        //            UserId = 1, // ID-ul utilizatorului pentru care creezi voucherul
-        //            SupermarketId = 123,
-        //            EarnedPoints = 50
-        //        };
+        [HttpPut("UpdateVoucherForSpecificUser/{userId}/{supermarketId}/{totalAmount}")]
+        public async Task<IActionResult> UpdateVoucher(int userId, int supermarketId, double totalAmount)
+        {
+            try
+            {
+                var existingVoucher = await _unitOfWork.VoucherRepository.GetVoucherForUserAndSupermarket(userId, supermarketId);
 
-        //        _unitOfWork.VoucherRepository.AddVoucherForSpecificUser(double earnedMoney);
-        //        return Ok(product);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return BadRequest(e.Message);
-        //    }
-        //}
+                if (existingVoucher == null)
+                {
+                    return NotFound("Voucher not found");
+                }
+
+                int earnedMoneyRounded = 0;
+                if (totalAmount >= 150)
+                {
+                    double earnedMoneyDouble = 0.05 * totalAmount;
+                    earnedMoneyRounded = (int)Math.Round(earnedMoneyDouble);
+                }
+                existingVoucher.EarnedPoints += earnedMoneyRounded;
+
+                _unitOfWork.VoucherRepository.UpdateVoucherForSpecificUser(existingVoucher);
+
+                return Ok(existingVoucher);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
 
     }
 }
