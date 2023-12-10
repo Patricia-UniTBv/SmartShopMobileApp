@@ -16,6 +16,8 @@ namespace API.Repository
         public ICartItemRepository CartItemRepository => _cartItemRepository ??= new CartItemRepository(_context, _mapper);
         private ISupermarketRepository? _supermarketRepository;
         public ISupermarketRepository SupermarketRepository => _supermarketRepository ??= new SupermarketRepository(_context, _mapper);
+        private IVoucherRepository? _voucherRepository;
+        public IVoucherRepository VoucherRepository => _voucherRepository ??= new VoucherRepository(_context, _mapper);
 
         private readonly SmartShopDBContext _context;
 

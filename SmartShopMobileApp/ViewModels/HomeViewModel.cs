@@ -58,6 +58,12 @@ namespace SmartShopMobileApp.ViewModels
             }
 
         }
+
+        [RelayCommand]
+        private void OnSupermarketSelected(SupermarketDTO selectedSupermarket)
+        {
+            CurrentSupermarket.Supermarket = selectedSupermarket;
+        }
         #endregion
     }
 }

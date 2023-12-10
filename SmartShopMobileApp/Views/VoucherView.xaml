@@ -4,9 +4,13 @@
              x:Class="SmartShopMobileApp.Views.VoucherView"
              Title="VoucherView">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Image Source="card.png" HeightRequest="300" WidthRequest="300" />
+        <Label Text="125 lei" 
+               Margin="170, -20, 0, 0"
+               FontFamily="Poppins-Regular"
+               FontSize="20"
+               TextColor="#8C1A6D"/>
+        <Button Text="Apply" Command="{Binding ApplyVoucherCommand}" FontSize="20" Margin="90,250,90,0" CornerRadius="20" BackgroundColor="Pink"/>
+
     </VerticalStackLayout>
 </ContentPage>

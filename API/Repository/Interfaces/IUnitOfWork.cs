@@ -7,6 +7,7 @@
         IUserRepository UserRepository { get; }
         ICartItemRepository CartItemRepository { get; }
         ISupermarketRepository SupermarketRepository { get; }
+        IVoucherRepository VoucherRepository { get; }
 
         Task CompleteAsync();
     }

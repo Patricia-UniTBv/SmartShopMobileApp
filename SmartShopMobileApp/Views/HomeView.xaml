@@ -29,6 +29,9 @@
                                     <Label Text="{Binding Name}" Margin="10,0,0,0" FontFamily="Poppins-Bold" TextColor="#2B0B98" FontSize="16" />
                                 </StackLayout>
                             </Grid>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference SupermarketsList}, Path=BindingContext.SupermarketSelectedCommand}" CommandParameter="{Binding .}" />
+                            </Frame.GestureRecognizers>
                         </Frame>
                     </Grid>
                 </DataTemplate>
