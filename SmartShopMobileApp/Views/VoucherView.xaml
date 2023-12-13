@@ -9,14 +9,19 @@
         <toolkit:EventToCommandBehavior Command="{Binding PageAppearingCommand}" EventName="Appearing" />
     </ContentPage.Behaviors>
     <VerticalStackLayout>
-        <Label Text="Your current voucher:"
+        <Label Text="Your current voucher for "
                FontFamily="Poppins-Regular"
                FontSize="20"
                TextColor="#2B0B98"
-               Margin="10,0,0,0"/>
+               Margin="70,10,0,0"/>
+        <Label Text="{Binding CurrentSupermarketName}"
+               FontFamily="Poppins-Bold"
+               FontSize="20"
+               TextColor="#2B0B98"
+               Margin="170,0,0,-30"/>
         <Image Source="card.png" HeightRequest="300" WidthRequest="300" />
         <Label Text="{Binding EarnedMoneyText}" 
-               Margin="130, -20, 0, 0"
+               Margin="130, -30, 0, 0"
                FontFamily="Poppins-Regular"
                FontSize="20"
                TextColor="#8C1A6D"/>
@@ -25,7 +30,7 @@
                FontSize="14"
                TextColor="Gray"
                Margin="15,0,0,0"/>
-        <Button Text="Apply" Command="{Binding ApplyVoucherCommand}" IsEnabled="{Binding IsApplyButtonEnabled}" FontSize="20" Margin="90,230,90,0" CornerRadius="20" BackgroundColor="{Binding ApplyButtonColor}"/>
+        <Button Text="Apply" Command="{Binding ApplyVoucherCommand}" IsEnabled="{Binding IsApplyButtonEnabled}" FontSize="20" Margin="90,200,90,0" CornerRadius="20" BackgroundColor="{Binding ApplyButtonColor}"/>
 
     </VerticalStackLayout>
 </ContentPage>

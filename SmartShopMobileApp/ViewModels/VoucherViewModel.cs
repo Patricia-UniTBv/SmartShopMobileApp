@@ -44,6 +44,9 @@ namespace SmartShopMobileApp.ViewModels
         public string _applyButtonColor;
 
         [ObservableProperty]
+        public string _currentSupermarketName;
+
+        [ObservableProperty]
         public int? _earnedMoney;
 
         private async Task GetEarnedMoney()
@@ -63,7 +66,7 @@ namespace SmartShopMobileApp.ViewModels
                 }
                 else
                 {
-                    NoMoneyOnVoucherText = "Use this voucher for a discount for your shopping cart.";
+                    NoMoneyOnVoucherText = "";
                     IsApplyButtonEnabled = false;
                     ApplyButtonColor = "Gray";
                 }
@@ -101,6 +104,7 @@ namespace SmartShopMobileApp.ViewModels
         [RelayCommand]
         private async void PageAppearing(object obj)
         {
+            CurrentSupermarketName = CurrentSupermarket.Supermarket.Name;
             await GetEarnedMoney();
         }
 
