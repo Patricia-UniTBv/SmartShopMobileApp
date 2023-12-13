@@ -17,6 +17,21 @@ namespace API.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [HttpGet("GetVoucherForUserAndSupermarket/{userId}/{supermarketId}")]
+        public async Task<IActionResult> GetVoucherForUserAndSupermarket(int userId, int supermarketId)
+        {
+            try
+            {
+                var existingVoucher = await _unitOfWork.VoucherRepository.GetVoucherForUserAndSupermarket(userId, supermarketId);
+
+                return Ok(existingVoucher);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpPut("UpdateVoucherForSpecificUser/{userId}/{supermarketId}/{totalAmount}")]
         public async Task<IActionResult> UpdateVoucher(int userId, int supermarketId, double totalAmount)
         {
@@ -36,6 +51,30 @@ namespace API.Controllers
                     earnedMoneyRounded = (int)Math.Round(earnedMoneyDouble);
                 }
                 existingVoucher.EarnedPoints += earnedMoneyRounded;
+
+                _unitOfWork.VoucherRepository.UpdateVoucherForSpecificUser(existingVoucher);
+
+                return Ok(existingVoucher);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPut("UpdateVoucherForSpecificUserWhenItIsUsed/{userId}/{supermarketId}")]
+        public async Task<IActionResult> UpdateVoucherWhenItIsUsed(int userId, int supermarketId)
+        {
+            try
+            {
+                var existingVoucher = await _unitOfWork.VoucherRepository.GetVoucherForUserAndSupermarket(userId, supermarketId);
+
+                if (existingVoucher == null)
+                {
+                    return NotFound("Voucher not found");
+                }
+
+                existingVoucher.EarnedPoints = 0;
 
                 _unitOfWork.VoucherRepository.UpdateVoucherForSpecificUser(existingVoucher);
 

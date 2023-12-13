@@ -58,5 +58,19 @@ namespace API.Controllers
             }
         }
 
+        [HttpPut("UpdateShoppingCart")]
+        public async Task<IActionResult> UpdateShoppingCart([FromBody] ShoppingCartDTO shoppingCart)
+        {
+            try
+            {
+                await _unitOfWork.ShoppingCartRepository.UpdateShoppingCart(shoppingCart);
+                return Ok(shoppingCart);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
     }
 }

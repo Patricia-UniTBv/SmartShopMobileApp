@@ -124,10 +124,10 @@ namespace SmartShopMobileApp.ViewModels
             {
                 _manageData.SetStrategy(new UpdateData());
                 _manageData.GetDataAndDeserializeIt<object>($"Voucher/UpdateVoucherForSpecificUser/{AuthenticationResultHelper.ActiveUser.UserID}/{CurrentSupermarket.Supermarket.SupermarketID}/{TotalAmount}", "");
-                //_manageData.GetDataAndDeserializeIt<object>($"ShoppingCart/UpdateShoppingCartWhenTransacted?id={ShoppingCartId}", "");
-                //Microsoft.Maui.Controls.Application.Current.MainPage.DisplayAlert("Payment Confirmation", "The transaction was successful! You have recieved an email to confirm your payment.", "OK");
-                //SendPaymentConfirmationEmail("patyanelis@yahoo.com", TotalAmount); // sa modific cu adresa userului conectat dupa autentificare!!
-                //App.Current.MainPage.Navigation.PopAsync();
+                _manageData.GetDataAndDeserializeIt<object>($"ShoppingCart/UpdateShoppingCartWhenTransacted?id={ShoppingCartId}", "");
+                Microsoft.Maui.Controls.Application.Current.MainPage.DisplayAlert("Payment Confirmation", "The transaction was successful! You have recieved an email to confirm your payment.", "OK");
+                SendPaymentConfirmationEmail("patyanelis@yahoo.com", TotalAmount); // sa modific cu adresa userului conectat dupa autentificare!!
+                App.Current.MainPage.Navigation.PopAsync();
             }
             else
             {

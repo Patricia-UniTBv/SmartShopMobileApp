@@ -1,16 +1,31 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="SmartShopMobileApp.Views.VoucherView"
+             xmlns:viewModels="clr-namespace:SmartShopMobileApp.ViewModels" 
              Title="VoucherView">
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior Command="{Binding PageAppearingCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
     <VerticalStackLayout>
+        <Label Text="Your current voucher:"
+               FontFamily="Poppins-Regular"
+               FontSize="20"
+               TextColor="#2B0B98"
+               Margin="10,0,0,0"/>
         <Image Source="card.png" HeightRequest="300" WidthRequest="300" />
-        <Label Text="125 lei" 
-               Margin="170, -20, 0, 0"
+        <Label Text="{Binding EarnedMoneyText}" 
+               Margin="130, -20, 0, 0"
                FontFamily="Poppins-Regular"
                FontSize="20"
                TextColor="#8C1A6D"/>
-        <Button Text="Apply" Command="{Binding ApplyVoucherCommand}" FontSize="20" Margin="90,250,90,0" CornerRadius="20" BackgroundColor="Pink"/>
+        <Label Text="{Binding NoMoneyOnVoucherText}"
+               FontFamily="Poppins-Regular"
+               FontSize="14"
+               TextColor="Gray"
+               Margin="15,0,0,0"/>
+        <Button Text="Apply" Command="{Binding ApplyVoucherCommand}" IsEnabled="{Binding IsApplyButtonEnabled}" FontSize="20" Margin="90,230,90,0" CornerRadius="20" BackgroundColor="{Binding ApplyButtonColor}"/>
 
     </VerticalStackLayout>
 </ContentPage>
