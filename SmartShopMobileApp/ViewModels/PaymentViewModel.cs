@@ -112,7 +112,7 @@ namespace SmartShopMobileApp.ViewModels
 
             var chargeoption = new ChargeCreateOptions
             {
-                Amount = Convert.ToInt64(2 * 100), // sa inlocuiesc 2 cu TotalAmount!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                Amount = Convert.ToInt64(TotalAmount * 100), 
                 Currency = "RON",
                 ReceiptEmail = "patyanelis@yahoo.com",
                 Customer = cust.Id,

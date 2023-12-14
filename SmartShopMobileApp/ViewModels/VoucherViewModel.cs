@@ -13,9 +13,9 @@ using System.Threading.Tasks;
 
 namespace SmartShopMobileApp.ViewModels
 {
-    public partial class VoucherViewModel: ObservableObject
+    public partial class VoucherViewModel : ObservableObject
     {
-        public VoucherViewModel() 
+        public VoucherViewModel()
         {
             _manageData = new ManageData();
             VouchersHistory = new ObservableCollection<VoucherHistory>();
@@ -61,7 +61,7 @@ namespace SmartShopMobileApp.ViewModels
             {
                 _manageData.SetStrategy(new GetData());
                 var voucher = await _manageData.GetDataAndDeserializeIt<VoucherDTO>($"Voucher/GetVoucherForUserAndSupermarket/{AuthenticationResultHelper.ActiveUser.UserID}/{CurrentSupermarket.Supermarket.SupermarketID}", "");
-                EarnedMoneyText =  $"Total: {voucher.EarnedPoints} lei";
+                EarnedMoneyText = $"Total: {voucher.EarnedPoints} lei";
                 EarnedMoney = voucher.EarnedPoints;
 
                 if (voucher.EarnedPoints == 0)
@@ -89,15 +89,18 @@ namespace SmartShopMobileApp.ViewModels
             {
                 _manageData.SetStrategy(new GetData());
                 var allShoppingCarts = await _manageData.GetDataAndDeserializeIt<List<ShoppingCartDTO>>($"ShoppingCart/GetAllTransactedShoppingCartsByUserId?id={AuthenticationResultHelper.ActiveUser.UserID}", "");
-                foreach(var cart in allShoppingCarts)
+                foreach (var cart in allShoppingCarts)
                 {
-                    var newVoucherHistory = new VoucherHistory();
-                    newVoucherHistory.CartCreationDate = cart.CreationDate;
-                    //foreach(var cart in allShoppingCarts)
-                    //{
-                    //    voucher.
-                    //}
-
+                    if (cart.TotalAmount > 10)
+                    {
+                        var newVoucherHistory = new VoucherHistory();
+                        newVoucherHistory.CartCreationDate = cart.CreationDate;
+                        newVoucherHistory.TotalAmount = cart.TotalAmount;
+                        newVoucherHistory.ValueModification = "+" + (0.05 * cart.TotalAmount).ToString();
+                        newVoucherHistory.ValueModificationTextColor = "#17C117";
+                        VouchersHistory.Add(newVoucherHistory);
+                    }
+                 
                 }
             }
             catch (Exception ex)
@@ -122,6 +125,12 @@ namespace SmartShopMobileApp.ViewModels
                 _manageData.SetStrategy(new UpdateData());
                 await _manageData.GetDataAndDeserializeIt<object>($"Voucher/UpdateVoucherForSpecificUserWhenItIsUsed/{AuthenticationResultHelper.ActiveUser.UserID}/{CurrentSupermarket.Supermarket.SupermarketID}", "");
 
+                var newVoucherHistory = new VoucherHistory();
+                newVoucherHistory.CartCreationDate = DateTime.Now;
+                newVoucherHistory.ValueModification = "-" + EarnedMoney.ToString();
+                newVoucherHistory.ValueModificationTextColor = "#770708"; // nu merge, de ce
+                VouchersHistory.Add(newVoucherHistory);
+
                 await App.Current.MainPage.Navigation.PopAsync();
             }
             catch (Exception ex)
@@ -135,6 +144,7 @@ namespace SmartShopMobileApp.ViewModels
         {
             CurrentSupermarketName = CurrentSupermarket.Supermarket.Name;
             await GetEarnedMoney();
+            await GetVoucherHistory();
         }
 
     }

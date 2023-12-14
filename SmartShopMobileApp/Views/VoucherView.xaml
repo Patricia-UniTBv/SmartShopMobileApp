@@ -3,73 +3,85 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="SmartShopMobileApp.Views.VoucherView"
-             xmlns:viewModels="clr-namespace:SmartShopMobileApp.ViewModels" 
+             xmlns:viewModels="clr-namespace:SmartShopMobileApp.ViewModels"
+             xmlns:m ="clr-namespace:SmartShopMobileApp.HelperModels"
              Title="VoucherView">
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior Command="{Binding PageAppearingCommand}" EventName="Appearing" />
     </ContentPage.Behaviors>
-    <VerticalStackLayout>
-        <Label Text="Your current voucher for "
+    <ScrollView>
+        <VerticalStackLayout>
+
+            <Label Text="Your current voucher for "
                FontFamily="Poppins-Regular"
                FontSize="20"
                TextColor="#2B0B98"
                Margin="70,10,0,0"/>
-        <Label Text="{Binding CurrentSupermarketName}"
+            <Label Text="{Binding CurrentSupermarketName}"
                FontFamily="Poppins-Bold"
                FontSize="20"
                TextColor="#2B0B98"
                Margin="170,0,0,-30"/>
-        <Image Source="card.png" HeightRequest="300" WidthRequest="300" />
-        <Label Text="{Binding EarnedMoneyText}" 
+            <Image Source="card.png" HeightRequest="300" WidthRequest="300" />
+            <Label Text="{Binding EarnedMoneyText}" 
                Margin="130, -30, 0, 0"
                FontFamily="Poppins-Regular"
                FontSize="20"
                TextColor="#8C1A6D"/>
-        <Label Text="{Binding NoMoneyOnVoucherText}"
+            <Label Text="{Binding NoMoneyOnVoucherText}"
                FontFamily="Poppins-Regular"
                FontSize="14"
                TextColor="Gray"
                Margin="15,0,0,0"/>
+            <Button Text="Apply" Command="{Binding ApplyVoucherCommand}" IsEnabled="{Binding IsApplyButtonEnabled}" FontSize="20" Margin="90,20,90,0" CornerRadius="20" BackgroundColor="{Binding ApplyButtonColor}"/>
 
-        <!--<CollectionView x:Name="SupermarketsList" ItemsSource="{Binding Products}" HeightRequest="300">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="model:ProductDTO">
-                    <Grid Padding="10,5,10,5">
-                        <Frame Padding="8" Style="{StaticResource LeaveCard}">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
+            <Label Text="Voucher history:"
+               FontFamily="Poppins-Bold"
+               FontSize="16"
+               TextColor="#2B0B98"
+               Margin="10,30,0,5"/>
 
-                                <Image Source="{Binding ImageUrl}" HeightRequest="100" WidthRequest="100" />
+            <ScrollView>
+                <CollectionView x:Name="SupermarketsList" ItemsSource="{Binding VouchersHistory}" HeightRequest="300">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="m:VoucherHistory">
+                            <Grid Padding="10,5,10,5">
+                                <Frame Padding="8" Style="{StaticResource LeaveCard}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
 
-                                <StackLayout Grid.Column="1" VerticalOptions="Center">
-                                    <Label Text="{Binding Name}" Margin="10,0,0,0" FontFamily="Poppins-Bold" TextColor="#2B0B98" FontSize="16" />
-                                    <StackLayout Orientation="Horizontal" >
-                                        <Label Text="Quantity:" Margin="10,0,0,0"  TextColor="Gray" FontSize="16"/>
-                                        <Label Text="{Binding Quantity}" Margin="10,0,0,0"  TextColor="Gray" FontSize="16" />
-
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal" >
-                                        <Label Text="Price:" Margin="10,0,0,0"  TextColor="Gray" FontSize="16"/>
-                                        <Label Text="{Binding Price}" Margin="10,0,0,0"  TextColor="Gray" FontSize="16" />
-
-                                    </StackLayout>
+                                        <StackLayout Grid.Column="1" VerticalOptions="Center">
+                                            <StackLayout Orientation="Horizontal" >
+                                                <Label Text="Date:" Margin="10,0,0,0"  TextColor="Gray" FontSize="16"/>
+                                                <Label Text="{Binding CartCreationDate}" Margin="10,0,0,0" FontFamily="Poppins-Bold" TextColor="#2B0B98" FontSize="16" />
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal" >
+                                                <Label Text="Total value:" Margin="10,0,0,0"  TextColor="Gray" FontSize="16"/>
+                                                <Label Text="{Binding TotalAmount}" Margin="10,0,0,0"  TextColor="Gray" FontSize="16" />
+                                                <Label Text=" lei" Margin="0,0,0,0" TextColor="Gray" FontSize="16" />
+                                            </StackLayout>
 
 
-                                </StackLayout>
-                                
+
+                                        </StackLayout>
+                                        <StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="EndAndExpand" >
+                                            <Label Text="{Binding ValueModification}" Margin="0,13,10,0" FontAttributes="Bold" TextColor="{Binding ValueModificationTextColor}" FontSize="16" />
+
+                                        </StackLayout>
 
 
+                                    </Grid>
+                                </Frame>
                             </Grid>
-                        </Frame>
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>-->
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
 
-        <Button Text="Apply" Command="{Binding ApplyVoucherCommand}" IsEnabled="{Binding IsApplyButtonEnabled}" FontSize="20" Margin="90,200,90,0" CornerRadius="20" BackgroundColor="{Binding ApplyButtonColor}"/>
 
-    </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

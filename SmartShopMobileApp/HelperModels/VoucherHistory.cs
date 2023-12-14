@@ -14,6 +14,8 @@ namespace SmartShopMobileApp.HelperModels
 
         public bool? IsTransacted { get; set; }
 
-        public double ValueModification { get; set; }
+        public string ValueModification { get; set; }
+
+        public string ValueModificationTextColor { get; set; }
     }
 }
