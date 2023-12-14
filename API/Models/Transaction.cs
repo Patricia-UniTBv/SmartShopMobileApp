@@ -13,7 +13,7 @@ public partial class Transaction
 
     public double TotalAmount { get; set; }
 
-    public string Barcode { get; set; } = null!;
+    public string? Barcode { get; set; }
 
     public virtual ShoppingCart ShoppingCart { get; set; } = null!;
 }

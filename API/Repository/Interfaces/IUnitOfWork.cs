@@ -8,7 +8,7 @@
         ICartItemRepository CartItemRepository { get; }
         ISupermarketRepository SupermarketRepository { get; }
         IVoucherRepository VoucherRepository { get; }
-
+        ITransactionRepository TransactionRepository { get; }
         Task CompleteAsync();
     }
 }

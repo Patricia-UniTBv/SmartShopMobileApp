@@ -30,6 +30,45 @@
                FontSize="14"
                TextColor="Gray"
                Margin="15,0,0,0"/>
+
+        <!--<CollectionView x:Name="SupermarketsList" ItemsSource="{Binding Products}" HeightRequest="300">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:ProductDTO">
+                    <Grid Padding="10,5,10,5">
+                        <Frame Padding="8" Style="{StaticResource LeaveCard}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image Source="{Binding ImageUrl}" HeightRequest="100" WidthRequest="100" />
+
+                                <StackLayout Grid.Column="1" VerticalOptions="Center">
+                                    <Label Text="{Binding Name}" Margin="10,0,0,0" FontFamily="Poppins-Bold" TextColor="#2B0B98" FontSize="16" />
+                                    <StackLayout Orientation="Horizontal" >
+                                        <Label Text="Quantity:" Margin="10,0,0,0"  TextColor="Gray" FontSize="16"/>
+                                        <Label Text="{Binding Quantity}" Margin="10,0,0,0"  TextColor="Gray" FontSize="16" />
+
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" >
+                                        <Label Text="Price:" Margin="10,0,0,0"  TextColor="Gray" FontSize="16"/>
+                                        <Label Text="{Binding Price}" Margin="10,0,0,0"  TextColor="Gray" FontSize="16" />
+
+                                    </StackLayout>
+
+
+                                </StackLayout>
+                                
+
+
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>-->
+
         <Button Text="Apply" Command="{Binding ApplyVoucherCommand}" IsEnabled="{Binding IsApplyButtonEnabled}" FontSize="20" Margin="90,200,90,0" CornerRadius="20" BackgroundColor="{Binding ApplyButtonColor}"/>
 
     </VerticalStackLayout>

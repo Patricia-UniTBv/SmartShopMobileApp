@@ -107,7 +107,8 @@ public partial class SmartShopDBContext : DbContext
 
             entity.Property(e => e.Barcode)
                 .HasMaxLength(50)
-                .IsUnicode(false);
+                .IsUnicode(false)
+                .IsRequired(false);
             entity.Property(e => e.TransactionDate).HasColumnType("date");
 
             entity.HasOne(d => d.ShoppingCart).WithMany(p => p.Transactions)

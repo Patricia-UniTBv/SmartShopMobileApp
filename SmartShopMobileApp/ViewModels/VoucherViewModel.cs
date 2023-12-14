@@ -2,9 +2,11 @@
 using CommunityToolkit.Mvvm.Input;
 using DTO;
 using Newtonsoft.Json;
+using SmartShopMobileApp.HelperModels;
 using SmartShopMobileApp.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +18,7 @@ namespace SmartShopMobileApp.ViewModels
         public VoucherViewModel() 
         {
             _manageData = new ManageData();
+            VouchersHistory = new ObservableCollection<VoucherHistory>();
             if (AuthenticationResultHelper.ActiveUser == null)
             {
                 AuthenticationResultHelper.ActiveUser = new UserDTO();
@@ -49,6 +52,9 @@ namespace SmartShopMobileApp.ViewModels
         [ObservableProperty]
         public int? _earnedMoney;
 
+        [ObservableProperty]
+        public ObservableCollection<VoucherHistory> _vouchersHistory;
+
         private async Task GetEarnedMoney()
         {
             try
@@ -67,8 +73,31 @@ namespace SmartShopMobileApp.ViewModels
                 else
                 {
                     NoMoneyOnVoucherText = "";
-                    IsApplyButtonEnabled = false;
-                    ApplyButtonColor = "Gray";
+                    IsApplyButtonEnabled = true;
+                    ApplyButtonColor = "#2B0B98";
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private async Task GetVoucherHistory()
+        {
+            try
+            {
+                _manageData.SetStrategy(new GetData());
+                var allShoppingCarts = await _manageData.GetDataAndDeserializeIt<List<ShoppingCartDTO>>($"ShoppingCart/GetAllTransactedShoppingCartsByUserId?id={AuthenticationResultHelper.ActiveUser.UserID}", "");
+                foreach(var cart in allShoppingCarts)
+                {
+                    var newVoucherHistory = new VoucherHistory();
+                    newVoucherHistory.CartCreationDate = cart.CreationDate;
+                    //foreach(var cart in allShoppingCarts)
+                    //{
+                    //    voucher.
+                    //}
+
                 }
             }
             catch (Exception ex)

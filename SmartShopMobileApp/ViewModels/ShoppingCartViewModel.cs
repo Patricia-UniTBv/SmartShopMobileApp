@@ -18,7 +18,7 @@ namespace SmartShopMobileApp.ViewModels
         public ShoppingCartViewModel() 
         {
             _manageData = new ManageData();
-            Products = new List<ProductDTO>();
+            Products = new List<ProductDTO>() { };
             _userId = 1; //provizoriu
         }
 
@@ -69,17 +69,28 @@ namespace SmartShopMobileApp.ViewModels
             try
             {
                 _manageData.SetStrategy(new GetData());
-                Products = await _manageData.GetDataAndDeserializeIt<List<ProductDTO>>($"ShoppingCart/GetLatestShoppingCartForCurrentUser?id={_userId}", "");
 
                 var latestShoppingCart = await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"ShoppingCart/GetLatestShoppingCartByUserId?id={_userId}", "");
-                ShoppingCartId = latestShoppingCart.ShoppingCartID;
-                TotalAmount = latestShoppingCart.TotalAmount;
 
-                if (ShoppingCartId != 0)
+                if (latestShoppingCart != null)
                 {
-                    ImageSource = "shopping_cart.png";
+                    Products = await _manageData.GetDataAndDeserializeIt<List<ProductDTO>>($"ShoppingCart/GetLatestShoppingCartForCurrentUser?id={_userId}", "");
+
+                    ShoppingCartId = latestShoppingCart.ShoppingCartID;
+                    TotalAmount = latestShoppingCart.TotalAmount;
+
+                    if (ShoppingCartId != 0)
+                    {
+                        ImageSource = "shopping_cart.png";
+                    }
+                    else
+                    {
+                        ImageSource = "cartempty.png";
+                        IsEmptyShoppingCartTextVisible = true;
+                    }
                 }
-                else { 
+                else
+                {
                     ImageSource = "cartempty.png";
                     IsEmptyShoppingCartTextVisible = true;
                 }

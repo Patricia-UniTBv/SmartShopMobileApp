@@ -15,6 +15,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using DTO;
 using SmartShopMobileApp.Helpers;
 using Newtonsoft.Json;
+using SmartShopMobileApp.Views;
 
 namespace SmartShopMobileApp.ViewModels
 {
@@ -111,7 +112,7 @@ namespace SmartShopMobileApp.ViewModels
 
             var chargeoption = new ChargeCreateOptions
             {
-                Amount = Convert.ToInt64(TotalAmount * 100),
+                Amount = Convert.ToInt64(2 * 100), // sa inlocuiesc 2 cu TotalAmount!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 Currency = "RON",
                 ReceiptEmail = "patyanelis@yahoo.com",
                 Customer = cust.Id,
@@ -122,12 +123,24 @@ namespace SmartShopMobileApp.ViewModels
             Charge charge = chargeService.Create(chargeoption);
             if (charge.Status == "succeeded")
             {
+                TransactionDTO transaction = new TransactionDTO();
+                transaction.ShoppingCartID = ShoppingCartId;
+                transaction.TransactionDate = DateTime.Now;
+                transaction.TotalAmount = TotalAmount;
+                var json = JsonConvert.SerializeObject(transaction);
+
+                _manageData.SetStrategy(new CreateData());
+                var result = _manageData.GetDataAndDeserializeIt<TransactionDTO>("Transaction/AddTransaction", json);
+
                 _manageData.SetStrategy(new UpdateData());
                 _manageData.GetDataAndDeserializeIt<object>($"Voucher/UpdateVoucherForSpecificUser/{AuthenticationResultHelper.ActiveUser.UserID}/{CurrentSupermarket.Supermarket.SupermarketID}/{TotalAmount}", "");
                 _manageData.GetDataAndDeserializeIt<object>($"ShoppingCart/UpdateShoppingCartWhenTransacted?id={ShoppingCartId}", "");
+
+                Thread.Sleep(1000);
+
                 Microsoft.Maui.Controls.Application.Current.MainPage.DisplayAlert("Payment Confirmation", "The transaction was successful! You have recieved an email to confirm your payment.", "OK");
                 SendPaymentConfirmationEmail("patyanelis@yahoo.com", TotalAmount); // sa modific cu adresa userului conectat dupa autentificare!!
-                App.Current.MainPage.Navigation.PopAsync();
+                App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new ShoppingCartView()));
             }
             else
             {
