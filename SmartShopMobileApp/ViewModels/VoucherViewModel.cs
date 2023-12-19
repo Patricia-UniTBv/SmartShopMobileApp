@@ -4,6 +4,7 @@ using DTO;
 using Newtonsoft.Json;
 using SmartShopMobileApp.HelperModels;
 using SmartShopMobileApp.Helpers;
+using SmartShopMobileApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -91,7 +92,7 @@ namespace SmartShopMobileApp.ViewModels
                 var allShoppingCarts = await _manageData.GetDataAndDeserializeIt<List<ShoppingCartDTO>>($"ShoppingCart/GetAllTransactedShoppingCartsByUserId?id={AuthenticationResultHelper.ActiveUser.UserID}", "");
                 foreach (var cart in allShoppingCarts)
                 {
-                    if (cart.TotalAmount > 10)
+                    if (cart.TotalAmount > 10) // aici trebuie sa modific cu 150 (10 este doar pentru test ca sa apara in lista cu istoricul)
                     {
                         var newVoucherHistory = new VoucherHistory();
                         newVoucherHistory.CartCreationDate = cart.CreationDate;
@@ -125,13 +126,14 @@ namespace SmartShopMobileApp.ViewModels
                 _manageData.SetStrategy(new UpdateData());
                 await _manageData.GetDataAndDeserializeIt<object>($"Voucher/UpdateVoucherForSpecificUserWhenItIsUsed/{AuthenticationResultHelper.ActiveUser.UserID}/{CurrentSupermarket.Supermarket.SupermarketID}", "");
 
-                var newVoucherHistory = new VoucherHistory();
-                newVoucherHistory.CartCreationDate = DateTime.Now;
-                newVoucherHistory.ValueModification = "-" + EarnedMoney.ToString();
-                newVoucherHistory.ValueModificationTextColor = "#770708"; // nu merge, de ce
-                VouchersHistory.Add(newVoucherHistory);
+                //var newVoucherHistory = new VoucherHistory();
+                //newVoucherHistory.CartCreationDate = DateTime.Now;
+                //newVoucherHistory.ValueModification = "-" + EarnedMoney.ToString();
+                //newVoucherHistory.ValueModificationTextColor = "#770708"; // nu merge, de ce
+                //VouchersHistory.Add(newVoucherHistory);
 
-                await App.Current.MainPage.Navigation.PopAsync();
+                await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new ShoppingCartView()));
+
             }
             catch (Exception ex)
             {

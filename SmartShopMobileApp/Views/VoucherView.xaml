@@ -68,7 +68,7 @@
 
                                         </StackLayout>
                                         <StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="EndAndExpand" >
-                                            <Label Text="{Binding ValueModification}" Margin="0,13,10,0" FontAttributes="Bold" TextColor="{Binding ValueModificationTextColor}" FontSize="16" />
+                                            <Label Text="{Binding ValueModification}" Margin="0,13,10,0" FontAttributes="Bold" TextColor="Green" FontSize="16" />
 
                                         </StackLayout>
 
