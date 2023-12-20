@@ -5,9 +5,11 @@ VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartShopMobileApp", "SmartShopMobileApp\SmartShopMobileApp.csproj", "{BEB48907-BEDD-40FC-811A-9CFBD403BA6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{70EA862A-BB07-4949-A33E-47E2DB85AEF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{70EA862A-BB07-4949-A33E-47E2DB85AEF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTO", "DTO\DTO.csproj", "{263D5D07-03ED-4C36-973F-DBB168DFC6B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTO", "DTO\DTO.csproj", "{263D5D07-03ED-4C36-973F-DBB168DFC6B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartShopMobileApp.Tests", "SmartShopMobileApp.Tests\SmartShopMobileApp.Tests.csproj", "{9884CC32-865B-4B08-893D-585D466D9FF1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{263D5D07-03ED-4C36-973F-DBB168DFC6B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{263D5D07-03ED-4C36-973F-DBB168DFC6B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{263D5D07-03ED-4C36-973F-DBB168DFC6B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9884CC32-865B-4B08-893D-585D466D9FF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9884CC32-865B-4B08-893D-585D466D9FF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9884CC32-865B-4B08-893D-585D466D9FF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9884CC32-865B-4B08-893D-585D466D9FF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
