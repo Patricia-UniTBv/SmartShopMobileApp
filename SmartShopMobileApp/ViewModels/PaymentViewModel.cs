@@ -53,6 +53,9 @@ namespace SmartShopMobileApp.ViewModels
             }
         }
         public int ShoppingCartId { get; set; }
+
+        public double VoucherDiscount { get;set; }
+
         [ObservableProperty]
         public string _cardNo;
         [ObservableProperty]
@@ -127,6 +130,7 @@ namespace SmartShopMobileApp.ViewModels
                 transaction.ShoppingCartID = ShoppingCartId;
                 transaction.TransactionDate = DateTime.Now;
                 transaction.TotalAmount = TotalAmount;
+                transaction.VoucherDiscount = VoucherDiscount;
                 var json = JsonConvert.SerializeObject(transaction);
 
                 _manageData.SetStrategy(new CreateData());
@@ -135,6 +139,7 @@ namespace SmartShopMobileApp.ViewModels
                 _manageData.SetStrategy(new UpdateData());
                 _manageData.GetDataAndDeserializeIt<object>($"Voucher/UpdateVoucherForSpecificUser/{AuthenticationResultHelper.ActiveUser.UserID}/{CurrentSupermarket.Supermarket.SupermarketID}/{TotalAmount}", "");
                 _manageData.GetDataAndDeserializeIt<object>($"ShoppingCart/UpdateShoppingCartWhenTransacted?id={ShoppingCartId}", "");
+                //_manageData.GetDataAndDeserializeIt<object>($"Transaction/UpdateVoucherDiscountForTransaction", "");
 
                 Thread.Sleep(1000);
 

@@ -32,6 +32,8 @@ namespace SmartShopMobileApp.ViewModels
         public int ShoppingCartId { get; set; }
         private int _userId { get; set; }//provizoriu
 
+        public double VoucherDiscount { get;set; }
+
         [ObservableProperty]
         public bool _isEmptyShoppingCartTextVisible;
 
@@ -107,7 +109,7 @@ namespace SmartShopMobileApp.ViewModels
         {
             try
             {
-                await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new PaymentView(TotalAmount, ShoppingCartId)));
+                await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new PaymentView(TotalAmount, ShoppingCartId, VoucherDiscount)));
 
             }
             catch (Exception e)

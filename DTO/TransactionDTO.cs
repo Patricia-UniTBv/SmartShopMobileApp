@@ -21,5 +21,8 @@ namespace DTO
         public double TotalAmount { get; set; }
 
         public string Barcode { get; set; } = null!;
+
+        public double? VoucherDiscount { get; set; }
+
     }
 }

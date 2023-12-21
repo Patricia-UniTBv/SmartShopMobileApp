@@ -32,6 +32,7 @@ public partial class SmartShopDBContext : DbContext
     public virtual DbSet<Voucher> Vouchers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=smartshopserver.database.windows.net;Database=SmartShopDB;Trusted_Connection=False;Encrypt=True;User ID=sqladmin;Password=Aneliz323;Trust Server Certificate=true");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -107,8 +108,7 @@ public partial class SmartShopDBContext : DbContext
 
             entity.Property(e => e.Barcode)
                 .HasMaxLength(50)
-                .IsUnicode(false)
-                .IsRequired(false);
+                .IsUnicode(false);
             entity.Property(e => e.TransactionDate).HasColumnType("date");
 
             entity.HasOne(d => d.ShoppingCart).WithMany(p => p.Transactions)

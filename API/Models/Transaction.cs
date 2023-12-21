@@ -15,5 +15,7 @@ public partial class Transaction
 
     public string? Barcode { get; set; }
 
+    public double? VoucherDiscount { get; set; }
+
     public virtual ShoppingCart ShoppingCart { get; set; } = null!;
 }

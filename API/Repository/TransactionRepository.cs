@@ -12,6 +12,17 @@ namespace API.Repository
         {
         }
 
+        public async Task<ICollection<TransactionDTO>> GetAllTransactions(int userId, int supermarketId)
+        {
+            var result = await _dbSet.ToListAsync();
+            return _mapper.Map<ICollection<Transaction>, ICollection<TransactionDTO>>(result!);
+        }
+
+        public async Task<ICollection<TransactionDTO>> GetAllTransactionsWithDiscount(int userId, int supermarketId)
+        {
+            var result = await _dbSet.Where(t => t.VoucherDiscount != null).ToListAsync();
+            return _mapper.Map<ICollection<Transaction>, ICollection<TransactionDTO>>(result!);
+        }
         public async Task<TransactionDTO> GetTransactionBySupermarketId(int shoppingCartId)
         {
             var result = await _dbSet.Where(t => t.ShoppingCartID == shoppingCartId).FirstOrDefaultAsync();
@@ -22,6 +33,14 @@ namespace API.Repository
         {
             var result = _mapper.Map<TransactionDTO, Transaction>(transaction);
             await _dbSet.AddAsync(result);
+            _context.SaveChanges();
+        }
+
+        public void UpdateVoucherDiscountForTransaction(TransactionDTO transaction)
+        {
+            var updatedField = _mapper.Map<TransactionDTO, Transaction>(transaction);
+            _context.ChangeTracker.Clear();
+            _context.Update(updatedField);
             _context.SaveChanges();
         }
 

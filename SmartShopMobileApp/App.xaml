@@ -15,6 +15,7 @@
                         <Setter Property="BackgroundColor" Value="#FFFFFF" />
                         <Setter Property="HeightRequest" Value="90" />
                     </Style>
+                    
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
