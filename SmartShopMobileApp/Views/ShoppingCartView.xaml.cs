@@ -17,4 +17,5 @@ public partial class ShoppingCartView : ContentPage
         InitializeComponent();
         BindingContext = new ShoppingCartViewModel();
     }
+
 }

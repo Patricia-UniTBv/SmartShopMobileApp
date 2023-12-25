@@ -15,6 +15,21 @@ namespace API.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [HttpGet("GetItemsForShoppingCart")]
+        public async Task<IActionResult> GetItemsForShoppingCart(int shoppingCartId)
+        {
+            try
+            {
+                var cartItems = await _unitOfWork.CartItemRepository.GetProductsByShoppingCart(shoppingCartId);
+             
+                return Ok(cartItems);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpDelete("DeleteCartItemFromShoppingCart")]
         public async Task<IActionResult> DeleteCartItemFromShoppingCart(int productId, int shoppingCartId, double quantity)
         {

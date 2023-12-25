@@ -2,11 +2,93 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartShopMobileApp.Views.HistoryAndStatisticsView"
-             Title="HistoryAndStatisticsView">
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewModels="clr-namespace:SmartShopMobileApp.ViewModels" 
+             xmlns:icon="clr-namespace:SmartShopMobileApp"
+             xmlns:model="clr-namespace:DTO;assembly=DTO"
+             x:DataType="viewModels:HistoryAndStatisticsViewModel"
+             Title="History">
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior Command="{Binding PageAppearingCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Grid x:Name="FilterGrid" IsVisible="False">
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent" Padding="10">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Text="{x:Static icon:IconFont.Calendar_month}" Style="{x:StaticResource GoogleFont}" TextColor="#2B0B98" FontSize="20" Margin="10,10,10,0"/>
+                    <DatePicker x:Name="DatePickerFilterStart" Format="dd.MM.yyyy" HorizontalOptions="StartAndExpand" />
+                    <Label Text="{x:Static icon:IconFont.Arrow_right_alt}" Style="{x:StaticResource GoogleFont}" TextColor="#2B0B98" FontSize="30" Margin="50,5,5,0" HorizontalOptions="CenterAndExpand"/>
+                    <Label Text="{x:Static icon:IconFont.Calendar_month}" Style="{StaticResource GoogleFont}" TextColor="#2B0B98" FontSize="20" Margin="10,10,0,0" HorizontalOptions="EndAndExpand"/>
+                    <DatePicker x:Name="DatePickerFilterEnd" Format="dd.MM.yyyy" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+
+                <Label Text="Minimum price: " Margin="14,20,0,0" TextColor="Gray"/>
+                <Slider x:Name="PriceSlider1" Minimum="0" Maximum="100" Value="50" HorizontalOptions="FillAndExpand" />
+                <Label Text="{Binding Value, Source={x:Reference PriceSlider1}, StringFormat='Price: {0:N2} lei'}" HorizontalOptions="CenterAndExpand" />
+
+                <Label Text="Maximum price: " Margin="14,0,0,0" TextColor="Gray"/>
+                <Slider x:Name="PriceSlider2" Minimum="0" Maximum="100" Value="50" HorizontalOptions="FillAndExpand" />
+                <Label Text="{Binding Value, Source={x:Reference PriceSlider2}, StringFormat='Price: {0:N2} lei'}" HorizontalOptions="CenterAndExpand" />
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{x:Static icon:IconFont.Arrow_drop_down_circle}" Style="{StaticResource GoogleFont}" TextColor="#2B0B98" FontSize="20" Margin="0,10,0,0" HorizontalOptions="Start"/>
+                    <Picker x:Name="StorePicker" Title="Select Supermarket">
+                        <Picker.Items>
+                            <x:String>Lidl</x:String>
+                            <x:String>Kaufland</x:String>
+                            <x:String>Carrefour</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </StackLayout>
+
+                <Button Text="Filtrare"/>
+            </StackLayout>
+        </Grid>
+        <Button Text="{x:Static icon:IconFont.Filter_alt}" Style="{StaticResource GoogleFont}" TextColor="#2B0B98" BackgroundColor="Transparent" Clicked="OnShowFiltersClicked" HorizontalOptions="StartAndExpand" />
+        <ScrollView>
+
+            <CollectionView x:Name="ShoppingCartsList" ItemsSource="{Binding ShoppingCarts}" HeightRequest="300">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:ShoppingCartDTO">
+                        <Grid Padding="10,5,10,5">
+                            <Frame Padding="8" Style="{StaticResource LeaveCard}">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackLayout Grid.Column="1" VerticalOptions="Center">
+                                        <StackLayout Orientation="Horizontal" >
+                                            <Label Text="Date:" Margin="10,0,0,0"  TextColor="#2B0B98" FontSize="16"/>
+                                            <Label Text="{Binding CreationDate, StringFormat='{0:dd. MM. yyyy}'}" Margin="10,0,0,0" FontFamily="Poppins-Bold" TextColor="#2B0B98" FontSize="16" />
+
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal" >
+                                            <Label Text="Supermarket:" Margin="10,10,0,0"  TextColor="#2B0B98" FontSize="16"/>
+                                            <Image Source="{Binding Supermarket.ImageUrl}" Margin="0,3,0,0" HeightRequest="37" WidthRequest="37" />
+
+                                        </StackLayout>
+
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="EndAndExpand" >
+                                        <Label Text="{Binding TotalAmount}" Margin="0,25,0,0"  TextColor="Green" FontSize="16" FontAttributes="Bold"/>
+                                        <Label Text=" lei" Margin="0,25,30,0" TextColor="Green" FontSize="16" FontAttributes="Bold" />
+                                    </StackLayout>
+
+                                </Grid>
+
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference ShoppingCartsList}, Path=BindingContext.ShoppingCartSelectedCommand}" CommandParameter="{Binding .}" />
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+
     </VerticalStackLayout>
 </ContentPage>

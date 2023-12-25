@@ -134,10 +134,10 @@ namespace SmartShopMobileApp.ViewModels
         }
 
         [RelayCommand]
-        private async void PageAppearing(object obj)
+        private async Task PageAppearing(object obj)
         {
             IsEmptyShoppingCartTextVisible = false;
-            GetLatestShoppingCartForCurrentUser();
+            await GetLatestShoppingCartForCurrentUser();
         }
 
     }
