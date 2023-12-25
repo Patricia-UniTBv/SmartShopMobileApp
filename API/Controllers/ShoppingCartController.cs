@@ -28,6 +28,20 @@ namespace API.Controllers
             }
         }
 
+        [HttpGet("GetAllTransactedShoppingCartsWithSupermarketByUserId")]
+        public async Task<IActionResult> GetAllTransactedShoppingCartsWithSupermarketByUserId(int id)
+        {
+            try
+            {
+                var shoppingCarts = await _unitOfWork.ShoppingCartRepository.GetAllTransactedShoppingCartsWithSupermarketByUserId(id);
+                return Ok(shoppingCarts);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpGet("GetLatestShoppingCartByUserId")]
         public async Task<IActionResult> GetLatestShoppingCartByUserId(int id)
         {

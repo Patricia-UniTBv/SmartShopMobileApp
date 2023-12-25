@@ -8,7 +8,7 @@ namespace API.Profiles
     {
         public ShoppingCartProfile()
         {
-            CreateMap<ShoppingCart, ShoppingCartDTO>();
+            CreateMap<ShoppingCart, ShoppingCartDTO>().ForMember(dest => dest.Supermarket, opt => opt.MapFrom(src => src.Supermarket));
             CreateMap<ShoppingCartDTO, ShoppingCart>();
         }
     }

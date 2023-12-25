@@ -76,8 +76,8 @@ namespace API.Controllers
             }
         }
 
-        [HttpPost("AddProductToShoppingCart/{numberOfProducts}")]
-        public async Task<IActionResult> AddProductToShoppingCart( ProductDTO product, int numberOfProducts)// SA PUN FROMBODY!
+        [HttpPost("AddProductToShoppingCart/{numberOfProducts}/{supermarketId}")]
+        public async Task<IActionResult> AddProductToShoppingCart( ProductDTO product, int numberOfProducts, int supermarketId)// SA PUN FROMBODY!
         {
             try
             {
@@ -92,6 +92,7 @@ namespace API.Controllers
                         CreationDate = DateTime.Now,
                         TotalAmount = 0,
                         IsTransacted = false,
+                        SupermarketID = supermarketId
                     };
 
                     await _unitOfWork.ShoppingCartRepository.AddShoppingCart(shoppingCart);
@@ -106,6 +107,7 @@ namespace API.Controllers
 
                 var productToAdd = await _unitOfWork.ProductRepository.GetProductById(product.ProductId);
                 shoppingCart.TotalAmount += productToAdd.Price * numberOfProducts;
+                shoppingCart.SupermarketID = supermarketId;
                 await _unitOfWork.ShoppingCartRepository.UpdateShoppingCart(shoppingCart);
 
                 await _unitOfWork.CartItemRepository.AddCartItem(cartItem);

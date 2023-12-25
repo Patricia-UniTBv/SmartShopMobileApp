@@ -15,9 +15,14 @@ public partial class ShoppingCart
 
     public bool? IsTransacted { get; set; }
 
+    public int? SupermarketID { get; set; }
+
+    public virtual User User { get; set; } = null!;
+
+    public virtual Supermarket? Supermarket { get; set; }
+
     public virtual ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
 
     public virtual ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
 
-    public virtual User User { get; set; } = null!;
 }

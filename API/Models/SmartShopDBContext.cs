@@ -37,6 +37,8 @@ public partial class SmartShopDBContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+
         modelBuilder.Entity<CartItem>(entity =>
         {
             entity.ToTable("CartItem");
@@ -88,6 +90,10 @@ public partial class SmartShopDBContext : DbContext
 
             entity.Property(e => e.CreationDate).HasColumnType("date");
             entity.Property(e => e.IsTransacted).HasDefaultValueSql("((0))");
+
+            entity.HasOne(d => d.Supermarket).WithMany(p => p.ShoppingCarts)
+                .HasForeignKey(d => d.SupermarketID)
+                .HasConstraintName("FK_ShoppingCart_Supermarket");
 
             entity.HasOne(d => d.User).WithMany(p => p.ShoppingCarts)
                 .HasForeignKey(d => d.UserID)

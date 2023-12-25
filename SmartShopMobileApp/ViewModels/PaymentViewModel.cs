@@ -139,7 +139,6 @@ namespace SmartShopMobileApp.ViewModels
                 _manageData.SetStrategy(new UpdateData());
                 _manageData.GetDataAndDeserializeIt<object>($"Voucher/UpdateVoucherForSpecificUser/{AuthenticationResultHelper.ActiveUser.UserID}/{CurrentSupermarket.Supermarket.SupermarketID}/{TotalAmount}", "");
                 _manageData.GetDataAndDeserializeIt<object>($"ShoppingCart/UpdateShoppingCartWhenTransacted?id={ShoppingCartId}", "");
-                //_manageData.GetDataAndDeserializeIt<object>($"Transaction/UpdateVoucherDiscountForTransaction", "");
 
                 Thread.Sleep(1000);
 

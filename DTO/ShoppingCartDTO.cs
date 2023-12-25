@@ -24,7 +24,11 @@ namespace DTO
 
         public bool? IsTransacted { get; set; }
 
+        public int? SupermarketID { get; set; }
+
         public virtual UserDTO User { get; set; } = null!;
+        public virtual SupermarketDTO? Supermarket { get; set; }
+
     }
 
 }

@@ -14,7 +14,13 @@ namespace API.Repository
 
         public async Task<List<ShoppingCartDTO>> GetAllTransactedShoppingCartsByUserId(int userID)
         {
-            var result = await _dbSet.Where(c => c.IsTransacted == true).ToListAsync();
+            var result = await _dbSet.Where(c => c.IsTransacted == true && c.UserID == userID).ToListAsync();
+            return _mapper.Map<List<ShoppingCart>, List<ShoppingCartDTO>>(result);
+        }
+
+        public async Task<List<ShoppingCartDTO>> GetAllTransactedShoppingCartsWithSupermarketByUserId(int userID)
+        {
+            var result = await _dbSet.Include(c => c.Supermarket).Where(c => c.IsTransacted == true && c.UserID == userID).ToListAsync();
             return _mapper.Map<List<ShoppingCart>, List<ShoppingCartDTO>>(result);
         }
 
@@ -59,6 +65,6 @@ namespace API.Repository
             _context.SaveChanges();
         }
 
-      
+        
     }
 }
