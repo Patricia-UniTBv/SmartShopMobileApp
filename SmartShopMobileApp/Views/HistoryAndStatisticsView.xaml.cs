@@ -1,4 +1,6 @@
+using DTO;
 using SmartShopMobileApp.ViewModels;
+using System.Collections.ObjectModel;
 
 namespace SmartShopMobileApp.Views;
 
@@ -10,8 +12,11 @@ public partial class HistoryAndStatisticsView : ContentPage
 		BindingContext = new HistoryAndStatisticsViewModel();
 	}
 
-    private void OnShowFiltersClicked(object sender, EventArgs e)
-    {
-        FilterGrid.IsVisible = !FilterGrid.IsVisible;
+	public HistoryAndStatisticsView(ObservableCollection<ShoppingCartDTO> carts)
+	{
+        InitializeComponent();
+        BindingContext = new HistoryAndStatisticsViewModel( carts);
     }
+
+   
 }

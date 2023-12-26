@@ -12,28 +12,28 @@
         <toolkit:EventToCommandBehavior Command="{Binding PageAppearingCommand}" EventName="Appearing" />
     </ContentPage.Behaviors>
     <VerticalStackLayout>
-        <Grid x:Name="FilterGrid" IsVisible="False">
+        <Grid x:Name="FilterGrid" IsVisible="{Binding IsFilterGridVisible}">
 
             <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent" Padding="10">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                     <Label Text="{x:Static icon:IconFont.Calendar_month}" Style="{x:StaticResource GoogleFont}" TextColor="#2B0B98" FontSize="20" Margin="10,10,10,0"/>
-                    <DatePicker x:Name="DatePickerFilterStart" Format="dd.MM.yyyy" HorizontalOptions="StartAndExpand" />
+                    <DatePicker x:Name="DatePickerFilterStart" Format="dd.MM.yyyy" HorizontalOptions="StartAndExpand" Date="{Binding StartDate}" />
                     <Label Text="{x:Static icon:IconFont.Arrow_right_alt}" Style="{x:StaticResource GoogleFont}" TextColor="#2B0B98" FontSize="30" Margin="50,5,5,0" HorizontalOptions="CenterAndExpand"/>
                     <Label Text="{x:Static icon:IconFont.Calendar_month}" Style="{StaticResource GoogleFont}" TextColor="#2B0B98" FontSize="20" Margin="10,10,0,0" HorizontalOptions="EndAndExpand"/>
-                    <DatePicker x:Name="DatePickerFilterEnd" Format="dd.MM.yyyy" HorizontalOptions="EndAndExpand"/>
+                    <DatePicker x:Name="DatePickerFilterEnd" Format="dd.MM.yyyy" HorizontalOptions="EndAndExpand" Date="{Binding EndDate}"/>
                 </StackLayout>
 
                 <Label Text="Minimum price: " Margin="14,20,0,0" TextColor="Gray"/>
-                <Slider x:Name="PriceSlider1" Minimum="0" Maximum="100" Value="50" HorizontalOptions="FillAndExpand" />
-                <Label Text="{Binding Value, Source={x:Reference PriceSlider1}, StringFormat='Price: {0:N2} lei'}" HorizontalOptions="CenterAndExpand" />
+                <Slider x:Name="PriceSlider1" Minimum="0" Maximum="1000" HorizontalOptions="FillAndExpand" Value="{Binding MinPrice}" />
+                <Label Text="{Binding Value, Source={x:Reference PriceSlider1}, StringFormat='Total amount: {0:N2} lei'}" HorizontalOptions="CenterAndExpand"  />
 
                 <Label Text="Maximum price: " Margin="14,0,0,0" TextColor="Gray"/>
-                <Slider x:Name="PriceSlider2" Minimum="0" Maximum="100" Value="50" HorizontalOptions="FillAndExpand" />
-                <Label Text="{Binding Value, Source={x:Reference PriceSlider2}, StringFormat='Price: {0:N2} lei'}" HorizontalOptions="CenterAndExpand" />
+                <Slider x:Name="PriceSlider2" Minimum="0" Maximum="1000" HorizontalOptions="FillAndExpand" Value="{Binding MaxPrice}"/>
+                <Label Text="{Binding Value, Source={x:Reference PriceSlider2}, StringFormat='Total amount: {0:N2} lei'}" HorizontalOptions="CenterAndExpand" />
 
                 <StackLayout Orientation="Horizontal">
                     <Label Text="{x:Static icon:IconFont.Arrow_drop_down_circle}" Style="{StaticResource GoogleFont}" TextColor="#2B0B98" FontSize="20" Margin="0,10,0,0" HorizontalOptions="Start"/>
-                    <Picker x:Name="StorePicker" Title="Select Supermarket">
+                    <Picker x:Name="StorePicker" Title="Select Supermarket" SelectedItem="{Binding SelectedStore}">
                         <Picker.Items>
                             <x:String>Lidl</x:String>
                             <x:String>Kaufland</x:String>
@@ -42,13 +42,13 @@
                     </Picker>
                 </StackLayout>
 
-                <Button Text="Filtrare"/>
+                <Button Text="Filtrare" Command="{Binding FilterShoppingCartsCommand}"/>
             </StackLayout>
         </Grid>
-        <Button Text="{x:Static icon:IconFont.Filter_alt}" Style="{StaticResource GoogleFont}" TextColor="#2B0B98" BackgroundColor="Transparent" Clicked="OnShowFiltersClicked" HorizontalOptions="StartAndExpand" />
+        <Button Text="{x:Static icon:IconFont.Filter_alt}" Style="{StaticResource GoogleFont}" TextColor="#2B0B98" BackgroundColor="Transparent" Command="{Binding ShowFiltersCommand}" HorizontalOptions="StartAndExpand" />
         <ScrollView>
 
-            <CollectionView x:Name="ShoppingCartsList" ItemsSource="{Binding ShoppingCarts}" HeightRequest="300">
+            <CollectionView x:Name="ShoppingCartsList" ItemsSource="{Binding ShoppingCarts, Mode=TwoWay}"  HeightRequest="300">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:ShoppingCartDTO">
                         <Grid Padding="10,5,10,5">
