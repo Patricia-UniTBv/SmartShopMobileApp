@@ -16,18 +16,7 @@ namespace DTO
         {
             get
             {
-                if (Name == "Lidl")
-                {
-                    return "lidl.png";
-                }
-                else if (Name == "Carrefour")
-                {
-                    return "carrefour.png";
-                }
-                else 
-                {
-                    return "kaufland.png";
-                }
+                return "shopping_cart.png";
             }
         }
     }

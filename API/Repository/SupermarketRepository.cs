@@ -12,6 +12,13 @@ namespace API.Repository
         {
         }
 
+        public async Task AddSupermarket(SupermarketDTO supermarket)
+        {
+            var result = _mapper.Map<SupermarketDTO, Supermarket>(supermarket);
+            await _dbSet.AddAsync(result);
+            _context.SaveChanges();
+        }
+
         public async Task<ICollection<SupermarketDTO>> GetAllSupermarkets()
         {
             var result = await _dbSet.ToListAsync();

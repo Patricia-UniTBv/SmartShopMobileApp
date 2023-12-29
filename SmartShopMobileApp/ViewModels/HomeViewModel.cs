@@ -4,6 +4,7 @@ using CommunityToolkit.Maui.Views;
 using DTO;
 using SmartShopMobileApp.Helpers;
 using SmartShopMobileApp.Views;
+using Newtonsoft.Json;
 
 namespace SmartShopMobileApp.ViewModels
 {
@@ -22,6 +23,8 @@ namespace SmartShopMobileApp.ViewModels
             get { return _manageData; }
             set { _manageData = value; }
         }
+
+        public string SupermarketInputName { get; set; }
 
         #region ObservableProperties
        
@@ -63,6 +66,26 @@ namespace SmartShopMobileApp.ViewModels
         private void OnSupermarketSelected(SupermarketDTO selectedSupermarket)
         {
             CurrentSupermarket.Supermarket = selectedSupermarket;
+        }
+
+        [RelayCommand]
+        private async Task AddButton(object obj)
+        {
+
+            string input = await Application.Current.MainPage.DisplayPromptAsync("Add supermarket", "What's its name?");
+            SupermarketDTO newSupermarket = new SupermarketDTO();
+            newSupermarket.Name = input;
+
+            var _httpClient = new HttpClient(App.Current.MainPage.Handler.MauiContext.Services.GetService<IHttpClientHandlerService>().GetInsecureHandler());
+
+            var json = JsonConvert.SerializeObject(newSupermarket);
+
+            _manageData.SetStrategy(new CreateData());
+            var result = await _manageData.GetDataAndDeserializeIt<SupermarketDTO>($"Supermarket/AddSupermarket", json);
+
+            Supermarkets = await _manageData.GetDataAndDeserializeIt<List<SupermarketDTO>>($"Supermarket/GetAllSupermarkets", "");
+            await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new HomeView(Supermarkets)));
+
         }
         #endregion
     }

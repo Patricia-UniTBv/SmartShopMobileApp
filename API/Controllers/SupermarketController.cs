@@ -1,4 +1,5 @@
 ﻿using API.Repository.Interfaces;
+using DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -21,6 +22,21 @@ namespace API.Controllers
                 var products = await _unitOfWork.SupermarketRepository.GetAllSupermarkets();
 
                 return Ok(products);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPost("AddSupermarket")]
+        public async Task<IActionResult> AddSupermarket([FromBody] SupermarketDTO supermarket)
+        {
+            try
+            {
+                await _unitOfWork.SupermarketRepository.AddSupermarket(supermarket);
+
+                return Ok(supermarket);
             }
             catch (Exception e)
             {

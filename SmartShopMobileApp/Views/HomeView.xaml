@@ -38,6 +38,23 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
+        <Button
+            BackgroundColor="#2B0B98"
+            VerticalOptions="EndAndExpand"
+            HorizontalOptions="EndAndExpand"
+            Margin="0,200,30,0"
+            WidthRequest="50" 
+            HeightRequest="50"
+            CornerRadius="25"
+            Padding="0"
+            Text="+"
+            TextColor="White"
+            FontSize="35"
+            FontAttributes="Bold"
+            Command="{Binding AddButtonCommand}" >
+
+        </Button>
+
 
 
         <!--<Button Text="Open scanner"
