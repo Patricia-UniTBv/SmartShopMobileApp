@@ -16,7 +16,7 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:SupermarketDTO">
                     <Grid Padding="10,5,10,5">
-                        <Frame Padding="8" Style="{StaticResource LeaveCard}">
+                        <Frame Padding="8" HeightRequest="100" WidthRequest="70" >
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />

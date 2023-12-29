@@ -90,6 +90,7 @@ namespace SmartShopMobileApp.ViewModels
             try
             {
                 _manageData.SetStrategy(new GetData());
+                VouchersHistory = new ObservableCollection<VoucherHistory>();
                 var allShoppingCarts = await _manageData.GetDataAndDeserializeIt<List<ShoppingCartDTO>>($"ShoppingCart/GetAllTransactedShoppingCartsByUserId?id={AuthenticationResultHelper.ActiveUser.UserID}", "");
                 foreach (var cart in allShoppingCarts)
                 {
@@ -107,15 +108,18 @@ namespace SmartShopMobileApp.ViewModels
                 }
 
                 var usedDiscounts = await _manageData.GetDataAndDeserializeIt<List<TransactionDTO>>($"Transaction/GetAllTransactionsWithDiscount/{AuthenticationResultHelper.ActiveUser.UserID}/{CurrentSupermarket.Supermarket.SupermarketID}", "");
-                foreach(var transaction in usedDiscounts)
+                foreach (var transaction in usedDiscounts)
                 {
-                    var newVoucherHistory = new VoucherHistory();
-                    newVoucherHistory.CartCreationDate = transaction.TransactionDate.ToShortDateString();
-                    newVoucherHistory.CreationDate = transaction.TransactionDate;
-                    newVoucherHistory.ValueModification = "- " + (transaction.VoucherDiscount).ToString() + " lei";
-                    newVoucherHistory.TotalAmount = transaction.TotalAmount.ToString().Substring(0, 4);
-                    newVoucherHistory.TextColor = Colors.Red;
-                    VouchersHistory.Add(newVoucherHistory);
+                    if (transaction.VoucherDiscount != 0)
+                    { 
+                        var newVoucherHistory = new VoucherHistory();
+                        newVoucherHistory.CartCreationDate = transaction.TransactionDate.ToShortDateString();
+                        newVoucherHistory.CreationDate = transaction.TransactionDate;
+                        newVoucherHistory.ValueModification = "- " + (transaction.VoucherDiscount).ToString() + " lei";
+                        newVoucherHistory.TotalAmount = transaction.TotalAmount.ToString().Substring(0, 4);
+                        newVoucherHistory.TextColor = Colors.Red;
+                        VouchersHistory.Add(newVoucherHistory); 
+                    }
                 }
 
                 var list = VouchersHistory.OrderByDescending(t => t.CreationDate.Month).OrderByDescending(t => t.CreationDate.Day).ToObservableCollection();

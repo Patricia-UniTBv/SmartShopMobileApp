@@ -12,11 +12,11 @@ public partial class HistoryAndStatisticsView : ContentPage
 		BindingContext = new HistoryAndStatisticsViewModel();
 	}
 
-	public HistoryAndStatisticsView(ObservableCollection<ShoppingCartDTO> carts)
-	{
-        InitializeComponent();
-        BindingContext = new HistoryAndStatisticsViewModel( carts);
-    }
+	//public HistoryAndStatisticsView(ObservableCollection<ShoppingCartDTO> carts)
+	//{
+ //       InitializeComponent();
+ //       BindingContext = new HistoryAndStatisticsViewModel( carts);
+ //   }
 
    
 }

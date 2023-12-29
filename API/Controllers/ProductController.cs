@@ -76,13 +76,14 @@ namespace API.Controllers
             }
         }
 
-        [HttpPost("AddProductToShoppingCart/{numberOfProducts}/{supermarketId}")]
-        public async Task<IActionResult> AddProductToShoppingCart( ProductDTO product, int numberOfProducts, int supermarketId)// SA PUN FROMBODY!
+        [HttpPost("AddProductToShoppingCart")]
+        public async Task<IActionResult> AddProductToShoppingCart([FromBody] ProductDTO product,int productId, int numberOfProducts, int supermarketId)// SA PUN FROMBODY!
         {
             try
             {
                 var shoppingCart = await _unitOfWork.ShoppingCartRepository.GetLatestShoppingCartForCurrentUser(1); //provizoriu, UserID trebuie modificat dupa autentificare!
                 var currentUser = await _unitOfWork.UserRepository.GetUserByID(1); //provizoriu
+                var product1 = await _unitOfWork.ProductRepository.GetProductById(productId);
 
                 if (shoppingCart == null)
                 {
@@ -100,19 +101,19 @@ namespace API.Controllers
                 }
                 var cartItem = new CartItemDTO
                 {
-                    ProductID = product.ProductId,
+                    ProductID = product1.ProductId,
                     ShoppingCartID = shoppingCart.ShoppingCartID,
                     Quantity = numberOfProducts, 
                 };
 
-                var productToAdd = await _unitOfWork.ProductRepository.GetProductById(product.ProductId);
+                var productToAdd = await _unitOfWork.ProductRepository.GetProductById(product1.ProductId);
                 shoppingCart.TotalAmount += productToAdd.Price * numberOfProducts;
                 shoppingCart.SupermarketID = supermarketId;
                 await _unitOfWork.ShoppingCartRepository.UpdateShoppingCart(shoppingCart);
 
                 await _unitOfWork.CartItemRepository.AddCartItem(cartItem);
 
-                return Ok(product);
+                return Ok(product1);
             }
             catch (Exception e)
             {

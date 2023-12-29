@@ -63,7 +63,7 @@ namespace SmartShopMobileApp.ViewModels
             var json = JsonConvert.SerializeObject(Product);
 
             _manageData.SetStrategy(new CreateData());
-            var result = await _manageData.GetDataAndDeserializeIt<ProductDTO>($"Product/AddProductToShoppingCart/{NumberOfProducts}/{CurrentSupermarket.Supermarket.SupermarketID}", json);
+            var result = await _manageData.GetDataAndDeserializeIt<object>($"Product/AddProductToShoppingCart?productId={Product.ProductId}&numberOfProducts={NumberOfProducts}&supermarketId={CurrentSupermarket.Supermarket.SupermarketID}", json);
             
             if(result != null)
                 await Application.Current.MainPage.DisplayAlert("Successfully added", "Your product has been successfully added to the shopping cart!", "OK");
