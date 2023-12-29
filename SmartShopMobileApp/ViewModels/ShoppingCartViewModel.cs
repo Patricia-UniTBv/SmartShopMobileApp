@@ -58,8 +58,7 @@ namespace SmartShopMobileApp.ViewModels
                 
                 _manageData.SetStrategy(new DeleteData());
                 await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"CartItem/DeleteCartItemFromShoppingCart?productId={product.ProductId}&shoppingCartId={latestShoppingCart.ShoppingCartID}&quantity={product.Quantity}", "");
-                //await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new ShoppingCartView()));
-                Products = await _manageData.GetDataAndDeserializeIt<List<ProductDTO>>($"ShoppingCart/GetLatestShoppingCartForCurrentUser?id={_userId}", "");
+                await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new ShoppingCartView()));
 
             }
             catch (Exception e)
