@@ -77,12 +77,12 @@ namespace API.Controllers
         }
 
         [HttpPost("AddProductToShoppingCart")]
-        public async Task<IActionResult> AddProductToShoppingCart([FromBody] ProductDTO product,int productId, int numberOfProducts, int supermarketId)// SA PUN FROMBODY!
+        public async Task<IActionResult> AddProductToShoppingCart([FromBody] ProductDTO product,int productId, int numberOfProducts, int supermarketId, int userId)// SA PUN FROMBODY!
         {
             try
             {
-                var shoppingCart = await _unitOfWork.ShoppingCartRepository.GetLatestShoppingCartForCurrentUser(1); //provizoriu, UserID trebuie modificat dupa autentificare!
-                var currentUser = await _unitOfWork.UserRepository.GetUserByID(1); //provizoriu
+                var shoppingCart = await _unitOfWork.ShoppingCartRepository.GetLatestShoppingCartForCurrentUser(userId); 
+                var currentUser = await _unitOfWork.UserRepository.GetUserByID(userId); //provizoriu
                 var product1 = await _unitOfWork.ProductRepository.GetProductById(productId);
 
                 if (shoppingCart == null)
