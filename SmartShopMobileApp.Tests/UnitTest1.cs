@@ -48,7 +48,6 @@ namespace SmartShopMobileApp.Tests
             // Arrange
             var supermarketRepositoryMock = new Mock<ISupermarketRepository>();
 
-            // Mock repository behavior to throw an exception
             unitOfWorkMock.Setup(uow => uow.SupermarketRepository.GetAllSupermarkets())
                           .Throws(new Exception("Some error message"));
 

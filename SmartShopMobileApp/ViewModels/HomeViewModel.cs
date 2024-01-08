@@ -30,6 +30,7 @@ namespace SmartShopMobileApp.ViewModels
        
         [ObservableProperty]
         private List<SupermarketDTO> _supermarkets;
+        #endregion
 
         private async Task GetSupermarkets()
         {
@@ -44,7 +45,7 @@ namespace SmartShopMobileApp.ViewModels
             }
         }
 
-        #endregion
+       
 
         #region RelayCommands
         [RelayCommand]
