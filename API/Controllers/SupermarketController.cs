@@ -19,9 +19,9 @@ namespace API.Controllers
         {
             try
             {
-                var products = await _unitOfWork.SupermarketRepository.GetAllSupermarkets();
+                var supermarkets = await _unitOfWork.SupermarketRepository.GetAllSupermarkets();
 
-                return Ok(products);
+                return Ok(supermarkets);
             }
             catch (Exception e)
             {

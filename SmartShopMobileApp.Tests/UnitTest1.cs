@@ -20,7 +20,6 @@ namespace SmartShopMobileApp.Tests
         {
             unitOfWorkMock = new Mock<IUnitOfWork>();
             mockMapper = new Mock<IMapper>();
-            controller = new SupermarketController(unitOfWorkMock.Object);
         }
 
         [Test]
@@ -32,6 +31,7 @@ namespace SmartShopMobileApp.Tests
             unitOfWorkMock.Setup(uow => uow.SupermarketRepository.GetAllSupermarkets())
                           .ReturnsAsync(new List<SupermarketDTO>() { });
 
+            var controller = new SupermarketController(unitOfWorkMock.Object);
 
             // Act
             var result = await controller.GetAllSupermarkets();
@@ -51,6 +51,7 @@ namespace SmartShopMobileApp.Tests
             unitOfWorkMock.Setup(uow => uow.SupermarketRepository.GetAllSupermarkets())
                           .Throws(new Exception("Some error message"));
 
+            var controller = new SupermarketController(unitOfWorkMock.Object);
 
             // Act
             var result = await controller.GetAllSupermarkets();
@@ -78,6 +79,8 @@ namespace SmartShopMobileApp.Tests
 
             unitOfWorkMock.Setup(uow => uow.SupermarketRepository.AddSupermarket(It.IsAny<SupermarketDTO>()));
 
+            var controller = new SupermarketController(unitOfWorkMock.Object);
+
             // Act
             var result = await controller.AddSupermarket(supermarketDto);
 
@@ -102,6 +105,8 @@ namespace SmartShopMobileApp.Tests
 
             unitOfWorkMock.Setup(uow => uow.SupermarketRepository.AddSupermarket(It.IsAny<SupermarketDTO>()))
                 .Throws(new Exception("Some error message"));
+
+            var controller = new SupermarketController(unitOfWorkMock.Object);
 
             // Act
             var result = await controller.AddSupermarket(supermarketDto);
