@@ -24,9 +24,9 @@ namespace API.Repository
 
             var productDTOs = result.Select(item => new ProductDTO
             {
-                ProductId = item.Product.ProductID,
+                ProductID = item.Product.ProductID,
                 Quantity = item.Quantity,
-                Price = item.Product.Price * (double)item.Quantity!,
+                Price = item.Product.Price * (decimal)item.Quantity!,
                 Name = item.Product.Name,
 
             }).ToList();

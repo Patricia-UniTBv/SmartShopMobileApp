@@ -8,20 +8,13 @@ namespace DTO
 {
     public class ProductDTO
     {
-        public int ProductId { get; set; }
+        public int ProductID { get; set; }
 
         public int CategoryID { get; set; }
 
         public string Name { get; set; } = null!;
 
-        public double Price
-        {
-            get;
-            //{
-            // return Price * (double)Quantity!;
-            //}
-            set;
-        }
+        public decimal Price { get; set; }
 
         public string Barcode { get; set; } = null!;
 

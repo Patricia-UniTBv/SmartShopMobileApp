@@ -13,7 +13,7 @@ namespace SmartShopMobileApp.ViewModels
         {
             _manageData = new ManageData();
             Supermarkets = new List<SupermarketDTO>();
-            GetSupermarkets();
+            //GetSupermarkets();
         }
 
         private IManageData _manageData;
@@ -66,6 +66,12 @@ namespace SmartShopMobileApp.ViewModels
             Application.Current.MainPage.DisplayAlert("Successfully selected", $"You've selected {selectedSupermarket.Name}", "OK");
             Thread.Sleep(1000);
             App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new BarcodeScannerView()));
+        }
+
+        [RelayCommand]
+        private async void PageAppearing(object obj)
+        {
+            GetSupermarkets();
         }
         #endregion
     }

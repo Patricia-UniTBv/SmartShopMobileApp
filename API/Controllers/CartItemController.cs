@@ -40,7 +40,7 @@ namespace API.Controllers
 
                 var shoppingCart = await _unitOfWork.ShoppingCartRepository.GetLatestShoppingCartForCurrentUser(1); //provizoriu, UserID trebuie modificat dupa autentificare!
                 var productToDelete = await _unitOfWork.ProductRepository.GetProductById(productId);
-                shoppingCart.TotalAmount -= productToDelete.Price * quantity;
+                shoppingCart.TotalAmount -= productToDelete.Price * (decimal)quantity;
                 await _unitOfWork.ShoppingCartRepository.UpdateShoppingCart(shoppingCart);
                 
                 await _unitOfWork.CompleteAsync();

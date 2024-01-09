@@ -39,8 +39,8 @@ namespace SmartShopMobileApp.ViewModels
             get { return _manageData; }
             set { _manageData = value; }
         }
-        private double totalAmount;
-        public double TotalAmount {
+        private decimal totalAmount;
+        public decimal TotalAmount {
             get { return totalAmount; }
             set
             {
@@ -54,7 +54,7 @@ namespace SmartShopMobileApp.ViewModels
         }
         public int ShoppingCartId { get; set; }
 
-        public double VoucherDiscount { get;set; }
+        public decimal VoucherDiscount { get;set; }
 
         [ObservableProperty]
         public string _cardNo;
@@ -152,7 +152,7 @@ namespace SmartShopMobileApp.ViewModels
                 return;
             }
         }
-        public async void SendPaymentConfirmationEmail(string recipientEmail, double totalAmount)
+        public async void SendPaymentConfirmationEmail(string recipientEmail, decimal totalAmount)
         {
             var email = new MimeMessage();
             email.From.Add(MailboxAddress.Parse("smartshopapp.testing@gmail.com"));

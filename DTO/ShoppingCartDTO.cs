@@ -20,7 +20,7 @@ namespace DTO
 
         public DateTime CreationDate { get; set; }
 
-        public double TotalAmount { get; set; }
+        public decimal TotalAmount { get; set; }
 
         public bool? IsTransacted { get; set; }
 

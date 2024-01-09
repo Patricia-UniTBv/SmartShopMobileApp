@@ -58,10 +58,10 @@ namespace SmartShopMobileApp.ViewModels
         private DateTime _endDate;
 
         [ObservableProperty]
-        private double _minPrice;
+        private decimal _minPrice;
 
         [ObservableProperty]
-        private double _maxPrice;
+        private decimal _maxPrice;
 
         [ObservableProperty]
         private string _selectedStore;

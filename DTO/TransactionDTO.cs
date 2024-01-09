@@ -18,11 +18,11 @@ namespace DTO
 
         public DateTime TransactionDate { get; set; }
 
-        public double TotalAmount { get; set; }
+        public decimal TotalAmount { get; set; }
 
         public string Barcode { get; set; } = null!;
 
-        public double? VoucherDiscount { get; set; }
+        public decimal? VoucherDiscount { get; set; }
 
     }
 }

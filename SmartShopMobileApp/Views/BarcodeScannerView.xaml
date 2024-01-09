@@ -4,30 +4,22 @@
              xmlns:cv="clr-namespace:Camera.MAUI;assembly=Camera.MAUI"
              xmlns:viewModels="clr-namespace:SmartShopMobileApp.ViewModels" 
              xmlns:model="clr-namespace:DTO;assembly=DTO"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
              x:DataType="viewModels:BarcodeScannerViewModel"
              x:Class="SmartShopMobileApp.Views.BarcodeScannerView"
              xmlns:icon="clr-namespace:SmartShopMobileApp"
              Title="Scan product">
     <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
-
-            <Label x:Name="barcodeResult" Text="{Binding BarcodeResult}" FontSize="20"/>
-            <cv:CameraView x:Name="cameraView" 
-                           WidthRequest="500"
-                           HeightRequest="450"
-                           CamerasLoaded="cameraView_CamerasLoaded"
-                           BarCodeDetectionEnabled="True"
-                           BarcodeDetected="cameraView_BarcodeDetected"/>
-
+        <VerticalStackLayout>
+            <zxing:CameraBarcodeReaderView
+                    x:Name="barcodeReader"
+                    BarcodesDetected="barcodeReader_BarcodesDetected"/>
             <Label Text="{Binding ProductName, StringFormat='Do you want to add {0} to your cart?'}"
-                   Margin="10,10"
+                   Margin="20,90,0,0"
                    FontSize="16"/>
-
-            <StackLayout Orientation="Vertical"  HorizontalOptions="Center" VerticalOptions="EndAndExpand" Margin="0,0,0,10">
+            <StackLayout Orientation="Vertical"  HorizontalOptions="Center" VerticalOptions="EndAndExpand" Margin="0,80,0,10">
                 <StackLayout Orientation="Horizontal" WidthRequest="130" >
+
                     <Entry Placeholder="1" Text="{Binding NumberOfProducts, Mode=TwoWay}" WidthRequest="90" />
                     <Button Text="{x:Static icon:IconFont.Add}"
                             TextColor="#8C1A6D"
@@ -37,7 +29,7 @@
                             WidthRequest="50"
                             Command="{Binding AddNumberOfProductsCommand}"/>
                 </StackLayout>
-                
+
                 <Button Text="Add to cart"
                         TextTransform="None"
                         CornerRadius="5"
@@ -50,8 +42,8 @@
                         HorizontalOptions="EndAndExpand"
                         Command="{Binding AddProductToCartCommand}"
                         CommandParameter="{Binding ProductName}"/>
-                </StackLayout>
-            
+            </StackLayout>
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

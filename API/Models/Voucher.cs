@@ -13,7 +13,7 @@ public partial class Voucher
 
     public string? CardNumber { get; set; }
 
-    public int? EarnedPoints { get; set; }
+    public decimal? EarnedPoints { get; set; }
 
     public virtual Supermarket Supermarket { get; set; } = null!;
 

@@ -77,7 +77,7 @@ namespace API.Controllers
         }
 
         [HttpPost("AddProductToShoppingCart")]
-        public async Task<IActionResult> AddProductToShoppingCart([FromBody] ProductDTO product,int productId, int numberOfProducts, int supermarketId, int userId)// SA PUN FROMBODY!
+        public async Task<IActionResult> AddProductToShoppingCart([FromBody] ProductDTO product,int productId, int numberOfProducts, int supermarketId, int userId)
         {
             try
             {
@@ -101,12 +101,12 @@ namespace API.Controllers
                 }
                 var cartItem = new CartItemDTO
                 {
-                    ProductID = product1.ProductId,
+                    ProductID = product1.ProductID,
                     ShoppingCartID = shoppingCart.ShoppingCartID,
                     Quantity = numberOfProducts, 
                 };
 
-                var productToAdd = await _unitOfWork.ProductRepository.GetProductById(product1.ProductId);
+                var productToAdd = await _unitOfWork.ProductRepository.GetProductById(product1.ProductID);
                 shoppingCart.TotalAmount += productToAdd.Price * numberOfProducts;
                 shoppingCart.SupermarketID = supermarketId;
                 await _unitOfWork.ShoppingCartRepository.UpdateShoppingCart(shoppingCart);

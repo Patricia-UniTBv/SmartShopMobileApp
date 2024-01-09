@@ -16,7 +16,7 @@ namespace SmartShopMobileApp.Views;
 [DesignTimeVisible(false)]
 public partial class PaymentView : ContentPage
 {
-	public PaymentView(double amount, int shoppingCartId, double voucherDiscount)
+	public PaymentView(decimal amount, int shoppingCartId, decimal voucherDiscount)
 	{
 		InitializeComponent();
         PaymentViewModel viewModel = new PaymentViewModel();

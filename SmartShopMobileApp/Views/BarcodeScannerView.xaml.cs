@@ -14,33 +14,29 @@ public partial class BarcodeScannerView : ContentPage
     public BarcodeScannerView()
     {
         InitializeComponent();
-
-        cameraView.BarCodeOptions = new Camera.MAUI.ZXingHelper.BarcodeDecodeOptions
+        barcodeReader.Options = new ZXing.Net.Maui.BarcodeReaderOptions
         {
-            PossibleFormats = { ZXing.BarcodeFormat.All_1D },
-            TryHarder = true,
+            Formats = ZXing.Net.Maui.BarcodeFormat.Codabar | ZXing.Net.Maui.BarcodeFormat.Code39
+                    | ZXing.Net.Maui.BarcodeFormat.Code93 | ZXing.Net.Maui.BarcodeFormat.Code128
+                    | ZXing.Net.Maui.BarcodeFormat.Ean8 | ZXing.Net.Maui.BarcodeFormat.Ean13
+                    | ZXing.Net.Maui.BarcodeFormat.Itf | ZXing.Net.Maui.BarcodeFormat.UpcE
+                    | ZXing.Net.Maui.BarcodeFormat.UpcA,
+            AutoRotate = true,
+            Multiple = true
         };
-    }
-    public BarcodeScannerViewModel viewModel { get; set; }
-    private void cameraView_CamerasLoaded(object sender, EventArgs e)
-    {
-        if (cameraView.Cameras.Count > 0)
-        {
-            cameraView.Camera = cameraView.Cameras.First();
-            MainThread.BeginInvokeOnMainThread(async () =>
-            {
-                await cameraView.StopCameraAsync();
-                await cameraView.StartCameraAsync();
-            });
-        }
+
     }
 
-    private async void cameraView_BarcodeDetected(object sender, Camera.MAUI.ZXingHelper.BarcodeEventArgs args)
+    private void barcodeReader_BarcodesDetected(object sender, ZXing.Net.Maui.BarcodeDetectionEventArgs e)
     {
-        MainThread.BeginInvokeOnMainThread(async () =>
+        var first = e.Results?.FirstOrDefault();
+
+        if (first is null)
+            return;
+
+        Dispatcher.DispatchAsync(() =>
         {
-            barcodeResult.Text = $"Barcode: {args.Result[0].Text}";
-            BindingContext = new BarcodeScannerViewModel(args.Result[0].Text);
+            BindingContext = new BarcodeScannerViewModel(first.Value);
         });
     }
 

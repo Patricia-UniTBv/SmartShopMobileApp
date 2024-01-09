@@ -34,7 +34,7 @@ namespace API.Controllers
         }
 
         [HttpPut("UpdateVoucherForSpecificUser/{userId}/{supermarketId}/{totalAmount}")]
-        public async Task<IActionResult> UpdateVoucher(int userId, int supermarketId, double totalAmount)
+        public async Task<IActionResult> UpdateVoucher(int userId, int supermarketId, decimal totalAmount)
         {
             try
             {
@@ -48,8 +48,8 @@ namespace API.Controllers
                 int earnedMoneyRounded = 0;
                 if (totalAmount >= 150)
                 {
-                    double earnedMoneyDouble = 0.05 * totalAmount;
-                    earnedMoneyRounded = (int)Math.Round(earnedMoneyDouble);
+                    decimal earnedMoney = 0.05m * totalAmount;
+                    earnedMoneyRounded = (int)Math.Round(earnedMoney);
                 }
                 existingVoucher.EarnedPoints += earnedMoneyRounded;
 

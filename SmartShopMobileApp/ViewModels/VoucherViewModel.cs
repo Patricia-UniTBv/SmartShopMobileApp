@@ -52,7 +52,7 @@ namespace SmartShopMobileApp.ViewModels
         public string _currentSupermarketName;
 
         [ObservableProperty]
-        public int? _earnedMoney;
+        public decimal? _earnedMoney;
 
         [ObservableProperty]
         public ObservableCollection<VoucherHistory> _vouchersHistory;
@@ -100,7 +100,7 @@ namespace SmartShopMobileApp.ViewModels
                         newVoucherHistory.CartCreationDate = cart.CreationDate.ToShortDateString();
                         newVoucherHistory.CreationDate = cart.CreationDate;
                         newVoucherHistory.TotalAmount = cart.TotalAmount.ToString().Substring(0, 4);
-                        newVoucherHistory.ValueModification = "+ " + (0.05 * cart.TotalAmount).ToString().Substring(0,4) + " lei";
+                        newVoucherHistory.ValueModification = "+ " + (0.05m * cart.TotalAmount).ToString().Substring(0,4) + " lei";
                         newVoucherHistory.TextColor = Colors.Green;
                         VouchersHistory.Add(newVoucherHistory);
                     }
@@ -139,7 +139,7 @@ namespace SmartShopMobileApp.ViewModels
             {
                 _manageData.SetStrategy(new GetData());
                 var latestShoppingCart = await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"ShoppingCart/GetLatestShoppingCartByUserId?id={AuthenticationResultHelper.ActiveUser.UserID}", "");
-                latestShoppingCart.TotalAmount -= Convert.ToDouble(EarnedMoney);
+                latestShoppingCart.TotalAmount -= Convert.ToDecimal(EarnedMoney);
 
                 _manageData.SetStrategy(new UpdateData());
                 var json = JsonConvert.SerializeObject(latestShoppingCart);
@@ -148,15 +148,7 @@ namespace SmartShopMobileApp.ViewModels
                 _manageData.SetStrategy(new UpdateData());
                 await _manageData.GetDataAndDeserializeIt<object>($"Voucher/UpdateVoucherForSpecificUserWhenItIsUsed/{AuthenticationResultHelper.ActiveUser.UserID}/{CurrentSupermarket.Supermarket.SupermarketID}", "");
 
-               
-
-                //var newVoucherHistory = new VoucherHistory();
-                //newVoucherHistory.CartCreationDate = DateTime.Now;
-                //newVoucherHistory.ValueModification = "-" + EarnedMoney.ToString();
-                //newVoucherHistory.ValueModificationTextColor = "#770708"; // nu merge, de ce
-                //VouchersHistory.Add(newVoucherHistory);
-
-                await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new ShoppingCartView(Convert.ToDouble(EarnedMoney))));
+                await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new ShoppingCartView(Convert.ToDecimal(EarnedMoney))));
 
             }
             catch (Exception ex)

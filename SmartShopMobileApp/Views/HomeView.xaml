@@ -2,10 +2,14 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartShopMobileApp.Views.HomeView"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewModels="clr-namespace:SmartShopMobileApp.ViewModels" 
              xmlns:model="clr-namespace:DTO;assembly=DTO"
              x:DataType="viewModels:HomeViewModel"
              Title="Home">
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior Command="{Binding PageAppearingCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
     <VerticalStackLayout>
         <Label Text="Choose your supermarket:"
                FontFamily="Poppins-Regular"
@@ -37,33 +41,5 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
-
-
-        <!--<Button Text="Open scanner"
-                TextTransform="None"
-                CornerRadius="5"
-                TextColor="#FFFFFF"
-                Padding="2,0,2,0"
-                BackgroundColor="#8A1C23"
-                WidthRequest="104"
-                HeightRequest="40"
-                HorizontalOptions="FillAndExpand"
-                Command="{Binding OpenScannerCommand}"/>-->
-        <!--<Label Text="The products are:"/>
-        <ListView x:Name="ProductListView" ItemsSource="{Binding Products}">
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="model:ProductDTO">
-                    <ViewCell>
-                        <StackLayout>
-                            <Label Text="{Binding Name}" FontAttributes="Bold" />
-                            <Label Text="{Binding Price, StringFormat='Price: {0:C}'}" />
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>-->
-
-
     </VerticalStackLayout>
 </ContentPage>

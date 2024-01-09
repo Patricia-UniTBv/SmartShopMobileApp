@@ -32,10 +32,13 @@ namespace SmartShopMobileApp.ViewModels
         public int ShoppingCartId { get; set; }
         private int _userId { get; set; }//provizoriu
 
-        public double VoucherDiscount { get;set; }
+        public decimal VoucherDiscount { get;set; }
 
         [ObservableProperty]
         public bool _isEmptyShoppingCartTextVisible;
+
+        [ObservableProperty]
+        public bool _isVoucherButtonVisible;
 
         [ObservableProperty]
         public string _imageSource;
@@ -44,7 +47,7 @@ namespace SmartShopMobileApp.ViewModels
         private List<ProductDTO> _products;
 
         [ObservableProperty]
-        private double _totalAmount;
+        private decimal _totalAmount;
 
         [RelayCommand]
         private async Task DeleteCartItem(object obj)
@@ -57,7 +60,7 @@ namespace SmartShopMobileApp.ViewModels
                 var latestShoppingCart = await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"ShoppingCart/GetLatestShoppingCartByUserId?id={_userId}", "");
                 
                 _manageData.SetStrategy(new DeleteData());
-                await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"CartItem/DeleteCartItemFromShoppingCart?productId={product.ProductId}&shoppingCartId={latestShoppingCart.ShoppingCartID}&quantity={product.Quantity}", "");
+                await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"CartItem/DeleteCartItemFromShoppingCart?productId={product.ProductID}&shoppingCartId={latestShoppingCart.ShoppingCartID}&quantity={product.Quantity}", "");
                 await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new ShoppingCartView()));
 
             }
@@ -85,17 +88,20 @@ namespace SmartShopMobileApp.ViewModels
                     if (ShoppingCartId != 0)
                     {
                         ImageSource = "shopping_cart.png";
+                        IsVoucherButtonVisible = true;
                     }
                     else
                     {
                         ImageSource = "cartempty.png";
                         IsEmptyShoppingCartTextVisible = true;
+                        IsVoucherButtonVisible = false;
                     }
                 }
                 else
                 {
                     ImageSource = "cartempty.png";
                     IsEmptyShoppingCartTextVisible = true;
+                    IsVoucherButtonVisible = false;
                 }
 
             }

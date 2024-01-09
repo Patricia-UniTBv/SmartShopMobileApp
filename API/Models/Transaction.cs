@@ -11,11 +11,11 @@ public partial class Transaction
 
     public DateTime TransactionDate { get; set; }
 
-    public double TotalAmount { get; set; }
+    public decimal TotalAmount { get; set; }
 
     public string? Barcode { get; set; }
 
-    public double? VoucherDiscount { get; set; }
+    public decimal? VoucherDiscount { get; set; }
 
     public virtual ShoppingCart ShoppingCart { get; set; } = null!;
 }

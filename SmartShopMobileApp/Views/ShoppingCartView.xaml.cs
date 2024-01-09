@@ -4,7 +4,7 @@ namespace SmartShopMobileApp.Views;
 
 public partial class ShoppingCartView : ContentPage
 {
-	public ShoppingCartView(double discount)
+	public ShoppingCartView(decimal discount)
 	{
 		InitializeComponent();
         ShoppingCartViewModel viewModel = new ShoppingCartViewModel();

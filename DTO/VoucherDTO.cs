@@ -16,7 +16,7 @@ namespace DTO
 
         public string? CardNumber { get; set; }
 
-        public int? EarnedPoints { get; set; }
+        public decimal? EarnedPoints { get; set; }
 
     }
 }

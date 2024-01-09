@@ -37,8 +37,6 @@ public partial class SmartShopDBContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder);
-
         modelBuilder.Entity<CartItem>(entity =>
         {
             entity.ToTable("CartItem");
@@ -71,6 +69,7 @@ public partial class SmartShopDBContext : DbContext
 
             entity.Property(e => e.Barcode).HasMaxLength(50);
             entity.Property(e => e.Name).HasMaxLength(50);
+            entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.Unit).HasMaxLength(20);
 
             entity.HasOne(d => d.Category).WithMany(p => p.Products)
@@ -90,6 +89,7 @@ public partial class SmartShopDBContext : DbContext
 
             entity.Property(e => e.CreationDate).HasColumnType("date");
             entity.Property(e => e.IsTransacted).HasDefaultValueSql("((0))");
+            entity.Property(e => e.TotalAmount).HasColumnType("decimal(10, 2)");
 
             entity.HasOne(d => d.Supermarket).WithMany(p => p.ShoppingCarts)
                 .HasForeignKey(d => d.SupermarketID)
@@ -115,7 +115,9 @@ public partial class SmartShopDBContext : DbContext
             entity.Property(e => e.Barcode)
                 .HasMaxLength(50)
                 .IsUnicode(false);
+            entity.Property(e => e.TotalAmount).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.TransactionDate).HasColumnType("date");
+            entity.Property(e => e.VoucherDiscount).HasColumnType("decimal(10, 2)");
 
             entity.HasOne(d => d.ShoppingCart).WithMany(p => p.Transactions)
                 .HasForeignKey(d => d.ShoppingCartID)
@@ -143,6 +145,7 @@ public partial class SmartShopDBContext : DbContext
             entity.ToTable("Voucher");
 
             entity.Property(e => e.CardNumber).HasMaxLength(50);
+            entity.Property(e => e.EarnedPoints).HasColumnType("decimal(10, 2)");
 
             entity.HasOne(d => d.Supermarket).WithMany(p => p.Vouchers)
                 .HasForeignKey(d => d.SupermarketID)

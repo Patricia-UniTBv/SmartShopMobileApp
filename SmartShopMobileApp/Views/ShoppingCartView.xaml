@@ -16,7 +16,7 @@
                FontSize="20"
                TextColor="#2B0B98"
                Margin="10,0,0,0"/>
-        <Image Source="{Binding ImageSource}" HeightRequest="160" WidthRequest="160" />
+        <Image Source="{Binding ImageSource}" HeightRequest="140" WidthRequest="160" />
         <Label Text="Your shopping cart is empty!" IsVisible="{Binding IsEmptyShoppingCartTextVisible}" 
                FontFamily="Poppins-Regular"
                FontSize="20"
@@ -91,7 +91,7 @@
         </StackLayout>
 
         <Button Text="Pay" Command="{Binding PayCommand}" FontSize="20" Margin="60,-15,60,10" CornerRadius="20" BackgroundColor="Green"/>
-        <Button Text="Apply voucher" Command="{Binding ApplyVoucherCommand}" HeightRequest="45" FontSize="18" Margin="110,10,110,10" CornerRadius="20" BackgroundColor="#2B0B98"/>
+        <Button Text="Apply voucher" Command="{Binding ApplyVoucherCommand}" IsEnabled="{Binding IsVoucherButtonVisible}" HeightRequest="45" FontSize="18" Margin="110,10,110,10" CornerRadius="20" BackgroundColor="#2B0B98"/>
 
     </VerticalStackLayout>
 </ContentPage>
