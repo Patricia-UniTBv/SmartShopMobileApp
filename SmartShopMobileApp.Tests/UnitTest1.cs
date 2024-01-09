@@ -13,7 +13,6 @@ namespace SmartShopMobileApp.Tests
     {
         private Mock<IUnitOfWork> unitOfWorkMock;
         private Mock<IMapper> mockMapper;
-        private SupermarketController controller;
 
         [SetUp]
         public void Setup()
