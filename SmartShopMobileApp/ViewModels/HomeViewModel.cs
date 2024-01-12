@@ -63,8 +63,7 @@ namespace SmartShopMobileApp.ViewModels
         private void OnSupermarketSelected(SupermarketDTO selectedSupermarket)
         {
             CurrentSupermarket.Supermarket = selectedSupermarket;
-            Application.Current.MainPage.DisplayAlert("Successfully selected", $"You've selected {selectedSupermarket.Name}", "OK");
-            Thread.Sleep(1000);
+            
             App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new BarcodeScannerView()));
         }
 

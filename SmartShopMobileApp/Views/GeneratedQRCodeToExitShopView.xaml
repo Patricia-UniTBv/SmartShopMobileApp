@@ -14,17 +14,20 @@
             Margin="10,0,0,0" />
 
         <zxing:BarcodeGeneratorView Format="QrCode" 
+                Value="Scan it at the exit"
                 ForegroundColor="Black"
                 HorizontalOptions="CenterAndExpand"
                 VerticalOptions="CenterAndExpand"
+                Margin="0,150,0,0"
                 WidthRequest="200"
                 HeightRequest="200"/>
 
         <Button Text="Finish shopping" 
-                Command="{Binding FinishShopping}" 
+                Command="{Binding FinishShoppingCommand}" 
                 VerticalOptions="End"
                 HeightRequest="45"
-                WidthRequest="150"
+                WidthRequest="190"
+                Margin="0,100,0,0"
                 FontSize="18"
                 CornerRadius="20"
                 BackgroundColor="#2B0B98"/>

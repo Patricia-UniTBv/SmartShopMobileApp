@@ -144,7 +144,6 @@ namespace SmartShopMobileApp.ViewModels
 
                 Microsoft.Maui.Controls.Application.Current.MainPage.DisplayAlert("Payment Confirmation", "The transaction was successful! You have recieved an email to confirm your payment.", "OK");
                 SendPaymentConfirmationEmail("patyanelis@yahoo.com", TotalAmount); // sa modific cu adresa userului conectat dupa autentificare!!
-                //App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new ShoppingCartView()));
                 App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new GeneratedQRCodeToExitShopView()));
             }
             else
