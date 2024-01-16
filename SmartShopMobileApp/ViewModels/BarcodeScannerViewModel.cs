@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using DTO;
 using Newtonsoft.Json;
 using SmartShopMobileApp.Helpers;
+using SmartShopMobileApp.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -80,6 +81,12 @@ namespace SmartShopMobileApp.ViewModels
         public async Task AddNumberOfProducts(object obj)
         {
             NumberOfProducts++;
+        }
+
+        [RelayCommand]
+        public async Task ObjectDetection(object obj)
+        {
+            await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new ObjectDetectionView()));
         }
     }
 }

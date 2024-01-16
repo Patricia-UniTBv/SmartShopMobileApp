@@ -42,6 +42,17 @@
                         HorizontalOptions="EndAndExpand"
                         Command="{Binding AddProductToCartCommand}"
                         CommandParameter="{Binding ProductName}"/>
+                <Button Text="Scan object"
+                        TextTransform="None"
+                        CornerRadius="5"
+                        FontSize="15"
+                        TextColor="#FFFFFF"
+                        Padding="2,0,2,0"
+                        BackgroundColor="#8C1A6D"
+                        WidthRequest="130"
+                        HeightRequest="40"
+                        HorizontalOptions="EndAndExpand"
+                        Command="{Binding ObjectDetectionCommand}"/>
             </StackLayout>
 
         </VerticalStackLayout>
