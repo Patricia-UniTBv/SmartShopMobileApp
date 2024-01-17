@@ -28,6 +28,9 @@ namespace SmartShopMobileApp.ViewModels
             AuthenticationResultHelper.ActiveUser.UserID = 1;
             IdentifyProductByBarcode(barcode);
         }
+
+        public BarcodeScannerViewModel() { }
+
         private IManageData _manageData;
         public IManageData ManageData
         {
@@ -84,7 +87,7 @@ namespace SmartShopMobileApp.ViewModels
         }
 
         [RelayCommand]
-        public async Task ObjectDetection(object obj)
+        public static async Task ObjectDetection()
         {
             await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new ObjectDetectionView()));
         }

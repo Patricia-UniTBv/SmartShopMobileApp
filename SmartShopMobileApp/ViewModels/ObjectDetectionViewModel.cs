@@ -17,7 +17,7 @@ namespace SmartShopMobileApp.ViewModels
     {
         public ObjectDetectionViewModel()
         {
-            var net = Emgu.CV.Dnn.DnnInvoke.ReadNetFromDarknet("./Detection/yolov3.cfg", "./Detection/yolov3.weights");
+            var net = DnnInvoke.ReadNetFromDarknet("./Detection/yolov3.cfg", "./Detection/yolov3.weights");
             var classLabels = File.ReadAllLines("./Detection/coco.names");
 
             net.SetPreferableBackend(Emgu.CV.Dnn.Backend.OpenCV);

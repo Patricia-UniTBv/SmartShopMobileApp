@@ -14,6 +14,8 @@ public partial class BarcodeScannerView : ContentPage
     public BarcodeScannerView()
     {
         InitializeComponent();
+        BindingContext = new BarcodeScannerViewModel();
+
         barcodeReader.Options = new ZXing.Net.Maui.BarcodeReaderOptions
         {
             Formats = ZXing.Net.Maui.BarcodeFormat.Codabar | ZXing.Net.Maui.BarcodeFormat.Code39
