@@ -19,6 +19,8 @@ public partial class SmartShopDBContext : DbContext
 
     public virtual DbSet<Category> Categories { get; set; }
 
+    public virtual DbSet<CreditCard> CreditCards { get; set; }
+
     public virtual DbSet<Product> Products { get; set; }
 
     public virtual DbSet<ShoppingCart> ShoppingCarts { get; set; }
@@ -32,6 +34,7 @@ public partial class SmartShopDBContext : DbContext
     public virtual DbSet<Voucher> Vouchers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=C2ROBRAWR0117;Database=SmartShopDB;Trusted_Connection=True;Encrypt=True;Trust Server Certificate=true");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -62,13 +65,35 @@ public partial class SmartShopDBContext : DbContext
                 .HasConstraintName("FK_Category_Category");
         });
 
+        modelBuilder.Entity<CreditCard>(entity =>
+        {
+            entity.HasKey(e => e.CardID);
+
+            entity.ToTable("CreditCard");
+
+            entity.Property(e => e.CVV)
+                .HasMaxLength(50)
+                .UseCollation("Latin1_General_BIN2");
+            entity.Property(e => e.CardIdentification).HasMaxLength(50);
+            entity.Property(e => e.CardNumber)
+                .HasMaxLength(50)
+                .UseCollation("Latin1_General_BIN2");
+            entity.Property(e => e.HolderName).HasMaxLength(50);
+
+            entity.HasOne(d => d.User).WithMany(p => p.CreditCards)
+                .HasForeignKey(d => d.UserID)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_CreditCard_User");
+        });
+
         modelBuilder.Entity<Product>(entity =>
         {
             entity.ToTable("Product");
 
             entity.Property(e => e.Barcode).HasMaxLength(50);
+            entity.Property(e => e.ImageSource).HasMaxLength(50);
             entity.Property(e => e.Name).HasMaxLength(50);
-            entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.Unit).HasMaxLength(20);
 
             entity.HasOne(d => d.Category).WithMany(p => p.Products)
@@ -88,7 +113,7 @@ public partial class SmartShopDBContext : DbContext
 
             entity.Property(e => e.CreationDate).HasColumnType("date");
             entity.Property(e => e.IsTransacted).HasDefaultValueSql("((0))");
-            entity.Property(e => e.TotalAmount).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.TotalAmount).HasColumnType("decimal(18, 2)");
 
             entity.HasOne(d => d.Supermarket).WithMany(p => p.ShoppingCarts)
                 .HasForeignKey(d => d.SupermarketID)
@@ -104,6 +129,7 @@ public partial class SmartShopDBContext : DbContext
         {
             entity.ToTable("Supermarket");
 
+            entity.Property(e => e.Address).HasMaxLength(50);
             entity.Property(e => e.Name).HasMaxLength(50);
         });
 
@@ -114,9 +140,9 @@ public partial class SmartShopDBContext : DbContext
             entity.Property(e => e.Barcode)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            entity.Property(e => e.TotalAmount).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.TotalAmount).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.TransactionDate).HasColumnType("date");
-            entity.Property(e => e.VoucherDiscount).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.VoucherDiscount).HasColumnType("decimal(18, 2)");
 
             entity.HasOne(d => d.ShoppingCart).WithMany(p => p.Transactions)
                 .HasForeignKey(d => d.ShoppingCartID)
@@ -137,6 +163,7 @@ public partial class SmartShopDBContext : DbContext
             entity.Property(e => e.Password)
                 .HasMaxLength(50)
                 .IsUnicode(false);
+            entity.Property(e => e.PreferredCurrency).HasMaxLength(50);
         });
 
         modelBuilder.Entity<Voucher>(entity =>
@@ -144,7 +171,7 @@ public partial class SmartShopDBContext : DbContext
             entity.ToTable("Voucher");
 
             entity.Property(e => e.CardNumber).HasMaxLength(50);
-            entity.Property(e => e.EarnedPoints).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.EarnedPoints).HasColumnType("decimal(18, 2)");
 
             entity.HasOne(d => d.Supermarket).WithMany(p => p.Vouchers)
                 .HasForeignKey(d => d.SupermarketID)

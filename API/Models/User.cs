@@ -17,6 +17,10 @@ public partial class User
 
     public string LastName { get; set; } = null!;
 
+    public string? PreferredCurrency { get; set; }
+
+    public virtual ICollection<CreditCard> CreditCards { get; set; } = new List<CreditCard>();
+
     public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; } = new List<ShoppingCart>();
 
     public virtual ICollection<Voucher> Vouchers { get; set; } = new List<Voucher>();
