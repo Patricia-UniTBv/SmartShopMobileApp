@@ -9,7 +9,7 @@ public partial class Supermarket
 
     public string Name { get; set; } = null!;
 
-    public string? Address { get; set; }
+    public virtual ICollection<Location> Locations { get; set; } = new List<Location>();
 
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();
 

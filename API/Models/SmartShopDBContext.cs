@@ -21,6 +21,8 @@ public partial class SmartShopDBContext : DbContext
 
     public virtual DbSet<CreditCard> CreditCards { get; set; }
 
+    public virtual DbSet<Location> Locations { get; set; }
+
     public virtual DbSet<Product> Products { get; set; }
 
     public virtual DbSet<ShoppingCart> ShoppingCarts { get; set; }
@@ -86,6 +88,18 @@ public partial class SmartShopDBContext : DbContext
                 .HasConstraintName("FK_CreditCard_User");
         });
 
+        modelBuilder.Entity<Location>(entity =>
+        {
+            entity.ToTable("Location");
+
+            entity.Property(e => e.Address).HasMaxLength(50);
+
+            entity.HasOne(d => d.Supermarket).WithMany(p => p.Locations)
+                .HasForeignKey(d => d.SupermarketID)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Location_Location");
+        });
+
         modelBuilder.Entity<Product>(entity =>
         {
             entity.ToTable("Product");
@@ -129,7 +143,6 @@ public partial class SmartShopDBContext : DbContext
         {
             entity.ToTable("Supermarket");
 
-            entity.Property(e => e.Address).HasMaxLength(50);
             entity.Property(e => e.Name).HasMaxLength(50);
         });
 
