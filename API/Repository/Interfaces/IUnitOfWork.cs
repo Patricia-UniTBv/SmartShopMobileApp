@@ -9,6 +9,7 @@
         ISupermarketRepository SupermarketRepository { get; }
         IVoucherRepository VoucherRepository { get; }
         ITransactionRepository TransactionRepository { get; }
+        ICreditCardRepository CreditCardRepository { get; }
         Task CompleteAsync();
     }
 }

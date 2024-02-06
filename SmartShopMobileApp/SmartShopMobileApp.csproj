@@ -68,6 +68,7 @@
 	  <None Remove="Resources\Images\kaufland.png" />
 	  <None Remove="Resources\Images\lidl.png" />
 	  <None Remove="Resources\Images\payment.jpg" />
+	  <None Remove="Resources\Images\pringles.jpg" />
 	  <None Remove="Resources\Images\shopping_cart.jpg" />
 	</ItemGroup>
 

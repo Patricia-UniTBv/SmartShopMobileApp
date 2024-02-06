@@ -16,6 +16,7 @@ using DTO;
 using SmartShopMobileApp.Helpers;
 using Newtonsoft.Json;
 using SmartShopMobileApp.Views;
+using System.Collections.ObjectModel;
 
 namespace SmartShopMobileApp.ViewModels
 {
@@ -39,6 +40,7 @@ namespace SmartShopMobileApp.ViewModels
             get { return _manageData; }
             set { _manageData = value; }
         }
+
         private decimal totalAmount;
         public decimal TotalAmount {
             get { return totalAmount; }
@@ -57,11 +59,20 @@ namespace SmartShopMobileApp.ViewModels
         public decimal VoucherDiscount { get;set; }
 
         [ObservableProperty]
+        public ObservableCollection<string> _paymentMethods;
+
+        [ObservableProperty]
+        public bool _isSaveCardChecked;
+
+        [ObservableProperty]
         public string _cardNo;
+
         [ObservableProperty]
         public string _expirationYear;
+
         [ObservableProperty]
         public string _expirationMonth;
+
         [ObservableProperty]
         public string _cvv;
 
@@ -122,6 +133,26 @@ namespace SmartShopMobileApp.ViewModels
                 Source = source.Id
             };
 
+            // save card data
+            var setupIntentCreateOptions = new SetupIntentCreateOptions
+            {
+                Customer = cust.Id,
+            };
+
+            var setupIntentService = new SetupIntentService();
+            var setupIntent = setupIntentService.Create(setupIntentCreateOptions);
+
+          
+            var customerId = cust.Id; 
+            var paymentMethods = GetCustomerPaymentMethods(customerId);
+
+            foreach (var paymentMethod in paymentMethods)
+            {
+                string last4Digits ="***********" + paymentMethod.Card?.Last4;
+
+                PaymentMethods.Add(last4Digits);
+            }
+
             var chargeService = new ChargeService();
             Charge charge = chargeService.Create(chargeoption);
             if (charge.Status == "succeeded")
@@ -171,6 +202,21 @@ namespace SmartShopMobileApp.ViewModels
             await smtp.AuthenticateAsync("smartshopapp.testing@gmail.com", "xfky mnvc wevt azih");
             await smtp.SendAsync(email);
             await smtp.DisconnectAsync(true);
+        }
+
+        public List<PaymentMethod> GetCustomerPaymentMethods(string customerId)
+        {
+            StripeConfiguration.ApiKey = "sk_test_51OHNMNDQz7fQ3QseH9lroYrCZXFfNVJAqJeHgWgeOYjczfYfH2M7lCJiTsnjb5gSysFLcdVT5wdVYjYt3gD2SVCs00acLz6SUz";
+
+            var paymentMethodService = new PaymentMethodService();
+
+            var paymentMethods = paymentMethodService.List(new PaymentMethodListOptions
+            {
+                Customer = customerId,
+                Type = "card", 
+            });
+
+            return paymentMethods.Data;
         }
 
         private void UpdatePayButtonText()
