@@ -76,7 +76,7 @@ namespace SmartShopMobileApp.ViewModels
                 _manageData.SetStrategy(new GetData());
 
                 ShoppingCarts = await _manageData.GetDataAndDeserializeIt<ObservableCollection<ShoppingCartDTO>>($"ShoppingCart/GetAllTransactedShoppingCartsWithSupermarketByUserId?id={AuthenticationResultHelper.ActiveUser.UserID}", "");
-
+                ShoppingCarts = new ObservableCollection<ShoppingCartDTO>(ShoppingCarts.OrderByDescending(s => s.CreationDate));
             }
             catch (Exception ex)
             {

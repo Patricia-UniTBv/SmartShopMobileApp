@@ -45,7 +45,29 @@
                 <Button Text="Filter" Command="{Binding FilterShoppingCartsCommand}"/>
             </StackLayout>
         </Grid>
-        <Button Text="{x:Static icon:IconFont.Filter_alt}" Style="{StaticResource GoogleFont}" TextColor="#2B0B98" BackgroundColor="Transparent" Command="{Binding ShowFiltersCommand}" HorizontalOptions="StartAndExpand" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0"
+                    Text="{x:Static icon:IconFont.Filter_alt}"
+                    Style="{StaticResource GoogleFont}"
+                    TextColor="#2B0B98"
+                    BackgroundColor="Transparent"
+                    Command="{Binding ShowFiltersCommand}"
+                    HorizontalOptions="Start"/>
+
+            <Label Grid.Column="1"
+                   Text="Filter"
+                   TextColor="#2B0B98"
+                   FontSize="16"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Center"/>
+        </Grid>
+
+        <Label Text="Your latest shopping carts:"  Padding="10,5,10,5" TextColor="#2B0B98" FontSize="20"></Label>
         <ScrollView>
 
             <CollectionView x:Name="ShoppingCartsList" ItemsSource="{Binding ShoppingCarts, Mode=TwoWay}"  HeightRequest="900">
