@@ -28,6 +28,7 @@ namespace API.Repository
                 Quantity = item.Quantity,
                 Price = item.Product.Price * (decimal)item.Quantity!,
                 Name = item.Product.Name,
+                CategoryID = item.Product.CategoryID,
                 ImageSource = item.Product.ImageSource
 
             }).ToList();

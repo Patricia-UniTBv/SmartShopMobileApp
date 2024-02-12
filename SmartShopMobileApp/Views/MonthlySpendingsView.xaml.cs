@@ -100,9 +100,11 @@ public partial class MonthlySpendingsView : ContentPage
         _manageData.SetStrategy(new GetData());
         foreach (var cart in shoppingCartsThisMonth)
         {
-            
-            cart.CartItemsAsProducts = await _manageData.GetDataAndDeserializeIt<List<ProductDTO>>($"CartItem/GetItemsForShoppingCart?shoppingCartId={cart.ShoppingCartID}", "");
+            cart.CartItemsAsProducts = await _manageData.GetDataAndDeserializeIt<List<ProductDTO>>($"CartItem/GetItemsForShoppingCart?shoppingCartId={cart.ShoppingCartID}", "");        
         }
+
+        _manageData.SetStrategy(new GetData());
+        var categoryNames = await _manageData.GetDataAndDeserializeIt<List<CategoryDTO>>($"Category/GetAllCategories", "");
 
         var spendingByCategory = shoppingCartsThisMonth
             .SelectMany(cart => cart.CartItemsAsProducts) 
@@ -110,7 +112,8 @@ public partial class MonthlySpendingsView : ContentPage
             .Select(group => new
             {
                 CategoryID = group.Key,
-                TotalAmount = group.Sum(item => item.Price)  
+                TotalAmount = group.Sum(item => item.Price),
+                CategoryName = categoryNames.FirstOrDefault(cat => cat.CategoryID == group.Key)?.Name
             })
             .ToList();
 
@@ -118,7 +121,7 @@ public partial class MonthlySpendingsView : ContentPage
             .Select(data =>
                 new ChartEntry((float)data.TotalAmount)
                 {
-                    Label = $"Category {data.CategoryID}", 
+                    Label = $"{data.CategoryName}", 
                     ValueLabel = $"{data.TotalAmount} lei"
                 })
             .ToArray();

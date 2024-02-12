@@ -19,7 +19,6 @@ public partial class SmartShopDBContext : DbContext
 
     public virtual DbSet<Category> Categories { get; set; }
 
-    public virtual DbSet<CreditCard> CreditCards { get; set; }
 
     public virtual DbSet<Location> Locations { get; set; }
 
@@ -67,26 +66,26 @@ public partial class SmartShopDBContext : DbContext
                 .HasConstraintName("FK_Category_Category");
         });
 
-        modelBuilder.Entity<CreditCard>(entity =>
-        {
-            entity.HasKey(e => e.CardID);
+        //modelBuilder.Entity<CreditCard>(entity =>
+        //{
+        //    entity.HasKey(e => e.CardID);
 
-            entity.ToTable("CreditCard");
+        //    entity.ToTable("CreditCard");
 
-            entity.Property(e => e.CVV)
-                .HasMaxLength(50)
-                .UseCollation("Latin1_General_BIN2");
-            entity.Property(e => e.CardIdentification).HasMaxLength(50);
-            entity.Property(e => e.CardNumber)
-                .HasMaxLength(50)
-                .UseCollation("Latin1_General_BIN2");
-            entity.Property(e => e.HolderName).HasMaxLength(50);
+        //    entity.Property(e => e.CVV)
+        //        .HasMaxLength(50)
+        //        .UseCollation("Latin1_General_BIN2");
+        //    entity.Property(e => e.CardIdentification).HasMaxLength(50);
+        //    entity.Property(e => e.CardNumber)
+        //        .HasMaxLength(50)
+        //        .UseCollation("Latin1_General_BIN2");
+        //    entity.Property(e => e.HolderName).HasMaxLength(50);
 
-            entity.HasOne(d => d.User).WithMany(p => p.CreditCards)
-                .HasForeignKey(d => d.UserID)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_CreditCard_User");
-        });
+        //    entity.HasOne(d => d.User).WithMany(p => p.CreditCards)
+        //        .HasForeignKey(d => d.UserID)
+        //        .OnDelete(DeleteBehavior.ClientSetNull)
+        //        .HasConstraintName("FK_CreditCard_User");
+        //});
 
         modelBuilder.Entity<Location>(entity =>
         {

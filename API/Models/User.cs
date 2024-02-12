@@ -19,7 +19,7 @@ public partial class User
 
     public string? PreferredCurrency { get; set; }
 
-    public virtual ICollection<CreditCard> CreditCards { get; set; } = new List<CreditCard>();
+   // public virtual ICollection<CreditCard> CreditCards { get; set; } = new List<CreditCard>();
 
     public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; } = new List<ShoppingCart>();
 
