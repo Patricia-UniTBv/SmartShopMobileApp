@@ -26,19 +26,7 @@ namespace SmartShopMobileApp.ViewModels
             AuthenticationResultHelper.ActiveUser.UserID = 1;
         }
 
-        //public HistoryAndStatisticsViewModel(ObservableCollection<ShoppingCartDTO> carts)
-        //{
-        //    _manageData = new ManageData();
-        //    ShoppingCarts = carts;
-        //    IsDataFiltered = true;
-        //    IsFilterGridVisible = true;
-        //    if (AuthenticationResultHelper.ActiveUser == null)
-        //    {
-        //        AuthenticationResultHelper.ActiveUser = new UserDTO();
-        //    }
-
-        //    AuthenticationResultHelper.ActiveUser.UserID = 1;
-        //}
+     
         private IManageData _manageData;
         public IManageData ManageData
         {

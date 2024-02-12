@@ -3,6 +3,7 @@ using SmartShopMobileApp.Helpers;
 using CommunityToolkit.Maui;
 using Syncfusion.Maui.Core.Hosting;
 using ZXing.Net.Maui.Controls;
+using Microcharts.Maui;
 
 namespace SmartShopMobileApp;
 
@@ -15,6 +16,7 @@ public static class MauiProgram
 			.UseMauiApp<App>()
 			.UseMauiCameraView()
             .UseMauiCommunityToolkit()
+            .UseMicrocharts()
             .ConfigureSyncfusionCore()
             .ConfigureFonts(fonts =>
 			{

@@ -20,6 +20,8 @@ namespace DTO
 
         public double? Quantity { get; set; }
 
+        public virtual ProductDTO Product { get; set; } = null!;
+
     }
 
 }

@@ -28,6 +28,8 @@ namespace DTO
 
         public virtual UserDTO User { get; set; } = null!;
         public virtual SupermarketDTO? Supermarket { get; set; }
+        public virtual ICollection<CartItemDTO> CartItems { get; set; } = new List<CartItemDTO>();
+        public List<ProductDTO> CartItemsAsProducts { get; set; } = new List<ProductDTO>();
 
     }
 
