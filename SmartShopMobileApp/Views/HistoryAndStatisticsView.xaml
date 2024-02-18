@@ -111,6 +111,6 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </ScrollView>
-
+        <Button x:Name="payButton" Command="{Binding ViewStatisticsCommand}" Text="View statistics" FontSize="18" Margin="30,10" />
     </VerticalStackLayout>
 </ContentPage>

@@ -101,8 +101,13 @@ namespace SmartShopMobileApp.ViewModels
         [RelayCommand]
         private void ShowFilters(object obj)
         {
-            //FilterGrid.IsVisible = !FilterGrid.IsVisible;
             IsFilterGridVisible = !IsFilterGridVisible;
+        }
+
+        [RelayCommand]
+        private void ViewStatistics(object obj)
+        {
+            App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new MonthlySpendingsView()));
         }
 
         [RelayCommand]
