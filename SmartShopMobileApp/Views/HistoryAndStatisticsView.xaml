@@ -68,7 +68,7 @@
         </Grid>
 
         <Label Text="Your latest shopping carts:"  Padding="10,5,10,5" TextColor="#2B0B98" FontSize="20"></Label>
-        <ScrollView>
+        <ScrollView HeightRequest="580">
 
             <CollectionView x:Name="ShoppingCartsList" ItemsSource="{Binding ShoppingCarts, Mode=TwoWay}"  HeightRequest="900">
                 <CollectionView.ItemTemplate>
