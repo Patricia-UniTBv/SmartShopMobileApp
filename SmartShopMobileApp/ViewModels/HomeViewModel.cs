@@ -64,7 +64,7 @@ namespace SmartShopMobileApp.ViewModels
         {
             CurrentSupermarket.Supermarket = selectedSupermarket;
             
-            App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new BarcodeScannerView()));
+            App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new MapView()));
         }
 
         [RelayCommand]

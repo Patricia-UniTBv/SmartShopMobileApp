@@ -18,6 +18,7 @@ public static class MauiProgram
             .UseMauiCommunityToolkit()
             .UseMicrocharts()
             .ConfigureSyncfusionCore()
+			.UseMauiMaps()
             .ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
