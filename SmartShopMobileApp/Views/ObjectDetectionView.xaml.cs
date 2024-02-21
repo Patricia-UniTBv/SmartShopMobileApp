@@ -113,30 +113,5 @@ public partial class ObjectDetectionView : ContentPage
         }
 
     }
-        /*var faceCascade = new CascadeClassifier("./detection/haarcascade_frontalface_default.xml"); 
-        var vc = new VideoCapture(0, Emgu.CV.VideoCapture.API.DShow); 
-
-        Mat frame = new(); 
-        Mat frameGray = new(); 
-
-        while(true)
-        {
-            vc.Read(frame); 
-
-            CvInvoke.CvtColor(frame, frameGray, Emgu.CV.CvEnum.ColorConversion.Bgr2Gray); 
-
-            var faces = faceCascade.DetectMultiScale(frameGray, 1.3, 5); 
-
-            if (faces is not null && faces.Length > 0) 
-              CvInvoke.Rectangle(frame, faces[0], new MCvScalar(0, 255, 0), 2);
-
-            CvInvoke.Imshow("face detection", frame); 
-
-            if (CvInvoke.WaitKey(1) == 27)
-            {
-              break;
-            }
-
-        }
-        */
+       
     }
