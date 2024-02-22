@@ -36,6 +36,7 @@
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding Source={x:Reference SupermarketsList}, Path=BindingContext.SupermarketSelectedCommand}" CommandParameter="{Binding .}" />
                             </Frame.GestureRecognizers>
+
                         </Frame>
                     </Grid>
                 </DataTemplate>
