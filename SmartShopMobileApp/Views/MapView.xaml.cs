@@ -22,6 +22,7 @@ public partial class MapView : ContentPage
 		InitializeComponent();
 
         _supermarketId = supermarketId;
+
         GetPinsForSupermarket();
 
     }
@@ -29,6 +30,9 @@ public partial class MapView : ContentPage
     public async void GetPinsForSupermarket()
     {
         _manageData = new ManageData();
+
+        var stackLayout = new StackLayout();
+
         var map = new Microsoft.Maui.Controls.Maps.Map();
         map.MapType = MapType.Street;
 
@@ -41,12 +45,35 @@ public partial class MapView : ContentPage
             {
                 Type = PinType.Place,
                 Label = location.Address,
-                Address = location.Address,
+                Address = location.Supermarket.Name,
                 Location = new Location((double)location.Latitude, (double)location.Longidute)
         };
+            pin.MarkerClicked += async (sender, e) =>
+            {
+                var button = new Button
+                {
+                    Text = "Start shopping",
+                    BackgroundColor = Color.FromArgb("#512BD4"), 
+                    TextColor = Color.FromArgb("#FFFFFF"),
+                    FontSize = 16, 
+                    CornerRadius = 5, 
+                    Padding = new Thickness(10), 
+                };
+
+                button.Clicked += async (s, ev) =>
+                {
+                    await Navigation.PushAsync(new BarcodeScannerView());
+                };
+
+                stackLayout.Children.Add(button);
+            };
             map.Pins.Add(pin);
         }
 
-        Content = map;
+        stackLayout.Children.Add(map);
+
+        map.MapType = MapType.Street;
+        map.MoveToRegion(MapSpan.FromCenterAndRadius(new Location(45.9432, 24.9668), Distance.FromKilometers(200)));
+        Content = stackLayout;
     }
 }

@@ -27,5 +27,20 @@ namespace API.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        //[HttpGet("GetAllSupermarkets")]
+        //public async Task<IActionResult> GetAllSupermarkets()
+        //{
+        //    try
+        //    {
+        //        var products = await _unitOfWork.SupermarketRepository.GetAllSupermarkets();
+
+        //        return Ok(products);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return BadRequest(e.Message);
+        //    }
+        //}
     }
 }
