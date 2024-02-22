@@ -68,7 +68,7 @@
         </Grid>
 
         <Label Text="Your latest shopping carts:"  Padding="10,5,10,5" TextColor="#2B0B98" FontSize="20"></Label>
-        <ScrollView HeightRequest="580">
+        <ScrollView HeightRequest="500">
 
             <CollectionView x:Name="ShoppingCartsList" ItemsSource="{Binding ShoppingCarts, Mode=TwoWay}"  HeightRequest="900">
                 <CollectionView.ItemTemplate>
@@ -111,6 +111,6 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </ScrollView>
-        <Button x:Name="payButton" Command="{Binding ViewStatisticsCommand}" Text="View statistics" FontSize="18" Margin="30,0" />
+        <Button x:Name="payButton" Command="{Binding ViewStatisticsCommand}" Text="View statistics" FontSize="18" Margin="30,30,30,10" />
     </VerticalStackLayout>
 </ContentPage>

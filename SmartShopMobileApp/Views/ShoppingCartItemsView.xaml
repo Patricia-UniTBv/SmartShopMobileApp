@@ -10,6 +10,7 @@
         <toolkit:EventToCommandBehavior Command="{Binding PageAppearingCommand}" EventName="Appearing" />
     </ContentPage.Behaviors>
     <VerticalStackLayout>
+        <Label Text="Products:"  Padding="10,5,10,5" TextColor="#2B0B98" FontSize="20"></Label>
         <ScrollView>
             <CollectionView x:Name="SupermarketsList" ItemsSource="{Binding CartItems}" HeightRequest="300">
                 <CollectionView.ItemTemplate>

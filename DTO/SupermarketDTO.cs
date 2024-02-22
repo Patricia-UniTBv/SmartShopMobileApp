@@ -30,5 +30,7 @@ namespace DTO
                 }
             }
         }
+
+        public virtual ICollection<LocationDTO> Locations { get; set; } = new List<LocationDTO>();
     }
 }

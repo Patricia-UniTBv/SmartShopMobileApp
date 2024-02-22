@@ -18,7 +18,22 @@ namespace API.Controllers
         {
             try
             {
-                var products = await _unitOfWork.SupermarketRepository.GetAllSupermarkets();
+                var supermarkets = await _unitOfWork.SupermarketRepository.GetAllSupermarkets();
+
+                return Ok(supermarkets);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("GetSupermarketById")]
+        public async Task<IActionResult> GetSupermarketById(int supermarketId)
+        {
+            try
+            {
+                var products = await _unitOfWork.SupermarketRepository.GetSupermarketById(supermarketId);
 
                 return Ok(products);
             }
@@ -27,20 +42,5 @@ namespace API.Controllers
                 return BadRequest(e.Message);
             }
         }
-
-        //[HttpGet("GetAllSupermarkets")]
-        //public async Task<IActionResult> GetAllSupermarkets()
-        //{
-        //    try
-        //    {
-        //        var products = await _unitOfWork.SupermarketRepository.GetAllSupermarkets();
-
-        //        return Ok(products);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return BadRequest(e.Message);
-        //    }
-        //}
     }
 }

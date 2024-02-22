@@ -41,11 +41,13 @@ public partial class MapView : ContentPage
 
         foreach (var location in supermarketLocations)
         {
+            var supermarket = await _manageData.GetDataAndDeserializeIt<SupermarketDTO>($"Supermarket/GetSupermarketById?supermarketId={_supermarketId}", "");
+            
             var pin = new Pin
             {
                 Type = PinType.Place,
                 Label = location.Address,
-                Address = location.Supermarket.Name,
+                Address = supermarket.Name,
                 Location = new Location((double)location.Latitude, (double)location.Longidute)
         };
             pin.MarkerClicked += async (sender, e) =>

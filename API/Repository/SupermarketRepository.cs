@@ -17,5 +17,11 @@ namespace API.Repository
             var result = await _dbSet.ToListAsync();
             return _mapper.Map<ICollection<Supermarket>, ICollection<SupermarketDTO>>(result);
         }
+
+        public async Task<SupermarketDTO> GetSupermarketById(int supermarketId)
+        {
+            var supermarket = await _dbSet.Where(l => l.SupermarketID == supermarketId).FirstAsync();
+            return _mapper.Map<Supermarket, SupermarketDTO>(supermarket);
+        }
     }
 }
