@@ -23,6 +23,9 @@ namespace API.Repository
         private ICategoryRepository? _categoryRepository;
         public ICategoryRepository CategoryRepository => _categoryRepository ??= new CategoryRepository(_context, _mapper);
 
+        private ILocationRepository? _locationRepository;
+        public ILocationRepository LocationRepository => _locationRepository ??= new LocationRepository(_context, _mapper);
+
         private readonly SmartShopDBContext _context;
 
         private readonly IMapper _mapper;

@@ -10,6 +10,7 @@
         IVoucherRepository VoucherRepository { get; }
         ITransactionRepository TransactionRepository { get; }
         ICategoryRepository CategoryRepository { get; }
+        ILocationRepository LocationRepository { get; }
         Task CompleteAsync();
     }
 }
