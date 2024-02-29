@@ -17,5 +17,18 @@ namespace API.Repository
             var result = await _dbSet.SingleAsync(u => u.UserID == ID);
             return _mapper.Map<User, UserDTO>(result);
         }
+
+        public async Task<UserDTO> GetUserByEmailAndPassword(string email, string password)
+        {
+            var result = await _dbSet.SingleAsync(u => u.Email == email && u.Password == password) ;
+            return _mapper.Map<User, UserDTO>(result);
+        }
+
+        public async Task AddNewUser(UserDTO newUser)
+        {
+            var result = _mapper.Map<UserDTO, User>(newUser);
+            await _dbSet.AddAsync(result);
+            _context.SaveChanges();
+        }
     }
 }
