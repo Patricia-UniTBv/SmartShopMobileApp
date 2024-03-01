@@ -18,12 +18,6 @@ namespace SmartShopMobileApp.ViewModels
         {
             _manageData = new ManageData();
             IsDataFiltered = false;
-            if (AuthenticationResultHelper.ActiveUser == null)
-            {
-                AuthenticationResultHelper.ActiveUser = new UserDTO();
-            }
-
-            AuthenticationResultHelper.ActiveUser.UserID = 1;
         }
 
      

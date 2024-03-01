@@ -21,12 +21,6 @@ namespace SmartShopMobileApp.ViewModels
         {
             _manageData = new ManageData();
             VouchersHistory = new ObservableCollection<VoucherHistory>();
-            if (AuthenticationResultHelper.ActiveUser == null)
-            {
-                AuthenticationResultHelper.ActiveUser = new UserDTO();
-            }
-
-            AuthenticationResultHelper.ActiveUser.UserID = 1;
         }
 
         private IManageData _manageData;

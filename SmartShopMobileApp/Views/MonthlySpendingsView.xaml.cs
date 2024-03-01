@@ -30,8 +30,8 @@ public partial class MonthlySpendingsView : ContentPage
 
         AuthenticationResultHelper.ActiveUser.UserID = 1;
 
-        GetShoppingCarts();
-        GetCategoryStatistics();
+        _ = GetShoppingCarts();
+        _ = GetCategoryStatistics();
     }
 
     private async Task GetShoppingCarts()

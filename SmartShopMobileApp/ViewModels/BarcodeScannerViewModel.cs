@@ -19,12 +19,7 @@ namespace SmartShopMobileApp.ViewModels
         public BarcodeScannerViewModel(string barcode) 
         {
             _manageData = new ManageData();
-            if (AuthenticationResultHelper.ActiveUser == null)
-            {
-                AuthenticationResultHelper.ActiveUser = new UserDTO();
-            }
-
-            AuthenticationResultHelper.ActiveUser.UserID = 1;
+           
             IdentifyProductByBarcode(barcode);
         }
         private IManageData _manageData;

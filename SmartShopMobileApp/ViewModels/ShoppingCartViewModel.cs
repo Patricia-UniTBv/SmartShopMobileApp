@@ -19,7 +19,6 @@ namespace SmartShopMobileApp.ViewModels
         {
             _manageData = new ManageData();
             Products = new List<ProductDTO>() { };
-            _userId = 1; //provizoriu
         }
 
         private IManageData _manageData;
@@ -30,7 +29,6 @@ namespace SmartShopMobileApp.ViewModels
         }
        
         public int ShoppingCartId { get; set; }
-        private int _userId { get; set; }//provizoriu
 
         public decimal VoucherDiscount { get;set; }
 
@@ -57,7 +55,7 @@ namespace SmartShopMobileApp.ViewModels
                 ProductDTO product = (ProductDTO)obj;
 
                 _manageData.SetStrategy(new GetData());
-                var latestShoppingCart = await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"ShoppingCart/GetLatestShoppingCartByUserId?id={_userId}", "");
+                var latestShoppingCart = await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"ShoppingCart/GetLatestShoppingCartByUserId?id={AuthenticationResultHelper.ActiveUser.UserID}", "");
                 
                 _manageData.SetStrategy(new DeleteData());
                 await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"CartItem/DeleteCartItemFromShoppingCart?productId={product.ProductID}&shoppingCartId={latestShoppingCart.ShoppingCartID}&quantity={product.Quantity}", "");
@@ -76,11 +74,11 @@ namespace SmartShopMobileApp.ViewModels
             {
                 _manageData.SetStrategy(new GetData());
 
-                var latestShoppingCart = await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"ShoppingCart/GetLatestShoppingCartByUserId?id={_userId}", "");
+                var latestShoppingCart = await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"ShoppingCart/GetLatestShoppingCartByUserId?id={AuthenticationResultHelper.ActiveUser.UserID}", "");
 
                 if (latestShoppingCart != null)
                 {
-                    Products = await _manageData.GetDataAndDeserializeIt<List<ProductDTO>>($"ShoppingCart/GetLatestShoppingCartForCurrentUser?id={_userId}", "");
+                    Products = await _manageData.GetDataAndDeserializeIt<List<ProductDTO>>($"ShoppingCart/GetLatestShoppingCartForCurrentUser?id={AuthenticationResultHelper.ActiveUser.UserID}", "");
 
                     ShoppingCartId = latestShoppingCart.ShoppingCartID;
                     TotalAmount = latestShoppingCart.TotalAmount;

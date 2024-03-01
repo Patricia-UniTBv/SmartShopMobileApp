@@ -25,12 +25,6 @@ namespace SmartShopMobileApp.ViewModels
         public PaymentViewModel() 
         {
             _manageData = new ManageData();
-            if (AuthenticationResultHelper.ActiveUser == null)
-            {
-                AuthenticationResultHelper.ActiveUser = new UserDTO(); 
-            }
-
-            AuthenticationResultHelper.ActiveUser.UserID = 1;
         }
 
         private IManageData _manageData;

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartShopMobileApp.Views.SignUpView"
              xmlns:viewModels="clr-namespace:SmartShopMobileApp.ViewModels" 
-             Title="SignUpView">
+             Title="Sign Up">
     <VerticalStackLayout>
             <ScrollView>
                 <StackLayout Margin="20">
