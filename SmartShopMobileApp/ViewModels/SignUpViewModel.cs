@@ -56,7 +56,7 @@ namespace SmartShopMobileApp.ViewModels
 
                 string hashedPassword = HashPassword(Password);
                 
-                await _manageData.GetDataAndDeserializeIt<UserDTO>($"User/AddNewUser?email={Email}&password={Password}&firstName={FirstName}&lastName={LastName}&birthdate={BirthDate}", "");
+                await _manageData.GetDataAndDeserializeIt<UserDTO>($"User/AddNewUser?email={Email}&password={hashedPassword}&firstName={FirstName}&lastName={LastName}&birthdate={BirthDate}", "");
               
                 Application.Current.MainPage = new NavigationPage(new LogInView());
 

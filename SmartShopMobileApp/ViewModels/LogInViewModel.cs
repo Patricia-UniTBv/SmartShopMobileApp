@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,12 +19,12 @@ namespace SmartShopMobileApp.ViewModels
         public LogInViewModel()
         {
             _manageData = new ManageData();
-            if (AuthenticationResultHelper.ActiveUser == null)
-            {
-                AuthenticationResultHelper.ActiveUser = new UserDTO();
-            }
+            //if (AuthenticationResultHelper.ActiveUser == null)
+            //{
+            //    AuthenticationResultHelper.ActiveUser = new UserDTO();
+            //}
 
-            AuthenticationResultHelper.ActiveUser.UserID = 1;
+            //AuthenticationResultHelper.ActiveUser.UserID = 1;
         }
 
         private IManageData _manageData;
@@ -43,7 +44,10 @@ namespace SmartShopMobileApp.ViewModels
             {
                 _manageData.SetStrategy(new GetData());
 
-                AuthenticationResultHelper.ActiveUser = await _manageData.GetDataAndDeserializeIt<UserDTO>($"User/GetUserByEmailAndPassword?email={Email}&password={Password}", "");
+                string hashedPassword = HashPassword(Password);
+
+                AuthenticationResultHelper.ActiveUser = await _manageData.GetDataAndDeserializeIt<UserDTO>($"User/GetUserByEmailAndPassword?email={Email}&password={hashedPassword}", "");
+
                 Application.Current.MainPage =  new AppShell();
 
             }
@@ -54,15 +58,31 @@ namespace SmartShopMobileApp.ViewModels
         }
 
         [RelayCommand]
-        private async Task OpenSignUpPage()
+        private Task OpenSignUpPage()
         {
             try
             {
-                App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new SignUpView()));
+                _ = Application.Current.MainPage.Navigation.PushAsync(new NavigationPage(new SignUpView()));
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+            }
+
+            return Task.CompletedTask;
+        }
+
+        private string HashPassword(string password)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
             }
         }
     }
