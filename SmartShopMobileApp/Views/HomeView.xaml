@@ -12,8 +12,21 @@
     </ContentPage.Behaviors>
     <VerticalStackLayout>
         <Grid>
-            <Label Text="Welcome" HorizontalOptions="Center" VerticalOptions="Center"/>
-            <Label Text="{Binding UserName}" HorizontalOptions="Center" VerticalOptions="Start"  Margin="0,30,0,0"/>
+            <Label Text="Welcome, "
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" 
+                   FontFamily="Poppins-Regular"
+                   FontSize="25"
+                   TextColor="#2B0B98"
+                   Margin="10,0,0,0"/>
+            <Label Text="{Binding UserName}"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Start"
+                   FontFamily="Poppins-Regular"
+                   FontSize="25"
+                   FontAttributes="Bold"
+                   TextColor="#2B0B98"
+                   Margin="10,80,0,30"/>
         </Grid>
         <Label Text="Choose your supermarket:"
                FontFamily="Poppins-Regular"

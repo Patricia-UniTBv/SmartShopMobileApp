@@ -13,7 +13,7 @@ namespace SmartShopMobileApp.ViewModels
         {
             _manageData = new ManageData();
             Supermarkets = new List<SupermarketDTO>();
-            userName = AuthenticationResultHelper.ActiveUser.FirstName + " " + AuthenticationResultHelper.ActiveUser.FirstName;
+            userName = AuthenticationResultHelper.ActiveUser.FirstName + " " + AuthenticationResultHelper.ActiveUser.FirstName + " !";
         }
 
         private IManageData _manageData;
