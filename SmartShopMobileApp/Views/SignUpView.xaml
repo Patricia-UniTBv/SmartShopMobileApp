@@ -9,7 +9,7 @@
                 <StackLayout Margin="20">
                     <Entry Placeholder="First Name" Text="{Binding FirstName}"/>
                     <Entry Placeholder="Last Name" Text="{Binding LastName}"/>
-                    <Entry Placeholder="Email Address" Text="{Binding Email}"/>
+                    <Entry Placeholder="Email Address" Text="{Binding EmailAddress}"/>
                 <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}"/>
                     <DatePicker x:Name="birthDateDatePicker"/>
                     <Button Text="Sign Up" Command="{Binding SignUpCommand}"/>

@@ -13,7 +13,7 @@ namespace SmartShopMobileApp.ViewModels
         {
             _manageData = new ManageData();
             Supermarkets = new List<SupermarketDTO>();
-            //GetSupermarkets();
+            userName = AuthenticationResultHelper.ActiveUser.FirstName + " " + AuthenticationResultHelper.ActiveUser.FirstName;
         }
 
         private IManageData _manageData;
@@ -22,6 +22,9 @@ namespace SmartShopMobileApp.ViewModels
             get { return _manageData; }
             set { _manageData = value; }
         }
+
+        [ObservableProperty]
+        private string userName;
 
         #region ObservableProperties
        

@@ -11,6 +11,10 @@
         <toolkit:EventToCommandBehavior Command="{Binding PageAppearingCommand}" EventName="Appearing" />
     </ContentPage.Behaviors>
     <VerticalStackLayout>
+        <Grid>
+            <Label Text="Welcome" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Label Text="{Binding UserName}" HorizontalOptions="Center" VerticalOptions="Start"  Margin="0,30,0,0"/>
+        </Grid>
         <Label Text="Choose your supermarket:"
                FontFamily="Poppins-Regular"
                FontSize="20"

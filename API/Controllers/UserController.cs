@@ -31,13 +31,13 @@ namespace API.Controllers
         }
 
         [HttpPost("AddNewUser")]
-        public async Task<IActionResult> AddNewUser(string email, string password, string firstName, string lastName, DateTime birthdate)
+        public async Task<IActionResult> AddNewUser(string emailAddress, string password, string firstName, string lastName, DateTime birthdate)
         {
             try
             {
                 var newUser = new UserDTO
                 {
-                    Email = email,
+                    Email = emailAddress,
                     Password = password, 
                     FirstName = firstName,
                     LastName = lastName,

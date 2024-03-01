@@ -39,7 +39,7 @@ namespace SmartShopMobileApp.ViewModels
         private string _lastName;
 
         [ObservableProperty]
-        private string _email;
+        private string _emailAddress;
 
         [ObservableProperty]
         private string _password;
@@ -56,7 +56,7 @@ namespace SmartShopMobileApp.ViewModels
 
                 string hashedPassword = HashPassword(Password);
                 
-                await _manageData.GetDataAndDeserializeIt<UserDTO>($"User/AddNewUser?email={Email}&password={hashedPassword}&firstName={FirstName}&lastName={LastName}&birthdate={BirthDate}", "");
+                await _manageData.GetDataAndDeserializeIt<UserDTO>($"User/AddNewUser?email={EmailAddress}&password={hashedPassword}&firstName={FirstName}&lastName={LastName}&birthdate={BirthDate}", "");
               
                 Application.Current.MainPage = new NavigationPage(new LogInView());
 
