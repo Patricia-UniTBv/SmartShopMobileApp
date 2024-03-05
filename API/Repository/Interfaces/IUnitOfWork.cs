@@ -11,6 +11,7 @@
         ITransactionRepository TransactionRepository { get; }
         ICategoryRepository CategoryRepository { get; }
         ILocationRepository LocationRepository { get; }
+        IOfferRepository OfferRepository { get; }
         Task CompleteAsync();
     }
 }

@@ -25,6 +25,8 @@ namespace API.Repository
 
         private ILocationRepository? _locationRepository;
         public ILocationRepository LocationRepository => _locationRepository ??= new LocationRepository(_context, _mapper);
+        private IOfferRepository? _offerRepository;
+        public IOfferRepository OfferRepository => _offerRepository ??= new OfferRepository(_context, _mapper);
 
         private readonly SmartShopDBContext _context;
 
