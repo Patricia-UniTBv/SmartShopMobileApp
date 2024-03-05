@@ -6,11 +6,17 @@
              Title="View your spendings">
     <ScrollView>
         <VerticalStackLayout>
-            <Label Text="Your spendings in the last 4 months:"  Padding="10,20,10,20" TextColor="#2B0B98" FontSize="16"></Label>
+            <Label Text="Your spendings in the last 3 months:"  Padding="10,20,10,20" TextColor="#2B0B98" FontSize="16"></Label>
             <micro:ChartView x:Name="chartView" HeightRequest="300" WidthRequest="500"/>
 
-            <Label Text="Your spendings by categories - Current month:"  Padding="10,50,10,0" TextColor="#2B0B98" FontSize="16"></Label>
-            <micro:ChartView x:Name="chartView1" HeightRequest="300" WidthRequest="370" Margin="5,-2,0,0"/>
+            <StackLayout>
+                <Label Text="Select a month:" Margin="10"/>
+                <Picker x:Name="monthPicker" Margin="10" SelectedIndexChanged="MonthPicker_SelectedIndexChanged"/>
+                <Label x:Name="chartLabel" Margin="10"/>
+                <micro:ChartView x:Name="chartView1" HeightRequest="300" WidthRequest="370" Margin="10"/>
+            </StackLayout>
+
+
 
         </VerticalStackLayout>
     </ScrollView>

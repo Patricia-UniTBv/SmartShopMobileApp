@@ -17,6 +17,7 @@ public partial class MonthlySpendingsView : ContentPage
         get { return _manageData; }
         set { _manageData = value; }
     }
+    private List<string> months = new List<string> { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
 
     public MonthlySpendingsView()
     {
@@ -30,8 +31,22 @@ public partial class MonthlySpendingsView : ContentPage
 
         AuthenticationResultHelper.ActiveUser.UserID = 1;
 
+        foreach (string month in months)
+        {
+            monthPicker.Items.Add(month);
+        }
+
         GetShoppingCarts();
-        GetCategoryStatistics();
+
+        var currentDate = DateTime.Now;
+        GetCategoryStatistics(currentDate.Month.ToString());
+    }
+
+    private async void MonthPicker_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        string selectedMonth = monthPicker.SelectedItem as string;
+
+        await GetCategoryStatistics(selectedMonth);
     }
 
     private async Task GetShoppingCarts()
@@ -84,12 +99,12 @@ public partial class MonthlySpendingsView : ContentPage
         }
     }
 
-    private async Task GetCategoryStatistics()
+    private async Task GetCategoryStatistics(string selectedMonth)
     {
         _manageData.SetStrategy(new GetData());
 
         var currentDate = DateTime.Now;
-        var firstDayOfMonth = new DateTime(currentDate.Year, currentDate.Month, 1);
+        var firstDayOfMonth = new DateTime(currentDate.Year, months.IndexOf(selectedMonth) + 1, 1);
         var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
 
         var allShoppingCarts = await _manageData.GetDataAndDeserializeIt<List<ShoppingCartDTO>>($"ShoppingCart/GetAllTransactedShoppingCartsWithSupermarketByUserId?id={AuthenticationResultHelper.ActiveUser.UserID}", "");
