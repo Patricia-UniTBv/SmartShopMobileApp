@@ -36,18 +36,36 @@ public partial class MonthlySpendingsView : ContentPage
             monthPicker.Items.Add(month);
         }
 
+        for (int year = 2000; year <= DateTime.Now.Year; year++) 
+        {
+            yearPicker.Items.Add(year.ToString());
+        }
+
         GetShoppingCarts();
 
         var currentDate = DateTime.Now;
-        GetCategoryStatistics(currentDate.Month.ToString());
+        GetCategoryStatistics(currentDate.Month.ToString(),currentDate.Year);
     }
 
-    private async void MonthPicker_SelectedIndexChanged(object sender, EventArgs e)
+    private void Picker_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        ShowChart();
+    }
+
+    private async Task ShowChart()
     {
         string selectedMonth = monthPicker.SelectedItem as string;
+        int selectedYear = int.Parse(yearPicker.SelectedItem as string);
 
-        await GetCategoryStatistics(selectedMonth);
+        await GetCategoryStatistics(selectedMonth, selectedYear);
     }
+
+    //private async void MonthPicker_SelectedIndexChanged(object sender, EventArgs e)
+    //{
+    //    string selectedMonth = monthPicker.SelectedItem as string;
+
+    //    await GetCategoryStatistics(selectedMonth);
+    //}
 
     private async Task GetShoppingCarts()
     {
@@ -99,12 +117,12 @@ public partial class MonthlySpendingsView : ContentPage
         }
     }
 
-    private async Task GetCategoryStatistics(string selectedMonth)
+    private async Task GetCategoryStatistics(string selectedMonth, int selectedYear)
     {
         _manageData.SetStrategy(new GetData());
 
         var currentDate = DateTime.Now;
-        var firstDayOfMonth = new DateTime(currentDate.Year, months.IndexOf(selectedMonth) + 1, 1);
+        var firstDayOfMonth = new DateTime(selectedYear, months.IndexOf(selectedMonth) + 1, 1);
         var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
 
         var allShoppingCarts = await _manageData.GetDataAndDeserializeIt<List<ShoppingCartDTO>>($"ShoppingCart/GetAllTransactedShoppingCartsWithSupermarketByUserId?id={AuthenticationResultHelper.ActiveUser.UserID}", "");
