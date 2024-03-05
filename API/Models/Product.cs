@@ -29,5 +29,7 @@ public partial class Product
 
     public virtual Category Category { get; set; } = null!;
 
+    public virtual ICollection<Offer> Offers { get; set; } = new List<Offer>();
+
     public virtual Supermarket Supermarket { get; set; } = null!;
 }
