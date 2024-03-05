@@ -41,25 +41,25 @@ namespace SmartShopMobileApp.ViewModels
         [ObservableProperty]
         private DateTime birthDate;
 
-        [RelayCommand]
-        private async Task SignUp()
-        {
-            try
-            {
-                _manageData.SetStrategy(new CreateData());
+        //[RelayCommand]
+        //private async Task SignUp()
+        //{
+        //    try
+        //    {
+        //        _manageData.SetStrategy(new CreateData());
 
-                string hashedPassword = HashPassword(Password);
+        //        string hashedPassword = HashPassword(Password);
                 
-                await _manageData.GetDataAndDeserializeIt<UserDTO>($"User/AddNewUser?emailAddress={EmailAddress}&password={hashedPassword}&firstName={FirstName}&lastName={LastName}&birthdate={BirthDate}", "");
+        //        await _manageData.GetDataAndDeserializeIt<UserDTO>($"User/AddNewUser?emailAddress={EmailAddress}&password={hashedPassword}&firstName={FirstName}&lastName={LastName}&birthdate={BirthDate}", "");
               
-                Application.Current.MainPage = new NavigationPage(new LogInView());
+        //        Application.Current.MainPage = new NavigationPage(new LogInView());
 
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine(e.Message);
+        //    }
+        //}
 
         private string HashPassword(string password)
         {

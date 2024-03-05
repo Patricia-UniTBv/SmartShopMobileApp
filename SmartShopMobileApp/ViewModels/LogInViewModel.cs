@@ -36,11 +36,11 @@ namespace SmartShopMobileApp.ViewModels
         {
             try
             {
-                _manageData.SetStrategy(new GetData());
+                _manageData.SetStrategy(new CreateData());
 
-                string hashedPassword = HashPassword(Password);
+                //string hashedPassword = HashPassword(Password);
 
-                AuthenticationResultHelper.ActiveUser = await _manageData.GetDataAndDeserializeIt<UserDTO>($"User/GetUserByEmailAndPassword?email={Email}&password={hashedPassword}", "");
+                AuthenticationResultHelper.ActiveUser = await _manageData.GetDataAndDeserializeIt<UserDTO>($"User/Login?email={Email}&password={Password}", "");
 
                 Application.Current.MainPage =  new AppShell();
 
