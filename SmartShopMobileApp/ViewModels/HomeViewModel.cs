@@ -13,7 +13,9 @@ namespace SmartShopMobileApp.ViewModels
         {
             _manageData = new ManageData();
             Supermarkets = new List<SupermarketDTO>();
-            //GetSupermarkets();
+            IsCurrentOffersVisible = false;
+
+            GetCurrentOffers();
         }
 
         private IManageData _manageData;
@@ -23,8 +25,27 @@ namespace SmartShopMobileApp.ViewModels
             set { _manageData = value; }
         }
 
-        #region ObservableProperties
-       
+        [ObservableProperty]
+        private bool _isCurrentOffersVisible;
+
+        private async Task GetCurrentOffers()
+        {
+            try
+            {
+                _manageData.SetStrategy(new GetData());
+                var offers = await _manageData.GetDataAndDeserializeIt<List<OfferDTO>>("Offer/GetAllCurrentOffers", "");
+                if (offers.Count > 0)
+                {
+                    IsCurrentOffersVisible = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+
         [ObservableProperty]
         private List<SupermarketDTO> _supermarkets;
 
@@ -41,9 +62,6 @@ namespace SmartShopMobileApp.ViewModels
             }
         }
 
-        #endregion
-
-        #region RelayCommands
         [RelayCommand]
         private async Task OpenScanner()
         {
@@ -72,6 +90,6 @@ namespace SmartShopMobileApp.ViewModels
         {
             GetSupermarkets();
         }
-        #endregion
+
     }
 }

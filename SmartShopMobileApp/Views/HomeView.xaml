@@ -36,9 +36,74 @@
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding Source={x:Reference SupermarketsList}, Path=BindingContext.SupermarketSelectedCommand}" CommandParameter="{Binding .}" />
                             </Frame.GestureRecognizers>
+                            
+                            
 
                         </Frame>
                     </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Label
+            Margin="11,20,0,10"
+            FontFamily="Montserrat-Bold"
+            FontSize="20"
+            IsVisible="{Binding IsCurrentOffersVisible}"
+            Text="Current offers: "
+            TextColor="#1C698A" />
+
+        <CollectionView
+                        Margin="7,0,7,0"
+                        ItemsSource="{Binding CurrentOffers}">
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout
+                            HorizontalItemSpacing="10"
+                            Orientation="Vertical"
+                            Span="2"
+                            VerticalItemSpacing="10" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame
+                                    BackgroundColor="Transparent"
+                                    BorderColor="#dee3e3"
+                                    CornerRadius="5"
+                                    HasShadow="True"
+                                    IsClippedToBounds="True"
+                                    Style="{StaticResource NewsFrameStyle}">
+                        <Grid Margin="-20,-30,-20,-20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image
+                                            Grid.Row="0"
+                                            Margin="5"
+                                            Source="{Binding Product.ImageUrl}"
+                                            WidthRequest="200" />
+                            <Label
+                                            Grid.Row="1"
+                                            Margin="6,0,0,0"
+                                            FontFamily="Montserrat"
+                                            FontSize="12"
+                                            Text="{Binding }"
+                                            TextColor="#1C698A" />
+                            <Label
+                                            Grid.Row="2"
+                                            Margin="7,0,0,12"
+                                            FontFamily="Montserrat"
+                                            FontSize="9"
+                                            Text="{Binding DateAndTimePeriod}"
+                                            TextColor="#1C698A" />
+                        </Grid>
+                    </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
