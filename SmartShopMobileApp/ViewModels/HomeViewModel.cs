@@ -4,6 +4,7 @@ using CommunityToolkit.Maui.Views;
 using DTO;
 using SmartShopMobileApp.Helpers;
 using SmartShopMobileApp.Views;
+using System.Collections.ObjectModel;
 
 namespace SmartShopMobileApp.ViewModels
 {
@@ -28,16 +29,20 @@ namespace SmartShopMobileApp.ViewModels
         [ObservableProperty]
         private bool _isCurrentOffersVisible;
 
+        [ObservableProperty]
+        private ObservableCollection<OfferDTO> _currentOffers;
+
         private async Task GetCurrentOffers()
         {
             try
             {
                 _manageData.SetStrategy(new GetData());
-                var offers = await _manageData.GetDataAndDeserializeIt<List<OfferDTO>>("Offer/GetAllCurrentOffers", "");
+                var offers = await _manageData.GetDataAndDeserializeIt<ObservableCollection<OfferDTO>>("Offer/GetAllCurrentOffers", "");
                 if (offers.Count > 0)
                 {
                     IsCurrentOffersVisible = true;
                 }
+                CurrentOffers = offers;
             }
             catch (Exception ex)
             {
