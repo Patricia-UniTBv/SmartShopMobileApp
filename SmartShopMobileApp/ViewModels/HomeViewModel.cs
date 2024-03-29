@@ -41,6 +41,11 @@ namespace SmartShopMobileApp.ViewModels
                 if (offers.Count > 0)
                 {
                     IsCurrentOffersVisible = true;
+                    foreach(var offer in offers) 
+                    {
+                        offer.OldPrice = offer.Product.Price;
+                        offer.NewPrice = offer.Product.Price * (1 - (decimal)offer.OfferPercentage / 100);
+                    }
                 }
                 CurrentOffers = offers;
             }
