@@ -44,7 +44,7 @@ namespace SmartShopMobileApp.ViewModels
                     foreach(var offer in offers) 
                     {
                         offer.OldPrice = offer.Product.Price;
-                        offer.NewPrice = offer.Product.Price * (1 - (decimal)offer.OfferPercentage / 100);
+                        offer.NewPrice = Math.Round(offer.Product.Price * (1 - (decimal)offer.OfferPercentage / 100), 2);
                     }
                 }
                 CurrentOffers = offers;
