@@ -4,6 +4,7 @@
              xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
              xmlns:viewModels="clr-namespace:SmartShopMobileApp.ViewModels" 
              x:Class="SmartShopMobileApp.Views.GeneratedQRCodeToExitShopView"
+             xmlns:lang="clr-namespace:SmartShopMobileApp.Resources.Languages"
              Title="GeneratedQRCodeToExitShopView">
     <VerticalStackLayout>
         <Label 

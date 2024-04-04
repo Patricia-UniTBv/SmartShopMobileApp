@@ -6,6 +6,7 @@
              xmlns:viewModels="clr-namespace:SmartShopMobileApp.ViewModels" 
              xmlns:icon="clr-namespace:SmartShopMobileApp"
              xmlns:model="clr-namespace:DTO;assembly=DTO"
+             xmlns:lang="clr-namespace:SmartShopMobileApp.Resources.Languages"
              x:DataType="viewModels:HistoryAndStatisticsViewModel"
              Title="History">
     <ContentPage.Behaviors>

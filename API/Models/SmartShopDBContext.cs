@@ -169,6 +169,9 @@ public partial class SmartShopDBContext : DbContext
                 .HasMaxLength(1000)
                 .IsUnicode(false);
             entity.Property(e => e.PreferredCurrency).HasMaxLength(50);
+            entity.Property(e => e.PreferredLanguage)
+                .HasMaxLength(2)
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<Voucher>(entity =>

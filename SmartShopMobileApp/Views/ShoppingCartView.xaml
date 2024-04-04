@@ -4,6 +4,7 @@
              x:Class="SmartShopMobileApp.Views.ShoppingCartView"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:icon="clr-namespace:SmartShopMobileApp"
+             xmlns:lang="clr-namespace:SmartShopMobileApp.Resources.Languages"
              xmlns:viewModels="clr-namespace:SmartShopMobileApp.ViewModels" 
              xmlns:model="clr-namespace:DTO;assembly=DTO"
              Title="My shopping cart">
@@ -11,13 +12,13 @@
         <toolkit:EventToCommandBehavior Command="{Binding PageAppearingCommand}" EventName="Appearing" />
     </ContentPage.Behaviors>
     <VerticalStackLayout>
-            <Label Text="Your current shopping cart:"
+        <Label Text="{x:Static lang:AppResources.YourCurrentShoppingCart}"
                FontFamily="Poppins-Regular"
                FontSize="20"
                TextColor="#2B0B98"
                Margin="10,0,0,0"/>
         <Image Source="{Binding ImageSource}" HeightRequest="140" WidthRequest="160" />
-        <Label Text="Your shopping cart is empty!" IsVisible="{Binding IsEmptyShoppingCartTextVisible}" 
+        <Label Text="{x:Static lang:AppResources.YourShoppingCartIsEmpty}" IsVisible="{Binding IsEmptyShoppingCartTextVisible}" 
                FontFamily="Poppins-Regular"
                FontSize="20"
                TextColor="Grey"
@@ -38,12 +39,12 @@
                                 <StackLayout Grid.Column="1" VerticalOptions="Center">
                                     <Label Text="{Binding Name}" Margin="10,0,0,0" FontFamily="Poppins-Bold" TextColor="#2B0B98" FontSize="16" />
                                     <StackLayout Orientation="Horizontal" >
-                                        <Label Text="Quantity:" Margin="10,0,0,0"  TextColor="Gray" FontSize="16"/>
+                                        <Label Text="{x:Static lang:AppResources.Quantity}" Margin="10,0,0,0"  TextColor="Gray" FontSize="16"/>
                                         <Label Text="{Binding Quantity}" Margin="10,0,0,0"  TextColor="Gray" FontSize="16" />
                                         
                                     </StackLayout>
                                     <StackLayout Orientation="Horizontal" >
-                                        <Label Text="Price:" Margin="10,0,0,0"  TextColor="Gray" FontSize="16"/>
+                                        <Label Text="{x:Static lang:AppResources.Price}" Margin="10,0,0,0"  TextColor="Gray" FontSize="16"/>
                                         <Label Text="{Binding Price}" Margin="10,0,0,0"  TextColor="Gray" FontSize="16" />
 
                                     </StackLayout>
@@ -90,8 +91,8 @@
                    Margin="5,0,0,0"/>  
         </StackLayout>
 
-        <Button Text="Pay" Command="{Binding PayCommand}" FontSize="20" Margin="60,-15,60,10" CornerRadius="20" BackgroundColor="Green"/>
-        <Button Text="Apply voucher" Command="{Binding ApplyVoucherCommand}" IsEnabled="{Binding IsVoucherButtonVisible}" HeightRequest="45" FontSize="18" Margin="110,10,110,10" CornerRadius="20" BackgroundColor="#2B0B98"/>
+        <Button Text="{x:Static lang:AppResources.Pay}" Command="{Binding PayCommand}" FontSize="20" Margin="60,-15,60,10" CornerRadius="20" BackgroundColor="Green"/>
+        <Button Text="{x:Static lang:AppResources.ApplyVoucher}" Command="{Binding ApplyVoucherCommand}" IsEnabled="{Binding IsVoucherButtonVisible}" HeightRequest="45" FontSize="18" Margin="110,10,110,10" CornerRadius="20" BackgroundColor="#2B0B98"/>
 
     </VerticalStackLayout>
 </ContentPage>

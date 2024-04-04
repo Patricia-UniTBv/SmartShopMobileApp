@@ -2,11 +2,85 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartShopMobileApp.Views.ProfileView"
+             xmlns:viewmodels="clr-namespace:SmartShopMobileApp.ViewModels"
+             xmlns:lang="clr-namespace:SmartShopMobileApp.Resources.Languages"
              Title="ProfileView">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ContentPage.BindingContext>
+        <viewmodels:ProfileViewModel />
+    </ContentPage.BindingContext>
+    <!--<ContentPage.Behaviors>
+        <xct:EventToCommandBehavior Command="{Binding PageAppearingCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>-->
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout>
+                <StackLayout
+                    Margin="16,32,0,0"
+                    Padding="0"
+                    HeightRequest="128"
+                    Orientation="Horizontal">
+                    <AbsoluteLayout>
+                        <Frame x:Name="imageFrame"
+                               CornerRadius="60"
+                               IsClippedToBounds="False"
+                               HorizontalOptions="End"
+                               VerticalOptions="End"
+                               Margin="0,0,30,30"
+                               WidthRequest="100"
+                               HeightRequest="100">
+                            <Image Source="{Binding CurrentUser.ImageUrl}" Aspect="AspectFill"/>
+                        </Frame>
+
+                        <!--<Button Command="{Binding EditImageCommand}"
+                                BackgroundColor="#5AA7C8"
+                                CornerRadius="20"
+                                WidthRequest="40"
+                                HeightRequest="40"
+                                AbsoluteLayout.LayoutBounds="0.9,0.9,40,40" 
+                                AbsoluteLayout.LayoutFlags="PositionProportional" >
+                            <Button.ImageSource>
+                                <FontImageSource
+                                FontFamily="FontAwesome"
+                                Glyph="{x:Static fa:FontAwesomeIcons.Pencil}"
+                                Size="20"
+                                Color="#FFFFFF" />
+                            </Button.ImageSource>
+                        </Button>-->
+
+                    </AbsoluteLayout>
+
+                    <StackLayout Orientation="Vertical">
+                        <Label
+                            Margin="13,20,0,0"
+                            FontSize="32"
+                            Style="{StaticResource DarkBlueMontserratBold}"
+                            Text="{Binding CurrentUser.FirstName}" />
+                        <StackLayout Margin="16,0,0,0" Orientation="Horizontal">
+
+                            <Label
+                                FontSize="20"
+                                Style="{StaticResource DarkBlueMontserrat}"
+                                Text="{Binding CurrentUser.LastName}" />
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+
+
+
+                <Picker
+                        Title="Change language"
+                        Margin="10,10,10,0"
+                        BackgroundColor="Transparent"
+                        FontFamily="Montserrat"
+                        FontSize="15"
+                        ItemsSource="{Binding LanguageOptions}"
+                        SelectedItem="{Binding SelectedLanguage}"
+                        TextColor="#1C698A"
+                        TitleColor="#1C698A"
+                    HorizontalOptions="StartAndExpand"
+                        WidthRequest="150" />
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>

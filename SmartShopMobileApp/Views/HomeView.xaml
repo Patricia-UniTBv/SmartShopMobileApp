@@ -5,13 +5,14 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewModels="clr-namespace:SmartShopMobileApp.ViewModels" 
              xmlns:model="clr-namespace:DTO;assembly=DTO"
+             xmlns:lang="clr-namespace:SmartShopMobileApp.Resources.Languages"
              x:DataType="viewModels:HomeViewModel"
              Title="Home">
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior Command="{Binding PageAppearingCommand}" EventName="Appearing" />
     </ContentPage.Behaviors>
     <VerticalStackLayout>
-        <Label Text="Choose your supermarket:"
+        <Label Text="{x:Static lang:AppResources.ChooseYourSupermarket}"
                FontFamily="Poppins-Regular"
                FontSize="20"
                TextColor="#2B0B98"

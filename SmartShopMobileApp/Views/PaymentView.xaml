@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartShopMobileApp.Views.PaymentView"
              xmlns:calendar="clr-namespace:Syncfusion.Maui.Calendar;assembly=Syncfusion.Maui.Calendar"
+             xmlns:lang="clr-namespace:SmartShopMobileApp.Resources.Languages"
              xmlns:viewModels="clr-namespace:SmartShopMobileApp.ViewModels" 
              Title="Payment">
 

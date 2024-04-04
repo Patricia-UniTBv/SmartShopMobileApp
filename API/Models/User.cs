@@ -19,6 +19,8 @@ public partial class User
 
     public string? PreferredCurrency { get; set; }
 
+    public string? PreferredLanguage { get; set; }
+
     public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; } = new List<ShoppingCart>();
 
     public virtual ICollection<Voucher> Vouchers { get; set; } = new List<Voucher>();
