@@ -120,11 +120,20 @@
   <data name="ApplyVoucher" xml:space="preserve">
     <value>Apply voucher</value>
   </data>
+  <data name="CardName" xml:space="preserve">
+    <value>Card name:</value>
+  </data>
+  <data name="CardNumber" xml:space="preserve">
+    <value>Card number:</value>
+  </data>
   <data name="CartValue" xml:space="preserve">
     <value>Cart value:</value>
   </data>
   <data name="ChooseYourSupermarket" xml:space="preserve">
     <value>Choose your supermarket:</value>
+  </data>
+  <data name="CurrentOffers" xml:space="preserve">
+    <value>Current offers:</value>
   </data>
   <data name="CurrentVoucherFor" xml:space="preserve">
     <value>Your current voucher for</value>
@@ -132,14 +141,47 @@
   <data name="Date" xml:space="preserve">
     <value>Date:</value>
   </data>
+  <data name="ExpirationMonth" xml:space="preserve">
+    <value>Expiration month:</value>
+  </data>
+  <data name="ExpirationYear" xml:space="preserve">
+    <value>Expiration year:</value>
+  </data>
+  <data name="MaximumPrice" xml:space="preserve">
+    <value>Maximum price:</value>
+  </data>
+  <data name="MinimumPrice" xml:space="preserve">
+    <value>Minimum price:</value>
+  </data>
   <data name="Pay" xml:space="preserve">
     <value>Pay</value>
   </data>
   <data name="Price" xml:space="preserve">
     <value>Price:</value>
   </data>
+  <data name="ProcessPayment" xml:space="preserve">
+    <value>Process payment</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>Products:</value>
+  </data>
   <data name="Quantity" xml:space="preserve">
     <value>Quantity:</value>
+  </data>
+  <data name="SecurityNumber" xml:space="preserve">
+    <value>Security number:</value>
+  </data>
+  <data name="SelectAMonth" xml:space="preserve">
+    <value>Select a month:</value>
+  </data>
+  <data name="SelectAYear" xml:space="preserve">
+    <value>Select a year:</value>
+  </data>
+  <data name="ThankYouForShoppingAtOurSupermarket" xml:space="preserve">
+    <value>Thank you for shopping at our supermarket!</value>
+  </data>
+  <data name="ViewStatistics" xml:space="preserve">
+    <value>View statistics</value>
   </data>
   <data name="VoucherHistory" xml:space="preserve">
     <value>Voucher history:</value>
@@ -147,7 +189,16 @@
   <data name="YourCurrentShoppingCart" xml:space="preserve">
     <value>Your current shopping cart:</value>
   </data>
+  <data name="YourLatestShoppingCart" xml:space="preserve">
+    <value>Your latest shopping cart:</value>
+  </data>
   <data name="YourShoppingCartIsEmpty" xml:space="preserve">
     <value>Your shopping cart is empty!</value>
+  </data>
+  <data name="YourSpendingsByCategories" xml:space="preserve">
+    <value>Your spendings by categories:</value>
+  </data>
+  <data name="YourSpendingsInTheLast3Months" xml:space="preserve">
+    <value>Your spendings in the last 3 months:</value>
   </data>
 </root>

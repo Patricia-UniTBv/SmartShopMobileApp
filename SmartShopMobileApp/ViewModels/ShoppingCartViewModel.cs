@@ -131,7 +131,12 @@ namespace SmartShopMobileApp.ViewModels
         {
             try
             {
-                await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new VoucherView()));
+                if(CurrentSupermarket.Supermarket != null)
+                    await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new VoucherView()));
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("", "Please select a supermarket", "OK");
+                }
 
             }
             catch (Exception e)

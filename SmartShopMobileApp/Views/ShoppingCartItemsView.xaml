@@ -11,7 +11,7 @@
         <toolkit:EventToCommandBehavior Command="{Binding PageAppearingCommand}" EventName="Appearing" />
     </ContentPage.Behaviors>
     <VerticalStackLayout>
-        <Label Text="Products:"  Padding="10,5,10,5" TextColor="#2B0B98" FontSize="20"></Label>
+        <Label Text="{x:Static lang:AppResources.Products}"  Padding="10,5,10,5" TextColor="#2B0B98" FontSize="20"></Label>
         <ScrollView>
             <CollectionView x:Name="SupermarketsList" ItemsSource="{Binding CartItems}" HeightRequest="300">
                 <CollectionView.ItemTemplate>
@@ -29,12 +29,12 @@
                                     <StackLayout Grid.Column="1" VerticalOptions="Center">
                                         <Label Text="{Binding Name}" Margin="10,0,0,0" FontFamily="Poppins-Bold" TextColor="#2B0B98" FontSize="16" />
                                         <StackLayout Orientation="Horizontal" >
-                                            <Label Text="Quantity:" Margin="10,0,0,0"  TextColor="Gray" FontSize="16"/>
+                                            <Label Text="{x:Static lang:AppResources.Quantity}" Margin="10,0,0,0"  TextColor="Gray" FontSize="16"/>
                                             <Label Text="{Binding Quantity}" Margin="10,0,0,0"  TextColor="Gray" FontSize="16" />
 
                                         </StackLayout>
                                         <StackLayout Orientation="Horizontal" >
-                                            <Label Text="Price:" Margin="10,0,0,0"  TextColor="Gray" FontSize="16"/>
+                                            <Label Text="{x:Static lang:AppResources.Price}" Margin="10,0,0,0"  TextColor="Gray" FontSize="16"/>
                                             <Label Text="{Binding Price}" Margin="10,0,0,0"  TextColor="Gray" FontSize="16" />
 
                                         </StackLayout>

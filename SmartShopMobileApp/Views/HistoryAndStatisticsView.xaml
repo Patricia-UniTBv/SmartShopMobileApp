@@ -24,11 +24,11 @@
                     <DatePicker x:Name="DatePickerFilterEnd" Format="dd.MM.yyyy" HorizontalOptions="EndAndExpand" Date="{Binding EndDate}"/>
                 </StackLayout>
 
-                <Label Text="Minimum price: " Margin="14,20,0,0" TextColor="Gray"/>
+                <Label Text="{x:Static lang:AppResources.MinimumPrice} " Margin="14,20,0,0" TextColor="Gray"/>
                 <Slider x:Name="PriceSlider1" Minimum="0" Maximum="1000" HorizontalOptions="FillAndExpand" Value="{Binding MinPrice}" />
                 <Label Text="{Binding Value, Source={x:Reference PriceSlider1}, StringFormat='Total amount: {0:N2} lei'}" HorizontalOptions="CenterAndExpand"  />
 
-                <Label Text="Maximum price: " Margin="14,0,0,0" TextColor="Gray"/>
+                <Label Text="{x:Static lang:AppResources.MaximumPrice} " Margin="14,0,0,0" TextColor="Gray"/>
                 <Slider x:Name="PriceSlider2" Minimum="0" Maximum="1000" HorizontalOptions="FillAndExpand" Value="{Binding MaxPrice}"/>
                 <Label Text="{Binding Value, Source={x:Reference PriceSlider2}, StringFormat='Total amount: {0:N2} lei'}" HorizontalOptions="CenterAndExpand" />
 
@@ -68,7 +68,7 @@
                    VerticalOptions="Center"/>
         </Grid>
 
-        <Label Text="Your latest shopping carts:"  Padding="10,5,10,5" TextColor="#2B0B98" FontSize="20"></Label>
+        <Label Text="{x:Static lang:AppResources.YourLatestShoppingCart}"  Padding="10,5,10,5" TextColor="#2B0B98" FontSize="20"></Label>
         <ScrollView HeightRequest="500">
 
             <CollectionView x:Name="ShoppingCartsList" ItemsSource="{Binding ShoppingCarts, Mode=TwoWay}"  HeightRequest="900">
@@ -85,7 +85,7 @@
 
                                     <StackLayout Grid.Column="1" VerticalOptions="Center">
                                         <StackLayout Orientation="Horizontal" >
-                                            <Label Text="Date:" Margin="10,0,0,0"  TextColor="#2B0B98" FontSize="16"/>
+                                            <Label Text="{x:Static lang:AppResources.Date}" Margin="10,0,0,0"  TextColor="#2B0B98" FontSize="16"/>
                                             <Label Text="{Binding CreationDate, StringFormat='{0:dd. MM. yyyy}'}" Margin="10,0,0,0" FontFamily="Poppins-Bold" TextColor="#2B0B98" FontSize="16" />
 
                                         </StackLayout>
@@ -112,6 +112,6 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </ScrollView>
-        <Button x:Name="payButton" Command="{Binding ViewStatisticsCommand}" Text="View statistics" FontSize="18" Margin="30,30,30,10" />
+        <Button x:Name="payButton" Command="{Binding ViewStatisticsCommand}" Text="{x:Static lang:AppResources.ViewStatistics}" FontSize="18" Margin="30,30,30,10" />
     </VerticalStackLayout>
 </ContentPage>

@@ -7,14 +7,14 @@
              Title="View your spendings">
     <ScrollView>
         <VerticalStackLayout>
-            <Label Text="Your spendings in the last 3 months:"  Padding="10,20,10,20" TextColor="#2B0B98" FontSize="16"></Label>
+            <Label Text="{x:Static lang:AppResources.YourSpendingsInTheLast3Months}"  Padding="10,20,10,20" TextColor="#2B0B98" FontSize="16"></Label>
             <micro:ChartView x:Name="chartView" HeightRequest="300" WidthRequest="500"/>
 
-            <Label Text="Your spendings by categories:"  Padding="10,50,10,20" TextColor="#2B0B98" FontSize="16"></Label>
+            <Label Text="{x:Static lang:AppResources.YourSpendingsByCategories}"  Padding="10,50,10,20" TextColor="#2B0B98" FontSize="16"></Label>
             <StackLayout Margin="10,0,10,0">
-                <Label Text="Select a month:" />
+                <Label Text="{x:Static lang:AppResources.SelectAMonth}" />
                 <Picker x:Name="monthPicker"  SelectedIndexChanged="Picker_SelectedIndexChanged"/>
-                <Label Text="Select a year:" />
+                <Label Text="{x:Static lang:AppResources.SelectAYear}" />
                 <Picker x:Name="yearPicker"  SelectedIndexChanged="Picker_SelectedIndexChanged"/>
                 <Label x:Name="chartLabel" />
                 <micro:ChartView x:Name="chartView1" HeightRequest="300" WidthRequest="370" Margin="10"/>

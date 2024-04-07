@@ -8,17 +8,17 @@
              Title="Payment">
 
     <VerticalStackLayout>
-        <Label Text="Process payment" Margin="18,15" FontFamily="Poppins-Bold" FontSize="20" TextColor="#2B0B98"/>
+        <Label Text="{x:Static lang:AppResources.ProcessPayment}" Margin="18,15" FontFamily="Poppins-Bold" FontSize="20" TextColor="#2B0B98"/>
         <StackLayout Padding="20">
-            <Label Text="Card Name"/>
+            <Label Text="{x:Static lang:AppResources.CardName}"/>
             <Entry Placeholder="Card Name" Keyboard="Default" MaxLength="16" x:Name="cardName" Margin="0,0,0,15"/>
-            <Label Text="Card Number"/>
+            <Label Text="{x:Static lang:AppResources.CardNumber}"/>
             <Entry Placeholder="Card Number" Keyboard="Numeric" MaxLength="16" x:Name="cardNo" Text="{Binding CardNo}" Margin="0,15"/>
-            <Label Text="Expire Year"/>
-            <Entry Placeholder="Expire Year" Keyboard="Numeric" MaxLength="2" x:Name="expireYear" Text="{Binding ExpirationYear}" Margin="0,15"/>
-            <Label Text="Expire Month"/>
+            <Label Text="{x:Static lang:AppResources.ExpirationYear}"/>
+            <Entry Placeholder="Expiration Year" Keyboard="Numeric" MaxLength="2" x:Name="expireYear" Text="{Binding ExpirationYear}" Margin="0,15"/>
+            <Label Text="{x:Static lang:AppResources.ExpirationMonth}"/>
             <Entry Placeholder="Expire Month" Keyboard="Numeric" MaxLength="2" x:Name="expireMonth" Text="{Binding ExpirationMonth}" Margin="0,15"/>
-            <Label Text="Security number"/>
+            <Label Text="{x:Static lang:AppResources.SecurityNumber}"/>
             <Entry Placeholder="CVV" Keyboard="Numeric" MaxLength="3" x:Name="cvv" Text="{Binding Cvv}" Margin="0,15"/>
             <Image Source="payment.png" HeightRequest="100" WidthRequest="300" />
             <Button x:Name="payButton" Command="{Binding PayCommand}" Text="{Binding PayButtonText}" FontSize="18" Margin="30,10" />

@@ -8,7 +8,7 @@
              Title="GeneratedQRCodeToExitShopView">
     <VerticalStackLayout>
         <Label 
-            Text="Thank you for shopping at our Supermarket!"
+            Text="{x:Static lang:AppResources.ThankYouForShoppingAtOurSupermarket}"
             FontFamily="Poppins-Regular"
             FontSize="20"
             TextColor="#2B0B98"

@@ -120,11 +120,20 @@
   <data name="ApplyVoucher" xml:space="preserve">
     <value>Aplică voucher</value>
   </data>
+  <data name="CardName" xml:space="preserve">
+    <value>Nume card:</value>
+  </data>
+  <data name="CardNumber" xml:space="preserve">
+    <value>Număr card:</value>
+  </data>
   <data name="CartValue" xml:space="preserve">
     <value>Valoare coș:</value>
   </data>
   <data name="ChooseYourSupermarket" xml:space="preserve">
     <value>Alege supermarket-ul:</value>
+  </data>
+  <data name="CurrentOffers" xml:space="preserve">
+    <value>Oferte curente:</value>
   </data>
   <data name="CurrentVoucherFor" xml:space="preserve">
     <value>Voucher-ul tău curent pentru</value>
@@ -132,14 +141,47 @@
   <data name="Date" xml:space="preserve">
     <value>Data:</value>
   </data>
+  <data name="ExpirationMonth" xml:space="preserve">
+    <value>Luna de expirare:</value>
+  </data>
+  <data name="ExpirationYear" xml:space="preserve">
+    <value>An de expirare:</value>
+  </data>
+  <data name="MaximumPrice" xml:space="preserve">
+    <value>Preț maxim:</value>
+  </data>
+  <data name="MinimumPrice" xml:space="preserve">
+    <value>Preț minim:</value>
+  </data>
   <data name="Pay" xml:space="preserve">
     <value>Platește</value>
   </data>
   <data name="Price" xml:space="preserve">
     <value>Preț:</value>
   </data>
+  <data name="ProcessPayment" xml:space="preserve">
+    <value>Procesează plata:</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>Produse:</value>
+  </data>
   <data name="Quantity" xml:space="preserve">
     <value>Cantitate:</value>
+  </data>
+  <data name="SecurityNumber" xml:space="preserve">
+    <value>Cod de securitate:</value>
+  </data>
+  <data name="SelectAMonth" xml:space="preserve">
+    <value>Selectează o lună:</value>
+  </data>
+  <data name="SelectAYear" xml:space="preserve">
+    <value>Selectează un an:</value>
+  </data>
+  <data name="ThankYouForShoppingAtOurSupermarket" xml:space="preserve">
+    <value>Mulțumim că ați cumpărat de la noi!</value>
+  </data>
+  <data name="ViewStatistics" xml:space="preserve">
+    <value>Vezi statistici</value>
   </data>
   <data name="VoucherHistory" xml:space="preserve">
     <value>Istoric voucher:</value>
@@ -147,7 +189,16 @@
   <data name="YourCurrentShoppingCart" xml:space="preserve">
     <value>Coșul tău de cumpărături curent:</value>
   </data>
+  <data name="YourLatestShoppingCart" xml:space="preserve">
+    <value>Ultimul tău coș de cumpărături:</value>
+  </data>
   <data name="YourShoppingCartIsEmpty" xml:space="preserve">
     <value>Coșul tău de cumpărături este gol!</value>
+  </data>
+  <data name="YourSpendingsByCategories" xml:space="preserve">
+    <value>Cheltuielile tale pe categorii:</value>
+  </data>
+  <data name="YourSpendingsInTheLast3Months" xml:space="preserve">
+    <value>Cheltuielile tale în ultimele 3 luni:</value>
   </data>
 </root>

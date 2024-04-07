@@ -70,6 +70,24 @@ namespace SmartShopMobileApp.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Card name:.
+        /// </summary>
+        internal static string CardName {
+            get {
+                return ResourceManager.GetString("CardName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Card number:.
+        /// </summary>
+        internal static string CardNumber {
+            get {
+                return ResourceManager.GetString("CardNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cart value:.
         /// </summary>
         internal static string CartValue {
@@ -84,6 +102,15 @@ namespace SmartShopMobileApp.Resources.Languages {
         internal static string ChooseYourSupermarket {
             get {
                 return ResourceManager.GetString("ChooseYourSupermarket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current offers:.
+        /// </summary>
+        internal static string CurrentOffers {
+            get {
+                return ResourceManager.GetString("CurrentOffers", resourceCulture);
             }
         }
         
@@ -106,6 +133,42 @@ namespace SmartShopMobileApp.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Expiration month:.
+        /// </summary>
+        internal static string ExpirationMonth {
+            get {
+                return ResourceManager.GetString("ExpirationMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expiration year:.
+        /// </summary>
+        internal static string ExpirationYear {
+            get {
+                return ResourceManager.GetString("ExpirationYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum price:.
+        /// </summary>
+        internal static string MaximumPrice {
+            get {
+                return ResourceManager.GetString("MaximumPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum price:.
+        /// </summary>
+        internal static string MinimumPrice {
+            get {
+                return ResourceManager.GetString("MinimumPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pay.
         /// </summary>
         internal static string Pay {
@@ -124,11 +187,74 @@ namespace SmartShopMobileApp.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Process payment.
+        /// </summary>
+        internal static string ProcessPayment {
+            get {
+                return ResourceManager.GetString("ProcessPayment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Products:.
+        /// </summary>
+        internal static string Products {
+            get {
+                return ResourceManager.GetString("Products", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Quantity:.
         /// </summary>
         internal static string Quantity {
             get {
                 return ResourceManager.GetString("Quantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Security number:.
+        /// </summary>
+        internal static string SecurityNumber {
+            get {
+                return ResourceManager.GetString("SecurityNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a month:.
+        /// </summary>
+        internal static string SelectAMonth {
+            get {
+                return ResourceManager.GetString("SelectAMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a year:.
+        /// </summary>
+        internal static string SelectAYear {
+            get {
+                return ResourceManager.GetString("SelectAYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thank you for shopping at our supermarket!.
+        /// </summary>
+        internal static string ThankYouForShoppingAtOurSupermarket {
+            get {
+                return ResourceManager.GetString("ThankYouForShoppingAtOurSupermarket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View statistics.
+        /// </summary>
+        internal static string ViewStatistics {
+            get {
+                return ResourceManager.GetString("ViewStatistics", resourceCulture);
             }
         }
         
@@ -151,11 +277,38 @@ namespace SmartShopMobileApp.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your latest shopping cart:.
+        /// </summary>
+        internal static string YourLatestShoppingCart {
+            get {
+                return ResourceManager.GetString("YourLatestShoppingCart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your shopping cart is empty!.
         /// </summary>
         internal static string YourShoppingCartIsEmpty {
             get {
                 return ResourceManager.GetString("YourShoppingCartIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your spendings by categories:.
+        /// </summary>
+        internal static string YourSpendingsByCategories {
+            get {
+                return ResourceManager.GetString("YourSpendingsByCategories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your spendings in the last 3 months:.
+        /// </summary>
+        internal static string YourSpendingsInTheLast3Months {
+            get {
+                return ResourceManager.GetString("YourSpendingsInTheLast3Months", resourceCulture);
             }
         }
     }

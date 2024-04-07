@@ -51,7 +51,7 @@
             FontFamily="Montserrat-Bold"
             FontSize="20"
             IsVisible="{Binding IsCurrentOffersVisible}"
-            Text="Current offers: "
+            Text="{x:Static lang:AppResources.CurrentOffers}"
             TextColor="#1C698A" />
         <ScrollView HeightRequest="300">
         <CollectionView
