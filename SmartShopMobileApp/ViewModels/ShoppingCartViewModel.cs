@@ -28,7 +28,8 @@ namespace SmartShopMobileApp.ViewModels
             get { return _manageData; }
             set { _manageData = value; }
         }
-       
+
+        private readonly CurrencyConversionService _conversionService = new CurrencyConversionService();
         public int ShoppingCartId { get; set; }
         private int _userId { get; set; }//provizoriu
 
@@ -81,9 +82,14 @@ namespace SmartShopMobileApp.ViewModels
                 if (latestShoppingCart != null)
                 {
                     Products = await _manageData.GetDataAndDeserializeIt<List<ProductDTO>>($"ShoppingCart/GetLatestShoppingCartForCurrentUser?id={_userId}", "");
-
+                    foreach(var product in Products)
+                    {
+                        product.Price = _conversionService.ConvertCurrencyAsync(product.Price, "RON", "EUR");
+                    }
                     ShoppingCartId = latestShoppingCart.ShoppingCartID;
-                    TotalAmount = latestShoppingCart.TotalAmount;
+                    TotalAmount = _conversionService.ConvertCurrencyAsync(latestShoppingCart.TotalAmount, "RON", "EUR");
+                    //TotalAmount = latestShoppingCart.TotalAmount;
+
 
                     if (ShoppingCartId != 0)
                     {
