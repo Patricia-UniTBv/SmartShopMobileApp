@@ -6,6 +6,7 @@ namespace API.Repository.Interfaces
     {
         Task<UserDTO> GetUserByID(int ID);
         Task<UserDTO> UpdateLanguage(int userId, string language);
+        Task<UserDTO> UpdateCurrency(int userId, string currency);
 
     }
 }

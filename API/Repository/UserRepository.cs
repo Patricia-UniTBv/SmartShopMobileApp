@@ -33,5 +33,23 @@ namespace API.Repository
 
             return user;
         }
+
+
+        public async Task<UserDTO> UpdateCurrency(int userId, string currency)
+        {
+            var dbUser = await _dbSet.SingleAsync(u => u.UserID == userId);
+            var user = _mapper.Map<User, UserDTO>(dbUser);
+
+            user.PreferredCurrency = currency;
+
+            var mapped = _mapper.Map<UserDTO, User>(user);
+
+            _context.ChangeTracker.Clear();
+            _context.Update(mapped);
+            _context.SaveChanges();
+
+            return user;
+        }
+
     }
 }

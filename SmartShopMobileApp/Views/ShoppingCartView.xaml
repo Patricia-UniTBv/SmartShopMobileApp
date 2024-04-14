@@ -46,7 +46,7 @@
                                     <StackLayout Orientation="Horizontal" >
                                         <Label Text="{x:Static lang:AppResources.Price}" Margin="10,0,0,0"  TextColor="Gray" FontSize="16"/>
                                         <Label Text="{Binding Price}" Margin="10,0,0,0"  TextColor="Gray" FontSize="16" />
-
+                                        <Label Text="{Binding Currency}" Margin="5,0,0,0"  TextColor="Gray" FontSize="16" />
                                     </StackLayout>
 
 
@@ -84,7 +84,7 @@
                    FontSize="20"
                    TextColor="#2B0B98"
                    Margin="10,0,0,0"/>
-            <Label Text="RON"
+            <Label Text="{Binding Currency}"
                    FontFamily="Poppins-Semibold"
                    FontSize="20"
                    TextColor="#2B0B98"

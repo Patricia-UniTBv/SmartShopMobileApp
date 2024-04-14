@@ -11,7 +11,8 @@
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior Command="{Binding PageAppearingCommand}" EventName="Appearing" />
     </ContentPage.Behaviors>
-    <VerticalStackLayout>
+    <ScrollView>
+       <VerticalStackLayout>
         <Label Text="{x:Static lang:AppResources.ChooseYourSupermarket}"
                FontFamily="Poppins-Regular"
                FontSize="20"
@@ -37,8 +38,8 @@
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding Source={x:Reference SupermarketsList}, Path=BindingContext.SupermarketSelectedCommand}" CommandParameter="{Binding .}" />
                             </Frame.GestureRecognizers>
-                            
-                            
+
+
 
                         </Frame>
                     </Grid>
@@ -53,29 +54,29 @@
             IsVisible="{Binding IsCurrentOffersVisible}"
             Text="{x:Static lang:AppResources.CurrentOffers}"
             TextColor="#1C698A" />
-        <ScrollView HeightRequest="300">
+        <!--<ScrollView HeightRequest="300">-->
         <CollectionView
         Margin="7,0,7,0"
-        ItemsSource="{Binding CurrentOffers}">  
+        ItemsSource="{Binding CurrentOffers}">
 
             <CollectionView.ItemsLayout>
-                    <GridItemsLayout
+                <GridItemsLayout
                     HorizontalItemSpacing="10"
                     Orientation="Vertical"
                     Span="2"
                     VerticalItemSpacing="10" />
-                </CollectionView.ItemsLayout>
+            </CollectionView.ItemsLayout>
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:OfferDTO">
-                  <Frame
+                    <Frame
                     BackgroundColor="Transparent"
                     BorderColor="#dee3e3"
                     CornerRadius="5"
                     IsClippedToBounds="True"
                     Style="{StaticResource OffersFrameStyle}">
 
-                            <Grid Margin="-20,-30,10,-20">
+                        <Grid Margin="-20,-30,10,-20">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="Auto" />
@@ -85,27 +86,44 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                                <Image
+                            <Image
                                     Grid.Row="0"
-                                    Margin="10,30,0,10"
+                                    Margin="10,30,15,10"
                                     Source="{Binding Product.ImageSource}"
-                                    WidthRequest="200" />   
-                                <StackLayout Orientation="Vertical">
-                                    <Label
-                                        HorizontalOptions="End"
-                                        VerticalOptions="StartAndExpand"
-                                        Margin="0,30,0,0"
-                                        Text="{Binding OldPrice, StringFormat='{0} lei'}"
-                                        TextDecorations="Strikethrough"
-                                        TextColor="Red"/>
-                                    <Label
+                                    WidthRequest="200" />
+                            <StackLayout Orientation="Vertical">
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                        <Label
+                                HorizontalOptions="End"
+                                VerticalOptions="StartAndExpand"
+                                Margin="0,30,0,0"
+                                Text="{Binding OldPrice}"
+                                TextDecorations="Strikethrough"
+                                TextColor="Red"/>
+                                        <Label
+                                HorizontalOptions="End"
+                                VerticalOptions="StartAndExpand"
+                                Margin="0,30,0,0"
+                                Text="{Binding Currency}"
+                                TextDecorations="Strikethrough"
+                                TextColor="Red"/>   
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" Margin="0,20,0,0">
+                                        <Label
                                         HorizontalOptions="End"
                                         VerticalOptions="StartAndExpand"
                                         Margin="0,-20,0,0"
-                                        Text="{Binding NewPrice, StringFormat='{0} lei'}"
+                                        Text="{Binding NewPrice}"
                                         TextColor="Green"/>
+                                        <Label
+                                        HorizontalOptions="End"
+                                        VerticalOptions="StartAndExpand"
+                                        Margin="0,-20,0,0"
+                                        Text="{Binding Currency}"
+                                        TextColor="Green"/>
+                                    </StackLayout>
                                 </StackLayout>
-                                <Label
+                            <Label
                                         WidthRequest="100"
                                         Grid.Row="1"
                                         Margin="-25,0,0,0"
@@ -114,8 +132,9 @@
                                         FontAttributes="Bold"
                                         Text="{Binding Product.Name}"
                                         TextColor="#1C698A" />
+                            
 
-                                <Label
+                            <Label
                                         Grid.Row="2"
                                         Margin="25,0,0,0"
                                         FontFamily="Montserrat"
@@ -123,7 +142,7 @@
                                         Text="{Binding OfferPercentage, StringFormat='Discount: -{0}%'}"
                                         TextColor="Red" />
 
-                                <Label
+                            <Label
                         Grid.Row="3"
                         Margin="25,0,0,12"
                         FontFamily="Montserrat"
@@ -131,7 +150,7 @@
                         Text="{Binding OfferStartDate, StringFormat='{0:dd-MM-yyyy}-'}"
                         TextColor="#1C698A" />
 
-                                <Label
+                            <Label
                         Grid.Row="3"
                         Margin="85,0,0,12"
                         FontFamily="Montserrat"
@@ -139,18 +158,19 @@
                         Text="{Binding OfferStartDate, StringFormat='{0:dd-MM-yyyy}'}"
                         TextColor="#1C698A" />
 
-                                <Image
+                            <Image
                                     HorizontalOptions="EndAndExpand"
                                     HeightRequest="20"
                                     Grid.Row="1"
                                     Margin="80,2,0,0"
                                     Source="{Binding Supermarket.ImageUrl}" />
 
-                            </Grid>
+                        </Grid>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        </ScrollView>
+        <!--</ScrollView>-->
     </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

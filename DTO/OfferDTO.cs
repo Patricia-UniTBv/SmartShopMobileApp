@@ -24,8 +24,11 @@ namespace DTO
 
         public decimal NewPrice { get; set; }
 
+        public string? Currency { get; set; }
+
         public virtual ProductDTO Product { get; set; } = null!;
         public virtual SupermarketDTO Supermarket { get; set; } = null!;
+
 
     }
 }

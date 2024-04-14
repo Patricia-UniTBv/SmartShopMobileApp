@@ -17,6 +17,24 @@ namespace SmartShopMobileApp.ViewModels
             IsCurrentOffersVisible = false;
 
             GetCurrentOffers();
+
+            if (AuthenticationResultHelper.ActiveUser == null)
+            {
+                AuthenticationResultHelper.ActiveUser = new UserDTO();
+            }
+
+            AuthenticationResultHelper.ActiveUser.UserID = 1;
+            AuthenticationResultHelper.ActiveUser.PreferredCurrency = "EUR";
+
+            Currency = AuthenticationResultHelper.ActiveUser.PreferredCurrency;
+
+            Currency = AuthenticationResultHelper.ActiveUser.PreferredCurrency switch
+            {
+                "USD" => "$",
+                "EUR" => "€",
+                "GBP" => "£",
+                _ => AuthenticationResultHelper.ActiveUser.PreferredCurrency,
+            };
         }
 
         private IManageData _manageData;
@@ -32,6 +50,9 @@ namespace SmartShopMobileApp.ViewModels
         [ObservableProperty]
         private ObservableCollection<OfferDTO> _currentOffers;
 
+        [ObservableProperty]
+        private string _currency;
+
         private async Task GetCurrentOffers()
         {
             try
@@ -45,6 +66,7 @@ namespace SmartShopMobileApp.ViewModels
                     {
                         offer.OldPrice = offer.Product.Price;
                         offer.NewPrice = Math.Round(offer.Product.Price * (1 - (decimal)offer.OfferPercentage / 100), 2);
+                        offer.Currency = Currency;
                     }
                 }
                 CurrentOffers = offers;

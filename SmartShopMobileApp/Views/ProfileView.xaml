@@ -68,7 +68,7 @@
 
 
                 <Picker
-                        Title="Change language"
+                        Title="{Binding CurrentUser.PreferredLanguage}"
                         Margin="10,10,10,0"
                         BackgroundColor="Transparent"
                         FontFamily="Montserrat"
@@ -77,8 +77,21 @@
                         SelectedItem="{Binding SelectedLanguage}"
                         TextColor="#1C698A"
                         TitleColor="#1C698A"
-                    HorizontalOptions="StartAndExpand"
+                        HorizontalOptions="StartAndExpand"
                         WidthRequest="150" />
+
+                <Picker
+                        Title="{Binding CurrentUser.PreferredCurrency}"
+                        Margin="10,10,10,0"
+                        BackgroundColor="Transparent"
+                        FontFamily="Montserrat"
+                        FontSize="15"
+                        ItemsSource="{Binding CurrencyOptions}"
+                        SelectedItem="{Binding SelectedCurrency}"
+                        TextColor="#1C698A"
+                        TitleColor="#1C698A"
+                        HorizontalOptions="StartAndExpand"
+                        WidthRequest="150" />   
             </StackLayout>
 
         </StackLayout>

@@ -18,9 +18,24 @@ namespace API.Controllers
         {
             try
             {
-                var employee = await _unitOfWork.UserRepository.UpdateLanguage(userId, language);
+                var user = await _unitOfWork.UserRepository.UpdateLanguage(userId, language);
 
-                return Ok(employee);
+                return Ok(user);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPost("UpdateCurrency")]
+        public async Task<IActionResult> UpdateCurrency(int userId, string currency)
+        {
+            try
+            {
+                var user = await _unitOfWork.UserRepository.UpdateCurrency(userId, currency);
+
+                return Ok(user);
             }
             catch (Exception e)
             {

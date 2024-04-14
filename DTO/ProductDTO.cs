@@ -34,6 +34,8 @@ namespace DTO
         }
         public string? ImageSource { get; set; }
         public double? Quantity { get; set; }
+        public string? Currency { get; set; }
+
 
     }
 }

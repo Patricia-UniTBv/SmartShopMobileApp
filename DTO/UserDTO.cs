@@ -22,6 +22,7 @@ namespace DTO
         public string ImageUrl => "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png";
 
         public string? PreferredLanguage { get; set; }
+        public string? PreferredCurrency { get; set; }
     }
 
 }

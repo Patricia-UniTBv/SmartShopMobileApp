@@ -63,6 +63,11 @@ namespace SmartShopMobileApp.Helpers
             var calculatedAmount = (amount * sourceCurrencyExchangeRate) * destinationCurrencyExchangeRate;
             return calculatedAmount;
         }
+
+        public List<string> GetAllCurrencyCodes()
+        {
+            return _currencies.Keys.ToList();
+        }
     }
 
 }

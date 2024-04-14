@@ -23,6 +23,9 @@ namespace SmartShopMobileApp.ViewModels
         [ObservableProperty] 
         private ObservableCollection<string> _languageOptions;
 
+        [ObservableProperty]
+        private List<string> _currencyOptions;
+
         private IManageData _manageData;
         public IManageData ManageData
         {
@@ -52,6 +55,21 @@ namespace SmartShopMobileApp.ViewModels
             }
         }
 
+        private string _selectedCurrency;
+        [Obsolete]
+        public string SelectedCurrency
+        {
+            get => _selectedCurrency;
+            set
+            {
+                _selectedCurrency = value;
+                OnPropertyChanged("SelectedCurrency");
+
+                Task.Run(async () => await ChangeCurrency(_selectedCurrency));
+            }
+        }
+        private readonly CurrencyConversionService _conversionService = new CurrencyConversionService();
+
         public ProfileViewModel()
         {
             var currentCulture = CultureInfo.CurrentCulture;
@@ -77,6 +95,9 @@ namespace SmartShopMobileApp.ViewModels
                "Romanian"
             };
             SelectedLanguage = currentCulture.DisplayName;
+
+            CurrencyOptions = _conversionService.GetAllCurrencyCodes();
+
         }
 
         [Obsolete]
@@ -98,7 +119,28 @@ namespace SmartShopMobileApp.ViewModels
                 {
                     App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new HomeView()));
                 });
-                // App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new HomeView()));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        [Obsolete]
+        private async Task ChangeCurrency(string selectedCurrency)
+        {
+            try
+            {
+
+                _manageData.SetStrategy(new CreateData());
+                var json = JsonConvert.SerializeObject(CurrentUser);
+
+                await _manageData.GetDataAndDeserializeIt<UserDTO>($"User/UpdateCurrency?userId={CurrentUser.UserID}&currency={selectedCurrency}", json);
+
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new ProfileView()));
+                });
             }
             catch (Exception e)
             {

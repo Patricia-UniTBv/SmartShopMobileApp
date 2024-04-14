@@ -20,6 +20,16 @@ namespace SmartShopMobileApp.ViewModels
             _manageData = new ManageData();
             Products = new List<ProductDTO>() { };
             _userId = 1; //provizoriu
+
+            if (AuthenticationResultHelper.ActiveUser == null)
+            {
+                AuthenticationResultHelper.ActiveUser = new UserDTO();
+            }
+
+            AuthenticationResultHelper.ActiveUser.UserID = 1;
+            AuthenticationResultHelper.ActiveUser.PreferredCurrency = "EUR";
+
+            Currency = AuthenticationResultHelper.ActiveUser.PreferredCurrency.ToLower();
         }
 
         private IManageData _manageData;
@@ -49,6 +59,10 @@ namespace SmartShopMobileApp.ViewModels
 
         [ObservableProperty]
         private decimal _totalAmount;
+
+        [ObservableProperty]
+        private string _currency;
+
 
         [RelayCommand]
         private async Task DeleteCartItem(object obj)
@@ -84,11 +98,11 @@ namespace SmartShopMobileApp.ViewModels
                     Products = await _manageData.GetDataAndDeserializeIt<List<ProductDTO>>($"ShoppingCart/GetLatestShoppingCartForCurrentUser?id={_userId}", "");
                     foreach(var product in Products)
                     {
-                        product.Price = _conversionService.ConvertCurrencyAsync(product.Price, "RON", "EUR");
+                        product.Price = Math.Round(_conversionService.ConvertCurrencyAsync(product.Price, "RON", AuthenticationResultHelper.ActiveUser.PreferredCurrency), 2);
+                        product.Currency = Currency;
                     }
                     ShoppingCartId = latestShoppingCart.ShoppingCartID;
-                    TotalAmount = _conversionService.ConvertCurrencyAsync(latestShoppingCart.TotalAmount, "RON", "EUR");
-                    //TotalAmount = latestShoppingCart.TotalAmount;
+                    TotalAmount = Math.Round(_conversionService.ConvertCurrencyAsync(latestShoppingCart.TotalAmount, "RON", AuthenticationResultHelper.ActiveUser.PreferredCurrency), 2);
 
 
                     if (ShoppingCartId != 0)

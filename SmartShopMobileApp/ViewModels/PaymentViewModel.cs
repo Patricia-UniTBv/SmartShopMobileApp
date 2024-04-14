@@ -31,6 +31,9 @@ namespace SmartShopMobileApp.ViewModels
             }
 
             AuthenticationResultHelper.ActiveUser.UserID = 1;
+            AuthenticationResultHelper.ActiveUser.PreferredCurrency = "EUR";
+
+            CurrencyValue = AuthenticationResultHelper.ActiveUser.PreferredCurrency;
         }
 
         private IManageData _manageData;
@@ -79,6 +82,9 @@ namespace SmartShopMobileApp.ViewModels
         [ObservableProperty]
         public string _payButtonText;
 
+        [ObservableProperty]
+        private string _currencyValue;
+
         public void PayViaStripe()
         {
             StripeConfiguration.ApiKey = "sk_test_51OHNMNDQz7fQ3QseH9lroYrCZXFfNVJAqJeHgWgeOYjczfYfH2M7lCJiTsnjb5gSysFLcdVT5wdVYjYt3gD2SVCs00acLz6SUz";
@@ -105,7 +111,7 @@ namespace SmartShopMobileApp.ViewModels
             var option = new SourceCreateOptions
             {
                 Type = SourceType.Card,
-                Currency = "ron",
+                Currency = CurrencyValue,
                 Token = stripeToken.Id
             };
 
@@ -127,7 +133,7 @@ namespace SmartShopMobileApp.ViewModels
             var chargeoption = new ChargeCreateOptions
             {
                 Amount = Convert.ToInt64(TotalAmount * 100), 
-                Currency = "RON",
+                Currency = CurrencyValue,
                 ReceiptEmail = "patyanelis@yahoo.com",
                 Customer = cust.Id,
                 Source = source.Id
@@ -192,7 +198,7 @@ namespace SmartShopMobileApp.ViewModels
             email.Body = new TextPart(TextFormat.Html)
             {
                 Text = $"<p>Dear customer,</p>" + // sa inlocuiesc customer cu numele utilizatorului
-                     $"<p>We are pleased to inform you that your payment of {TotalAmount} RON has been successfully processed. Thank you for your payment! </p>" + 
+                     $"<p>We are pleased to inform you that your payment of {TotalAmount} {CurrencyValue} has been successfully processed. Thank you for your payment! </p>" + 
                      $"<p> With respect,  </p>" +
                      $"<p> SmartShop Mobile App <3 </p> "
             };
@@ -221,7 +227,7 @@ namespace SmartShopMobileApp.ViewModels
 
         private void UpdatePayButtonText()
         {
-            PayButtonText = $"Pay {TotalAmount} lei";
+            PayButtonText = $"Pay {TotalAmount}" + " " + CurrencyValue;
         }
 
         [RelayCommand]
