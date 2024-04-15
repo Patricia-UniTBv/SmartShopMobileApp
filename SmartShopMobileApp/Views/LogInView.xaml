@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartShopMobileApp.Views.LogInView"
+             xmlns:viewModels="clr-namespace:SmartShopMobileApp.ViewModels" >
+    <VerticalStackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="280"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="5"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="25"/>
+            </Grid.ColumnDefinitions>
+            <Entry Grid.Row="2"
+               Grid.Column="1"
+               Text="Email"
+               Placeholder="emailAddress"/>
+            <Entry Grid.Row="3"
+               Grid.Column="1"
+               Text="Password"
+               Placeholder="Password"
+               IsPassword="True"/>
+            <Button Grid.Row="4"
+                Grid.Column="1"
+                Text="Log in"
+               />
+        </Grid>
+        <Label Text="Don't have an account? Create one:" Margin="10,20,10,0" FontSize="Medium" HorizontalOptions="Center"/>
+
+        <Button Text="Sign Up" Command="{Binding OpenSignUpPageCommand}" Margin="0,10,0,0" HorizontalOptions="Center"/>
+    </VerticalStackLayout>
+</ContentPage>
