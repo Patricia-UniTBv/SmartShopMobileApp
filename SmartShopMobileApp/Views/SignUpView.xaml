@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartShopMobileApp.Views.SignUpView"
+             xmlns:viewModels="clr-namespace:SmartShopMobileApp.ViewModels" 
+             Title="Sign Up">
+    <VerticalStackLayout>
+        <ScrollView>
+            <StackLayout Margin="20">
+                <Entry Placeholder="First Name" Text="{Binding FirstName}"/>
+                <Entry Placeholder="Last Name" Text="{Binding LastName}"/>
+                <Entry Placeholder="Email Address" Text="{Binding EmailAddress}"/>
+                <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}"/>
+                <DatePicker x:Name="birthDateDatePicker"/>
+                <Button Text="Sign Up" Command="{Binding SignUpCommand}"/>
+            </StackLayout>
+        </ScrollView>
+    </VerticalStackLayout>
+</ContentPage>
