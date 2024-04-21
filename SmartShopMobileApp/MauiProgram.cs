@@ -50,6 +50,9 @@ public static class MauiProgram
         builder.Services.AddTransient<LogInView>();
         builder.Services.AddTransient<LogInViewModel>();
 
+        builder.Services.AddTransient<SignUpView>();
+        builder.Services.AddTransient<SignUpViewModel>();
+
         return builder.Build();
 	}
 }

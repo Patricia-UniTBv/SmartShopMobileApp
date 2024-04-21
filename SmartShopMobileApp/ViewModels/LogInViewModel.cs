@@ -45,8 +45,7 @@ namespace SmartShopMobileApp.ViewModels
             var error = await _authService.LoginAsync(new LoginRequestDTO(ExistingUser.Email, ExistingUser.Password));
             if (string.IsNullOrWhiteSpace(error))
             {
-                //await Shell.Current.GoToAsync("//AppView");
-                await Shell.Current.DisplayAlert("Error", error, "Ok");
+                await Shell.Current.GoToAsync("//AppView");
             }
             else
             {
