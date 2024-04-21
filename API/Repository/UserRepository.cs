@@ -12,6 +12,23 @@ namespace API.Repository
         {
         }
 
+        public async Task<List<UserDTO>> GetAllUsers()
+        {
+            var result = await _dbSet.ToListAsync();
+            return _mapper.Map<List<User>, List<UserDTO>>(result);
+        }
+
+        public async Task<UserDTO> GetUserByEmailAndPassword(string email, string password)
+        {
+            var user = await _dbSet.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
+
+            if (user == null)
+            {
+                return new UserDTO();
+            }
+            return _mapper.Map<User, UserDTO>(user);
+        }
+
         public async Task<UserDTO> GetUserByID(int ID)
         {
             var result = await _dbSet.SingleAsync(u => u.UserID == ID);

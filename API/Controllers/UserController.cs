@@ -1,9 +1,11 @@
 ﻿using API.Repository.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
+
     public class UserController: ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -11,6 +13,35 @@ namespace API.Controllers
         public UserController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+        }
+
+        [HttpGet("GetAllUsers")]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            try
+            {
+                var users = await _unitOfWork.UserRepository.GetAllUsers();
+
+                return Ok(users);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("GetUserByEmailAndPassword")]
+        public async Task<IActionResult> GetUserByEmailAndPassword(string email, string password)
+        {
+            try
+            {
+                var user = await _unitOfWork.UserRepository.GetUserByEmailAndPassword(email, password);
+                return Ok(user);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpPost("UpdateLanguage")]

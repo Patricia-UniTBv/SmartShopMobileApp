@@ -20,16 +20,17 @@
             </Grid.ColumnDefinitions>
             <Entry Grid.Row="2"
                Grid.Column="1"
-               Text="Email"
+               Text="{Binding Email}"
                Placeholder="emailAddress"/>
             <Entry Grid.Row="3"
                Grid.Column="1"
-               Text="Password"
+               Text="{Binding Password}"
                Placeholder="Password"
                IsPassword="True"/>
             <Button Grid.Row="4"
                 Grid.Column="1"
                 Text="Log in"
+                Command ="{Binding LogInCommand}"
                />
         </Grid>
         <Label Text="Don't have an account? Create one:" Margin="10,20,10,0" FontSize="Medium" HorizontalOptions="Center"/>

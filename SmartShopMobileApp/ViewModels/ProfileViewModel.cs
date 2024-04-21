@@ -1,8 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using DTO;
 using Newtonsoft.Json;
 using SmartShopMobileApp.Helpers;
 using SmartShopMobileApp.Resources.Languages;
+using SmartShopMobileApp.Services;
 using SmartShopMobileApp.Views;
 using System;
 using System.Collections.Generic;
@@ -24,13 +26,23 @@ namespace SmartShopMobileApp.ViewModels
         private ObservableCollection<string> _languageOptions;
 
         [ObservableProperty]
-        private List<string> _currencyOptions;
+        private ObservableCollection<string> _currencyOptions;
+
+        [ObservableProperty]
+        private AuthResponseDTO _loggedUser;
 
         private IManageData _manageData;
         public IManageData ManageData
         {
             get { return _manageData; }
             set { _manageData = value; }
+        }
+
+        private IAuthService _authService;
+        public IAuthService AuthService
+        {
+            get { return _authService; }
+            set { _authService = value; }
         }
 
         private string _selectedLanguage;
@@ -51,6 +63,10 @@ namespace SmartShopMobileApp.ViewModels
                 else if (_selectedLanguage == "Romanian")
                 {
                     Task.Run(async () => await ChangeLanguage("ro"));
+                }
+                else if (_selectedLanguage == "French")
+                {
+                    Task.Run(async () => await ChangeLanguage("fr"));
                 }
             }
         }
@@ -78,6 +94,8 @@ namespace SmartShopMobileApp.ViewModels
 
             _manageData = new ManageData();
 
+            _authService = new AuthService();
+
             if (AuthenticationResultHelper.ActiveUser == null)
             {
                 AuthenticationResultHelper.ActiveUser = new UserDTO();
@@ -92,11 +110,18 @@ namespace SmartShopMobileApp.ViewModels
             LanguageOptions = new ObservableCollection<string>()
             {
                "English",
-               "Romanian"
+               "Romanian",
+               "French"
             };
             SelectedLanguage = currentCulture.DisplayName;
 
-            CurrencyOptions = _conversionService.GetAllCurrencyCodes();
+            CurrencyOptions = new ObservableCollection<string>()
+            {
+               "RON",
+               "EUR",
+               "USD",
+               "GBP"
+            };
 
         }
 
@@ -146,6 +171,15 @@ namespace SmartShopMobileApp.ViewModels
             {
                 Console.WriteLine(e.Message);
             }
+        }
+
+        [RelayCommand]
+        private async Task LogOut()
+        {
+            LoggedUser = null;
+            App.NewLoggedUser = true;
+            _authService.Logout();
+            await Shell.Current.GoToAsync("//LogInView");
         }
     }
 }

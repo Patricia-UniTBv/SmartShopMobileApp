@@ -5,8 +5,20 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:SmartShopMobileApp.Views"
     Shell.FlyoutBehavior="Disabled">
+    
+    <ShellItem Route="MainPage">
+        <ShellContent
+        Title="Main Page"
+        ContentTemplate="{DataTemplate local:MainPageView}"/>
+    </ShellItem>
 
-    <TabBar>
+    <ShellItem Route="LogInView">
+        <ShellContent
+        Title="LogIn"
+        ContentTemplate="{DataTemplate local:LogInView}"/>
+    </ShellItem>
+    
+    <TabBar Route="AppView">
         <ShellContent Title="Home"  
                       Icon="home.png"
                       ContentTemplate="{DataTemplate local:HomeView}" />

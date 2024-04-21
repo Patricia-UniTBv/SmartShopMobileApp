@@ -11,6 +11,7 @@
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior Command="{Binding PageAppearingCommand}" EventName="Appearing" />
     </ContentPage.Behaviors>
+    
     <VerticalStackLayout>
         <Label Text="{x:Static lang:AppResources.YourCurrentShoppingCart}"
                FontFamily="Poppins-Regular"

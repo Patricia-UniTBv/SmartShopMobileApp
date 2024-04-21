@@ -2,15 +2,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartShopMobileApp.Views.ProfileView"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:icon="clr-namespace:SmartShopMobileApp"
              xmlns:viewmodels="clr-namespace:SmartShopMobileApp.ViewModels"
              xmlns:lang="clr-namespace:SmartShopMobileApp.Resources.Languages"
-             Title="ProfileView">
+             Title="Your profile">
     <ContentPage.BindingContext>
         <viewmodels:ProfileViewModel />
     </ContentPage.BindingContext>
-    <!--<ContentPage.Behaviors>
-        <xct:EventToCommandBehavior Command="{Binding PageAppearingCommand}" EventName="Appearing" />
-    </ContentPage.Behaviors>-->
+
     <ContentPage.Content>
         <StackLayout>
             <StackLayout>
@@ -46,7 +46,6 @@
                                 Color="#FFFFFF" />
                             </Button.ImageSource>
                         </Button>-->
-
                     </AbsoluteLayout>
 
                     <StackLayout Orientation="Vertical">
@@ -93,7 +92,24 @@
                         HorizontalOptions="StartAndExpand"
                         WidthRequest="150" />   
             </StackLayout>
+            <StackLayout Orientation="Horizontal"
+                         VerticalOptions="EndAndExpand"
+                         HorizontalOptions="StartAndExpand">
 
+                <Button Text="{x:Static icon:IconFont.Logout}"
+                        CornerRadius="30"
+                        Command="{Binding LogOutCommand}"
+                        Margin="20"
+                        VerticalOptions="EndAndExpand"
+                        HorizontalOptions="Start">
+                </Button>
+
+                <Label Text="Log out"
+                       Margin="-10,10,20,30"
+                       TextColor="#1C698A"
+                       VerticalOptions="End"/>
+            </StackLayout>
         </StackLayout>
+        
     </ContentPage.Content>
 </ContentPage>

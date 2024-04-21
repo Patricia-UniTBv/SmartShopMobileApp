@@ -7,11 +7,12 @@ namespace SmartShopMobileApp;
 
 public partial class App : Application
 {
-	public App()
+    public static bool NewLoggedUser { get; set; }
+    public App()
 	{
 		InitializeComponent();
-
-        MainPage = new NavigationPage(new LogInView());
+        NewLoggedUser = false;
+        MainPage = new AppShell();
     }
 
 }
