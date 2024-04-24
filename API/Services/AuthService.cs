@@ -1,14 +1,10 @@
 ﻿using API.Repository;
 using API.Repository.Interfaces;
+using API.Services.Interfaces;
 using DTO;
 
 namespace API.Services
 {
-    public interface IAuthService
-    {
-        Task<ApiResponse<AuthResponseDTO>> LoginAsync(LoginRequestDTO loginDto, CancellationToken cancellationToken = default);
-    }
-
     public sealed class AuthService : IAuthService
     {
         private readonly ITokenService _tokenService;

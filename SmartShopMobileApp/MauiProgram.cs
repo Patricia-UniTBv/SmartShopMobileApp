@@ -8,6 +8,7 @@ using Microcharts.Maui;
 using SmartShopMobileApp.Services;
 using SmartShopMobileApp.Views;
 using SmartShopMobileApp.ViewModels;
+using SmartShopMobileApp.Services.Interfaces;
 
 namespace SmartShopMobileApp;
 

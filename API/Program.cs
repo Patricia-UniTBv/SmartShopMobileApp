@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using API.Services;
+using API.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 

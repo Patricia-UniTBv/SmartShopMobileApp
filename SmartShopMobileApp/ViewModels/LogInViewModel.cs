@@ -2,7 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using DTO;
 using SmartShopMobileApp.Helpers;
-using SmartShopMobileApp.Services;
+using SmartShopMobileApp.Services.Interfaces;
 using SmartShopMobileApp.Views;
 using System;
 using System.Collections.Generic;

@@ -1,5 +1,6 @@
 ﻿using DTO;
 using SmartShopMobileApp.Helpers;
+using SmartShopMobileApp.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,15 +12,6 @@ using System.Threading.Tasks;
 
 namespace SmartShopMobileApp.Services
 {
-    public interface IAuthService
-    {
-        Task<bool> IsUserAuthenticated();
-        Task<string> LoginAsync(LoginRequestDTO dto);
-        Task<AuthResponseDTO> GetAuthenticatedUserAsync();
-        Task<HttpClient> GetAuthenticatedHttpClientAsync();
-        void Logout();
-    }
-
     public class AuthService : IAuthService
     {
         private readonly IHttpClientFactory _httpClientFactory;

@@ -1,4 +1,4 @@
-using SmartShopMobileApp.Services;
+using SmartShopMobileApp.Services.Interfaces;
 using SmartShopMobileApp.ViewModels;
 
 namespace SmartShopMobileApp.Views;

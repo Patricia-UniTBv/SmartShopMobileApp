@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using SmartShopMobileApp.Helpers;
 using SmartShopMobileApp.Resources.Languages;
 using SmartShopMobileApp.Services;
+using SmartShopMobileApp.Services.Interfaces;
 using SmartShopMobileApp.Views;
 using System;
 using System.Collections.Generic;

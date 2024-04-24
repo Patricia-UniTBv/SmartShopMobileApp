@@ -1,4 +1,5 @@
-﻿using DTO;
+﻿using API.Services.Interfaces;
+using DTO;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -6,12 +7,6 @@ using System.Text;
 
 namespace API.Services
 {
-    public interface ITokenService
-    {
-        string GenerateJWT(IEnumerable<Claim>? additionalClaims = null);
-        string GenerateJWT(LoggedInUser user, IEnumerable<Claim>? additionalClaims = null);
-    }
-
     public sealed class TokenService : ITokenService
     {
         private readonly IConfiguration _configuration;
@@ -70,11 +65,6 @@ namespace API.Services
         private static SymmetricSecurityKey GetSecurityKey(IConfiguration _configuration)
         {
             string jwtKey = _configuration["Jwt:Key"]!;
-            if (jwtKey == null)
-            {
-                // Aruncați o excepție sau tratați în alt mod situația în care cheia nu este definită
-                throw new ArgumentNullException("Jwt:Key", "Jwt:Key trebuie să fie definit în configurație.");
-            }
 
             return new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
         }
