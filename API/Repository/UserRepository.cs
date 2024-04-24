@@ -68,5 +68,12 @@ namespace API.Repository
             return user;
         }
 
+        public async Task AddNewUser(UserDTO newUser)
+        {
+            var result = _mapper.Map<UserDTO, User>(newUser);
+            await _dbSet.AddAsync(result);
+            _context.SaveChanges();
+        }
+
     }
 }

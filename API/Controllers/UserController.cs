@@ -1,4 +1,5 @@
 ﻿using API.Repository.Interfaces;
+using DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -73,5 +74,29 @@ namespace API.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpPost("AddNewUser")]
+        public async Task<IActionResult> AddNewUser(string emailAddress, string password, string firstName, string lastName, DateTime birthdate)
+        {
+            try
+            {
+                var newUser = new UserDTO
+                {
+                    Email = emailAddress,
+                    Password = password,
+                    FirstName = firstName,
+                    LastName = lastName,
+                    Birthdate = birthdate
+                };
+                await _unitOfWork.UserRepository.AddNewUser(newUser);
+
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
     }
 }

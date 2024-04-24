@@ -7,6 +7,7 @@ using SmartShopMobileApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -40,7 +41,7 @@ namespace SmartShopMobileApp.ViewModels
         {
             _manageData.SetStrategy(new GetData());
             ExistingUser = null;
-            ExistingUser = await _manageData.GetDataAndDeserializeIt<UserDTO>($"User/GetUserByEmailAndPassword?email={Email}&password={Password}", "");
+            ExistingUser = await _manageData.GetDataAndDeserializeIt<UserDTO>($"User/GetUserByEmailAndPassword?email={Email}&password={LogInViewModel.HashPassword(Password)}", "");
 
             var error = await _authService.LoginAsync(new LoginRequestDTO(ExistingUser.Email, ExistingUser.Password));
             if (string.IsNullOrWhiteSpace(error))
@@ -51,6 +52,23 @@ namespace SmartShopMobileApp.ViewModels
             {
                 await Shell.Current.DisplayAlert("Error", error, "Ok");
             }
+        }
+
+        private static string HashPassword(string password)
+        {
+            byte[] bytes = SHA256.HashData(Encoding.UTF8.GetBytes(password));
+            StringBuilder builder = new();
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                builder.Append(bytes[i].ToString("x2"));
+            }
+            return builder.ToString();
+        }
+
+        [RelayCommand]
+        private async Task OpenSignUpPage()
+        {
+            await Shell.Current.GoToAsync("//SignUpView");
         }
     }
 }

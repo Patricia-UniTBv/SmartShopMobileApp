@@ -17,7 +17,13 @@
         Title="LogIn"
         ContentTemplate="{DataTemplate local:LogInView}"/>
     </ShellItem>
-    
+
+    <ShellItem Route="SignUpView">
+        <ShellContent
+         Title="SignUp"
+         ContentTemplate="{DataTemplate local:SignUpView}"/>
+    </ShellItem>
+
     <TabBar Route="AppView">
         <ShellContent Title="Home"  
                       Icon="home.png"

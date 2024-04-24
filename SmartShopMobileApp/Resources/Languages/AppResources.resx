@@ -129,6 +129,12 @@
   <data name="CartValue" xml:space="preserve">
     <value>Cart value:</value>
   </data>
+  <data name="ChoosePreferredCurrency" xml:space="preserve">
+    <value>Choose your preferred currency:</value>
+  </data>
+  <data name="ChoosePreferredLanguage" xml:space="preserve">
+    <value>Choose your preferred language:</value>
+  </data>
   <data name="ChooseYourSupermarket" xml:space="preserve">
     <value>Choose your supermarket:</value>
   </data>

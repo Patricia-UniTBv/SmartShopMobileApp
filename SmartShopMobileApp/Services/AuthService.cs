@@ -46,7 +46,7 @@ namespace SmartShopMobileApp.Services
             return null;
         }
 
-        public async Task<string?> LoginAsync(LoginRequestDTO dto)
+        public async Task<string?> LoginAsync(LoginRequestDTO dto) //DECRIPTARE PAROLA!!!
         {
             var httpClient = new HttpClient(App.Current.MainPage.Handler.MauiContext.Services.GetService<IHttpClientHandlerService>().GetInsecureHandler());
             string Uri = DeviceInfo.Platform == DevicePlatform.Android ? "https://10.0.2.2:7116/api/" : "https://localhost:5152";

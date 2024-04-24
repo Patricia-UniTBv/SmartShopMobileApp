@@ -9,6 +9,7 @@ namespace API.Repository.Interfaces
         Task<UserDTO> GetUserByEmailAndPassword(string email, string password);
         Task<UserDTO> UpdateLanguage(int userId, string language);
         Task<UserDTO> UpdateCurrency(int userId, string currency);
+        Task AddNewUser(UserDTO newUser);
 
     }
 }

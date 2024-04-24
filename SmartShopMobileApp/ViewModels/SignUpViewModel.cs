@@ -2,9 +2,11 @@
 using CommunityToolkit.Mvvm.Input;
 using DTO;
 using SmartShopMobileApp.Helpers;
+using SmartShopMobileApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -50,7 +52,7 @@ namespace SmartShopMobileApp.ViewModels
 
                 await _manageData.GetDataAndDeserializeIt<UserDTO>($"User/AddNewUser?emailAddress={EmailAddress}&password={hashedPassword}&firstName={FirstName}&lastName={LastName}&birthdate={BirthDate}", "");
 
-                Application.Current.MainPage = new NavigationPage(new LogInView());
+                await Shell.Current.GoToAsync("//LogInView");
 
             }
             catch (Exception e)
@@ -59,18 +61,15 @@ namespace SmartShopMobileApp.ViewModels
             }
         }
 
-        private string HashPassword(string password)
+        private static string HashPassword(string password)
         {
-            using (SHA256 sha256Hash = SHA256.Create())
+            byte[] bytes = SHA256.HashData(Encoding.UTF8.GetBytes(password));
+            StringBuilder builder = new();
+            for (int i = 0; i < bytes.Length; i++)
             {
-                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
-                StringBuilder builder = new StringBuilder();
-                for (int i = 0; i < bytes.Length; i++)
-                {
-                    builder.Append(bytes[i].ToString("x2"));
-                }
-                return builder.ToString();
+                builder.Append(bytes[i].ToString("x2"));
             }
+            return builder.ToString();
         }
 
     }

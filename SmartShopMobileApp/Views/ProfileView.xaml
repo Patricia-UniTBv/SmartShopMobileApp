@@ -22,13 +22,15 @@
                     <AbsoluteLayout>
                         <Frame x:Name="imageFrame"
                                CornerRadius="60"
-                               IsClippedToBounds="False"
+                               IsClippedToBounds="True"
                                HorizontalOptions="End"
                                VerticalOptions="End"
                                Margin="0,0,30,30"
                                WidthRequest="100"
                                HeightRequest="100">
-                            <Image Source="{Binding CurrentUser.ImageUrl}" Aspect="AspectFill"/>
+                            <Image Source="{Binding CurrentUser.ImageUrl}" 
+                                   Aspect="AspectFill" 
+                                   Margin="-20"/>
                         </Frame>
 
                         <!--<Button Command="{Binding EditImageCommand}"
@@ -65,21 +67,43 @@
                 </StackLayout>
 
 
+                <Label Text="{x:Static lang:AppResources.ChoosePreferredLanguage}"
+                       Margin="10,50,0,0"
+                       TextColor="#1C698A"/>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{x:Static icon:IconFont.Arrow_drop_down_circle}" 
+                           Style="{StaticResource GoogleFont}" 
+                           TextColor="#2B0B98" 
+                           FontSize="20" 
+                           Margin="10,20,0,0" 
+                           HorizontalOptions="Start"/>
+                    <Picker
+                            Title="{Binding CurrentUser.PreferredLanguage}"
+                            Margin="10,10,10,0"
+                            BackgroundColor="Transparent"
+                            FontFamily="Montserrat"
+                            FontSize="15"
+                            ItemsSource="{Binding LanguageOptions}"
+                            SelectedItem="{Binding SelectedLanguage}"
+                            TextColor="#1C698A"
+                            TitleColor="#1C698A"
+                            HorizontalOptions="StartAndExpand"
+                            WidthRequest="150" />
 
-                <Picker
-                        Title="{Binding CurrentUser.PreferredLanguage}"
-                        Margin="10,10,10,0"
-                        BackgroundColor="Transparent"
-                        FontFamily="Montserrat"
-                        FontSize="15"
-                        ItemsSource="{Binding LanguageOptions}"
-                        SelectedItem="{Binding SelectedLanguage}"
-                        TextColor="#1C698A"
-                        TitleColor="#1C698A"
-                        HorizontalOptions="StartAndExpand"
-                        WidthRequest="150" />
+                </StackLayout>
 
-                <Picker
+                <Label Text="{Binding CurrentUser.PreferredCurrency}"
+                       Margin="10,30,0,0"
+                       TextColor="#1C698A"/>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{x:Static icon:IconFont.Arrow_drop_down_circle}" 
+                           Style="{StaticResource GoogleFont}" 
+                           TextColor="#2B0B98" 
+                           FontSize="20" 
+                           Margin="10,20,0,0" 
+                           HorizontalOptions="Start"/>
+
+                    <Picker
                         Title="{Binding CurrentUser.PreferredCurrency}"
                         Margin="10,10,10,0"
                         BackgroundColor="Transparent"
@@ -90,14 +114,17 @@
                         TextColor="#1C698A"
                         TitleColor="#1C698A"
                         HorizontalOptions="StartAndExpand"
-                        WidthRequest="150" />   
+                        WidthRequest="150" />
+                </StackLayout>
+                  
             </StackLayout>
             <StackLayout Orientation="Horizontal"
                          VerticalOptions="EndAndExpand"
                          HorizontalOptions="StartAndExpand">
 
                 <Button Text="{x:Static icon:IconFont.Logout}"
-                        CornerRadius="30"
+                        Style="{x:StaticResource GoogleFont}"
+                        CornerRadius="40"
                         Command="{Binding LogOutCommand}"
                         Margin="20"
                         VerticalOptions="EndAndExpand"

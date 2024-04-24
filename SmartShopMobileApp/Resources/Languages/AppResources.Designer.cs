@@ -97,6 +97,24 @@ namespace SmartShopMobileApp.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose your preferred currency:.
+        /// </summary>
+        internal static string ChoosePreferredCurrency {
+            get {
+                return ResourceManager.GetString("ChoosePreferredCurrency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose your preferred language:.
+        /// </summary>
+        internal static string ChoosePreferredLanguage {
+            get {
+                return ResourceManager.GetString("ChoosePreferredLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose your supermarket:.
         /// </summary>
         internal static string ChooseYourSupermarket {
