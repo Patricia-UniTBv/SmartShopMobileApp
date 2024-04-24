@@ -18,8 +18,8 @@ public partial class MainPage : ContentPage
         base.OnNavigatedTo(args);
         if (await _authService.IsUserAuthenticated())
         {
-            await Shell.Current.GoToAsync($"//{nameof(HomeView)}");
-            //await Shell.Current.GoToAsync($"//{nameof(LogInView)}");
+            //await Shell.Current.GoToAsync($"//{nameof(HomeView)}");
+            await Shell.Current.GoToAsync($"//{nameof(LogInView)}");
         }
         else
         {

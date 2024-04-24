@@ -13,14 +13,18 @@ namespace DTO
         public string FirstName { get; }
         public string Email { get; }
         public string Password { get; }
+        public string PreferredLanguage { get; }
+        public string PreferredCurrency { get; }
 
-        public LoggedInUser(int id, string lastName, string firstName, string email, string password)
+        public LoggedInUser(int id, string lastName, string firstName, string email, string password, string preferredLanguage, string preferredCurrency)
         {
             UserId = id;
             FirstName = firstName;
             LastName = lastName;
             Email = email;
             Password = password;
+            PreferredLanguage = preferredLanguage;
+            PreferredCurrency = preferredCurrency;
         }
     }
 }

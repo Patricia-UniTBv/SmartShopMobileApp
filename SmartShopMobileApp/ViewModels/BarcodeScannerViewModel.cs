@@ -19,12 +19,12 @@ namespace SmartShopMobileApp.ViewModels
         public BarcodeScannerViewModel(string barcode) 
         {
             _manageData = new ManageData();
-            if (AuthenticationResultHelper.ActiveUser == null)
-            {
-                AuthenticationResultHelper.ActiveUser = new UserDTO();
-            }
+            //if (AuthenticationResultHelper.ActiveUser == null)
+            //{
+            //    AuthenticationResultHelper.ActiveUser = new UserDTO();
+            //}
 
-            AuthenticationResultHelper.ActiveUser.UserID = 1;
+            //AuthenticationResultHelper.ActiveUser.UserID = 1;
             IdentifyProductByBarcode(barcode);
         }
         private IManageData _manageData;
@@ -69,7 +69,7 @@ namespace SmartShopMobileApp.ViewModels
             var json = JsonConvert.SerializeObject(Product);
 
             _manageData.SetStrategy(new CreateData());
-            var result = await _manageData.GetDataAndDeserializeIt<object>($"Product/AddProductToShoppingCart?productId={Product.ProductID}&numberOfProducts={NumberOfProducts}&supermarketId={CurrentSupermarket.Supermarket.SupermarketID}&userId={AuthenticationResultHelper.ActiveUser.UserID}", json);
+            var result = await _manageData.GetDataAndDeserializeIt<object>($"Product/AddProductToShoppingCart?productId={Product.ProductID}&numberOfProducts={NumberOfProducts}&supermarketId={CurrentSupermarket.Supermarket.SupermarketID}&userId={AuthenticationResultHelper.ActiveUser.UserId}", json);
             
             if(result != null)
                 await Application.Current.MainPage.DisplayAlert("Successfully added", "Your product has been successfully added to the shopping cart!", "OK");

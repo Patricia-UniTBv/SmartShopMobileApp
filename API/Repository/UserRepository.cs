@@ -35,6 +35,13 @@ namespace API.Repository
             return _mapper.Map<User, UserDTO>(result);
         }
 
+        public async Task<Tuple<string,string>> GetPreferredLanguageAndCurrency(int userId)
+        {
+            var dbUser = await _dbSet.SingleAsync(u => u.UserID == userId);
+            return Tuple.Create(dbUser.PreferredLanguage!, dbUser.PreferredCurrency!);
+        }
+
+
         public async Task<UserDTO> UpdateLanguage(int userId, string language)
         {
             var dbUser = await _dbSet.SingleAsync(u => u.UserID == userId);

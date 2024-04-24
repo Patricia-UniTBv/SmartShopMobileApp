@@ -5,6 +5,8 @@ using DTO;
 using SmartShopMobileApp.Helpers;
 using SmartShopMobileApp.Views;
 using System.Collections.ObjectModel;
+using SmartShopMobileApp.Services;
+using SmartShopMobileApp.Services.Interfaces;
 
 namespace SmartShopMobileApp.ViewModels
 {
@@ -13,28 +15,12 @@ namespace SmartShopMobileApp.ViewModels
         public HomeViewModel() 
         {
             _manageData = new ManageData();
+            _authService = new AuthService();
+
             Supermarkets = new List<SupermarketDTO>();
+            ActiveUser = new AuthResponseDTO();
+
             IsCurrentOffersVisible = false;
-
-            GetCurrentOffers();
-
-            if (AuthenticationResultHelper.ActiveUser == null)
-            {
-                AuthenticationResultHelper.ActiveUser = new UserDTO();
-            }
-
-            AuthenticationResultHelper.ActiveUser.UserID = 1;
-            AuthenticationResultHelper.ActiveUser.PreferredCurrency = "EUR";
-
-            Currency = AuthenticationResultHelper.ActiveUser.PreferredCurrency;
-
-            Currency = AuthenticationResultHelper.ActiveUser.PreferredCurrency switch
-            {
-                "USD" => "$",
-                "EUR" => "€",
-                "GBP" => "£",
-                _ => AuthenticationResultHelper.ActiveUser.PreferredCurrency,
-            };
         }
 
         private IManageData _manageData;
@@ -42,6 +28,13 @@ namespace SmartShopMobileApp.ViewModels
         {
             get { return _manageData; }
             set { _manageData = value; }
+        }
+
+        private IAuthService _authService;
+        public IAuthService AuthService
+        {
+            get { return _authService; }
+            set { _authService = value; }
         }
 
         [ObservableProperty]
@@ -52,6 +45,36 @@ namespace SmartShopMobileApp.ViewModels
 
         [ObservableProperty]
         private string _currency;
+
+        [ObservableProperty]
+        private AuthResponseDTO _activeUser;
+
+        private async Task GetPreferredCurrency()
+        {
+            try
+            {
+                ActiveUser = await _authService.GetAuthenticatedUserAsync();
+
+                _manageData.SetStrategy(new GetData());
+                var result = await _manageData.GetDataAndDeserializeIt<Tuple<string,string>>($"User/GetPreferredLanguageAndCurrency?userId={ActiveUser.UserId}", "");
+                
+                Currency = result.Item2;
+                ActiveUser.PreferredCurrency = Currency;
+
+                Currency = ActiveUser.PreferredCurrency switch
+                {
+                    "USD" => "$",
+                    "EUR" => "€",
+                    "GBP" => "£",
+                    _ => ActiveUser.PreferredCurrency,
+                };
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
 
         private async Task GetCurrentOffers()
         {
@@ -118,9 +141,11 @@ namespace SmartShopMobileApp.ViewModels
         }
 
         [RelayCommand]
-        private async void PageAppearing(object obj)
+        private async Task PageAppearing(object obj)
         {
-            GetSupermarkets();
+            await GetSupermarkets();
+            await GetCurrentOffers();
+            await GetPreferredCurrency();
         }
 
     }

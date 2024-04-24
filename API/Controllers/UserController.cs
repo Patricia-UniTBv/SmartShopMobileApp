@@ -45,6 +45,21 @@ namespace API.Controllers
             }
         }
 
+
+        [HttpGet("GetPreferredLanguageAndCurrency")]
+        public async Task<IActionResult> GetPreferredLanguageAndCurrency(int userId)
+        {
+            try
+            {
+                var result = await _unitOfWork.UserRepository.GetPreferredLanguageAndCurrency(userId);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpPost("UpdateLanguage")]
         public async Task<IActionResult> UpdateLanguage(int userId, string language)
         {

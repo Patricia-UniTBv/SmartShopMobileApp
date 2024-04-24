@@ -25,13 +25,13 @@ namespace SmartShopMobileApp.ViewModels
         public PaymentViewModel() 
         {
             _manageData = new ManageData();
-            if (AuthenticationResultHelper.ActiveUser == null)
-            {
-                AuthenticationResultHelper.ActiveUser = new UserDTO(); 
-            }
+            //if (AuthenticationResultHelper.ActiveUser == null)
+            //{
+            //    AuthenticationResultHelper.ActiveUser = new UserDTO(); 
+            //}
 
-            AuthenticationResultHelper.ActiveUser.UserID = 1;
-            AuthenticationResultHelper.ActiveUser.PreferredCurrency = "EUR";
+            //AuthenticationResultHelper.ActiveUser.UserID = 1;
+            //AuthenticationResultHelper.ActiveUser.PreferredCurrency = "EUR";
 
             CurrencyValue = AuthenticationResultHelper.ActiveUser.PreferredCurrency;
         }
@@ -174,7 +174,7 @@ namespace SmartShopMobileApp.ViewModels
                 var result = _manageData.GetDataAndDeserializeIt<TransactionDTO>("Transaction/AddTransaction", json);
 
                 _manageData.SetStrategy(new UpdateData());
-                _manageData.GetDataAndDeserializeIt<object>($"Voucher/UpdateVoucherForSpecificUser/{AuthenticationResultHelper.ActiveUser.UserID}/{CurrentSupermarket.Supermarket.SupermarketID}/{TotalAmount}", "");
+                _manageData.GetDataAndDeserializeIt<object>($"Voucher/UpdateVoucherForSpecificUser/{AuthenticationResultHelper.ActiveUser.UserId}/{CurrentSupermarket.Supermarket.SupermarketID}/{TotalAmount}", "");
                 _manageData.GetDataAndDeserializeIt<object>($"ShoppingCart/UpdateShoppingCartWhenTransacted?id={ShoppingCartId}", "");
 
                 Thread.Sleep(1000);

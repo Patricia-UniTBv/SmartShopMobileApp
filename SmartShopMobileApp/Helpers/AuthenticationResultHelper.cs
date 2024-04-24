@@ -9,6 +9,6 @@ namespace SmartShopMobileApp.Helpers
 {
     public static class AuthenticationResultHelper
     {
-        public static UserDTO ActiveUser { get; set; }
+        public static AuthResponseDTO ActiveUser { get; set; }
     }
 }

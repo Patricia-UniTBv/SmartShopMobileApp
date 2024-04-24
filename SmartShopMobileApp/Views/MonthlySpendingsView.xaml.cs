@@ -24,12 +24,12 @@ public partial class MonthlySpendingsView : ContentPage
         InitializeComponent();
         _manageData = new ManageData();
 
-        if (AuthenticationResultHelper.ActiveUser == null)
-        {
-            AuthenticationResultHelper.ActiveUser = new UserDTO();
-        }
+        //if (AuthenticationResultHelper.ActiveUser == null)
+        //{
+        //    AuthenticationResultHelper.ActiveUser = new UserDTO();
+        //}
 
-        AuthenticationResultHelper.ActiveUser.UserID = 1;
+        //AuthenticationResultHelper.ActiveUser.UserID = 1;
 
         foreach (string month in months)
         {
@@ -73,7 +73,7 @@ public partial class MonthlySpendingsView : ContentPage
         {
             _manageData.SetStrategy(new GetData());
 
-            shoppingCarts = await _manageData.GetDataAndDeserializeIt<List<ShoppingCartDTO>>($"ShoppingCart/GetAllTransactedShoppingCartsWithSupermarketByUserId?id={AuthenticationResultHelper.ActiveUser.UserID}", "");
+            shoppingCarts = await _manageData.GetDataAndDeserializeIt<List<ShoppingCartDTO>>($"ShoppingCart/GetAllTransactedShoppingCartsWithSupermarketByUserId?id={AuthenticationResultHelper.ActiveUser.UserId}", "");
 
             var lastFourMonths = DateTime.Now.AddMonths(-3); 
 
@@ -125,7 +125,7 @@ public partial class MonthlySpendingsView : ContentPage
         var firstDayOfMonth = new DateTime(selectedYear, months.IndexOf(selectedMonth) + 1, 1);
         var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
 
-        var allShoppingCarts = await _manageData.GetDataAndDeserializeIt<List<ShoppingCartDTO>>($"ShoppingCart/GetAllTransactedShoppingCartsWithSupermarketByUserId?id={AuthenticationResultHelper.ActiveUser.UserID}", "");
+        var allShoppingCarts = await _manageData.GetDataAndDeserializeIt<List<ShoppingCartDTO>>($"ShoppingCart/GetAllTransactedShoppingCartsWithSupermarketByUserId?id={AuthenticationResultHelper.ActiveUser.UserId}", "");
 
         var shoppingCartsThisMonth = allShoppingCarts
             .Where(cart => cart.CreationDate >= firstDayOfMonth && cart.CreationDate <= lastDayOfMonth).ToList();

@@ -21,13 +21,13 @@ namespace SmartShopMobileApp.ViewModels
             Products = new List<ProductDTO>() { };
             _userId = 1; //provizoriu
 
-            if (AuthenticationResultHelper.ActiveUser == null)
-            {
-                AuthenticationResultHelper.ActiveUser = new UserDTO();
-            }
+            //if (AuthenticationResultHelper.ActiveUser == null)
+            //{
+            //    AuthenticationResultHelper.ActiveUser = new UserDTO();
+            //}
 
-            AuthenticationResultHelper.ActiveUser.UserID = 1;
-            AuthenticationResultHelper.ActiveUser.PreferredCurrency = "EUR";
+            //AuthenticationResultHelper.ActiveUser.UserID = 1;
+            //AuthenticationResultHelper.ActiveUser.PreferredCurrency = "EUR";
 
             Currency = AuthenticationResultHelper.ActiveUser.PreferredCurrency.ToLower();
         }

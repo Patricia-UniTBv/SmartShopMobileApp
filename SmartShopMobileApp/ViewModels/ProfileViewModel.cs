@@ -20,9 +20,6 @@ namespace SmartShopMobileApp.ViewModels
 {
     public partial class ProfileViewModel: ObservableObject 
     {
-        [ObservableProperty]
-        private UserDTO _currentUser;
-
         [ObservableProperty] 
         private ObservableCollection<string> _languageOptions;
 
@@ -30,7 +27,7 @@ namespace SmartShopMobileApp.ViewModels
         private ObservableCollection<string> _currencyOptions;
 
         [ObservableProperty]
-        private AuthResponseDTO _loggedUser;
+        private AuthResponseDTO _activeUser;
 
         private IManageData _manageData;
         public IManageData ManageData
@@ -94,19 +91,20 @@ namespace SmartShopMobileApp.ViewModels
             var resourceSet = rm.GetResourceSet(currentCulture, true, true);
 
             _manageData = new ManageData();
-
             _authService = new AuthService();
 
-            if (AuthenticationResultHelper.ActiveUser == null)
-            {
-                AuthenticationResultHelper.ActiveUser = new UserDTO();
-            }
+            GetActiveUser();
 
-            AuthenticationResultHelper.ActiveUser.UserID = 1;
-            //PROVIZORIU
-            CurrentUser = AuthenticationResultHelper.ActiveUser;
-            CurrentUser.FirstName = "Test";
-            CurrentUser.LastName = "Testez";
+            //if (AuthenticationResultHelper.ActiveUser == null)
+            //{
+            //    AuthenticationResultHelper.ActiveUser = new UserDTO();
+            //}
+
+            //AuthenticationResultHelper.ActiveUser.UserID = 1;
+            ////PROVIZORIU
+            //CurrentUser = AuthenticationResultHelper.ActiveUser;
+            //CurrentUser.FirstName = "Test";
+            //CurrentUser.LastName = "Testez";
 
             LanguageOptions = new ObservableCollection<string>()
             {
@@ -126,6 +124,18 @@ namespace SmartShopMobileApp.ViewModels
 
         }
 
+        private async Task GetActiveUser()
+        {
+            try
+            {
+                ActiveUser = await _authService.GetAuthenticatedUserAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
         [Obsolete]
         private async Task ChangeLanguage(string selectedLanguage)
         {
@@ -133,9 +143,9 @@ namespace SmartShopMobileApp.ViewModels
             {
 
                 _manageData.SetStrategy(new CreateData());
-                var json = JsonConvert.SerializeObject(CurrentUser);
+                //var json = JsonConvert.SerializeObject(CurrentUser);
 
-                await _manageData.GetDataAndDeserializeIt<UserDTO>($"User/UpdateLanguage?userId={CurrentUser.UserID}&language={selectedLanguage}", json);
+                await _manageData.GetDataAndDeserializeIt<UserDTO>($"User/UpdateLanguage?userId={ActiveUser.UserId}&language={selectedLanguage}", "");
 
                 var language = new CultureInfo(selectedLanguage);
                 CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(selectedLanguage);
@@ -159,9 +169,9 @@ namespace SmartShopMobileApp.ViewModels
             {
 
                 _manageData.SetStrategy(new CreateData());
-                var json = JsonConvert.SerializeObject(CurrentUser);
+                //var json = JsonConvert.SerializeObject(CurrentUser);
 
-                await _manageData.GetDataAndDeserializeIt<UserDTO>($"User/UpdateCurrency?userId={CurrentUser.UserID}&currency={selectedCurrency}", json);
+                await _manageData.GetDataAndDeserializeIt<UserDTO>($"User/UpdateCurrency?userId={ActiveUser.UserId}&currency={selectedCurrency}", "");
 
                 Device.BeginInvokeOnMainThread(() =>
                 {
@@ -177,7 +187,7 @@ namespace SmartShopMobileApp.ViewModels
         [RelayCommand]
         private async Task LogOut()
         {
-            LoggedUser = null;
+            ActiveUser = null;
             App.NewLoggedUser = true;
             _authService.Logout();
             await Shell.Current.GoToAsync("//LogInView");

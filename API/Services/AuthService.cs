@@ -19,7 +19,7 @@ namespace API.Services
         public async Task<ApiResponse<AuthResponseDTO>> LoginAsync(LoginRequestDTO loginDto, CancellationToken cancellationToken = default)
         {
             var user = _userRepository.GetUserByEmailAndPassword(loginDto.Email, loginDto.Password).Result;
-            var loggedInUser = new LoggedInUser(user.UserID, user.LastName, user.FirstName, user.Email, user.Password);
+            var loggedInUser = new LoggedInUser(user.UserID, user.LastName, user.FirstName, user.Email, user.Password, user.PreferredLanguage, user.PreferredCurrency);
             
             var jwt = _tokenService.GenerateJWT(loggedInUser);
 
@@ -30,6 +30,8 @@ namespace API.Services
                 FirstName = loggedInUser.FirstName,
                 LastName = loggedInUser.LastName,
                 Password = loggedInUser.Password,
+                PreferredLanguage = loggedInUser.PreferredLanguage,
+                PreferredCurrency = loggedInUser.PreferredCurrency,
                 Token = jwt
             };
             return ApiResponse<AuthResponseDTO>.Success(authResponse);

@@ -18,12 +18,12 @@ namespace SmartShopMobileApp.ViewModels
         {
             _manageData = new ManageData();
             IsDataFiltered = false;
-            if (AuthenticationResultHelper.ActiveUser == null)
-            {
-                AuthenticationResultHelper.ActiveUser = new UserDTO();
-            }
+            //if (AuthenticationResultHelper.ActiveUser == null)
+            //{
+            //    AuthenticationResultHelper.ActiveUser = new UserDTO();
+            //}
 
-            AuthenticationResultHelper.ActiveUser.UserID = 1;
+            //AuthenticationResultHelper.ActiveUser.UserID = 1;
         }
 
      
@@ -63,7 +63,7 @@ namespace SmartShopMobileApp.ViewModels
             {
                 _manageData.SetStrategy(new GetData());
 
-                ShoppingCarts = await _manageData.GetDataAndDeserializeIt<ObservableCollection<ShoppingCartDTO>>($"ShoppingCart/GetAllTransactedShoppingCartsWithSupermarketByUserId?id={AuthenticationResultHelper.ActiveUser.UserID}", "");
+                ShoppingCarts = await _manageData.GetDataAndDeserializeIt<ObservableCollection<ShoppingCartDTO>>($"ShoppingCart/GetAllTransactedShoppingCartsWithSupermarketByUserId?id={AuthenticationResultHelper.ActiveUser.UserId}", "");
                 ShoppingCarts = new ObservableCollection<ShoppingCartDTO>(ShoppingCarts.OrderByDescending(s => s.CreationDate));
             }
             catch (Exception ex)
@@ -83,7 +83,7 @@ namespace SmartShopMobileApp.ViewModels
         {
             _manageData.SetStrategy(new GetData());
 
-            ShoppingCarts = await _manageData.GetDataAndDeserializeIt<ObservableCollection<ShoppingCartDTO>>($"ShoppingCart/GetAllTransactedShoppingCartsWithSupermarketByUserId?id={AuthenticationResultHelper.ActiveUser.UserID}", "");
+            ShoppingCarts = await _manageData.GetDataAndDeserializeIt<ObservableCollection<ShoppingCartDTO>>($"ShoppingCart/GetAllTransactedShoppingCartsWithSupermarketByUserId?id={AuthenticationResultHelper.ActiveUser.UserId}", "");
 
             ShoppingCarts = new ObservableCollection<ShoppingCartDTO>(
                                 ShoppingCarts

@@ -92,7 +92,7 @@
 
                 </StackLayout>
 
-                <Label Text="{Binding CurrentUser.PreferredCurrency}"
+                <Label Text="{x:Static lang:AppResources.ChoosePreferredCurrency}"
                        Margin="10,30,0,0"
                        TextColor="#1C698A"/>
                 <StackLayout Orientation="Horizontal">
