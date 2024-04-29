@@ -10,10 +10,7 @@ namespace SmartShopMobileApp.ViewModels
 {
     public partial class GeneratedQRCodeToExitShopViewModel
     {
-        public GeneratedQRCodeToExitShopViewModel()
-        {
-
-        }
+        public GeneratedQRCodeToExitShopViewModel() { }
 
         [RelayCommand]
         private async Task FinishShopping(object obj)

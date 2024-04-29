@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace SmartShopMobileApp.Helpers
 {
-    public static class AuthenticationResultHelper
-    {
-        public static AuthResponseDTO ActiveUser { get; set; }
-    }
+    //public static class AuthenticationResultHelper
+    //{
+    //    public static AuthResponseDTO ActiveUser { get; set; }
+    //}
 }

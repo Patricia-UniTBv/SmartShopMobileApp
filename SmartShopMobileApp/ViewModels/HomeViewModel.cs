@@ -17,11 +17,9 @@ namespace SmartShopMobileApp.ViewModels
         public HomeViewModel() 
         {
             _manageData = new ManageData();
-            _authService = new AuthService();
 
             Supermarkets = new List<SupermarketDTO>();
-            ActiveUser = new AuthResponseDTO();
-
+           
             IsCurrentOffersVisible = false;
         }
 
@@ -32,13 +30,6 @@ namespace SmartShopMobileApp.ViewModels
             set { _manageData = value; }
         }
 
-        private IAuthService _authService;
-        public IAuthService AuthService
-        {
-            get { return _authService; }
-            set { _authService = value; }
-        }
-
         [ObservableProperty]
         private bool _isCurrentOffersVisible;
 
@@ -47,17 +38,6 @@ namespace SmartShopMobileApp.ViewModels
 
         [ObservableProperty]
         private string _currency;
-
-        [ObservableProperty]
-        private AuthResponseDTO _activeUser;
-
-        private static void SetAppCulture(string preferredLanguage)
-        {
-           
-            var language = new CultureInfo(preferredLanguage);
-            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(preferredLanguage);
-            AppResources.Culture = language;
-        }
 
         private async Task GetCurrentOffers()
         {

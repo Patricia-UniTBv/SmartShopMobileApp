@@ -17,6 +17,8 @@ using SmartShopMobileApp.Helpers;
 using Newtonsoft.Json;
 using SmartShopMobileApp.Views;
 using System.Collections.ObjectModel;
+using SmartShopMobileApp.Services.Interfaces;
+using SmartShopMobileApp.Services;
 
 namespace SmartShopMobileApp.ViewModels
 {
@@ -25,15 +27,11 @@ namespace SmartShopMobileApp.ViewModels
         public PaymentViewModel() 
         {
             _manageData = new ManageData();
-            //if (AuthenticationResultHelper.ActiveUser == null)
-            //{
-            //    AuthenticationResultHelper.ActiveUser = new UserDTO(); 
-            //}
+            _authService = new AuthService();
 
-            //AuthenticationResultHelper.ActiveUser.UserID = 1;
-            //AuthenticationResultHelper.ActiveUser.PreferredCurrency = "EUR";
+            ActiveUser = new AuthResponseDTO();
 
-            CurrencyValue = AuthenticationResultHelper.ActiveUser.PreferredCurrency;
+            CurrencyValue = PreferredCurrency.Value;
         }
 
         private IManageData _manageData;
@@ -42,6 +40,13 @@ namespace SmartShopMobileApp.ViewModels
         {
             get { return _manageData; }
             set { _manageData = value; }
+        }
+
+        private IAuthService _authService;
+        public IAuthService AuthService
+        {
+            get { return _authService; }
+            set { _authService = value; }
         }
 
         private decimal totalAmount;
@@ -84,6 +89,9 @@ namespace SmartShopMobileApp.ViewModels
 
         [ObservableProperty]
         private string _currencyValue;
+
+        [ObservableProperty]
+        private AuthResponseDTO _activeUser;
 
         public void PayViaStripe()
         {
@@ -134,12 +142,11 @@ namespace SmartShopMobileApp.ViewModels
             {
                 Amount = Convert.ToInt64(TotalAmount * 100), 
                 Currency = CurrencyValue,
-                ReceiptEmail = "patyanelis@yahoo.com",
+                ReceiptEmail = ActiveUser.Email,
                 Customer = cust.Id,
                 Source = source.Id
             };
 
-            // save card data
             var setupIntentCreateOptions = new SetupIntentCreateOptions
             {
                 Customer = cust.Id,
@@ -174,13 +181,13 @@ namespace SmartShopMobileApp.ViewModels
                 var result = _manageData.GetDataAndDeserializeIt<TransactionDTO>("Transaction/AddTransaction", json);
 
                 _manageData.SetStrategy(new UpdateData());
-                _manageData.GetDataAndDeserializeIt<object>($"Voucher/UpdateVoucherForSpecificUser/{AuthenticationResultHelper.ActiveUser.UserId}/{CurrentSupermarket.Supermarket.SupermarketID}/{TotalAmount}", "");
+                _manageData.GetDataAndDeserializeIt<object>($"Voucher/UpdateVoucherForSpecificUser/{ActiveUser.UserId}/{CurrentSupermarket.Supermarket.SupermarketID}/{TotalAmount}", "");
                 _manageData.GetDataAndDeserializeIt<object>($"ShoppingCart/UpdateShoppingCartWhenTransacted?id={ShoppingCartId}", "");
 
                 Thread.Sleep(1000);
 
                 Microsoft.Maui.Controls.Application.Current.MainPage.DisplayAlert("Payment Confirmation", "The transaction was successful! You have recieved an email to confirm your payment.", "OK");
-                SendPaymentConfirmationEmail("patyanelis@yahoo.com", TotalAmount); // sa modific cu adresa userului conectat dupa autentificare!!
+                SendPaymentConfirmationEmail(ActiveUser.Email, TotalAmount); 
                 App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new GeneratedQRCodeToExitShopView()));
             }
             else
@@ -193,14 +200,14 @@ namespace SmartShopMobileApp.ViewModels
         {
             var email = new MimeMessage();
             email.From.Add(MailboxAddress.Parse("smartshopapp.testing@gmail.com"));
-            email.To.Add(MailboxAddress.Parse("patyanelis@yahoo.com"));  // sa modific cu adresa userului conectat dupa autentificare!!
+            email.To.Add(MailboxAddress.Parse(ActiveUser.Email)); 
             email.Subject = $"Payment Confirmation";
             email.Body = new TextPart(TextFormat.Html)
             {
-                Text = $"<p>Dear customer,</p>" + // sa inlocuiesc customer cu numele utilizatorului
+                Text = $"<p>Dear {ActiveUser.FirstName},</p>" + 
                      $"<p>We are pleased to inform you that your payment of {TotalAmount} {CurrencyValue} has been successfully processed. Thank you for your payment! </p>" + 
                      $"<p> With respect,  </p>" +
-                     $"<p> SmartShop Mobile App <3 </p> "
+                     $"<p> SmartShop Mobile App </p> "
             };
 
             using var smtp = new MailKit.Net.Smtp.SmtpClient();

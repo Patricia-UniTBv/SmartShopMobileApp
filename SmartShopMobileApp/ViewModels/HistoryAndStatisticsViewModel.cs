@@ -2,6 +2,8 @@
 using CommunityToolkit.Mvvm.Input;
 using DTO;
 using SmartShopMobileApp.Helpers;
+using SmartShopMobileApp.Services;
+using SmartShopMobileApp.Services.Interfaces;
 using SmartShopMobileApp.Views;
 using System;
 using System.Collections.Generic;
@@ -17,13 +19,10 @@ namespace SmartShopMobileApp.ViewModels
         public HistoryAndStatisticsViewModel()
         {
             _manageData = new ManageData();
-            IsDataFiltered = false;
-            //if (AuthenticationResultHelper.ActiveUser == null)
-            //{
-            //    AuthenticationResultHelper.ActiveUser = new UserDTO();
-            //}
+            _authService = new AuthService();
 
-            //AuthenticationResultHelper.ActiveUser.UserID = 1;
+            ActiveUser = new AuthResponseDTO();
+            IsDataFiltered = false;
         }
 
      
@@ -32,6 +31,13 @@ namespace SmartShopMobileApp.ViewModels
         {
             get { return _manageData; }
             set { _manageData = value; }
+        }
+
+        private IAuthService _authService;
+        public IAuthService AuthService
+        {
+            get { return _authService; }
+            set { _authService = value; }
         }
 
         public bool IsDataFiltered { get; set; }
@@ -57,13 +63,16 @@ namespace SmartShopMobileApp.ViewModels
         [ObservableProperty]
         public ObservableCollection<ShoppingCartDTO> shoppingCarts;
 
+        [ObservableProperty]
+        private AuthResponseDTO _activeUser;
+
         private async Task GetAllShoppingCarts()
         {
             try
             {
                 _manageData.SetStrategy(new GetData());
 
-                ShoppingCarts = await _manageData.GetDataAndDeserializeIt<ObservableCollection<ShoppingCartDTO>>($"ShoppingCart/GetAllTransactedShoppingCartsWithSupermarketByUserId?id={AuthenticationResultHelper.ActiveUser.UserId}", "");
+                ShoppingCarts = await _manageData.GetDataAndDeserializeIt<ObservableCollection<ShoppingCartDTO>>($"ShoppingCart/GetAllTransactedShoppingCartsWithSupermarketByUserId?id={ActiveUser.UserId}", "");
                 ShoppingCarts = new ObservableCollection<ShoppingCartDTO>(ShoppingCarts.OrderByDescending(s => s.CreationDate));
             }
             catch (Exception ex)
@@ -83,7 +92,7 @@ namespace SmartShopMobileApp.ViewModels
         {
             _manageData.SetStrategy(new GetData());
 
-            ShoppingCarts = await _manageData.GetDataAndDeserializeIt<ObservableCollection<ShoppingCartDTO>>($"ShoppingCart/GetAllTransactedShoppingCartsWithSupermarketByUserId?id={AuthenticationResultHelper.ActiveUser.UserId}", "");
+            ShoppingCarts = await _manageData.GetDataAndDeserializeIt<ObservableCollection<ShoppingCartDTO>>($"ShoppingCart/GetAllTransactedShoppingCartsWithSupermarketByUserId?id={ActiveUser.UserId}", "");
 
             ShoppingCarts = new ObservableCollection<ShoppingCartDTO>(
                                 ShoppingCarts
@@ -117,8 +126,11 @@ namespace SmartShopMobileApp.ViewModels
             MaxPrice = 1000;
             StartDate = DateTime.Now.AddMonths(-12);
             EndDate = DateTime.Now;
-            if(IsDataFiltered == false)
-              await GetAllShoppingCarts();
+
+            if (IsDataFiltered == false)
+            {
+                await GetAllShoppingCarts();
+            }
         }
     }
 }

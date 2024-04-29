@@ -3,6 +3,8 @@ using CommunityToolkit.Mvvm.Input;
 using DTO;
 using Newtonsoft.Json;
 using SmartShopMobileApp.Helpers;
+using SmartShopMobileApp.Services;
+using SmartShopMobileApp.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,12 +21,10 @@ namespace SmartShopMobileApp.ViewModels
         public BarcodeScannerViewModel(string barcode) 
         {
             _manageData = new ManageData();
-            //if (AuthenticationResultHelper.ActiveUser == null)
-            //{
-            //    AuthenticationResultHelper.ActiveUser = new UserDTO();
-            //}
+            _authService = new AuthService();
 
-            //AuthenticationResultHelper.ActiveUser.UserID = 1;
+            ActiveUser = new AuthResponseDTO();
+
             IdentifyProductByBarcode(barcode);
         }
         private IManageData _manageData;
@@ -34,7 +34,14 @@ namespace SmartShopMobileApp.ViewModels
             set { _manageData = value; }
         }
 
-        
+
+        private IAuthService _authService;
+        public IAuthService AuthService
+        {
+            get { return _authService; }
+            set { _authService = value; }
+        }
+
         [ObservableProperty]
         public string _productName;
 
@@ -43,6 +50,9 @@ namespace SmartShopMobileApp.ViewModels
 
         [ObservableProperty]
         public int _numberOfProducts;
+
+        [ObservableProperty]
+        private AuthResponseDTO _activeUser;
 
         public ProductDTO Product { get; set; }
 
@@ -69,7 +79,8 @@ namespace SmartShopMobileApp.ViewModels
             var json = JsonConvert.SerializeObject(Product);
 
             _manageData.SetStrategy(new CreateData());
-            var result = await _manageData.GetDataAndDeserializeIt<object>($"Product/AddProductToShoppingCart?productId={Product.ProductID}&numberOfProducts={NumberOfProducts}&supermarketId={CurrentSupermarket.Supermarket.SupermarketID}&userId={AuthenticationResultHelper.ActiveUser.UserId}", json);
+            var result = await _manageData.GetDataAndDeserializeIt<object>($"Product/AddProductToShoppingCart?productId={Product.ProductID}&numberOfProducts={NumberOfProducts}" +
+                $"&supermarketId={CurrentSupermarket.Supermarket.SupermarketID}&userId={ActiveUser.UserId}", json);
             
             if(result != null)
                 await Application.Current.MainPage.DisplayAlert("Successfully added", "Your product has been successfully added to the shopping cart!", "OK");
