@@ -59,35 +59,6 @@ namespace SmartShopMobileApp.ViewModels
             AppResources.Culture = language;
         }
 
-        private async Task GetPreferredCurrencyAndLanguage()
-        {
-            try
-            {
-                ActiveUser = await _authService.GetAuthenticatedUserAsync();
-
-                _manageData.SetStrategy(new GetData());
-                var result = await _manageData.GetDataAndDeserializeIt<Tuple<string,string>>($"User/GetPreferredLanguageAndCurrency?userId={ActiveUser.UserId}", "");
-                
-                Currency = result.Item2;
-                ActiveUser.PreferredCurrency = Currency;
-
-                Currency = ActiveUser.PreferredCurrency switch
-                {
-                    "USD" => "$",
-                    "EUR" => "€",
-                    "GBP" => "£",
-                    _ => ActiveUser.PreferredCurrency,
-                };
-
-                SetAppCulture(result.Item1);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
-
         private async Task GetCurrentOffers()
         {
             try
@@ -101,9 +72,15 @@ namespace SmartShopMobileApp.ViewModels
                     {
                         offer.OldPrice = offer.Product.Price;
                         offer.NewPrice = Math.Round(offer.Product.Price * (1 - (decimal)offer.OfferPercentage / 100), 2);
-                        offer.Currency = Currency;
+                        offer.Currency = PreferredCurrency.Value switch
+                        {
+                            "USD" => "$",
+                            "EUR" => "€",
+                            "GBP" => "£",
+                            _ => PreferredCurrency.Value,
+                        };
                     }
-                }
+                    }
                 CurrentOffers = offers;
             }
             catch (Exception ex)
@@ -157,7 +134,6 @@ namespace SmartShopMobileApp.ViewModels
         {
             await GetSupermarkets();
             await GetCurrentOffers();
-            await GetPreferredCurrencyAndLanguage();
         }
 
     }
