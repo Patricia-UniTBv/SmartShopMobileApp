@@ -7,6 +7,8 @@ using SmartShopMobileApp.Views;
 using System.Collections.ObjectModel;
 using SmartShopMobileApp.Services;
 using SmartShopMobileApp.Services.Interfaces;
+using SmartShopMobileApp.Resources.Languages;
+using System.Globalization;
 
 namespace SmartShopMobileApp.ViewModels
 {
@@ -49,7 +51,15 @@ namespace SmartShopMobileApp.ViewModels
         [ObservableProperty]
         private AuthResponseDTO _activeUser;
 
-        private async Task GetPreferredCurrency()
+        private static void SetAppCulture(string preferredLanguage)
+        {
+           
+            var language = new CultureInfo(preferredLanguage);
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(preferredLanguage);
+            AppResources.Culture = language;
+        }
+
+        private async Task GetPreferredCurrencyAndLanguage()
         {
             try
             {
@@ -68,6 +78,8 @@ namespace SmartShopMobileApp.ViewModels
                     "GBP" => "£",
                     _ => ActiveUser.PreferredCurrency,
                 };
+
+                SetAppCulture(result.Item1);
             }
             catch (Exception ex)
             {
@@ -145,7 +157,7 @@ namespace SmartShopMobileApp.ViewModels
         {
             await GetSupermarkets();
             await GetCurrentOffers();
-            await GetPreferredCurrency();
+            await GetPreferredCurrencyAndLanguage();
         }
 
     }

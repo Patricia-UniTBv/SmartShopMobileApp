@@ -15,6 +15,7 @@ using System.Linq;
 using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
+using ZXing;
 
 namespace SmartShopMobileApp.ViewModels
 {
@@ -143,18 +144,12 @@ namespace SmartShopMobileApp.ViewModels
             {
 
                 _manageData.SetStrategy(new CreateData());
-                //var json = JsonConvert.SerializeObject(CurrentUser);
 
                 await _manageData.GetDataAndDeserializeIt<UserDTO>($"User/UpdateLanguage?userId={ActiveUser.UserId}&language={selectedLanguage}", "");
 
                 var language = new CultureInfo(selectedLanguage);
                 CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(selectedLanguage);
                 AppResources.Culture = language;
-
-                Device.BeginInvokeOnMainThread(() =>
-                {
-                    App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new HomeView()));
-                });
             }
             catch (Exception e)
             {
