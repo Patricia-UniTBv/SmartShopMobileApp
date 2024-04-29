@@ -122,7 +122,7 @@ namespace SmartShopMobileApp.ViewModels
                "USD",
                "GBP"
             };
-
+            SelectedCurrency = PreferredCurrency.Value;
         }
 
         private async Task GetActiveUser()
@@ -164,7 +164,6 @@ namespace SmartShopMobileApp.ViewModels
             {
 
                 _manageData.SetStrategy(new CreateData());
-                //var json = JsonConvert.SerializeObject(CurrentUser);
 
                 await _manageData.GetDataAndDeserializeIt<UserDTO>($"User/UpdateCurrency?userId={ActiveUser.UserId}&currency={selectedCurrency}", "");
 
