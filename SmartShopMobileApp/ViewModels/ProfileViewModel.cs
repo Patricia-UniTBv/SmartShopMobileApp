@@ -21,6 +21,34 @@ namespace SmartShopMobileApp.ViewModels
 {
     public partial class ProfileViewModel: ObservableObject 
     {
+        public ProfileViewModel()
+        {
+            _manageData = new ManageData();
+            _authService = new AuthService();
+
+            ActiveUser = new AuthResponseDTO();
+            ActiveUser = AuthenticatedUser.ActiveUser;
+
+            var currentCulture = CultureInfo.CurrentCulture;
+
+            LanguageOptions = new ObservableCollection<string>()
+            {
+               "English",
+               "Romanian",
+               "French"
+            };
+            SelectedLanguage = currentCulture.DisplayName;
+
+            CurrencyOptions = new ObservableCollection<string>()
+            {
+               "RON",
+               "EUR",
+               "USD",
+               "GBP"
+            };
+            SelectedCurrency = PreferredCurrency.Value;
+        }
+
         [ObservableProperty] 
         private ObservableCollection<string> _languageOptions;
 
@@ -83,66 +111,12 @@ namespace SmartShopMobileApp.ViewModels
                 Task.Run(async () => await ChangeCurrency(_selectedCurrency));
             }
         }
-        private readonly CurrencyConversionService _conversionService = new CurrencyConversionService();
-
-        public ProfileViewModel()
-        {
-            var currentCulture = CultureInfo.CurrentCulture;
-            var rm = new ResourceManager("SmartShopMobileApp.Resources.Languages.AppResources", typeof(AppResources).Assembly);
-            var resourceSet = rm.GetResourceSet(currentCulture, true, true);
-
-            _manageData = new ManageData();
-            _authService = new AuthService();
-
-            GetActiveUser();
-
-            //if (AuthenticationResultHelper.ActiveUser == null)
-            //{
-            //    AuthenticationResultHelper.ActiveUser = new UserDTO();
-            //}
-
-            //AuthenticationResultHelper.ActiveUser.UserID = 1;
-            ////PROVIZORIU
-            //CurrentUser = AuthenticationResultHelper.ActiveUser;
-            //CurrentUser.FirstName = "Test";
-            //CurrentUser.LastName = "Testez";
-
-            LanguageOptions = new ObservableCollection<string>()
-            {
-               "English",
-               "Romanian",
-               "French"
-            };
-            SelectedLanguage = currentCulture.DisplayName;
-
-            CurrencyOptions = new ObservableCollection<string>()
-            {
-               "RON",
-               "EUR",
-               "USD",
-               "GBP"
-            };
-            SelectedCurrency = PreferredCurrency.Value;
-        }
-
-        private async Task GetActiveUser()
-        {
-            try
-            {
-                ActiveUser = await _authService.GetAuthenticatedUserAsync();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
 
         [Obsolete]
         private async Task ChangeLanguage(string selectedLanguage)
         {
             try
             {
-
                 _manageData.SetStrategy(new CreateData());
 
                 await _manageData.GetDataAndDeserializeIt<UserDTO>($"User/UpdateLanguage?userId={ActiveUser.UserId}&language={selectedLanguage}", "");
@@ -162,7 +136,6 @@ namespace SmartShopMobileApp.ViewModels
         {
             try
             {
-
                 _manageData.SetStrategy(new CreateData());
 
                 await _manageData.GetDataAndDeserializeIt<UserDTO>($"User/UpdateCurrency?userId={ActiveUser.UserId}&currency={selectedCurrency}", "");
@@ -183,7 +156,9 @@ namespace SmartShopMobileApp.ViewModels
         {
             ActiveUser = null;
             App.NewLoggedUser = true;
+
             _authService.Logout();
+
             await Shell.Current.GoToAsync("//LogInView");
         }
     }

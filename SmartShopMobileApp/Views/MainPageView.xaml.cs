@@ -47,6 +47,7 @@ public partial class MainPageView : ContentPage
     private async void SetCultureAndPreferrences()
     {
         var activeUser = await _authService.GetAuthenticatedUserAsync();
+        AuthenticatedUser.ActiveUser = activeUser;
 
         _manageData.SetStrategy(new GetData());
         var result = await _manageData.GetDataAndDeserializeIt<Tuple<string, string>>($"User/GetPreferredLanguageAndCurrency?userId={activeUser.UserId}", "");
@@ -56,5 +57,6 @@ public partial class MainPageView : ContentPage
 
         PreferredCurrency.Value = result.Item2;
     }
+
 
 }

@@ -28,7 +28,7 @@
                                Margin="0,0,30,30"
                                WidthRequest="100"
                                HeightRequest="100">
-                            <Image Source="{Binding CurrentUser.ImageUrl}" 
+                            <Image Source="{Binding ActiveUser.ImageUrl}" 
                                    Aspect="AspectFill" 
                                    Margin="-20"/>
                         </Frame>
@@ -55,13 +55,13 @@
                             Margin="13,20,0,0"
                             FontSize="32"
                             Style="{StaticResource DarkBlueMontserratBold}"
-                            Text="{Binding CurrentUser.FirstName}" />
+                            Text="{Binding ActiveUser.FirstName}" />
                         <StackLayout Margin="16,0,0,0" Orientation="Horizontal">
 
                             <Label
                                 FontSize="20"
                                 Style="{StaticResource DarkBlueMontserrat}"
-                                Text="{Binding CurrentUser.LastName}" />
+                                Text="{Binding ActiveUser.LastName}" />
                         </StackLayout>
                     </StackLayout>
                 </StackLayout>

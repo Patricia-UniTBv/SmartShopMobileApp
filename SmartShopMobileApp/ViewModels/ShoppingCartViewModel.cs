@@ -2,6 +2,8 @@
 using CommunityToolkit.Mvvm.Input;
 using DTO;
 using SmartShopMobileApp.Helpers;
+using SmartShopMobileApp.Services;
+using SmartShopMobileApp.Services.Interfaces;
 using SmartShopMobileApp.Views;
 using System;
 using System.Collections.Generic;
@@ -18,18 +20,14 @@ namespace SmartShopMobileApp.ViewModels
         public ShoppingCartViewModel() 
         {
             _manageData = new ManageData();
+            _authService = new AuthService();
+
+            ActiveUser = new AuthResponseDTO();
+            ActiveUser = AuthenticatedUser.ActiveUser;
+
             Products = new List<ProductDTO>() { };
-            _userId = 1; //provizoriu
 
-            //if (AuthenticationResultHelper.ActiveUser == null)
-            //{
-            //    AuthenticationResultHelper.ActiveUser = new UserDTO();
-            //}
-
-            //AuthenticationResultHelper.ActiveUser.UserID = 1;
-            //AuthenticationResultHelper.ActiveUser.PreferredCurrency = "EUR";
-
-            Currency = AuthenticationResultHelper.ActiveUser.PreferredCurrency.ToLower();
+            Currency = PreferredCurrency.Value;
         }
 
         private IManageData _manageData;
@@ -39,9 +37,15 @@ namespace SmartShopMobileApp.ViewModels
             set { _manageData = value; }
         }
 
+        private IAuthService _authService;
+        public IAuthService AuthService
+        {
+            get { return _authService; }
+            set { _authService = value; }
+        }
+
         private readonly CurrencyConversionService _conversionService = new CurrencyConversionService();
         public int ShoppingCartId { get; set; }
-        private int _userId { get; set; }//provizoriu
 
         public decimal VoucherDiscount { get;set; }
 
@@ -63,6 +67,9 @@ namespace SmartShopMobileApp.ViewModels
         [ObservableProperty]
         private string _currency;
 
+        [ObservableProperty]
+        private AuthResponseDTO _activeUser;
+
 
         [RelayCommand]
         private async Task DeleteCartItem(object obj)
@@ -72,7 +79,7 @@ namespace SmartShopMobileApp.ViewModels
                 ProductDTO product = (ProductDTO)obj;
 
                 _manageData.SetStrategy(new GetData());
-                var latestShoppingCart = await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"ShoppingCart/GetLatestShoppingCartByUserId?id={_userId}", "");
+                var latestShoppingCart = await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"ShoppingCart/GetLatestShoppingCartByUserId?id={ActiveUser.UserId}", "");
                 
                 _manageData.SetStrategy(new DeleteData());
                 await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"CartItem/DeleteCartItemFromShoppingCart?productId={product.ProductID}&shoppingCartId={latestShoppingCart.ShoppingCartID}&quantity={product.Quantity}", "");
@@ -91,18 +98,18 @@ namespace SmartShopMobileApp.ViewModels
             {
                 _manageData.SetStrategy(new GetData());
 
-                var latestShoppingCart = await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"ShoppingCart/GetLatestShoppingCartByUserId?id={_userId}", "");
+                var latestShoppingCart = await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"ShoppingCart/GetLatestShoppingCartByUserId?id={ActiveUser.UserId}", "");
 
                 if (latestShoppingCart != null)
                 {
-                    Products = await _manageData.GetDataAndDeserializeIt<List<ProductDTO>>($"ShoppingCart/GetLatestShoppingCartForCurrentUser?id={_userId}", "");
+                    Products = await _manageData.GetDataAndDeserializeIt<List<ProductDTO>>($"ShoppingCart/GetLatestShoppingCartForCurrentUser?id={ActiveUser.UserId}", "");
                     foreach(var product in Products)
                     {
-                        product.Price = Math.Round(_conversionService.ConvertCurrencyAsync(product.Price, "RON", AuthenticationResultHelper.ActiveUser.PreferredCurrency), 2);
+                        product.Price = Math.Round(_conversionService.ConvertCurrencyAsync(product.Price, "RON", PreferredCurrency.Value), 2);
                         product.Currency = Currency;
                     }
                     ShoppingCartId = latestShoppingCart.ShoppingCartID;
-                    TotalAmount = Math.Round(_conversionService.ConvertCurrencyAsync(latestShoppingCart.TotalAmount, "RON", AuthenticationResultHelper.ActiveUser.PreferredCurrency), 2);
+                    TotalAmount = Math.Round(_conversionService.ConvertCurrencyAsync(latestShoppingCart.TotalAmount, "RON", PreferredCurrency.Value), 2);
 
 
                     if (ShoppingCartId != 0)

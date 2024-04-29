@@ -24,6 +24,7 @@ namespace SmartShopMobileApp.ViewModels
             _authService = new AuthService();
 
             ActiveUser = new AuthResponseDTO();
+            ActiveUser = AuthenticatedUser.ActiveUser;
 
             IdentifyProductByBarcode(barcode);
         }

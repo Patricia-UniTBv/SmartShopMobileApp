@@ -5,6 +5,8 @@ using DTO;
 using Newtonsoft.Json;
 using SmartShopMobileApp.HelperModels;
 using SmartShopMobileApp.Helpers;
+using SmartShopMobileApp.Services;
+using SmartShopMobileApp.Services.Interfaces;
 using SmartShopMobileApp.Views;
 using System;
 using System.Collections.Generic;
@@ -20,13 +22,12 @@ namespace SmartShopMobileApp.ViewModels
         public VoucherViewModel()
         {
             _manageData = new ManageData();
-            VouchersHistory = new ObservableCollection<VoucherHistory>();
-            //if (AuthenticationResultHelper.ActiveUser == null)
-            //{
-            //    AuthenticationResultHelper.ActiveUser = new UserDTO();
-            //}
+            _authService = new AuthService();
 
-            //AuthenticationResultHelper.ActiveUser.UserID = 1;
+            ActiveUser = new AuthResponseDTO();
+            ActiveUser = AuthenticatedUser.ActiveUser;
+
+            VouchersHistory = new ObservableCollection<VoucherHistory>();
         }
 
         private IManageData _manageData;
@@ -34,6 +35,13 @@ namespace SmartShopMobileApp.ViewModels
         {
             get { return _manageData; }
             set { _manageData = value; }
+        }
+
+        private IAuthService _authService;
+        public IAuthService AuthService
+        {
+            get { return _authService; }
+            set { _authService = value; }
         }
 
         [ObservableProperty]
@@ -57,12 +65,15 @@ namespace SmartShopMobileApp.ViewModels
         [ObservableProperty]
         public ObservableCollection<VoucherHistory> _vouchersHistory;
 
+        [ObservableProperty]
+        private AuthResponseDTO _activeUser;
+
         private async Task GetEarnedMoney()
         {
             try
             {
                 _manageData.SetStrategy(new GetData());
-                var voucher = await _manageData.GetDataAndDeserializeIt<VoucherDTO>($"Voucher/GetVoucherForUserAndSupermarket/{AuthenticationResultHelper.ActiveUser.UserId}/{CurrentSupermarket.Supermarket.SupermarketID}", "");
+                var voucher = await _manageData.GetDataAndDeserializeIt<VoucherDTO>($"Voucher/GetVoucherForUserAndSupermarket/{ActiveUser.UserId}/{CurrentSupermarket.Supermarket.SupermarketID}", "");
                 EarnedMoneyText = $"Total: {voucher.EarnedPoints} lei";
                 EarnedMoney = voucher.EarnedPoints;
 
@@ -91,10 +102,10 @@ namespace SmartShopMobileApp.ViewModels
             {
                 _manageData.SetStrategy(new GetData());
                 VouchersHistory = new ObservableCollection<VoucherHistory>();
-                var allShoppingCarts = await _manageData.GetDataAndDeserializeIt<List<ShoppingCartDTO>>($"ShoppingCart/GetAllTransactedShoppingCartsByUserId?id={AuthenticationResultHelper.ActiveUser.UserId}", "");
+                var allShoppingCarts = await _manageData.GetDataAndDeserializeIt<List<ShoppingCartDTO>>($"ShoppingCart/GetAllTransactedShoppingCartsByUserId?id={ActiveUser.UserId}", "");
                 foreach (var cart in allShoppingCarts)
                 {
-                    if (cart.TotalAmount > 10) // aici trebuie sa modific cu 150 (10 este doar pentru test ca sa apara in lista cu istoricul)
+                    if (cart.TotalAmount > 150) 
                     {
                         var newVoucherHistory = new VoucherHistory();
                         newVoucherHistory.CartCreationDate = cart.CreationDate.ToShortDateString();
@@ -107,7 +118,7 @@ namespace SmartShopMobileApp.ViewModels
                  
                 }
 
-                var usedDiscounts = await _manageData.GetDataAndDeserializeIt<List<TransactionDTO>>($"Transaction/GetAllTransactionsWithDiscount/{AuthenticationResultHelper.ActiveUser.UserId}/{CurrentSupermarket.Supermarket.SupermarketID}", "");
+                var usedDiscounts = await _manageData.GetDataAndDeserializeIt<List<TransactionDTO>>($"Transaction/GetAllTransactionsWithDiscount/{ActiveUser.UserId}/{CurrentSupermarket.Supermarket.SupermarketID}", "");
                 foreach (var transaction in usedDiscounts)
                 {
                     if (transaction.VoucherDiscount != 0)
@@ -138,7 +149,7 @@ namespace SmartShopMobileApp.ViewModels
             try
             {
                 _manageData.SetStrategy(new GetData());
-                var latestShoppingCart = await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"ShoppingCart/GetLatestShoppingCartByUserId?id={AuthenticationResultHelper.ActiveUser.UserId}", "");
+                var latestShoppingCart = await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"ShoppingCart/GetLatestShoppingCartByUserId?id={ActiveUser.UserId}", "");
                 latestShoppingCart.TotalAmount -= Convert.ToDecimal(EarnedMoney);
 
                 _manageData.SetStrategy(new UpdateData());
@@ -146,7 +157,7 @@ namespace SmartShopMobileApp.ViewModels
                 await _manageData.GetDataAndDeserializeIt<object>($"ShoppingCart/UpdateShoppingCart", json);
 
                 _manageData.SetStrategy(new UpdateData());
-                await _manageData.GetDataAndDeserializeIt<object>($"Voucher/UpdateVoucherForSpecificUserWhenItIsUsed/{AuthenticationResultHelper.ActiveUser.UserId}/{CurrentSupermarket.Supermarket.SupermarketID}", "");
+                await _manageData.GetDataAndDeserializeIt<object>($"Voucher/UpdateVoucherForSpecificUserWhenItIsUsed/{ActiveUser.UserId}/{CurrentSupermarket.Supermarket.SupermarketID}", "");
 
                 await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new ShoppingCartView(Convert.ToDecimal(EarnedMoney))));
 
