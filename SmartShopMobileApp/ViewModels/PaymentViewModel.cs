@@ -27,9 +27,7 @@ namespace SmartShopMobileApp.ViewModels
         public PaymentViewModel() 
         {
             _manageData = new ManageData();
-            _authService = new AuthService();
 
-            ActiveUser = new AuthResponseDTO();
             ActiveUser = AuthenticatedUser.ActiveUser;
 
             CurrencyValue = PreferredCurrency.Value;
@@ -41,13 +39,6 @@ namespace SmartShopMobileApp.ViewModels
         {
             get { return _manageData; }
             set { _manageData = value; }
-        }
-
-        private IAuthService _authService;
-        public IAuthService AuthService
-        {
-            get { return _authService; }
-            set { _authService = value; }
         }
 
         private decimal totalAmount;
@@ -92,7 +83,7 @@ namespace SmartShopMobileApp.ViewModels
         private string _currencyValue;
 
         [ObservableProperty]
-        private AuthResponseDTO _activeUser;
+        private AuthResponseDTO _activeUser = new();
 
         public void PayViaStripe()
         {

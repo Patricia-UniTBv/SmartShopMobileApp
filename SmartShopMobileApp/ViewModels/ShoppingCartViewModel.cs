@@ -20,9 +20,7 @@ namespace SmartShopMobileApp.ViewModels
         public ShoppingCartViewModel() 
         {
             _manageData = new ManageData();
-            _authService = new AuthService();
 
-            ActiveUser = new AuthResponseDTO();
             ActiveUser = AuthenticatedUser.ActiveUser;
 
             Products = new List<ProductDTO>() { };
@@ -35,13 +33,6 @@ namespace SmartShopMobileApp.ViewModels
         {
             get { return _manageData; }
             set { _manageData = value; }
-        }
-
-        private IAuthService _authService;
-        public IAuthService AuthService
-        {
-            get { return _authService; }
-            set { _authService = value; }
         }
 
         private readonly CurrencyConversionService _conversionService = new CurrencyConversionService();
@@ -68,7 +59,7 @@ namespace SmartShopMobileApp.ViewModels
         private string _currency;
 
         [ObservableProperty]
-        private AuthResponseDTO _activeUser;
+        private AuthResponseDTO _activeUser = new();
 
 
         [RelayCommand]

@@ -26,7 +26,6 @@ namespace SmartShopMobileApp.ViewModels
             _manageData = new ManageData();
             _authService = new AuthService();
 
-            ActiveUser = new AuthResponseDTO();
             ActiveUser = AuthenticatedUser.ActiveUser;
 
             var currentCulture = CultureInfo.CurrentCulture;
@@ -56,7 +55,7 @@ namespace SmartShopMobileApp.ViewModels
         private ObservableCollection<string> _currencyOptions;
 
         [ObservableProperty]
-        private AuthResponseDTO _activeUser;
+        private AuthResponseDTO _activeUser = new();
 
         private IManageData _manageData;
         public IManageData ManageData

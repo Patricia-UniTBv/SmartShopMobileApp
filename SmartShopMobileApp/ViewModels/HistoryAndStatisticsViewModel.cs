@@ -19,9 +19,7 @@ namespace SmartShopMobileApp.ViewModels
         public HistoryAndStatisticsViewModel()
         {
             _manageData = new ManageData();
-            _authService = new AuthService();
 
-            ActiveUser = new AuthResponseDTO();
             ActiveUser = AuthenticatedUser.ActiveUser;
 
             IsDataFiltered = false;
@@ -66,7 +64,7 @@ namespace SmartShopMobileApp.ViewModels
         public ObservableCollection<ShoppingCartDTO> shoppingCarts;
 
         [ObservableProperty]
-        private AuthResponseDTO _activeUser;
+        private AuthResponseDTO _activeUser = new();
 
         private async Task GetAllShoppingCarts()
         {
