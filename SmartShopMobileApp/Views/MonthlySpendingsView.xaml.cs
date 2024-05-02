@@ -1,3 +1,4 @@
+using CommunityToolkit.Mvvm.ComponentModel;
 using DTO;
 using Microcharts;
 using Microcharts.Maui;
@@ -9,27 +10,12 @@ namespace SmartShopMobileApp.Views;
 
 public partial class MonthlySpendingsView : ContentPage
 {
-    private List<ShoppingCartDTO> shoppingCarts;
-    private Chart chart;
-    private IManageData _manageData;
-    public IManageData ManageData
-    {
-        get { return _manageData; }
-        set { _manageData = value; }
-    }
-    private List<string> months = new List<string> { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
-
     public MonthlySpendingsView()
     {
         InitializeComponent();
         _manageData = new ManageData();
 
-        //if (AuthenticationResultHelper.ActiveUser == null)
-        //{
-        //    AuthenticationResultHelper.ActiveUser = new UserDTO();
-        //}
-
-        //AuthenticationResultHelper.ActiveUser.UserID = 1;
+        _activeUser = AuthenticatedUser.ActiveUser;
 
         foreach (string month in months)
         {
@@ -47,6 +33,17 @@ public partial class MonthlySpendingsView : ContentPage
         GetCategoryStatistics(currentDate.Month.ToString(),currentDate.Year);
     }
 
+    private List<ShoppingCartDTO> shoppingCarts;
+    private IManageData _manageData;
+    public IManageData ManageData
+    {
+        get { return _manageData; }
+        set { _manageData = value; }
+    }
+    private List<string> months = new List<string> { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+
+    private AuthResponseDTO _activeUser = new();
+
     private void Picker_SelectedIndexChanged(object sender, EventArgs e)
     {
         ShowChart();
@@ -60,20 +57,13 @@ public partial class MonthlySpendingsView : ContentPage
         await GetCategoryStatistics(selectedMonth, selectedYear);
     }
 
-    //private async void MonthPicker_SelectedIndexChanged(object sender, EventArgs e)
-    //{
-    //    string selectedMonth = monthPicker.SelectedItem as string;
-
-    //    await GetCategoryStatistics(selectedMonth);
-    //}
-
-    private async Task GetShoppingCarts()
+    private async void GetShoppingCarts()
     {
         try
         {
             _manageData.SetStrategy(new GetData());
 
-            shoppingCarts = await _manageData.GetDataAndDeserializeIt<List<ShoppingCartDTO>>($"ShoppingCart/GetAllTransactedShoppingCartsWithSupermarketByUserId?id={AuthenticationResultHelper.ActiveUser.UserId}", "");
+            shoppingCarts = await _manageData.GetDataAndDeserializeIt<List<ShoppingCartDTO>>($"ShoppingCart/GetAllTransactedShoppingCartsWithSupermarketByUserId?id={_activeUser.UserId}", "");
 
             var lastFourMonths = DateTime.Now.AddMonths(-3); 
 
@@ -125,7 +115,7 @@ public partial class MonthlySpendingsView : ContentPage
         var firstDayOfMonth = new DateTime(selectedYear, months.IndexOf(selectedMonth) + 1, 1);
         var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
 
-        var allShoppingCarts = await _manageData.GetDataAndDeserializeIt<List<ShoppingCartDTO>>($"ShoppingCart/GetAllTransactedShoppingCartsWithSupermarketByUserId?id={AuthenticationResultHelper.ActiveUser.UserId}", "");
+        var allShoppingCarts = await _manageData.GetDataAndDeserializeIt<List<ShoppingCartDTO>>($"ShoppingCart/GetAllTransactedShoppingCartsWithSupermarketByUserId?id={_activeUser.UserId}", "");
 
         var shoppingCartsThisMonth = allShoppingCarts
             .Where(cart => cart.CreationDate >= firstDayOfMonth && cart.CreationDate <= lastDayOfMonth).ToList();

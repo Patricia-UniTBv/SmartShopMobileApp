@@ -41,6 +41,63 @@ namespace SmartShopMobileApp.ViewModels
         [ObservableProperty]
         private DateTime birthDate;
 
+        private bool _isEmailValid;
+        public bool IsEmailValid
+        {
+            get { return _isEmailValid; }
+            set
+            {
+                if (_isEmailValid != value)
+                {
+                    _isEmailValid = value;
+                    OnPropertyChanged(nameof(IsEmailValid));
+                    UpdateSignUpEnabled();
+                }
+            }
+        }
+
+        private bool _isPasswordValid;
+        public bool IsPasswordValid
+        {
+            get { return _isPasswordValid; }
+            set
+            {
+                if (_isPasswordValid != value)
+                {
+                    _isPasswordValid = value;
+                    OnPropertyChanged(nameof(IsPasswordValid));
+                    UpdateSignUpEnabled();
+                }
+            }
+        }
+
+        private void UpdateSignUpEnabled()
+        {
+            var a = IsEmailValid;
+            var b = IsPasswordValid;
+
+            IsSignUpEnabled = !string.IsNullOrWhiteSpace(FirstName) &&
+                              !string.IsNullOrWhiteSpace(LastName) &&
+                              !string.IsNullOrWhiteSpace(EmailAddress) &&
+                              !string.IsNullOrWhiteSpace(Password) &&
+                              IsEmailValid &&
+                              IsPasswordValid;
+        }
+
+        private bool _isSignUpEnabled;
+        public bool IsSignUpEnabled
+        {
+            get { return _isSignUpEnabled; }
+            set
+            {
+                if (_isSignUpEnabled != value)
+                {
+                    _isSignUpEnabled = value;
+                    OnPropertyChanged(nameof(IsSignUpEnabled));
+                }
+            }
+        }
+
         [RelayCommand]
         private async Task SignUp()
         {
@@ -50,7 +107,8 @@ namespace SmartShopMobileApp.ViewModels
 
                 string hashedPassword = HashPassword(Password);
 
-                await _manageData.GetDataAndDeserializeIt<UserDTO>($"User/AddNewUser?emailAddress={EmailAddress}&password={hashedPassword}&firstName={FirstName}&lastName={LastName}&birthdate={BirthDate}", "");
+                await _manageData.GetDataAndDeserializeIt<UserDTO>($"User/AddNewUser?emailAddress={EmailAddress}" +
+                    $"&password={hashedPassword}&firstName={FirstName}&lastName={LastName}&birthdate={BirthDate}", "");
 
                 await Shell.Current.GoToAsync("//LogInView");
 

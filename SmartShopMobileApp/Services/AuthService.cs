@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -38,12 +39,12 @@ namespace SmartShopMobileApp.Services
             return null;
         }
 
-        public async Task<string?> LoginAsync(LoginRequestDTO dto) //DECRIPTARE PAROLA!!!
+        public async Task<string?> LoginAsync(LoginRequestDTO dto)
         {
             var httpClient = new HttpClient(App.Current.MainPage.Handler.MauiContext.Services.GetService<IHttpClientHandlerService>().GetInsecureHandler());
             string Uri = DeviceInfo.Platform == DevicePlatform.Android ? "https://10.0.2.2:7116/api/" : "https://localhost:5152";
 
-            var uri = new Uri(Uri + $"Auth/login?Email={dto.Email}&Password={dto.Password}");
+            var uri = new Uri(Uri + $"Auth/login?Email={dto.Email}&Password={HashPassword(dto.Password)}");
 
             var response = await httpClient.PostAsJsonAsync<LoginRequestDTO>(uri, dto);
 
@@ -84,6 +85,17 @@ namespace SmartShopMobileApp.Services
                 new AuthenticationHeaderValue("Bearer", authenticatedUser.Token);
 
             return httpClient;
+        }
+
+        private static string HashPassword(string password)
+        {
+            byte[] bytes = SHA256.HashData(Encoding.UTF8.GetBytes(password));
+            StringBuilder builder = new();
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                builder.Append(bytes[i].ToString("x2"));
+            }
+            return builder.ToString();
         }
     }
 }

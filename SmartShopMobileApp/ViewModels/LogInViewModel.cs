@@ -41,15 +41,8 @@ namespace SmartShopMobileApp.ViewModels
         {
             _manageData.SetStrategy(new GetData());
             ExistingUser = null;
-            ExistingUser = await _manageData.GetDataAndDeserializeIt<UserDTO>($"User/GetUserByEmailAndPassword?email={Email}&password={HashPassword(Password)}", "");
-           
-            //AuthenticationResultHelper.ActiveUser.UserId = ExistingUser.UserID;
-            //AuthenticationResultHelper.ActiveUser.FirstName = ExistingUser.FirstName;
-            //AuthenticationResultHelper.ActiveUser.LastName = ExistingUser.LastName;
-            //AuthenticationResultHelper.ActiveUser.Email = ExistingUser.Email;
-            //AuthenticationResultHelper.ActiveUser.PreferredLanguage = ExistingUser.PreferredLanguage;
-            //AuthenticationResultHelper.ActiveUser.PreferredCurrency = ExistingUser.PreferredCurrency;
-
+            var hashedPassword = HashPassword(Password);
+            ExistingUser = await _manageData.GetDataAndDeserializeIt<UserDTO>($"User/GetUserByEmailAndPassword?email={Email}&password={hashedPassword}", "");
 
             var error = await _authService.LoginAsync(new LoginRequestDTO(ExistingUser.Email, ExistingUser.Password));
             if (string.IsNullOrWhiteSpace(error))
