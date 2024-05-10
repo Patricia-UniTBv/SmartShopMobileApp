@@ -22,7 +22,7 @@ namespace API.Services
                 ValidateAudience = false,
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
-                ValidIssuer = configuration["Jwt:Issuer"],
+                ValidIssuer = "https://localhost:7157",
                 IssuerSigningKey = GetSecurityKey(configuration)
             };
 
@@ -30,7 +30,7 @@ namespace API.Services
         {
             var securityKey = GetSecurityKey(_configuration);
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-            var expireInMinutes = Convert.ToInt32(_configuration["Jwt:ExpireIMinutes"] ?? "60");
+            var expireInMinutes = 60;
 
             var claims = new List<Claim> {
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
@@ -38,11 +38,16 @@ namespace API.Services
             if (additionalClaims?.Any() == true)
                 claims.AddRange(additionalClaims!);
 
-            var token = new JwtSecurityToken(issuer: _configuration["Jwt:Issuer"],
+            var issuer = "https://localhost:7157"; 
+       
+
+            var token = new JwtSecurityToken(
+                issuer: issuer,
                 audience: "*",
-              claims: claims,
-              expires: DateTime.Now.AddMinutes(expireInMinutes),
-              signingCredentials: credentials);
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(expireInMinutes),
+                signingCredentials: credentials);
+
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
@@ -64,7 +69,8 @@ namespace API.Services
 
         private static SymmetricSecurityKey GetSecurityKey(IConfiguration _configuration)
         {
-            string jwtKey = _configuration["Jwt:Key"]!;
+            //string jwtKey = _configuration["Jwt:Key"]!;
+            string jwtKey = "@SomERandomStromgKey/(@bH6)-@-#-$";
 
             return new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
         }
