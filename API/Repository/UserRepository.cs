@@ -39,7 +39,7 @@ namespace API.Repository
         {
             var dbUser = await _dbSet.SingleAsync(u => u.UserID == userId);
 
-            string language = dbUser.PreferredLanguage ?? "eng";
+            string language = dbUser.PreferredLanguage ?? "en";
             string currency = dbUser.PreferredCurrency ?? "RON";
 
             return Tuple.Create(language, currency);

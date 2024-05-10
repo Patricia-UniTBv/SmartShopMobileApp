@@ -54,6 +54,9 @@ public partial class MainPageView : ContentPage
 
         var result = await _manageData.GetDataAndDeserializeIt<Tuple<string, string>>($"User/GetPreferredLanguageAndCurrency?userId={activeUser.UserId}", "");
 
+        AuthenticatedUser.ActiveUser.PreferredLanguage = result.Item1;
+        AuthenticatedUser.ActiveUser.PreferredCurrency = result.Item2;
+
         var switchToCulture = new CultureInfo(result.Item1);
         LocalizationResourceManager.Instance.SetCulture(switchToCulture);
 

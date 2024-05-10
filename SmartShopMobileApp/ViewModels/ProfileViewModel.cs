@@ -36,7 +36,7 @@ namespace SmartShopMobileApp.ViewModels
                "Romanian",
                "French"
             };
-            SelectedLanguage = currentCulture.DisplayName;
+            SelectedLanguage =ActiveUser.PreferredLanguage.ToUpper();
 
             CurrencyOptions = new ObservableCollection<string>()
             {
