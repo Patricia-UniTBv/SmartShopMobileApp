@@ -46,13 +46,14 @@ namespace SmartShopMobileApp.Helpers
 
         private string GetLatestCurrencies()
         {
-            var client = new RestClient("https://api.currencyapi.com/v3/latest?base_currency=RON");
+            //var client = new RestClient("https://api.currencyapi.com/v3/latest?base_currency=RON");
 
-            client.Timeout = -1;
-            var request = new RestRequest(Method.GET);
-            request.AddHeader("apikey", "cur_live_wv1yJn5eStzk3YvzKRVLEnHkQsK2n6I2uzgfJkDx");
-            IRestResponse response = client.Execute(request);
-            return response.Content;
+            //client.Timeout = -1;
+            //var request = new RestRequest(Method.GET);
+            //request.AddHeader("apikey", "cur_live_wv1yJn5eStzk3YvzKRVLEnHkQsK2n6I2uzgfJkDx");
+            //IRestResponse response = client.Execute(request);
+            //return response.Content;
+            return "";
         }
 
 

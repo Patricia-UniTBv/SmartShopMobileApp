@@ -42,9 +42,9 @@ namespace SmartShopMobileApp.Services
         public async Task<string?> LoginAsync(LoginRequestDTO dto)
         {
             var httpClient = new HttpClient(App.Current.MainPage.Handler.MauiContext.Services.GetService<IHttpClientHandlerService>().GetInsecureHandler());
-            string Uri = DeviceInfo.Platform == DevicePlatform.Android ? "https://10.0.2.2:7116/api/" : "https://localhost:5152";
+            string Uri = "https://webappapiuni.azurewebsites.net/api/";
 
-            var uri = new Uri(Uri + $"Auth/login?Email={dto.Email}&Password={HashPassword(dto.Password)}");
+            var uri = new Uri(Uri + $"Auth/login?Email={dto.Email}&Password={dto.Password}");
 
             var response = await httpClient.PostAsJsonAsync<LoginRequestDTO>(uri, dto);
 

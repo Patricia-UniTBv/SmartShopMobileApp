@@ -38,7 +38,11 @@ namespace API.Repository
         public async Task<Tuple<string,string>> GetPreferredLanguageAndCurrency(int userId)
         {
             var dbUser = await _dbSet.SingleAsync(u => u.UserID == userId);
-            return Tuple.Create(dbUser.PreferredLanguage!, dbUser.PreferredCurrency!);
+
+            string language = dbUser.PreferredLanguage ?? "eng";
+            string currency = dbUser.PreferredCurrency ?? "RON";
+
+            return Tuple.Create(language, currency);
         }
 
 

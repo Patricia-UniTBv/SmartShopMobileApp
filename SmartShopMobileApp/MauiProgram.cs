@@ -72,10 +72,13 @@ public static class MauiProgramExtensions
 
         services.AddHttpClient(AppConstants.HttpClientName, httpClient =>
         {
-            var baseAddress =
-                    DeviceInfo.Platform == DevicePlatform.Android
-                        ? "https://10.0.2.2:7157"
-                        : "https://localhost:7157";
+            //var baseAddress =
+            //        DeviceInfo.Platform == DevicePlatform.Android
+            //            ? "https://10.0.2.2:7157"
+            //            : "https://localhost:7157";
+            var baseAddress = "https://webappapiuni.azurewebsites.net/api/";
+
+
 
             httpClient.BaseAddress = new Uri(baseAddress);
         })

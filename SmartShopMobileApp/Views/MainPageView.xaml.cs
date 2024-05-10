@@ -37,11 +37,11 @@ public partial class MainPageView : ContentPage
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
         base.OnNavigatedTo(args);
-        //if (await _authService.IsUserAuthenticated())
-        //{
-        //    SetCultureAndPreferrences();
-        //    await Shell.Current.GoToAsync("//AppView");
-        //}
+        if (await _authService.IsUserAuthenticated())
+        {
+            SetCultureAndPreferrences();
+            await Shell.Current.GoToAsync("//AppView");
+        }
         await Shell.Current.GoToAsync("//AppView");
     }
 
@@ -51,6 +51,7 @@ public partial class MainPageView : ContentPage
         AuthenticatedUser.ActiveUser = activeUser;
 
         _manageData.SetStrategy(new GetData());
+
         var result = await _manageData.GetDataAndDeserializeIt<Tuple<string, string>>($"User/GetPreferredLanguageAndCurrency?userId={activeUser.UserId}", "");
 
         var switchToCulture = new CultureInfo(result.Item1);
