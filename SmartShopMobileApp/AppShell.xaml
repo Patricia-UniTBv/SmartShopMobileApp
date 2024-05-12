@@ -6,11 +6,11 @@
     xmlns:local="clr-namespace:SmartShopMobileApp.Views"
     Shell.FlyoutBehavior="Disabled">
     
-    <ShellItem Route="MainPage">
+    <!--<ShellItem Route="MainPage">
         <ShellContent
         Title="Main Page"
         ContentTemplate="{DataTemplate local:MainPageView}"/>
-    </ShellItem>
+    </ShellItem>-->
 
     <ShellItem Route="LogInView">
         <ShellContent
