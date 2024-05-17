@@ -74,7 +74,7 @@ namespace SmartShopMobileApp.ViewModels
                 
                 _manageData.SetStrategy(new DeleteData());
                 await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"CartItem/DeleteCartItemFromShoppingCart?productId={product.ProductID}&shoppingCartId={latestShoppingCart.ShoppingCartID}&quantity={product.Quantity}", "");
-                await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new ShoppingCartView()));
+                await App.Current.MainPage.Navigation.PushAsync(new ShoppingCartView());
 
             }
             catch (Exception e)
@@ -105,7 +105,7 @@ namespace SmartShopMobileApp.ViewModels
 
                     if (ShoppingCartId != 0)
                     {
-                        ImageSource = "shopping_cart.png";
+                        ImageSource = "cartempty.png";
                         IsVoucherButtonVisible = true;
                     }
                     else
@@ -134,7 +134,7 @@ namespace SmartShopMobileApp.ViewModels
         {
             try
             {
-                await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new PaymentView(TotalAmount, ShoppingCartId, VoucherDiscount)));
+                await App.Current.MainPage.Navigation.PushAsync(new PaymentView(TotalAmount, ShoppingCartId, VoucherDiscount));
 
             }
             catch (Exception e)
@@ -150,7 +150,7 @@ namespace SmartShopMobileApp.ViewModels
             try
             {
                 if(CurrentSupermarket.Supermarket != null)
-                    await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new VoucherView()));
+                    await App.Current.MainPage.Navigation.PushAsync(new VoucherView());
                 else
                 {
                     await Application.Current.MainPage.DisplayAlert("", "Please select a supermarket", "OK");

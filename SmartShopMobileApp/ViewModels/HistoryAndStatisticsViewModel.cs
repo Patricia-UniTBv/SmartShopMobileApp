@@ -84,7 +84,7 @@ namespace SmartShopMobileApp.ViewModels
         [RelayCommand]
         private static void OnShoppingCartSelected(ShoppingCartDTO selectedCart)
         {
-            App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new ShoppingCartItemsView(selectedCart)));
+            App.Current.MainPage.Navigation.PushAsync(new ShoppingCartItemsView(selectedCart));
         }
 
         [RelayCommand]
@@ -102,9 +102,7 @@ namespace SmartShopMobileApp.ViewModels
                                         item.TotalAmount >= MinPrice &&
                                         item.TotalAmount <= MaxPrice &&
                                         (SelectedStore == null || item.Supermarket?.Name == SelectedStore))
-                                    .ToList()
-                            );
-
+                                    .ToList());
         }
 
         [RelayCommand]
@@ -116,7 +114,7 @@ namespace SmartShopMobileApp.ViewModels
         [RelayCommand]
         private void ViewStatistics(object obj)
         {
-            App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new MonthlySpendingsView()));
+            App.Current.MainPage.Navigation.PushAsync(new MonthlySpendingsView());
         }
 
         [RelayCommand]

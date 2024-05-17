@@ -150,7 +150,7 @@ namespace SmartShopMobileApp.ViewModels
                 _manageData.SetStrategy(new UpdateData());
                 await _manageData.GetDataAndDeserializeIt<object>($"Voucher/UpdateVoucherForSpecificUserWhenItIsUsed/{ActiveUser.UserId}/{CurrentSupermarket.Supermarket.SupermarketID}", "");
 
-                await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new ShoppingCartView(Convert.ToDecimal(EarnedMoney))));
+                await App.Current.MainPage.Navigation.PushAsync(new ShoppingCartView(Convert.ToDecimal(EarnedMoney)));
 
             }
             catch (Exception ex)

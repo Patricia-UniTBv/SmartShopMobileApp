@@ -7,9 +7,10 @@
              xmlns:viewmodels="clr-namespace:SmartShopMobileApp.ViewModels"
              xmlns:lang="clr-namespace:SmartShopMobileApp.Resources.Languages"
              Title="Your profile">
-    <ContentPage.BindingContext>
-        <viewmodels:ProfileViewModel />
-    </ContentPage.BindingContext>
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior Command="{Binding PageAppearingCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
 
     <ContentPage.Content>
         <StackLayout>
@@ -28,26 +29,11 @@
                                Margin="0,0,30,30"
                                WidthRequest="100"
                                HeightRequest="100">
-                            <Image Source="{Binding ActiveUser.ImageUrl}" 
+                            <!--<Image Source="{Binding ActiveUser.ImageUrl}" 
                                    Aspect="AspectFill" 
-                                   Margin="-20"/>
+                                   Margin="-20"/>-->
                         </Frame>
 
-                        <!--<Button Command="{Binding EditImageCommand}"
-                                BackgroundColor="#5AA7C8"
-                                CornerRadius="20"
-                                WidthRequest="40"
-                                HeightRequest="40"
-                                AbsoluteLayout.LayoutBounds="0.9,0.9,40,40" 
-                                AbsoluteLayout.LayoutFlags="PositionProportional" >
-                            <Button.ImageSource>
-                                <FontImageSource
-                                FontFamily="FontAwesome"
-                                Glyph="{x:Static fa:FontAwesomeIcons.Pencil}"
-                                Size="20"
-                                Color="#FFFFFF" />
-                            </Button.ImageSource>
-                        </Button>-->
                     </AbsoluteLayout>
 
                     <StackLayout Orientation="Vertical">

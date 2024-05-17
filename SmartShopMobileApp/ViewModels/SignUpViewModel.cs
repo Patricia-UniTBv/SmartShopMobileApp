@@ -107,8 +107,14 @@ namespace SmartShopMobileApp.ViewModels
 
                 string hashedPassword = HashPassword(Password);
 
-                await _manageData.GetDataAndDeserializeIt<UserDTO>($"User/AddNewUser?emailAddress={EmailAddress}" +
+                var newUser = await _manageData.GetDataAndDeserializeIt<UserDTO>($"User/AddNewUser?emailAddress={EmailAddress}" +
                     $"&password={hashedPassword}&firstName={FirstName}&lastName={LastName}&birthdate={BirthDate}", "");
+                
+
+                List<int> list = new() { 1, 2, 3 };
+
+                foreach (var id in list)
+                    await _manageData.GetDataAndDeserializeIt<VoucherDTO>($"Voucher/CreateVoucherForUserAndSupermarket?userId={newUser.UserID}&supermarketId={id}","");
 
                 await Shell.Current.GoToAsync("//LogInView");
 

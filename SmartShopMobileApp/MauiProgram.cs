@@ -36,11 +36,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<IAuthService, AuthService>();
         builder.Services.AddSingleton<IHttpClientHandlerService, HttpClientHandlerService>();
 
-#if DEBUG
-		//builder.Logging.AddDebug();
-#endif
 		builder.Services.AddTransient<AuthService>();
-		builder.Services.AddTransient<ProfileView>();
+		//builder.Services.AddTransient<ProfileView>();
 
         builder.Services.AddTransient<LogInView>();
         builder.Services.AddTransient<LogInViewModel>();
@@ -66,10 +63,6 @@ public static class MauiProgramExtensions
 
         services.AddHttpClient(AppConstants.HttpClientName, httpClient =>
         {
-            //var baseAddress =
-            //        DeviceInfo.Platform == DevicePlatform.Android
-            //            ? "https://10.0.2.2:7157"
-            //            : "https://localhost:7157";
             var baseAddress = "https://webappapiuni.azurewebsites.net/api/";
 
 

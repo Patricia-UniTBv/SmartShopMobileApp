@@ -84,6 +84,7 @@ namespace API.Repository
             var result = _mapper.Map<UserDTO, User>(newUser);
             await _dbSet.AddAsync(result);
             _context.SaveChanges();
+            newUser.UserID = result.UserID;
         }
 
     }

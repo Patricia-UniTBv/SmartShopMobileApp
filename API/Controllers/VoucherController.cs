@@ -87,5 +87,26 @@ namespace API.Controllers
             }
         }
 
+        [HttpPost("CreateVoucherForUserAndSupermarket")]
+        public async Task<IActionResult> CreateVoucherForUser(int userId, int supermarketId)
+        {
+            try
+            {
+                VoucherDTO newVoucher = new()
+                {
+                    UserID = userId,
+                    SupermarketID = supermarketId
+                };
+
+                await _unitOfWork.VoucherRepository.CreateVoucherForUserAndSupermarket(newVoucher);
+
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
     }
 }

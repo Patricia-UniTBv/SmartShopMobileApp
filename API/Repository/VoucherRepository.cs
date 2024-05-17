@@ -26,6 +26,14 @@ namespace API.Repository
             _context.SaveChanges();
         }
 
-     
+        public async Task CreateVoucherForUserAndSupermarket(VoucherDTO newVoucher)
+        {
+            var result = _mapper.Map<VoucherDTO, Voucher>(newVoucher);
+            await _dbSet.AddAsync(result);
+            _context.SaveChanges();
+        }
+
+
+
     }
 }

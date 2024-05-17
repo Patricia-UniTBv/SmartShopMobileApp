@@ -27,25 +27,6 @@ namespace SmartShopMobileApp.ViewModels
             _authService = new AuthService();
 
             ActiveUser = AuthenticatedUser.ActiveUser;
-
-            var currentCulture = CultureInfo.CurrentCulture;
-
-            LanguageOptions = new ObservableCollection<string>()
-            {
-               "English",
-               "Romanian",
-               "French"
-            };
-            SelectedLanguage =ActiveUser.PreferredLanguage.ToUpper();
-
-            CurrencyOptions = new ObservableCollection<string>()
-            {
-               "RON",
-               "EUR",
-               "USD",
-               "GBP"
-            };
-            SelectedCurrency = PreferredCurrency.Value;
         }
 
         [ObservableProperty] 
@@ -141,7 +122,7 @@ namespace SmartShopMobileApp.ViewModels
 
                 Device.BeginInvokeOnMainThread(() =>
                 {
-                    App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new ProfileView()));
+                    App.Current.MainPage.Navigation.PushAsync(new ProfileView());
                 });
             }
             catch (Exception e)
@@ -159,6 +140,29 @@ namespace SmartShopMobileApp.ViewModels
             _authService.Logout();
 
             await Shell.Current.GoToAsync("//LogInView");
+        }
+
+        [RelayCommand]
+        private void PageAppearing(object obj)
+        {
+            ActiveUser = AuthenticatedUser.ActiveUser;
+
+            LanguageOptions = new ObservableCollection<string>()
+            {
+               "English",
+               "Romanian",
+               "French"
+            };
+            SelectedLanguage = ActiveUser.PreferredLanguage.ToUpper();
+
+            CurrencyOptions = new ObservableCollection<string>()
+            {
+               "RON",
+               "EUR",
+               "USD",
+               "GBP"
+            };
+            SelectedCurrency = PreferredCurrency.Value;
         }
     }
 }

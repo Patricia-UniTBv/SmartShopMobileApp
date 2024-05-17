@@ -6,7 +6,7 @@
              xmlns:viewModels="clr-namespace:SmartShopMobileApp.ViewModels"
              xmlns:lang="clr-namespace:SmartShopMobileApp.Resources.Languages"
              xmlns:m ="clr-namespace:SmartShopMobileApp.HelperModels"
-             Title="VoucherView">
+             Title="Your voucher">
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior Command="{Binding PageAppearingCommand}" EventName="Appearing" />
     </ContentPage.Behaviors>

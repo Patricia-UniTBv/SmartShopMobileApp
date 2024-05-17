@@ -51,6 +51,7 @@
 	<ItemGroup>
 	  <None Remove="Resources\AppIcon\cart.png" />
 	  <None Remove="Resources\AppIcon\Home.png" />
+	  <None Remove="Resources\AppIcon\logo.png" />
 	  <None Remove="Resources\AppIcon\profile.png" />
 	  <None Remove="Resources\AppIcon\scanner.png" />
 	  <None Remove="Resources\AppIcon\transaction.png" />
@@ -69,12 +70,13 @@
 	  <None Remove="Resources\Images\lidl.png" />
 	  <None Remove="Resources\Images\payment.jpg" />
 	  <None Remove="Resources\Images\pringles.jpg" />
-	  <None Remove="Resources\Images\shopping_cart.jpg" />
+	  <None Remove="Resources\Images\shoppingcart.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiImage Include="Resources\AppIcon\cart.png" />
 	  <MauiImage Include="Resources\AppIcon\home.png" />
+	  <MauiImage Include="Resources\AppIcon\logo.png" />
 	  <MauiImage Include="Resources\AppIcon\profile.png" />
 	  <MauiImage Include="Resources\AppIcon\scanner.png" />
 	  <MauiImage Include="Resources\AppIcon\transaction.png" />

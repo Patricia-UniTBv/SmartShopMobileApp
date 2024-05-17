@@ -105,7 +105,7 @@ namespace API.Controllers
                 };
                 await _unitOfWork.UserRepository.AddNewUser(newUser);
 
-                return Ok();
+                return Ok(newUser);
             }
             catch (Exception e)
             {

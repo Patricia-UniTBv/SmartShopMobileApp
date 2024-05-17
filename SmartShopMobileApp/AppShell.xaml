@@ -5,12 +5,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:SmartShopMobileApp.Views"
     Shell.FlyoutBehavior="Disabled">
-    
-    <!--<ShellItem Route="MainPage">
-        <ShellContent
-        Title="Main Page"
-        ContentTemplate="{DataTemplate local:MainPageView}"/>
-    </ShellItem>-->
 
     <ShellItem Route="LogInView">
         <ShellContent

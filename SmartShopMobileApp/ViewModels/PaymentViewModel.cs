@@ -180,7 +180,7 @@ namespace SmartShopMobileApp.ViewModels
 
                 Microsoft.Maui.Controls.Application.Current.MainPage.DisplayAlert("Payment Confirmation", "The transaction was successful! You have recieved an email to confirm your payment.", "OK");
                 SendPaymentConfirmationEmail(ActiveUser.Email, TotalAmount); 
-                App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new GeneratedQRCodeToExitShopView()));
+                App.Current.MainPage.Navigation.PushAsync(new GeneratedQRCodeToExitShopView());
             }
             else
             {

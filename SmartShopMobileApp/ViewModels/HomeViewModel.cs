@@ -91,7 +91,7 @@ namespace SmartShopMobileApp.ViewModels
         {
             try
             {
-                await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new BarcodeScannerView()));
+                await App.Current.MainPage.Navigation.PushAsync(new BarcodeScannerView());
 
             }
             catch (Exception e)
@@ -106,7 +106,7 @@ namespace SmartShopMobileApp.ViewModels
         {
             CurrentSupermarket.Supermarket = selectedSupermarket;
             
-            App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new MapView(selectedSupermarket.SupermarketID)));
+            App.Current.MainPage.Navigation.PushAsync(new MapView(selectedSupermarket.SupermarketID));
         }
 
         [RelayCommand]

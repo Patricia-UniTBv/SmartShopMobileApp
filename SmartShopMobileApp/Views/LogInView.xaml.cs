@@ -41,7 +41,7 @@ public partial class LogInView : ContentPage
             SetCultureAndPreferrences();
             await Shell.Current.GoToAsync("//AppView");
         }
-        await Shell.Current.GoToAsync("//AppView");
+        else await Shell.Current.GoToAsync("//LogInView");
     }
 
     private async void SetCultureAndPreferrences()

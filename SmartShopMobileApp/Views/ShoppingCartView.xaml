@@ -71,7 +71,7 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <StackLayout Margin="0,15,10,0"
+        <StackLayout Margin="0,45,10,0"
                      Orientation="Horizontal" 
                      VerticalOptions="CenterAndExpand" 
                      HorizontalOptions="CenterAndExpand">
@@ -92,8 +92,8 @@
                    Margin="5,0,0,0"/>  
         </StackLayout>
 
-        <Button Text="{x:Static lang:AppResources.Pay}" Command="{Binding PayCommand}" FontSize="20" Margin="60,-15,60,10" CornerRadius="20" BackgroundColor="Green"/>
-        <Button Text="{x:Static lang:AppResources.ApplyVoucher}" Command="{Binding ApplyVoucherCommand}" IsEnabled="{Binding IsVoucherButtonVisible}" HeightRequest="45" FontSize="18" Margin="110,10,110,10" CornerRadius="20" BackgroundColor="#2B0B98"/>
+        <Button Text="{x:Static lang:AppResources.Pay}" Command="{Binding PayCommand}" FontSize="20" Margin="60,15,60,10" CornerRadius="20" BackgroundColor="Green"/>
+        <Button Text="{x:Static lang:AppResources.ApplyVoucher}" Command="{Binding ApplyVoucherCommand}" IsEnabled="True" HeightRequest="45" FontSize="18" Margin="110,10,110,10" CornerRadius="20" BackgroundColor="#2B0B98"/>
 
     </VerticalStackLayout>
 </ContentPage>
