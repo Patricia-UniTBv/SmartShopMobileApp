@@ -36,7 +36,6 @@ public partial class SmartShopDBContext : DbContext
     public virtual DbSet<Voucher> Vouchers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=smartshopserver.database.windows.net;Database=SmartShopDB;User ID=sqladmin;Password=SmartShop2024&;Trusted_Connection=False;Encrypt=True;Trust Server Certificate=true");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

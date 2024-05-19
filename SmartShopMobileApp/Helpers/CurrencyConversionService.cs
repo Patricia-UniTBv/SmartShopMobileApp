@@ -11,7 +11,6 @@ namespace SmartShopMobileApp.Helpers
 {
     public class CurrencyConversionService
     {
-        private readonly string _apiBaseUrl;
         private Dictionary<string, decimal> _currencies = new Dictionary<string, decimal>();
 
 
