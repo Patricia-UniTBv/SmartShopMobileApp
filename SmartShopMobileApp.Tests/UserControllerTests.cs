@@ -65,5 +65,90 @@ namespace SmartShopMobileApp.Tests
             Assert.NotNull(badRequestResult);
             Assert.That(badRequestResult.Value, Is.EqualTo("Exception"));
         }
+
+        [Test]
+        public async Task GetUserByEmailAndPassword_ReturnsOkResult_WithUser()
+        {
+            // Arrange
+            var email = "test@example.com";
+            var password = "password";
+            var userDto = new UserDTO { UserID = 1, Email = email, FirstName = "Patricia" };
+
+            _mockUserRepository!.Setup(repo => repo.GetUserByEmailAndPassword(email, password))
+                .ReturnsAsync(userDto);
+
+            // Act
+            var result = await _controller!.GetUserByEmailAndPassword(email, password);
+
+            // Assert
+            Assert.IsInstanceOf<OkObjectResult>(result);
+            var okResult = result as OkObjectResult;
+            Assert.NotNull(okResult);
+            Assert.IsInstanceOf<UserDTO>(okResult.Value);
+            var user = okResult.Value as UserDTO;
+            Assert.That(user!.Email, Is.EqualTo(email));
+            Assert.That(user.FirstName, Is.EqualTo("Patricia"));
+        }
+
+        [Test]
+        public async Task GetUserByEmailAndPassword_ReturnsBadRequest_OnException()
+        {
+            // Arrange
+            var email = "test@example.com";
+            var password = "password";
+
+            _mockUserRepository!.Setup(repo => repo.GetUserByEmailAndPassword(email, password))
+                .ThrowsAsync(new Exception("Exception"));
+
+            // Act
+            var result = await _controller!.GetUserByEmailAndPassword(email, password);
+
+            // Assert
+            Assert.IsInstanceOf<BadRequestObjectResult>(result);
+            var badRequestResult = result as BadRequestObjectResult;
+            Assert.NotNull(badRequestResult);
+            Assert.That(badRequestResult.Value, Is.EqualTo("Exception"));
+        }
+
+        [Test]
+        public async Task GetPreferredLanguageAndCurrency_ReturnsOkResult_WithLanguageAndCurrency()
+        {
+            // Arrange
+            var userId = 1;
+            var language = "en";
+            var currency = "RON";
+            var expectedResult = Tuple.Create(language, currency);
+
+            _mockUserRepository!.Setup(repo => repo.GetPreferredLanguageAndCurrency(userId))
+                .ReturnsAsync(expectedResult);
+
+            // Act
+            var result = await _controller!.GetPreferredLanguageAndCurrency(userId);
+
+            // Assert
+            Assert.IsInstanceOf<OkObjectResult>(result);
+            var okResult = result as OkObjectResult;
+            Assert.NotNull(okResult);
+            Assert.That(okResult.Value, Is.EqualTo(expectedResult));
+        }
+
+        [Test]
+        public async Task GetPreferredLanguageAndCurrency_ReturnsBadRequest_OnException()
+        {
+            // Arrange
+            var userId = 1;
+
+            _mockUserRepository!.Setup(repo => repo.GetPreferredLanguageAndCurrency(userId))
+                .ThrowsAsync(new Exception("Exception"));
+
+            // Act
+            var result = await _controller!.GetPreferredLanguageAndCurrency(userId);
+
+            // Assert
+            Assert.IsInstanceOf<BadRequestObjectResult>(result);
+            var badRequestResult = result as BadRequestObjectResult;
+            Assert.NotNull(badRequestResult);
+            Assert.That(badRequestResult.Value, Is.EqualTo("Exception"));
+        }
     }
 }
