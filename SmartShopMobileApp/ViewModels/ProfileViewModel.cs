@@ -25,10 +25,29 @@ namespace SmartShopMobileApp.ViewModels
         {
             _manageData = new ManageData();
             _authService = new AuthService();
-
             ActiveUser = AuthenticatedUser.ActiveUser;
+
+            LanguageOptions = new ObservableCollection<string>()
+            {
+               "English",
+               "Romanian",
+               "French"
+            };
+            SelectedLanguage = ActiveUser.PreferredLanguage.ToUpper();
+
+            CurrencyOptions = new ObservableCollection<string>()
+            {
+               "RON",
+               "EUR",
+               "USD",
+               "GBP"
+            };
+            InitialCurrency = PreferredCurrency.Value;
+
         }
 
+        [ObservableProperty]
+        private string _initialCurrency;
         [ObservableProperty] 
         private ObservableCollection<string> _languageOptions;
 
@@ -54,7 +73,6 @@ namespace SmartShopMobileApp.ViewModels
 
         private string _selectedLanguage;
 
-        [Obsolete]
         public string SelectedLanguage
         {
             get => _selectedLanguage;
@@ -65,21 +83,20 @@ namespace SmartShopMobileApp.ViewModels
 
                 if (_selectedLanguage == "English")
                 {
-                    Task.Run(async () => await ChangeLanguage("en"));
+                    ChangeLanguage("en");
                 }
                 else if (_selectedLanguage == "Romanian")
                 {
-                    Task.Run(async () => await ChangeLanguage("ro"));
+                    ChangeLanguage("ro");
                 }
                 else if (_selectedLanguage == "French")
                 {
-                    Task.Run(async () => await ChangeLanguage("fr"));
+                    ChangeLanguage("fr");
                 }
             }
         }
 
         private string _selectedCurrency;
-        [Obsolete]
         public string SelectedCurrency
         {
             get => _selectedCurrency;
@@ -87,12 +104,16 @@ namespace SmartShopMobileApp.ViewModels
             {
                 _selectedCurrency = value;
                 OnPropertyChanged("SelectedCurrency");
-
-                Task.Run(async () => await ChangeCurrency(_selectedCurrency));
+                if (_selectedCurrency != InitialCurrency)
+                { 
+                    ChangeCurrency(_selectedCurrency);
+                    InitialCurrency = SelectedCurrency;
+                    OnPropertyChanged("SelectedCurrency");
+                    OnPropertyChanged("InitialCurrency");
+                }
             }
         }
 
-        [Obsolete]
         private async Task ChangeLanguage(string selectedLanguage)
         {
             try
@@ -111,7 +132,6 @@ namespace SmartShopMobileApp.ViewModels
             }
         }
 
-        [Obsolete]
         private async Task ChangeCurrency(string selectedCurrency)
         {
             try
@@ -119,6 +139,7 @@ namespace SmartShopMobileApp.ViewModels
                 _manageData.SetStrategy(new CreateData());
 
                 await _manageData.GetDataAndDeserializeIt<UserDTO>($"User/UpdateCurrency?userId={ActiveUser.UserId}&currency={selectedCurrency}", "");
+                PreferredCurrency.Value = selectedCurrency;
 
                 Device.BeginInvokeOnMainThread(() =>
                 {
@@ -142,27 +163,5 @@ namespace SmartShopMobileApp.ViewModels
             await Shell.Current.GoToAsync("//LogInView");
         }
 
-        [RelayCommand]
-        private void PageAppearing(object obj)
-        {
-            ActiveUser = AuthenticatedUser.ActiveUser;
-
-            LanguageOptions = new ObservableCollection<string>()
-            {
-               "English",
-               "Romanian",
-               "French"
-            };
-            SelectedLanguage = ActiveUser.PreferredLanguage.ToUpper();
-
-            CurrencyOptions = new ObservableCollection<string>()
-            {
-               "RON",
-               "EUR",
-               "USD",
-               "GBP"
-            };
-            SelectedCurrency = PreferredCurrency.Value;
-        }
     }
 }

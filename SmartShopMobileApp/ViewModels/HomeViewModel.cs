@@ -30,6 +30,8 @@ namespace SmartShopMobileApp.ViewModels
             set { _manageData = value; }
         }
 
+        private readonly CurrencyConversionService _conversionService = new CurrencyConversionService();
+
         [ObservableProperty]
         private bool _isCurrentOffersVisible;
 
@@ -50,8 +52,9 @@ namespace SmartShopMobileApp.ViewModels
                     IsCurrentOffersVisible = true;
                     foreach(var offer in offers) 
                     {
-                        offer.OldPrice = offer.Product.Price;
-                        offer.NewPrice = Math.Round(offer.Product.Price * (1 - (decimal)offer.OfferPercentage / 100), 2);
+                        offer.OldPrice = Math.Round(_conversionService.ConvertCurrencyAsync(offer.Product.Price, "RON", PreferredCurrency.Value), 2);
+                        decimal fromPrice = Math.Round(offer.Product.Price * (1 - (decimal)offer.OfferPercentage / 100), 2);
+                        offer.NewPrice = Math.Round(_conversionService.ConvertCurrencyAsync(fromPrice, "RON", PreferredCurrency.Value), 2);
                         offer.Currency = PreferredCurrency.Value switch
                         {
                             "USD" => "$",

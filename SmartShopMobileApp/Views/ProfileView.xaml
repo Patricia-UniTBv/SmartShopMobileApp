@@ -4,13 +4,14 @@
              x:Class="SmartShopMobileApp.Views.ProfileView"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:icon="clr-namespace:SmartShopMobileApp"
-             xmlns:viewmodels="clr-namespace:SmartShopMobileApp.ViewModels"
+             xmlns:viewModels="clr-namespace:SmartShopMobileApp.ViewModels"
              xmlns:lang="clr-namespace:SmartShopMobileApp.Resources.Languages"
+             x:DataType="viewModels:ProfileViewModel"
              Title="Your profile">
 
-    <ContentPage.Behaviors>
+    <!--<ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior Command="{Binding PageAppearingCommand}" EventName="Appearing" />
-    </ContentPage.Behaviors>
+    </ContentPage.Behaviors>-->
 
     <ContentPage.Content>
         <StackLayout>
@@ -20,21 +21,7 @@
                     Padding="0"
                     HeightRequest="128"
                     Orientation="Horizontal">
-                    <AbsoluteLayout>
-                        <Frame x:Name="imageFrame"
-                               CornerRadius="60"
-                               IsClippedToBounds="True"
-                               HorizontalOptions="End"
-                               VerticalOptions="End"
-                               Margin="0,0,30,30"
-                               WidthRequest="100"
-                               HeightRequest="100">
-                            <!--<Image Source="{Binding ActiveUser.ImageUrl}" 
-                                   Aspect="AspectFill" 
-                                   Margin="-20"/>-->
-                        </Frame>
-
-                    </AbsoluteLayout>
+                    <Label Text="Hello, "/>
 
                     <StackLayout Orientation="Vertical">
                         <Label
@@ -64,7 +51,7 @@
                            Margin="10,20,0,0" 
                            HorizontalOptions="Start"/>
                     <Picker
-                            Title="{Binding CurrentUser.PreferredLanguage}"
+                            Title="{Binding ActiveUser.PreferredLanguage}"
                             Margin="10,10,10,0"
                             BackgroundColor="Transparent"
                             FontFamily="Montserrat"
@@ -90,7 +77,7 @@
                            HorizontalOptions="Start"/>
 
                     <Picker
-                        Title="{Binding CurrentUser.PreferredCurrency}"
+                        Title="{Binding InitialCurrency}"
                         Margin="10,10,10,0"
                         BackgroundColor="Transparent"
                         FontFamily="Montserrat"
