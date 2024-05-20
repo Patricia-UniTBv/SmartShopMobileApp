@@ -24,7 +24,10 @@
                FontSize="20"
                TextColor="Grey"
                Margin="50,10,0,0"/>
-        <CollectionView x:Name="SupermarketsList" ItemsSource="{Binding Products}" HeightRequest="300">
+        <CollectionView x:Name="SupermarketsList"
+                        ItemsSource="{Binding Products}"
+                        IsVisible="{Binding IsVoucherButtonVisible}"
+                        HeightRequest="300">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:ProductDTO">
                     <Grid Padding="10,5,10,5">

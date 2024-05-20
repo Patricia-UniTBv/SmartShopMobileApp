@@ -168,6 +168,7 @@ namespace SmartShopMobileApp.ViewModels
         private async Task PageAppearing(object obj)
         {
             IsEmptyShoppingCartTextVisible = false;
+            Currency = PreferredCurrency.Value;
             await GetLatestShoppingCartForCurrentUser();
         }
 

@@ -17,7 +17,8 @@ namespace SmartShopMobileApp.ViewModels
         {
             try
             {
-                await App.Current.MainPage.Navigation.PushAsync(new HomeView());
+                await App.Current.MainPage.Navigation.PopAsync();
+                await App.Current.MainPage.Navigation.PopAsync();
 
             }
             catch (Exception e)
