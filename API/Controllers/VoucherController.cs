@@ -48,7 +48,7 @@ namespace API.Controllers
                 decimal earnedMoney = 0;
                 if (totalAmount >= 150)
                 {
-                    earnedMoney = Math.Round(totalAmount/200, 2);
+                    earnedMoney = Math.Round(totalAmount/2000, 2);
                 }
                 existingVoucher.EarnedPoints += earnedMoney;
 
