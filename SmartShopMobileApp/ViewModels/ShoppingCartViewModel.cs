@@ -26,6 +26,7 @@ namespace SmartShopMobileApp.ViewModels
             Products = new List<ProductDTO>() { };
 
             Currency = PreferredCurrency.Value;
+            
         }
 
         private IManageData _manageData;
@@ -73,7 +74,7 @@ namespace SmartShopMobileApp.ViewModels
                 var latestShoppingCart = await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"ShoppingCart/GetLatestShoppingCartByUserId?id={ActiveUser.UserId}", "");
                 
                 _manageData.SetStrategy(new DeleteData());
-                await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"CartItem/DeleteCartItemFromShoppingCart?productId={product.ProductID}&shoppingCartId={latestShoppingCart.ShoppingCartID}&quantity={product.Quantity}", "");
+                await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"CartItem/DeleteCartItemFromShoppingCart?productId={product.ProductID}&shoppingCartId={latestShoppingCart.ShoppingCartID}&quantity={product.Quantity}&userId={ActiveUser.UserId}", "");
                 await App.Current.MainPage.Navigation.PushAsync(new ShoppingCartView());
 
             }
@@ -105,7 +106,7 @@ namespace SmartShopMobileApp.ViewModels
 
                     if (ShoppingCartId != 0)
                     {
-                        ImageSource = "cartempty.png";
+                        ImageSource = "shoppingcart.png";
                         IsVoucherButtonVisible = true;
                     }
                     else

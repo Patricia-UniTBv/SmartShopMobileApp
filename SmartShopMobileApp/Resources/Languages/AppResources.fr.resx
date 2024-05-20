@@ -153,6 +153,9 @@
   <data name="ExpirationYear" xml:space="preserve">
     <value>Annee d'éxpiration:</value>
   </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Bonjour, </value>
+  </data>
   <data name="MaximumPrice" xml:space="preserve">
     <value>Prix maximum:</value>
   </data>

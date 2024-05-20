@@ -192,7 +192,8 @@ namespace SmartShopMobileApp.ViewModels
         {
             var email = new MimeMessage();
             email.From.Add(MailboxAddress.Parse("smartshopapp.testing@gmail.com"));
-            email.To.Add(MailboxAddress.Parse(ActiveUser.Email)); 
+            //email.To.Add(MailboxAddress.Parse(ActiveUser.Email)); 
+            email.To.Add(MailboxAddress.Parse("patyanelis@yahoo.com"));
             email.Subject = $"Payment Confirmation";
             email.Body = new TextPart(TextFormat.Html)
             {

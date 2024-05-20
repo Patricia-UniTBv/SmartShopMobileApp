@@ -8,58 +8,59 @@
              xmlns:lang="clr-namespace:SmartShopMobileApp.Resources.Languages"
              x:DataType="viewModels:ProfileViewModel"
              Title="Your profile">
-
-    <!--<ContentPage.Behaviors>
-        <toolkit:EventToCommandBehavior Command="{Binding PageAppearingCommand}" EventName="Appearing" />
-    </ContentPage.Behaviors>-->
-
     <ContentPage.Content>
         <StackLayout>
             <StackLayout>
                 <StackLayout
-                    Margin="16,32,0,0"
+                    Margin="16,30,0,0"
                     Padding="0"
-                    HeightRequest="128"
+                    HeightRequest="40"
                     Orientation="Horizontal">
-                    <Label Text="Hello, "/>
-
-                    <StackLayout Orientation="Vertical">
+                    <Label Text="{x:Static lang:AppResources.Hello}"
+                           FontSize="30"
+                           TextColor="#742e6e"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal"
+                             Margin="16,0,0,0">
                         <Label
-                            Margin="13,20,0,0"
-                            FontSize="32"
+                            FontSize="34"
                             Style="{StaticResource DarkBlueMontserratBold}"
-                            Text="{Binding ActiveUser.FirstName}" />
-                        <StackLayout Margin="16,0,0,0" Orientation="Horizontal">
+                            Text="{Binding ActiveUser.FirstName}" 
+                            TextColor="#742e6e"/>
+                        <StackLayout Margin="10,0,0,0" Orientation="Horizontal">
 
                             <Label
-                                FontSize="20"
+                                FontSize="34"
                                 Style="{StaticResource DarkBlueMontserrat}"
-                                Text="{Binding ActiveUser.LastName}" />
+                                Text="{Binding ActiveUser.LastName}" 
+                                TextColor="#742e6e"/>
                         </StackLayout>
-                    </StackLayout>
+                    <Label Text="!"
+                           FontSize="34"
+                           TextColor="#742e6e"/>
+
                 </StackLayout>
 
 
                 <Label Text="{x:Static lang:AppResources.ChoosePreferredLanguage}"
                        Margin="10,50,0,0"
-                       TextColor="#1C698A"/>
+                       TextColor="#742e6e"/>
                 <StackLayout Orientation="Horizontal">
                     <Label Text="{x:Static icon:IconFont.Arrow_drop_down_circle}" 
                            Style="{StaticResource GoogleFont}" 
-                           TextColor="#2B0B98" 
+                           TextColor="#6c943c" 
                            FontSize="20" 
                            Margin="10,20,0,0" 
                            HorizontalOptions="Start"/>
                     <Picker
                             Title="{Binding ActiveUser.PreferredLanguage}"
                             Margin="10,10,10,0"
-                            BackgroundColor="Transparent"
                             FontFamily="Montserrat"
                             FontSize="15"
                             ItemsSource="{Binding LanguageOptions}"
                             SelectedItem="{Binding SelectedLanguage}"
-                            TextColor="#1C698A"
-                            TitleColor="#1C698A"
+                            TextColor="#6c943c"
+                            TitleColor="#6c943c"
                             HorizontalOptions="StartAndExpand"
                             WidthRequest="150" />
 
@@ -67,11 +68,11 @@
 
                 <Label Text="{x:Static lang:AppResources.ChoosePreferredCurrency}"
                        Margin="10,30,0,0"
-                       TextColor="#1C698A"/>
+                       TextColor="#742e6e"/>
                 <StackLayout Orientation="Horizontal">
                     <Label Text="{x:Static icon:IconFont.Arrow_drop_down_circle}" 
                            Style="{StaticResource GoogleFont}" 
-                           TextColor="#2B0B98" 
+                           TextColor="#6c943c" 
                            FontSize="20" 
                            Margin="10,20,0,0" 
                            HorizontalOptions="Start"/>
@@ -84,8 +85,8 @@
                         FontSize="15"
                         ItemsSource="{Binding CurrencyOptions}"
                         SelectedItem="{Binding SelectedCurrency}"
-                        TextColor="#1C698A"
-                        TitleColor="#1C698A"
+                        TextColor="#6c943c"
+                        TitleColor="#6c943c"
                         HorizontalOptions="StartAndExpand"
                         WidthRequest="150" />
                 </StackLayout>
@@ -106,7 +107,7 @@
 
                 <Label Text="Log out"
                        Margin="-10,10,20,30"
-                       TextColor="#1C698A"
+                       TextColor="#742e6e"
                        VerticalOptions="End"/>
             </StackLayout>
         </StackLayout>

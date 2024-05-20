@@ -66,11 +66,15 @@
 	  <None Remove="Resources\Images\card.png" />
 	  <None Remove="Resources\Images\carrefour.png" />
 	  <None Remove="Resources\Images\cartempty.png" />
+	  <None Remove="Resources\Images\handcream.jpg" />
 	  <None Remove="Resources\Images\kaufland.png" />
 	  <None Remove="Resources\Images\lidl.png" />
 	  <None Remove="Resources\Images\payment.jpg" />
+	  <None Remove="Resources\Images\pinkmarker.png" />
 	  <None Remove="Resources\Images\pringles.jpg" />
 	  <None Remove="Resources\Images\shoppingcart.jpg" />
+	  <None Remove="Resources\Images\syoss.jpg" />
+	  <None Remove="Resources\Images\zizin.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>

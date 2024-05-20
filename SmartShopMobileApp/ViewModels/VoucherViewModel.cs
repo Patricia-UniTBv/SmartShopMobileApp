@@ -124,7 +124,7 @@ namespace SmartShopMobileApp.ViewModels
                     }
                 }
 
-                var list = VouchersHistory.OrderByDescending(t => t.CreationDate.Month).OrderByDescending(t => t.CreationDate.Day).ToObservableCollection();
+                var list = VouchersHistory.OrderByDescending(t => t.CreationDate).ToObservableCollection();
                 VouchersHistory = list;
 
             }

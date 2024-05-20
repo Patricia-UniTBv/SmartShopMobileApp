@@ -169,6 +169,15 @@ namespace SmartShopMobileApp.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hello, .
+        /// </summary>
+        internal static string Hello {
+            get {
+                return ResourceManager.GetString("Hello", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maximum price:.
         /// </summary>
         internal static string MaximumPrice {

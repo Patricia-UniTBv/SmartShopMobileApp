@@ -16,14 +16,14 @@
         <Label Text="{x:Static lang:AppResources.YourCurrentShoppingCart}"
                FontFamily="Poppins-Regular"
                FontSize="20"
-               TextColor="#2B0B98"
+               TextColor="#742e6e"
                Margin="10,0,0,0"/>
         <Image Source="{Binding ImageSource}" HeightRequest="140" WidthRequest="160" />
         <Label Text="{x:Static lang:AppResources.YourShoppingCartIsEmpty}" IsVisible="{Binding IsEmptyShoppingCartTextVisible}" 
                FontFamily="Poppins-Regular"
                FontSize="20"
                TextColor="Grey"
-               Margin="50,30,0,0"/>
+               Margin="50,10,0,0"/>
         <CollectionView x:Name="SupermarketsList" ItemsSource="{Binding Products}" HeightRequest="300">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:ProductDTO">
@@ -40,14 +40,29 @@
                                 <StackLayout Grid.Column="1" VerticalOptions="Center">
                                     <Label Text="{Binding Name}" Margin="10,0,0,0" FontFamily="Poppins-Bold" TextColor="#2B0B98" FontSize="16" />
                                     <StackLayout Orientation="Horizontal" >
-                                        <Label Text="{x:Static lang:AppResources.Quantity}" Margin="10,0,0,0"  TextColor="Gray" FontSize="16"/>
-                                        <Label Text="{Binding Quantity}" Margin="10,0,0,0"  TextColor="Gray" FontSize="16" />
+                                        <Label Text="{x:Static lang:AppResources.Quantity}" 
+                                               Margin="10,0,0,0" 
+                                               TextColor="Gray"
+                                               FontSize="16"/>
+                                        <Label Text="{Binding Quantity}"
+                                               Margin="10,0,0,0"
+                                               TextColor="Gray"
+                                               FontSize="16" />
                                         
                                     </StackLayout>
                                     <StackLayout Orientation="Horizontal" >
-                                        <Label Text="{x:Static lang:AppResources.Price}" Margin="10,0,0,0"  TextColor="Gray" FontSize="16"/>
-                                        <Label Text="{Binding Price}" Margin="10,0,0,0"  TextColor="Gray" FontSize="16" />
-                                        <Label Text="{Binding Currency}" Margin="5,0,0,0"  TextColor="Gray" FontSize="16" />
+                                        <Label Text="{x:Static lang:AppResources.Price}"
+                                               Margin="10,0,0,0"
+                                               TextColor="Gray"
+                                               FontSize="16"/>
+                                        <Label Text="{Binding Price}"
+                                               Margin="10,0,0,0"
+                                               TextColor="Gray"
+                                               FontSize="16" />
+                                        <Label Text="{Binding Currency}"
+                                               Margin="5,0,0,0"
+                                               TextColor="Gray"
+                                               FontSize="16" />
                                     </StackLayout>
 
 
@@ -70,8 +85,9 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
-        <StackLayout Margin="0,45,10,0"
+        <StackLayout >
+            <StackLayout IsVisible="{Binding IsVoucherButtonVisible}"
+                     Margin="0,45,10,0"
                      Orientation="Horizontal" 
                      VerticalOptions="CenterAndExpand" 
                      HorizontalOptions="CenterAndExpand">
@@ -92,8 +108,21 @@
                    Margin="5,0,0,0"/>  
         </StackLayout>
 
-        <Button Text="{x:Static lang:AppResources.Pay}" Command="{Binding PayCommand}" FontSize="20" Margin="60,15,60,10" CornerRadius="20" BackgroundColor="Green"/>
-        <Button Text="{x:Static lang:AppResources.ApplyVoucher}" Command="{Binding ApplyVoucherCommand}" IsEnabled="True" HeightRequest="45" FontSize="18" Margin="110,10,110,10" CornerRadius="20" BackgroundColor="#2B0B98"/>
-
+        <Button Text="{x:Static lang:AppResources.Pay}" 
+                Command="{Binding PayCommand}"
+                IsVisible="{Binding IsVoucherButtonVisible}"
+                FontSize="20" 
+                Margin="60,15,60,10"
+                CornerRadius="20"
+                BackgroundColor="Green"/>
+        <Button Text="{x:Static lang:AppResources.ApplyVoucher}" 
+                Command="{Binding ApplyVoucherCommand}" 
+                IsEnabled="True" 
+                HeightRequest="45"
+                FontSize="18"
+                Margin="110,10,110,10"
+                CornerRadius="20"
+                BackgroundColor="#742e6e"/>
+        </StackLayout>
     </VerticalStackLayout>
 </ContentPage>

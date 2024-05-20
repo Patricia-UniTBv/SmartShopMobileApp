@@ -45,13 +45,12 @@ namespace API.Controllers
                     return NotFound("Voucher not found");
                 }
 
-                int earnedMoneyRounded = 0;
+                decimal earnedMoney = 0;
                 if (totalAmount >= 150)
                 {
-                    decimal earnedMoney = 0.05m * totalAmount;
-                    earnedMoneyRounded = (int)Math.Round(earnedMoney);
+                    earnedMoney = Math.Round(0.05m * totalAmount, 2);
                 }
-                existingVoucher.EarnedPoints += earnedMoneyRounded;
+                existingVoucher.EarnedPoints += earnedMoney;
 
                 _unitOfWork.VoucherRepository.UpdateVoucherForSpecificUser(existingVoucher);
 
@@ -95,7 +94,8 @@ namespace API.Controllers
                 VoucherDTO newVoucher = new()
                 {
                     UserID = userId,
-                    SupermarketID = supermarketId
+                    SupermarketID = supermarketId,
+                    EarnedPoints = 0
                 };
 
                 await _unitOfWork.VoucherRepository.CreateVoucherForUserAndSupermarket(newVoucher);

@@ -11,7 +11,7 @@
         <Label Text="{x:Static lang:AppResources.ProcessPayment}" Margin="18,15" FontFamily="Poppins-Bold" FontSize="20" TextColor="#2B0B98"/>
         <StackLayout Padding="20">
             <Label Text="{x:Static lang:AppResources.CardName}"/>
-            <Entry Placeholder="Card Name" Keyboard="Default" MaxLength="16" x:Name="cardName" Margin="0,0,0,15"/>
+            <Entry Placeholder="Card Name" Keyboard="Default" MaxLength="26" x:Name="cardName" Margin="0,0,0,15"/>
             <Label Text="{x:Static lang:AppResources.CardNumber}"/>
             <Entry Placeholder="Card Number" Keyboard="Numeric" MaxLength="16" x:Name="cardNo" Text="{Binding CardNo}" Margin="0,15"/>
             <Label Text="{x:Static lang:AppResources.ExpirationYear}"/>

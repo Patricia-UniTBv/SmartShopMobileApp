@@ -14,10 +14,9 @@
     <ScrollView>
        <VerticalStackLayout>
         <Label Text="{x:Static lang:AppResources.ChooseYourSupermarket}"
-               FontFamily="Poppins-Regular"
                FontSize="20"
-               TextColor="#2B0B98"
-               Margin="10,0,0,0"/>
+               TextColor="#742e6e"
+               Margin="10,20,0,10"/>
         <CollectionView x:Name="SupermarketsList" ItemsSource="{Binding Supermarkets}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:SupermarketDTO">
@@ -32,7 +31,7 @@
                                 <Image Source="{Binding ImageUrl}" HeightRequest="90" WidthRequest="90" />
 
                                 <StackLayout Grid.Column="1" VerticalOptions="Center">
-                                    <Label Text="{Binding Name}" Margin="10,0,0,0" FontFamily="Poppins-Bold" TextColor="#2B0B98" FontSize="16" />
+                                        <Label Text="{Binding Name}" Margin="10,0,0,0" FontAttributes="Bold" TextColor="#742e6e" FontSize="16" />
                                 </StackLayout>
                             </Grid>
                             <Frame.GestureRecognizers>
@@ -53,8 +52,8 @@
             FontSize="20"
             IsVisible="{Binding IsCurrentOffersVisible}"
             Text="{x:Static lang:AppResources.CurrentOffers}"
-            TextColor="#1C698A" />
-        <!--<ScrollView HeightRequest="300">-->
+            TextColor="#6c943c" />
+   
         <CollectionView
         Margin="7,0,7,0"
         ItemsSource="{Binding CurrentOffers}">
@@ -170,7 +169,7 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <!--</ScrollView>-->
+     
     </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

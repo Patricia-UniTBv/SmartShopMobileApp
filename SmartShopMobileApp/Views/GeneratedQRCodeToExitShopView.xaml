@@ -5,14 +5,14 @@
              xmlns:viewModels="clr-namespace:SmartShopMobileApp.ViewModels" 
              x:Class="SmartShopMobileApp.Views.GeneratedQRCodeToExitShopView"
              xmlns:lang="clr-namespace:SmartShopMobileApp.Resources.Languages"
-             Title="GeneratedQRCodeToExitShopView">
+             Title="Exit QR">
     <VerticalStackLayout>
         <Label 
             Text="{x:Static lang:AppResources.ThankYouForShoppingAtOurSupermarket}"
             FontFamily="Poppins-Regular"
             FontSize="20"
-            TextColor="#2B0B98"
-            Margin="10,0,0,0" />
+            TextColor="#742e6e"
+            Margin="10,20,0,0" />
 
         <zxing:BarcodeGeneratorView Format="QrCode" 
                 Value="Scan it at the exit"
@@ -31,7 +31,7 @@
                 Margin="0,100,0,0"
                 FontSize="18"
                 CornerRadius="20"
-                BackgroundColor="#2B0B98"/>
+                BackgroundColor="#742e6e"/>
 
     </VerticalStackLayout>
 </ContentPage>
