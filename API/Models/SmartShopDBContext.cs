@@ -36,7 +36,8 @@ public partial class SmartShopDBContext : DbContext
     public virtual DbSet<Voucher> Vouchers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=smartshopserver.database.windows.net;Database=SmartShopDB;User ID=sqladmin;Password=SmartShop2024&;Trusted_Connection=False;Encrypt=True;Trust Server Certificate=true");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=smartshopserver.database.windows.net;Database=SmartShopDB;Trusted_Connection=False;Encrypt=True;User ID=sqladmin;Password=SmartShop2024&;Trust Server Certificate=true");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -89,6 +90,11 @@ public partial class SmartShopDBContext : DbContext
                 .HasForeignKey(d => d.ProductId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Offer_Product");
+
+            entity.HasOne(d => d.Supermarket).WithMany(p => p.Offers)
+                .HasForeignKey(d => d.SupermarketId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Offer_Supermarket");
         });
 
         modelBuilder.Entity<Product>(entity =>

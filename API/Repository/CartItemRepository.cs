@@ -53,6 +53,14 @@ namespace API.Repository
             _context.SaveChanges();
         }
 
+        public async Task UpdateCartItem(CartItemDTO item)
+        {
+            var cartItem = _mapper.Map<CartItemDTO, CartItem>(item);
+            _context.ChangeTracker.Clear();
+            _context.Update(cartItem);
+            _context.SaveChanges();
+        }
+
         public async Task<CartItemDTO> GetCartItemById(int id)
         {
             var cart = await _dbSet.SingleAsync(c => c.CartItemID == id);

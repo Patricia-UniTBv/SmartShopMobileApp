@@ -9,5 +9,6 @@ namespace API.Repository.Interfaces
         Task<CartItemDTO> GetCartItemByProductIdAndShoppingCartId(int productId, int shoppingCartId, double quantity);
         Task AddCartItem(CartItemDTO item);
         void DeleteCartItem(CartItemDTO item);
+        Task UpdateCartItem(CartItemDTO item);
     }
 }

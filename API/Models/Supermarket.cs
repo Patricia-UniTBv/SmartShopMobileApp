@@ -11,6 +11,8 @@ public partial class Supermarket
 
     public virtual ICollection<Location> Locations { get; set; } = new List<Location>();
 
+    public virtual ICollection<Offer> Offers { get; set; } = new List<Offer>();
+
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();
 
     public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; } = new List<ShoppingCart>();

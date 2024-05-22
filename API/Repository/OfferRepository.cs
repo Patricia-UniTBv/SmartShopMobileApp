@@ -11,6 +11,7 @@ namespace API.Repository
         public OfferRepository(SmartShopDBContext context, IMapper _mapper) : base(context, _mapper)
         {
         }
+
         public async Task<ICollection<OfferDTO>> GetAllCurrentOffers()
         {
             var currentDate = DateTime.Now;
@@ -20,6 +21,17 @@ namespace API.Repository
                 .ToListAsync();
 
             return _mapper.Map<ICollection<Offer>, ICollection<OfferDTO>>(result);
+        }
+
+        public async Task<OfferDTO> GetActiveOfferForProduct(int productId, int supermarketId, DateTime currentDate)
+        {
+            var result = await _context.Offers
+            .Where(o => o.ProductId == productId
+                        && o.SupermarketId == supermarketId
+                        && o.OfferStartDate <= currentDate
+                        && o.OfferEndDate >= currentDate)
+            .FirstOrDefaultAsync();
+            return _mapper.Map<Offer, OfferDTO>(result!);
         }
 
     }

@@ -99,6 +99,17 @@ namespace API.Controllers
                     await _unitOfWork.ShoppingCartRepository.AddShoppingCart(shoppingCart);
                     shoppingCart = await _unitOfWork.ShoppingCartRepository.GetLatestShoppingCartForCurrentUser(currentUser.UserID);
                 }
+
+                var currentDate = DateTime.Now;
+                var activeOffer = await _unitOfWork.OfferRepository.GetActiveOfferForProduct(productId, supermarketId, currentDate);
+
+                decimal productPrice = product1.Price;
+                if (activeOffer != null)
+                {
+                    productPrice -= productPrice * (decimal)activeOffer.OfferPercentage / 100;
+                }
+                product1.Price = productPrice;
+
                 var cartItem = new CartItemDTO
                 {
                     ProductID = product1.ProductID,
@@ -106,8 +117,7 @@ namespace API.Controllers
                     Quantity = numberOfProducts, 
                 };
 
-                var productToAdd = await _unitOfWork.ProductRepository.GetProductById(product1.ProductID);
-                shoppingCart.TotalAmount += productToAdd.Price * numberOfProducts;
+                shoppingCart.TotalAmount += productPrice * numberOfProducts;
                 shoppingCart.SupermarketID = supermarketId;
                 await _unitOfWork.ShoppingCartRepository.UpdateShoppingCart(shoppingCart);
 

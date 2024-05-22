@@ -18,4 +18,6 @@ public partial class Offer
     public int ProductId { get; set; }
 
     public virtual Product Product { get; set; } = null!;
+
+    public virtual Supermarket Supermarket { get; set; } = null!;
 }
