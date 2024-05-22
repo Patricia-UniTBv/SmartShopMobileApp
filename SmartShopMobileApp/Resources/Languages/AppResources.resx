@@ -156,14 +156,23 @@
   <data name="Hello" xml:space="preserve">
     <value>Hello, </value>
   </data>
+  <data name="History" xml:space="preserve">
+    <value>History</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
+  </data>
+  <data name="LoadMore" xml:space="preserve">
+    <value>Load more</value>
   </data>
   <data name="MaximumPrice" xml:space="preserve">
     <value>Maximum price:</value>
   </data>
   <data name="MinimumPrice" xml:space="preserve">
     <value>Minimum price:</value>
+  </data>
+  <data name="MyCart" xml:space="preserve">
+    <value>My cart</value>
   </data>
   <data name="Pay" xml:space="preserve">
     <value>Pay</value>
@@ -177,8 +186,14 @@
   <data name="Products" xml:space="preserve">
     <value>Products:</value>
   </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
   <data name="Quantity" xml:space="preserve">
     <value>Quantity:</value>
+  </data>
+  <data name="ScanProduct" xml:space="preserve">
+    <value>Scan product</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Search a product...</value>
@@ -200,6 +215,9 @@
   </data>
   <data name="VoucherHistory" xml:space="preserve">
     <value>Voucher history:</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Welcome,</value>
   </data>
   <data name="YourCurrentShoppingCart" xml:space="preserve">
     <value>Your current shopping cart:</value>

@@ -14,36 +14,41 @@
     <ScrollView>
        <VerticalStackLayout>
             <StackLayout
-            Margin="16,30,0,0"
-            Padding="0"
-            HeightRequest="40"
-            Orientation="Horizontal">
-                <Label Text="{x:Static lang:AppResources.Hello}"
-           FontSize="30"
-           TextColor="#742e6e"/>
-            
+    Margin="16,30,0,0"
+    Padding="0"
+    HeightRequest="40"
+    Orientation="Horizontal">
+                <Label Text="{x:Static lang:AppResources.Welcome}"
+           FontSize="28"
+           TextColor="#6c943c"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal"
+             Margin="16,0,0,0">
                 <Label
-            FontSize="34"
+            FontSize="32"
             Style="{StaticResource DarkBlueMontserratBold}"
             Text="{Binding ActiveUser.FirstName}" 
-            TextColor="#742e6e"/>
+            FontAttributes="Bold"
+            TextColor="#6c943c"/>
                 <StackLayout Margin="10,0,0,0" Orientation="Horizontal">
 
                     <Label
-                FontSize="34"
+                FontSize="32"
                 Style="{StaticResource DarkBlueMontserrat}"
                 Text="{Binding ActiveUser.LastName}" 
-                TextColor="#742e6e"/>
+                FontAttributes="Bold"
+                TextColor="#6c943c"/>
                 </StackLayout>
                 <Label Text="!"
-           FontSize="34"
-           TextColor="#742e6e"/>
+           FontSize="32"
+           TextColor="#6c943c"/>
 
             </StackLayout>
+           
             <Label Text="{x:Static lang:AppResources.ChooseYourSupermarket}"
                FontSize="20"
                TextColor="#742e6e"
-               Margin="10,20,0,10"/>
+               Margin="10,50,0,10"/>
         <CollectionView x:Name="SupermarketsList" ItemsSource="{Binding Supermarkets}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:SupermarketDTO">
@@ -201,6 +206,10 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
+                <Button Text="{x:Static lang:AppResources.LoadMore}" 
+                        Command="{Binding LoadMoreCommand}"
+                        Margin="0,10,0,0"
+                        HorizontalOptions="Center"/>
             </StackLayout>
         </VerticalStackLayout>
     </ScrollView>

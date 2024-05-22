@@ -156,14 +156,23 @@
   <data name="Hello" xml:space="preserve">
     <value>Salut, </value>
   </data>
+  <data name="History" xml:space="preserve">
+    <value>Istoric</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Acasă</value>
+  </data>
+  <data name="LoadMore" xml:space="preserve">
+    <value>Mai multe</value>
   </data>
   <data name="MaximumPrice" xml:space="preserve">
     <value>Preț maxim:</value>
   </data>
   <data name="MinimumPrice" xml:space="preserve">
     <value>Preț minim:</value>
+  </data>
+  <data name="MyCart" xml:space="preserve">
+    <value>Coșul meu</value>
   </data>
   <data name="Pay" xml:space="preserve">
     <value>Platește</value>
@@ -177,8 +186,14 @@
   <data name="Products" xml:space="preserve">
     <value>Produse:</value>
   </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profil</value>
+  </data>
   <data name="Quantity" xml:space="preserve">
     <value>Cantitate:</value>
+  </data>
+  <data name="ScanProduct" xml:space="preserve">
+    <value>Scanează</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Caută un produs...</value>
@@ -200,6 +215,9 @@
   </data>
   <data name="VoucherHistory" xml:space="preserve">
     <value>Istoric voucher:</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Bine ai venit, </value>
   </data>
   <data name="YourCurrentShoppingCart" xml:space="preserve">
     <value>Coșul tău de cumpărături curent:</value>

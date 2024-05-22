@@ -7,7 +7,7 @@ namespace SmartShopMobileApp.Views;
 
 public partial class LogInView : ContentPage
 {
-	public LogInView(IAuthService authService)
+    public LogInView(IAuthService authService)
     {
         InitializeComponent();
         _manageData = new ManageData();
@@ -39,9 +39,13 @@ public partial class LogInView : ContentPage
         if (await _authService.IsUserAuthenticated())
         {
             SetCultureAndPreferrences();
-            await Shell.Current.GoToAsync("//AppView");
+     
+            
         }
-        else await Shell.Current.GoToAsync("//LogInView");
+        else 
+        { 
+            await Shell.Current.GoToAsync("//LogInView"); 
+        }
     }
 
     private async void SetCultureAndPreferrences()
@@ -60,5 +64,7 @@ public partial class LogInView : ContentPage
         LocalizationResourceManager.Instance.SetCulture(switchToCulture);
 
         PreferredCurrency.Value = result.Item2;
+
+        await Shell.Current.GoToAsync("//AppView/HomeView");
     }
 }

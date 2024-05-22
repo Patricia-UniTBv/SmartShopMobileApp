@@ -10,6 +10,8 @@ using SmartShopMobileApp.Services.Interfaces;
 using SmartShopMobileApp.Resources.Languages;
 using System.Globalization;
 using MailKit.Search;
+using System.Drawing.Printing;
+using CommunityToolkit.Maui.Core.Extensions;
 
 namespace SmartShopMobileApp.ViewModels
 {
@@ -18,7 +20,7 @@ namespace SmartShopMobileApp.ViewModels
         public HomeViewModel() 
         {
             _manageData = new ManageData();
-
+           
             ActiveUser = AuthenticatedUser.ActiveUser;
 
             Supermarkets = new List<SupermarketDTO>();
@@ -59,6 +61,8 @@ namespace SmartShopMobileApp.ViewModels
             }
         }
 
+        private int numberOfOffers { get; set; }
+
         [ObservableProperty]
         private AuthResponseDTO _activeUser = new();
         private async Task GetCurrentOffers()
@@ -70,7 +74,7 @@ namespace SmartShopMobileApp.ViewModels
                 if (offers.Count > 0)
                 {
                     IsCurrentOffersVisible = true;
-                    foreach(var offer in offers) 
+                    foreach (var offer in offers)
                     {
                         offer.OldPrice = Math.Round(_conversionService.ConvertCurrencyAsync(offer.Product.Price, "RON", PreferredCurrency.Value), 2);
                         decimal fromPrice = Math.Round(offer.Product.Price * (1 - (decimal)offer.OfferPercentage / 100), 2);
@@ -83,8 +87,10 @@ namespace SmartShopMobileApp.ViewModels
                             _ => PreferredCurrency.Value,
                         };
                     }
+
                 }
-                CurrentOffers = offers;
+                var list = offers.Take(4).ToList();
+                CurrentOffers = new ObservableCollection<OfferDTO>(list);
                 AllCurrentOffers = offers;
             }
             catch (Exception ex)
@@ -135,6 +141,25 @@ namespace SmartShopMobileApp.ViewModels
         }
 
         [RelayCommand]
+        private async Task LoadMore()
+        {
+            try
+            {
+                var nextOffers = AllCurrentOffers.Skip(numberOfOffers).Take(numberOfOffers).ToList();
+                foreach (var offer in nextOffers)
+                {
+                    CurrentOffers.Add(offer);
+                }
+                numberOfOffers += 4;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+        }
+
+        [RelayCommand]
         private void OnSupermarketSelected(SupermarketDTO selectedSupermarket)
         {
             CurrentSupermarket.Supermarket = selectedSupermarket;
@@ -145,6 +170,7 @@ namespace SmartShopMobileApp.ViewModels
         [RelayCommand]
         private async Task PageAppearing(object obj)
         {
+            numberOfOffers = 4;
             await GetSupermarkets();
             await GetCurrentOffers();
         }

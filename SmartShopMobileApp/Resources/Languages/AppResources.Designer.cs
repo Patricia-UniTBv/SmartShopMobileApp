@@ -178,11 +178,29 @@ namespace SmartShopMobileApp.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to History.
+        /// </summary>
+        internal static string History {
+            get {
+                return ResourceManager.GetString("History", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         internal static string Home {
             get {
                 return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load more.
+        /// </summary>
+        internal static string LoadMore {
+            get {
+                return ResourceManager.GetString("LoadMore", resourceCulture);
             }
         }
         
@@ -201,6 +219,15 @@ namespace SmartShopMobileApp.Resources.Languages {
         internal static string MinimumPrice {
             get {
                 return ResourceManager.GetString("MinimumPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My cart.
+        /// </summary>
+        internal static string MyCart {
+            get {
+                return ResourceManager.GetString("MyCart", resourceCulture);
             }
         }
         
@@ -241,11 +268,29 @@ namespace SmartShopMobileApp.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Profile.
+        /// </summary>
+        internal static string Profile {
+            get {
+                return ResourceManager.GetString("Profile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Quantity:.
         /// </summary>
         internal static string Quantity {
             get {
                 return ResourceManager.GetString("Quantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scan product.
+        /// </summary>
+        internal static string ScanProduct {
+            get {
+                return ResourceManager.GetString("ScanProduct", resourceCulture);
             }
         }
         
@@ -309,6 +354,15 @@ namespace SmartShopMobileApp.Resources.Languages {
         internal static string VoucherHistory {
             get {
                 return ResourceManager.GetString("VoucherHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome,.
+        /// </summary>
+        internal static string Welcome {
+            get {
+                return ResourceManager.GetString("Welcome", resourceCulture);
             }
         }
         
