@@ -83,7 +83,7 @@ namespace API.Controllers
             {
                 var shoppingCart = await _unitOfWork.ShoppingCartRepository.GetLatestShoppingCartForCurrentUser(userId); 
                 var currentUser = await _unitOfWork.UserRepository.GetUserByID(userId); 
-                var product1 = await _unitOfWork.ProductRepository.GetProductById(productId);
+                var product1 = await _unitOfWork.ProductRepository.GetProductByIdAndSupermarket(productId, supermarketId);
 
                 if (shoppingCart == null)
                 {

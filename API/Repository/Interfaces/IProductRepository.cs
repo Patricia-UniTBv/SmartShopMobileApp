@@ -8,5 +8,6 @@ namespace API.Repository.Interfaces
         Task<ProductDTO> GetProductById(int id);
         Task<ICollection<ProductDTO>> GetAllProductsForSupermarket(int supermarketID);
         Task<ProductDTO> GetProductByBarcode(string barcode);
+        Task<ProductDTO> GetProductByIdAndSupermarket(int id, int supermarketId);
     }
 }

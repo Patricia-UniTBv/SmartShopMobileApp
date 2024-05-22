@@ -34,5 +34,11 @@ namespace API.Repository
             var product = await _dbSet.Where(p => p.ProductID == id).FirstAsync();
             return _mapper.Map<Product, ProductDTO>(product);
         }
+
+        public async Task<ProductDTO> GetProductByIdAndSupermarket(int id, int supermarketId)
+        {
+            var product = await _dbSet.Where(p => p.ProductID == id && p.SupermarketID == supermarketId).FirstAsync();
+            return _mapper.Map<Product, ProductDTO>(product);
+        }
     }
 }

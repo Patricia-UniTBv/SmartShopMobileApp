@@ -18,8 +18,8 @@ public partial class MapView : ContentPage
 
     private int _supermarketId { get; set; }
     public MapView(int supermarketId)
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
 
         _supermarketId = supermarketId;
 
@@ -42,24 +42,24 @@ public partial class MapView : ContentPage
         foreach (var location in supermarketLocations)
         {
             var supermarket = await _manageData.GetDataAndDeserializeIt<SupermarketDTO>($"Supermarket/GetSupermarketById?supermarketId={_supermarketId}", "");
-            
+
             var pin = new Pin
             {
                 Type = PinType.Place,
                 Label = location.Address,
                 Address = supermarket.Name,
                 Location = new Location((double)location.Latitude, (double)location.Longidute)
-        };
+            };
             pin.MarkerClicked += async (sender, e) =>
             {
                 var button = new Button
                 {
                     Text = "Start shopping",
-                    BackgroundColor = Color.FromArgb("#512BD4"), 
+                    BackgroundColor = Color.FromArgb("#512BD4"),
                     TextColor = Color.FromArgb("#FFFFFF"),
-                    FontSize = 16, 
-                    CornerRadius = 5, 
-                    Padding = new Thickness(10), 
+                    FontSize = 16,
+                    CornerRadius = 5,
+                    Padding = new Thickness(10),
                 };
 
                 button.Clicked += async (s, ev) =>
@@ -67,7 +67,8 @@ public partial class MapView : ContentPage
                     await Navigation.PushAsync(new BarcodeScannerView());
                 };
 
-                stackLayout.Children.Add(button);
+                stackLayout.Children.Add(button); 
+              
             };
             map.Pins.Add(pin);
         }
