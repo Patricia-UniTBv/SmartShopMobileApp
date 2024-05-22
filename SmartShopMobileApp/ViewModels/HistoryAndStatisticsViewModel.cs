@@ -33,13 +33,6 @@ namespace SmartShopMobileApp.ViewModels
             set { _manageData = value; }
         }
 
-        private IAuthService _authService;
-        public IAuthService AuthService
-        {
-            get { return _authService; }
-            set { _authService = value; }
-        }
-
         public bool IsDataFiltered { get; set; }
 
         [ObservableProperty]

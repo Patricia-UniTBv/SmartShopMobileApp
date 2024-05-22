@@ -6,14 +6,14 @@
              xmlns:lang="clr-namespace:SmartShopMobileApp.Resources.Languages"
              xmlns:viewModels="clr-namespace:SmartShopMobileApp.ViewModels" 
              xmlns:model="clr-namespace:DTO;assembly=DTO"
-             Title="ShoppingCartItemsView">
+             Title="Items">
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior Command="{Binding PageAppearingCommand}" EventName="Appearing" />
     </ContentPage.Behaviors>
     <VerticalStackLayout>
         <Label Text="{x:Static lang:AppResources.Products}"  Padding="10,5,10,5" TextColor="#2B0B98" FontSize="20"></Label>
-        <ScrollView>
-            <CollectionView x:Name="SupermarketsList" ItemsSource="{Binding CartItems}" HeightRequest="300">
+        
+            <CollectionView x:Name="SupermarketsList" ItemsSource="{Binding CartItems}" >
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:ProductDTO">
                         <Grid Padding="10,5,10,5">
@@ -49,6 +49,6 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-        </ScrollView>
+
     </VerticalStackLayout>
 </ContentPage>

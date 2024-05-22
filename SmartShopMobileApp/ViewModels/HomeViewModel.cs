@@ -9,6 +9,7 @@ using SmartShopMobileApp.Services;
 using SmartShopMobileApp.Services.Interfaces;
 using SmartShopMobileApp.Resources.Languages;
 using System.Globalization;
+using MailKit.Search;
 
 namespace SmartShopMobileApp.ViewModels
 {
@@ -17,6 +18,8 @@ namespace SmartShopMobileApp.ViewModels
         public HomeViewModel() 
         {
             _manageData = new ManageData();
+
+            ActiveUser = AuthenticatedUser.ActiveUser;
 
             Supermarkets = new List<SupermarketDTO>();
            
@@ -39,8 +42,25 @@ namespace SmartShopMobileApp.ViewModels
         private ObservableCollection<OfferDTO> _currentOffers;
 
         [ObservableProperty]
+        private ObservableCollection<OfferDTO> _allCurrentOffers;
+
+        [ObservableProperty]
         private string _currency;
 
+        private string _searchedOffer;
+        public string SearchedOffer
+        {
+            get => _searchedOffer;
+            set
+            {
+                _searchedOffer = value;
+                OnPropertyChanged();
+                FilterOffers();
+            }
+        }
+
+        [ObservableProperty]
+        private AuthResponseDTO _activeUser = new();
         private async Task GetCurrentOffers()
         {
             try
@@ -63,8 +83,9 @@ namespace SmartShopMobileApp.ViewModels
                             _ => PreferredCurrency.Value,
                         };
                     }
-                    }
+                }
                 CurrentOffers = offers;
+                AllCurrentOffers = offers;
             }
             catch (Exception ex)
             {
@@ -86,6 +107,15 @@ namespace SmartShopMobileApp.ViewModels
             catch(Exception ex) 
             {
                 Console.WriteLine(ex.Message);
+            }
+        }
+
+        private void FilterOffers()
+        {
+            if (!string.IsNullOrWhiteSpace(SearchedOffer))
+            {
+                var query = SearchedOffer.ToLower();
+                CurrentOffers = new ObservableCollection<OfferDTO>(AllCurrentOffers.Where(o => o.Product.Name.ToLower().Contains(query)));
             }
         }
 

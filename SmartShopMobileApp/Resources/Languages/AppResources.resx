@@ -156,6 +156,9 @@
   <data name="Hello" xml:space="preserve">
     <value>Hello, </value>
   </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
   <data name="MaximumPrice" xml:space="preserve">
     <value>Maximum price:</value>
   </data>
@@ -176,6 +179,9 @@
   </data>
   <data name="Quantity" xml:space="preserve">
     <value>Quantity:</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search a product...</value>
   </data>
   <data name="SecurityNumber" xml:space="preserve">
     <value>Security number:</value>

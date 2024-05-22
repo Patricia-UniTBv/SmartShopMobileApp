@@ -156,6 +156,9 @@
   <data name="Hello" xml:space="preserve">
     <value>Salut, </value>
   </data>
+  <data name="Home" xml:space="preserve">
+    <value>Acasă</value>
+  </data>
   <data name="MaximumPrice" xml:space="preserve">
     <value>Preț maxim:</value>
   </data>
@@ -176,6 +179,9 @@
   </data>
   <data name="Quantity" xml:space="preserve">
     <value>Cantitate:</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Caută un produs...</value>
   </data>
   <data name="SecurityNumber" xml:space="preserve">
     <value>Cod de securitate:</value>

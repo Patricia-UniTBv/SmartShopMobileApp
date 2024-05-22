@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:SmartShopMobileApp.Views"
+     xmlns:lang="clr-namespace:SmartShopMobileApp.Resources.Languages"
     Shell.FlyoutBehavior="Disabled">
 
     <ShellItem Route="LogInView">
@@ -19,7 +20,7 @@
     </ShellItem>
 
     <TabBar Route="AppView">
-        <ShellContent Title="Home"  
+        <ShellContent Title="{x:Static lang:AppResources.Home}"  
                       Icon="home.png"
                       ContentTemplate="{DataTemplate local:HomeView}" />
         <ShellContent Title="Scan product"  

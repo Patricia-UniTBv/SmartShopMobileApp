@@ -178,6 +178,15 @@ namespace SmartShopMobileApp.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        internal static string Home {
+            get {
+                return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maximum price:.
         /// </summary>
         internal static string MaximumPrice {
@@ -237,6 +246,15 @@ namespace SmartShopMobileApp.Resources.Languages {
         internal static string Quantity {
             get {
                 return ResourceManager.GetString("Quantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search a product....
+        /// </summary>
+        internal static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
             }
         }
         
