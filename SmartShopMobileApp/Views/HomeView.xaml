@@ -47,7 +47,7 @@
         </CollectionView>
 
         <Label
-            Margin="11,50,0,10"
+            Margin="11,30,0,10"
             FontFamily="Montserrat-Bold"
             FontSize="20"
             IsVisible="{Binding IsCurrentOffersVisible}"
@@ -87,7 +87,7 @@
                             </Grid.ColumnDefinitions>
                             <Image
                                     Grid.Row="0"
-                                    Margin="10,30,15,10"
+                                    Margin="10,30,25,10"
                                     Source="{Binding Product.ImageSource}"
                                     WidthRequest="200" />
                             <StackLayout Orientation="Vertical">
