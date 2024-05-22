@@ -38,6 +38,7 @@ public partial class MapView : ContentPage
 
         _manageData.SetStrategy(new GetData());
         var supermarketLocations = await _manageData.GetDataAndDeserializeIt<List<LocationDTO>>($"Location/GetLocationsBySupermarketId?supermarketId={_supermarketId}", "");
+        bool appear = false;
 
         foreach (var location in supermarketLocations)
         {
@@ -50,25 +51,30 @@ public partial class MapView : ContentPage
                 Address = supermarket.Name,
                 Location = new Location((double)location.Latitude, (double)location.Longidute)
             };
+
             pin.MarkerClicked += async (sender, e) =>
             {
-                var button = new Button
+                if (appear == false)
                 {
-                    Text = "Start shopping",
-                    BackgroundColor = Color.FromArgb("#512BD4"),
-                    TextColor = Color.FromArgb("#FFFFFF"),
-                    FontSize = 16,
-                    CornerRadius = 5,
-                    Padding = new Thickness(10),
-                };
+                    var button = new Button
+                    {
+                        Text = "Start shopping",
+                        BackgroundColor = Color.FromArgb("#512BD4"),
+                        TextColor = Color.FromArgb("#FFFFFF"),
+                        FontSize = 16,
+                        CornerRadius = 5,
+                        Padding = new Thickness(10),
+                    };
 
-                button.Clicked += async (s, ev) =>
-                {
-                    await Navigation.PushAsync(new BarcodeScannerView());
-                };
+                    button.Clicked += async (s, ev) =>
+                    {
+                        await Navigation.PushAsync(new BarcodeScannerView());
+                    };
 
-                stackLayout.Children.Add(button); 
-              
+                    stackLayout.Children.Add(button);
+                    appear = true;
+                }
+                
             };
             map.Pins.Add(pin);
         }
