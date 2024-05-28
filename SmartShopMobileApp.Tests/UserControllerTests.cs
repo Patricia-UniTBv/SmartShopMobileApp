@@ -81,13 +81,16 @@ namespace SmartShopMobileApp.Tests
             var result = await _controller!.GetUserByEmailAndPassword(email, password);
 
             // Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
+            Assert.That(result, Is.InstanceOf<OkObjectResult>());
             var okResult = result as OkObjectResult;
-            Assert.NotNull(okResult);
-            Assert.IsInstanceOf<UserDTO>(okResult.Value);
+            Assert.That(okResult, Is.Not.Null);
+            Assert.That(okResult.Value, Is.InstanceOf<UserDTO>());
             var user = okResult.Value as UserDTO;
-            Assert.That(user!.Email, Is.EqualTo(email));
-            Assert.That(user.FirstName, Is.EqualTo("Patricia"));
+            Assert.Multiple(() =>
+            {
+                Assert.That(user!.Email, Is.EqualTo(email));
+                Assert.That(user.FirstName, Is.EqualTo("Patricia"));
+            });
         }
 
         [Test]

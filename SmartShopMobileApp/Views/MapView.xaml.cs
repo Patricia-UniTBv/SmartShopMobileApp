@@ -59,7 +59,7 @@ public partial class MapView : ContentPage
                     var button = new Button
                     {
                         Text = "Start shopping",
-                        BackgroundColor = Color.FromArgb("#512BD4"),
+                        BackgroundColor = Color.FromArgb("#742e6e"),
                         TextColor = Color.FromArgb("#FFFFFF"),
                         FontSize = 16,
                         CornerRadius = 5,
