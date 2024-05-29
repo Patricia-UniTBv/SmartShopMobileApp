@@ -93,7 +93,7 @@ namespace SmartShopMobileApp.ViewModels
             {
                 _manageData.SetStrategy(new GetData());
                 VouchersHistory = new ObservableCollection<VoucherHistory>();
-                var allShoppingCarts = await _manageData.GetDataAndDeserializeIt<List<ShoppingCartDTO>>($"ShoppingCart/GetAllTransactedShoppingCartsByUserId?id={ActiveUser.UserId}", "");
+                var allShoppingCarts = await _manageData.GetDataAndDeserializeIt<List<ShoppingCartDTO>>($"ShoppingCart/GetAllTransactedShoppingCartsByUserId?id={ActiveUser.UserId}&supermarketId={CurrentSupermarket.Supermarket.SupermarketID}", "");
                 foreach (var cart in allShoppingCarts)
                 {
                     if (cart.TotalAmount > 150) 
@@ -110,17 +110,20 @@ namespace SmartShopMobileApp.ViewModels
                 }
 
                 var usedDiscounts = await _manageData.GetDataAndDeserializeIt<List<TransactionDTO>>($"Transaction/GetAllTransactionsWithDiscount/{ActiveUser.UserId}/{CurrentSupermarket.Supermarket.SupermarketID}", "");
-                foreach (var transaction in usedDiscounts)
+                if (usedDiscounts.Count != 0)
                 {
-                    if (transaction.VoucherDiscount != 0)
-                    { 
-                        var newVoucherHistory = new VoucherHistory();
-                        newVoucherHistory.CartCreationDate = transaction.TransactionDate.ToShortDateString();
-                        newVoucherHistory.CreationDate = transaction.TransactionDate;
-                        newVoucherHistory.ValueModification = "- " + (transaction.VoucherDiscount).ToString() + " lei";
-                        newVoucherHistory.TotalAmount = transaction.TotalAmount.ToString().Substring(0, 4);
-                        newVoucherHistory.TextColor = Colors.Red;
-                        VouchersHistory.Add(newVoucherHistory); 
+                    foreach (var transaction in usedDiscounts)
+                    {
+                        if (transaction.VoucherDiscount != 0)
+                        {
+                            var newVoucherHistory = new VoucherHistory();
+                            newVoucherHistory.CartCreationDate = transaction.TransactionDate.ToShortDateString();
+                            newVoucherHistory.CreationDate = transaction.TransactionDate;
+                            newVoucherHistory.ValueModification = "- " + (transaction.VoucherDiscount).ToString() + " lei";
+                            newVoucherHistory.TotalAmount = transaction.TotalAmount.ToString().Substring(0, 4);
+                            newVoucherHistory.TextColor = Colors.Red;
+                            VouchersHistory.Add(newVoucherHistory);
+                        }
                     }
                 }
 

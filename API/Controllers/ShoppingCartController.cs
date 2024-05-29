@@ -15,11 +15,11 @@ namespace API.Controllers
         }
 
         [HttpGet("GetAllTransactedShoppingCartsByUserId")]
-        public async Task<IActionResult> GetAllTransactedShoppingCartsByUserId(int id)
+        public async Task<IActionResult> GetAllTransactedShoppingCartsByUserId(int id, int supermarketId)
         {
             try
             {
-                var shoppingCarts = await _unitOfWork.ShoppingCartRepository.GetAllTransactedShoppingCartsByUserId(id);
+                var shoppingCarts = await _unitOfWork.ShoppingCartRepository.GetAllTransactedShoppingCartsByUserId(id, supermarketId);
                 return Ok(shoppingCarts);
             }
             catch (Exception e)
@@ -42,12 +42,12 @@ namespace API.Controllers
             }
         }
 
-        [HttpGet("GetLatestShoppingCartByUserId")]
-        public async Task<IActionResult> GetLatestShoppingCartByUserId(int id)
+        [HttpGet("GetLatestShoppingCartByUserIdAndSupermarketId")]
+        public async Task<IActionResult> GetLatestShoppingCartByUserId(int id, int supermarketId)
         {
             try
             {
-                var latestShoppingCart = await _unitOfWork.ShoppingCartRepository.GetLatestShoppingCartForCurrentUser(id);
+                var latestShoppingCart = await _unitOfWork.ShoppingCartRepository.GetLatestShoppingCartForCurrentUserAndSupermarket(id, supermarketId);
                 return Ok(latestShoppingCart);
             }
             catch (Exception e)

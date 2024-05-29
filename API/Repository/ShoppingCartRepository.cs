@@ -12,9 +12,9 @@ namespace API.Repository
         {
         }
 
-        public async Task<List<ShoppingCartDTO>> GetAllTransactedShoppingCartsByUserId(int userID)
+        public async Task<List<ShoppingCartDTO>> GetAllTransactedShoppingCartsByUserId(int userID, int supermarketID)
         {
-            var result = await _dbSet.Where(c => c.IsTransacted == true && c.UserID == userID).ToListAsync();
+            var result = await _dbSet.Where(c => c.IsTransacted == true && c.UserID == userID && c.SupermarketID == supermarketID).ToListAsync();
             return _mapper.Map<List<ShoppingCart>, List<ShoppingCartDTO>>(result);
         }
 
@@ -37,6 +37,14 @@ namespace API.Repository
         public async Task<ShoppingCartDTO> GetLatestShoppingCartForCurrentUser(int userID)
         {
             var result = await _dbSet.Where(cart=> cart.UserID == userID && cart.IsTransacted == false).OrderByDescending(cart => cart.CreationDate).FirstOrDefaultAsync();
+            if (result != null)
+                return _mapper.Map<ShoppingCart, ShoppingCartDTO>(result!);
+            else return null;
+        }
+
+        public async Task<ShoppingCartDTO> GetLatestShoppingCartForCurrentUserAndSupermarket(int userID, int supermarketID)
+        {
+            var result = await _dbSet.Where(cart => cart.UserID == userID && cart.SupermarketID == supermarketID && cart.IsTransacted == false).OrderByDescending(cart => cart.CreationDate).FirstOrDefaultAsync();
             if (result != null)
                 return _mapper.Map<ShoppingCart, ShoppingCartDTO>(result!);
             else return null;

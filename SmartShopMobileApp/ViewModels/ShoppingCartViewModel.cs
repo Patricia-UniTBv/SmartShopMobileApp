@@ -90,7 +90,7 @@ namespace SmartShopMobileApp.ViewModels
             {
                 _manageData.SetStrategy(new GetData());
 
-                var latestShoppingCart = await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"ShoppingCart/GetLatestShoppingCartByUserId?id={ActiveUser.UserId}", "");
+                var latestShoppingCart = await _manageData.GetDataAndDeserializeIt<ShoppingCartDTO>($"ShoppingCart/GetLatestShoppingCartByUserIdAndSupermarketId?id={ActiveUser.UserId}&supermarketId={CurrentSupermarket.Supermarket.SupermarketID}", "");
 
                 if (latestShoppingCart != null)
                 {
