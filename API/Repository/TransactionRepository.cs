@@ -12,7 +12,7 @@ namespace API.Repository
         {
         }
 
-        public async Task<ICollection<TransactionDTO>> GetAllTransactions(int userId, int supermarketId)
+        public async Task<ICollection<TransactionDTO>> GetAllTransactions()
         {
             var result = await _dbSet.ToListAsync();
             return _mapper.Map<ICollection<Transaction>, ICollection<TransactionDTO>>(result!);
@@ -20,7 +20,12 @@ namespace API.Repository
 
         public async Task<ICollection<TransactionDTO>> GetAllTransactionsWithDiscount(int userId, int supermarketId)
         {
-            var result = await _dbSet.Where(t => t.VoucherDiscount != null).ToListAsync();
+            var result = await _dbSet
+                               .Include(t => t.ShoppingCart)
+                               .Where(t => t.VoucherDiscount != null
+                                           && t.ShoppingCart.UserID == userId
+                                           && t.ShoppingCart.SupermarketID == supermarketId)
+                               .ToListAsync();
             return _mapper.Map<ICollection<Transaction>, ICollection<TransactionDTO>>(result!);
         }
         public async Task<TransactionDTO> GetTransactionBySupermarketId(int shoppingCartId)

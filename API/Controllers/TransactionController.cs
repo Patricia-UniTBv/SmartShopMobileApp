@@ -18,11 +18,11 @@ namespace API.Controllers
         }
 
         [HttpGet("GetAllTransactions")]
-        public async Task<IActionResult> GetAllTransactions(int userId, int supermarketId)
+        public async Task<IActionResult> GetAllTransactions()
         {
             try
             {
-                var transactions = await _unitOfWork.TransactionRepository.GetAllTransactions(userId,supermarketId);
+                var transactions = await _unitOfWork.TransactionRepository.GetAllTransactions();
 
                 return Ok(transactions);
             }
