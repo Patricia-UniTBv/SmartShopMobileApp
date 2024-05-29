@@ -101,7 +101,7 @@ namespace SmartShopMobileApp.ViewModels
                         var newVoucherHistory = new VoucherHistory();
                         newVoucherHistory.CartCreationDate = cart.CreationDate.ToShortDateString();
                         newVoucherHistory.CreationDate = cart.CreationDate;
-                        newVoucherHistory.TotalAmount = cart.TotalAmount.ToString().Substring(0, 4);
+                        newVoucherHistory.TotalAmount = cart.TotalAmount.ToString("F2");
                         newVoucherHistory.ValueModification = "+ " + (0.05m * cart.TotalAmount).ToString().Substring(0,4) + " lei";
                         newVoucherHistory.TextColor = Colors.Green;
                         VouchersHistory.Add(newVoucherHistory);
@@ -120,7 +120,7 @@ namespace SmartShopMobileApp.ViewModels
                             newVoucherHistory.CartCreationDate = transaction.TransactionDate.ToShortDateString();
                             newVoucherHistory.CreationDate = transaction.TransactionDate;
                             newVoucherHistory.ValueModification = "- " + (transaction.VoucherDiscount).ToString() + " lei";
-                            newVoucherHistory.TotalAmount = transaction.TotalAmount.ToString().Substring(0, 4);
+                            newVoucherHistory.TotalAmount = transaction.TotalAmount.ToString("F2");
                             newVoucherHistory.TextColor = Colors.Red;
                             VouchersHistory.Add(newVoucherHistory);
                         }
