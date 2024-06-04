@@ -223,7 +223,7 @@
     <value>Your current shopping cart:</value>
   </data>
   <data name="YourLatestShoppingCart" xml:space="preserve">
-    <value>Your latest shopping cart:</value>
+    <value>Your latest shopping carts:</value>
   </data>
   <data name="YourShoppingCartIsEmpty" xml:space="preserve">
     <value>Your shopping cart is empty!</value>

@@ -376,7 +376,7 @@ namespace SmartShopMobileApp.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your latest shopping cart:.
+        ///   Looks up a localized string similar to Your latest shopping carts:.
         /// </summary>
         internal static string YourLatestShoppingCart {
             get {
