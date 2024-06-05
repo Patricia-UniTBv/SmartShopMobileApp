@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace SmartShopMobileApp.Tests
 {
+    [TestFixture]
     public class ProductControllerTests
     {
         private Mock<IUnitOfWork> _mockUnitOfWork;
