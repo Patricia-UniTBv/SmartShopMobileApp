@@ -67,5 +67,105 @@ namespace SmartShopMobileApp.Tests
             Assert.NotNull(badRequestResult);
             Assert.That(badRequestResult.Value, Is.EqualTo("Exception"));
         }
+
+        [Test]
+        public async Task UpdateVoucher_VoucherNotFound_ReturnsNotFound()
+        {
+            // Arrange
+            int userId = 1;
+            int supermarketId = 1;
+            decimal totalAmount = 100m;
+            _mockVoucherRepository?.Setup(r => r.GetVoucherForUserAndSupermarket(userId, supermarketId))!
+                .ReturnsAsync((VoucherDTO)null!);
+
+            // Act
+            var result = await _controller!.UpdateVoucher(userId, supermarketId, totalAmount);
+
+            // Assert
+            Assert.That(result, Is.InstanceOf<NotFoundObjectResult>());
+        }
+
+        [Test]
+        public async Task UpdateVoucher_VoucherFound_UpdatesVoucherAndReturnsOk()
+        {
+            // Arrange
+            int userId = 1;
+            int supermarketId = 1;
+            decimal totalAmount = 200m;
+            var existingVoucher = new VoucherDTO { UserID = userId, SupermarketID = supermarketId, EarnedPoints = 0 };
+            _mockVoucherRepository!.Setup(r => r.GetVoucherForUserAndSupermarket(userId, supermarketId))
+                .ReturnsAsync(existingVoucher);
+
+            // Act
+            var result = await _controller!.UpdateVoucher(userId, supermarketId, totalAmount);
+
+            // Assert
+            _mockVoucherRepository.Verify(r => r.UpdateVoucherForSpecificUser(It.Is<VoucherDTO>(v => v.EarnedPoints == 0.1m)), Times.Once);
+            Assert.IsInstanceOf<OkObjectResult>(result);
+        }
+
+        [Test]
+        public async Task UpdateVoucher_ExceptionThrown_ReturnsBadRequest()
+        {
+            // Arrange
+            int userId = 1;
+            int supermarketId = 1;
+            decimal totalAmount = 200m;
+            _mockVoucherRepository!.Setup(r => r.GetVoucherForUserAndSupermarket(userId, supermarketId))
+                .ThrowsAsync(new Exception("Exception"));
+
+            // Act
+            var result = await _controller!.UpdateVoucher(userId, supermarketId, totalAmount);
+
+            // Assert
+            Assert.IsInstanceOf<BadRequestObjectResult>(result);
+            var badRequestResult = result as BadRequestObjectResult;
+            Assert.NotNull(badRequestResult);
+            Assert.That(badRequestResult.Value, Is.EqualTo("Exception"));
+        }
+
+        [Test]
+        public async Task CreateVoucherForUser_ValidInput_CreatesVoucherAndReturnsOk()
+        {
+            // Arrange
+            int userId = 1;
+            int supermarketId = 1;
+            VoucherDTO newVoucher = null;
+
+            _mockVoucherRepository!.Setup(r => r.CreateVoucherForUserAndSupermarket(It.IsAny<VoucherDTO>()))
+                .Callback<VoucherDTO>(voucher => newVoucher = voucher)
+                .Returns(Task.CompletedTask);
+
+            // Act
+            var result = await _controller!.CreateVoucherForUser(userId, supermarketId);
+
+            // Assert
+            Assert.That(newVoucher, Is.Not.Null);
+            Assert.Multiple(() =>
+            {
+                Assert.That(newVoucher.UserID, Is.EqualTo(userId));
+                Assert.That(newVoucher.SupermarketID, Is.EqualTo(supermarketId));
+                Assert.That(newVoucher.EarnedPoints, Is.EqualTo(0));
+            });
+        }
+
+        [Test]
+        public async Task CreateVoucherForUser_ExceptionThrown_ReturnsBadRequest()
+        {
+            // Arrange
+            int userId = 1;
+            int supermarketId = 1;
+
+            _mockVoucherRepository!.Setup(r => r.CreateVoucherForUserAndSupermarket(It.IsAny<VoucherDTO>()))
+                .ThrowsAsync(new Exception("Exception"));
+
+            // Act
+            var result = await _controller!.CreateVoucherForUser(userId, supermarketId);
+
+            // Assert
+            Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
+            var badRequestResult = result as BadRequestObjectResult;
+            Assert.That(badRequestResult!.Value, Is.EqualTo("Exception"));
+        }
     }
 }
