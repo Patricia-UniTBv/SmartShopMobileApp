@@ -77,21 +77,5 @@ namespace API.Controllers
             }
         }
 
-        //[HttpPut("UpdateVoucherDiscountForTransaction")]
-        //public async Task<IActionResult> UpdateVoucherDiscountForTransaction()
-        //{
-        //    try
-        //    {
-        //        var lastTransaction = 
-        //        transaction.VoucherDiscount = transaction.TotalAmount;
-        //        _unitOfWork.TransactionRepository.UpdateVoucherDiscountForTransaction(transaction);
-
-        //        return Ok(transaction);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return BadRequest(e.Message);
-        //    }
-        //}
     }
 }
