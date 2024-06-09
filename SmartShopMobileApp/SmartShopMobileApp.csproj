@@ -32,6 +32,8 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" />
+		<MauiIcon Include="Resources\AppIcon\appiconfg.svg" />
 		<MauiIcon Include="Resources\AppIcon\logo.png" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
 		<!-- Splash Screen -->
@@ -49,6 +51,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\AppIcon\appicon.svg" />
+	  <None Remove="Resources\AppIcon\appiconfg.svg" />
 	  <None Remove="Resources\AppIcon\cart.png" />
 	  <None Remove="Resources\AppIcon\Home.png" />
 	  <None Remove="Resources\AppIcon\logo.png" />
