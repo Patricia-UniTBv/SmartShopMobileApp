@@ -127,7 +127,7 @@ namespace SmartShopMobileApp.ViewModels
                 AppResources.Culture = language;
                 LocalizationResourceManager.Instance.SetCulture(language);
 
-                await App.Current.MainPage.Navigation.PushAsync(new HomeView());
+                await App.Current.MainPage.Navigation.PushAsync(new ProfileView());
             }
             catch (Exception e)
             {

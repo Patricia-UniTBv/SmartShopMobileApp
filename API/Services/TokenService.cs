@@ -69,7 +69,6 @@ namespace API.Services
 
         private static SymmetricSecurityKey GetSecurityKey(IConfiguration _configuration)
         {
-            //string jwtKey = _configuration["Jwt:Key"]!;
             string jwtKey = "@SomERandomStromgKey/(@bH6)-@-#-$";
 
             return new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));

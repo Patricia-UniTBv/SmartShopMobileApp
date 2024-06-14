@@ -6,6 +6,7 @@ using SmartShopMobileApp.Services.Interfaces;
 using SmartShopMobileApp.Views;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -47,12 +48,32 @@ namespace SmartShopMobileApp.ViewModels
             var error = await _authService.LoginAsync(new LoginRequestDTO(ExistingUser.Email, ExistingUser.Password));
             if (string.IsNullOrWhiteSpace(error))
             {
-                await Shell.Current.GoToAsync("//AppView");
+                SetCultureAndPreferrences();
             }
             else
             {
                 await Shell.Current.DisplayAlert("Error", error, "Ok");
             }
+        }
+
+        private async void SetCultureAndPreferrences()
+        {
+            var activeUser = await _authService.GetAuthenticatedUserAsync();
+            AuthenticatedUser.ActiveUser = activeUser;
+
+            _manageData.SetStrategy(new GetData());
+
+            var result = await _manageData.GetDataAndDeserializeIt<Tuple<string, string>>($"User/GetPreferredLanguageAndCurrency?userId={activeUser.UserId}", "");
+
+            AuthenticatedUser.ActiveUser.PreferredLanguage = result.Item1;
+            AuthenticatedUser.ActiveUser.PreferredCurrency = result.Item2;
+
+            var switchToCulture = new CultureInfo(result.Item1);
+            LocalizationResourceManager.Instance.SetCulture(switchToCulture);
+
+            PreferredCurrency.Value = result.Item2;
+
+            await Shell.Current.GoToAsync("//AppView/HomeView");
         }
 
         private static string HashPassword(string password)
@@ -69,7 +90,7 @@ namespace SmartShopMobileApp.ViewModels
         [RelayCommand]
         private async Task OpenSignUpPage()
         {
-            await Shell.Current.GoToAsync("//SignUpView");
+            await App.Current.MainPage.Navigation.PushAsync(new SignUpView());
         }
     }
 }
