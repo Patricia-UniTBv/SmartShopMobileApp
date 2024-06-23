@@ -119,12 +119,12 @@ namespace SmartShopMobileApp.ViewModels
             Source source = sourceService.Create(option);
 
 
-            CustomerCreateOptions customer = new CustomerCreateOptions // se modifica dupa autentificare!
+            CustomerCreateOptions customer = new CustomerCreateOptions 
             {
-                Name = "Patricia Anghelache",
-                Email = "patricia.anghelache@student.unitbv.ro",
+                Name = ActiveUser.FirstName,
+                Email = ActiveUser.Email,
                 Description = "Pay",
-                Address = new AddressOptions { City = "Brasov", Country = "Romania", Line1 = "Sample Address", Line2 = "Sample Address 2", PostalCode = "700030", State = "" }
+                Address = new AddressOptions { }
             };
 
             var customerService = new CustomerService();
@@ -192,7 +192,6 @@ namespace SmartShopMobileApp.ViewModels
         {
             var email = new MimeMessage();
             email.From.Add(MailboxAddress.Parse("smartshopapp.testing@gmail.com"));
-            //email.To.Add(MailboxAddress.Parse(ActiveUser.Email)); 
             email.To.Add(MailboxAddress.Parse("patyanelis@yahoo.com"));
             email.Subject = $"Payment Confirmation";
             email.Body = new TextPart(TextFormat.Html)

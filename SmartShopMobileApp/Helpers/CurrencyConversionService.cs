@@ -52,7 +52,6 @@ namespace SmartShopMobileApp.Helpers
             request.AddHeader("apikey", "cur_live_wv1yJn5eStzk3YvzKRVLEnHkQsK2n6I2uzgfJkDx");
             IRestResponse response = client.Execute(request);
             return response.Content;
-            // return "";
         }
 
 
