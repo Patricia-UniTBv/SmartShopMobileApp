@@ -11,7 +11,7 @@ namespace API.Repository
         public CartItemRepository(SmartShopDBContext context, IMapper _mapper) : base(context, _mapper)
         {
         }
-        public async Task<ICollection<ProductDTO>> GetProductsByShoppingCart(int shoppingCartId)//sa modific sa ia tot obiectul Product dupa ID din CartItems
+        public async Task<ICollection<ProductDTO>> GetProductsByShoppingCart(int shoppingCartId)
         {
             var result = await _dbSet
                 .Where(item => item.ShoppingCartID == shoppingCartId)
