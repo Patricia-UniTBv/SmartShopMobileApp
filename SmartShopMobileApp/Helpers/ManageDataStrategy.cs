@@ -9,8 +9,6 @@ namespace SmartShopMobileApp.Helpers
     public abstract class ManageDataStrategy
     {
         public static string Uri = "https://webappapiuni.azurewebsites.net/api/";
-        //public static string Uri = "https://10.0.2.2:7116/api/";
-        //public static string Uri = "https://192.168.1.129/api/";
 
         public abstract Task<string> ManageData(HttpClient httpClient, string endPoint, string json);
     }
