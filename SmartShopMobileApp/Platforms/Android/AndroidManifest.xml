@@ -1,11 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-	<!--<application android:allowBackup="true"  android:supportsRtl="true">
-		<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyBxYTrLWO65qoEzrq12HNJNNlVkmVDTUkk" />
-		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
-	</application>-->
+	
 	<application android:allowBackup="true" android:icon="@mipmap/appicon" android:roundIcon="@mipmap/appicon_round" android:supportsRtl="true">
-		<!--<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDDJMMCLdE_DsnvFhpNBJwhj74xOb4K3u0" />-->
+		
 		<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDu2N_7-Ku9hrU5gfyfSCxY4pDudokljpQ"/>
 		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
 	</application>
