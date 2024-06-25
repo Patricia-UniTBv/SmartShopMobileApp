@@ -22,7 +22,7 @@ namespace API.Services
                 ValidateAudience = false,
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
-                ValidIssuer = "https://localhost:7157",
+                ValidIssuer = "https://webappapiuni.azurewebsites.net",
                 IssuerSigningKey = GetSecurityKey(configuration)
             };
 
@@ -38,7 +38,7 @@ namespace API.Services
             if (additionalClaims?.Any() == true)
                 claims.AddRange(additionalClaims!);
 
-            var issuer = "https://localhost:7157"; 
+            var issuer = "https://webappapiuni.azurewebsites.net"; 
        
 
             var token = new JwtSecurityToken(
