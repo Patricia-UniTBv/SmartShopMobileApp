@@ -1,4 +1,4 @@
-Smart Shop Mobile App
+Smart Shop - Mobile App for purchasing directly from the supermarket using Barcode scanning
 
 With the goal of simplifying shopping and reducing time spent in supermarkets, the SmartShop app offers an intuitive and user-friendly design, along with numerous useful features for Android users.
 
@@ -29,7 +29,7 @@ Technologies and tools:
 - Swagger
 
 APIs:
-- Googlr Maps API
+- Google Maps API
 - Stripe API
 - Currency API
   
