@@ -1,3 +1,5 @@
+Smart Shop Mobile App
+
 With the goal of simplifying shopping and reducing time spent in supermarkets, the SmartShop app offers an intuitive and user-friendly design, along with numerous useful features for Android users.
 
 Thanks to the scan-and-pay feature directly within the app, this technological solution can eliminate queues at checkout counters or self-service kiosks, transforming the shopping experience into a more pleasant and smooth process.
