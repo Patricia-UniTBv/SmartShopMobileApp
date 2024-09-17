@@ -27,6 +27,7 @@ Technologies and tools:
 - Microsoft Azure SQL Database
 - Microsoft Azure Web App
 - Swagger
+- NUnit
 
 APIs:
 - Google Maps API
